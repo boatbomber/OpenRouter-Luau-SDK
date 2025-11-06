@@ -72,7 +72,6 @@ class CodeGenerator:
         """
         self.spec = spec
         self.output_dir = output_dir
-        self.generated_dir = output_dir
         self.parser = parser
 
         # Set up Jinja2 environment
@@ -101,7 +100,7 @@ class CodeGenerator:
         Raises:
             Exception: If generation fails
         """
-        ensure_directory(self.generated_dir)
+        ensure_directory(self.output_dir)
 
         generated_files = []
 
@@ -117,7 +116,7 @@ class CodeGenerator:
 
         # Format generated files with stylua
         logger.info("Formatting generated files with stylua...")
-        self._format_files(generated_files)
+        self._format_files()
 
         return generated_files
 
@@ -170,7 +169,7 @@ class CodeGenerator:
         )
 
         # Write file
-        output_path = self.generated_dir / "types.luau"
+        output_path = self.output_dir / "types.luau"
         output_path.write_text(content, encoding="utf-8")
         logger.info(f"Generated {len(type_defs)} types")
 
@@ -201,7 +200,7 @@ class CodeGenerator:
         )
 
         # Write file
-        output_path = self.generated_dir / "init.luau"
+        output_path = self.output_dir / "init.luau"
         output_path.write_text(content, encoding="utf-8")
         logger.info(f"Generated {len(method_defs)} methods")
 
@@ -474,12 +473,9 @@ class CodeGenerator:
         result = re.sub(r"\b[A-Z][a-zA-Z0-9_]*\b", replace_type_name, type_str)
         return result
 
-    def _format_files(self, files: List[Path]) -> None:
+    def _format_files(self) -> None:
         """
         Format generated files using stylua.
-
-        Args:
-            files: List of file paths to format
         """
         # Check if stylua is available
         stylua_path = shutil.which("stylua")
@@ -487,24 +483,23 @@ class CodeGenerator:
             logger.warning("stylua not found in PATH, skipping formatting")
             return
 
-        for file_path in files:
-            try:
-                # Run stylua on the file
-                result = subprocess.run(
-                    [stylua_path, str(file_path)],
-                    capture_output=True,
-                    text=True,
-                    timeout=30,
+        try:
+            # Run stylua on the file
+            result = subprocess.run(
+                [stylua_path, str(self.output_dir.absolute())],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+
+            if result.returncode == 0:
+                logger.debug(f"Formatted {self.output_dir.name}")
+            else:
+                logger.warning(
+                    f"stylua failed for {self.output_dir.name}: {result.stderr}"
                 )
 
-                if result.returncode == 0:
-                    logger.debug(f"Formatted {file_path.name}")
-                else:
-                    logger.warning(
-                        f"stylua failed for {file_path.name}: {result.stderr}"
-                    )
-
-            except subprocess.TimeoutExpired:
-                logger.warning(f"stylua timed out for {file_path.name}")
-            except Exception as e:
-                logger.warning(f"Failed to format {file_path.name}: {e}")
+        except subprocess.TimeoutExpired:
+            logger.warning(f"stylua timed out for {self.output_dir.name}")
+        except Exception as e:
+            logger.warning(f"Failed to format {self.output_dir.name}: {e}")
