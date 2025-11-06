@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-06T22:31:19.490999Z
+-- Last generated: 2025-11-06T23:24:28.011245Z
 
 --[[
   OpenAI-compatible Chat Completions and Completions API with additional

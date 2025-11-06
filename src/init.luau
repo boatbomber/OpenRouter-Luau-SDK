@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-06T22:31:19.504789Z
+-- Last generated: 2025-11-06T23:24:28.020291Z
 
 --[[
   OpenRouter API - Generated API Methods
