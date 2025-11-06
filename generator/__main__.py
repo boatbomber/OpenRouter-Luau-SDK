@@ -107,12 +107,6 @@ def main(input: Path, output: Path, verbose: bool, dry_run: bool):
             logger.info("Generation completed successfully!")
             logger.info("=" * 60)
 
-            # Next steps
-            logger.info("\nNext steps:")
-            logger.info("  1. Review the generated files")
-            logger.info("  2. Run Luau type checker: luau-lsp analyze src/")
-            logger.info("  3. Update src/init.luau to import generated methods")
-
     except Exception as e:
         logger.error(f"\nError: {e}")
         if verbose:
