@@ -12,3 +12,17 @@ profile.svg
 
 # Time trace
 trace.json
+
+# Build artifacts
+/*.rbxl
+/*.rbxlx
+/*.rbxm
+/*.rbxmx
+sourcemap.json
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# VS Code files
+.vscode/*
