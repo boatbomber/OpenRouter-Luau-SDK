@@ -116,6 +116,9 @@ class CodeGenerator:
 
         # Format generated files with stylua
         logger.info("Formatting generated files with stylua...")
+        # Stylua "misses" some changes on the first pass, which would make CI fail
+        # as Stylua would request more changes. Running twice converges on a stable result.
+        self._format_files()
         self._format_files()
 
         return generated_files
