@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-06T22:31:19.490999Z
+-- Last generated: 2025-11-06T23:35:09.169101Z
 
 --[[
   OpenAI-compatible Chat Completions and Completions API with additional
@@ -516,31 +516,34 @@ export type OpenAIResponsesIncludable = (
 
 export type OpenAIResponsesIncompleteDetails = { reason: ("max_output_tokens" | "content_filter")? }?
 
-export type OpenAIResponsesInput = string | {
-	{
-		["type"]: "message"?,
-		role: "user" | "system" | "assistant" | "developer",
-		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
-	} | {
-		id: string,
-		["type"]: "message"?,
-		role: "user" | "system" | "developer",
-		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
-	} | {
-		["type"]: "function_call_output",
-		id: string,
-		call_id: string,
-		output: string,
-		status: ToolCallStatus?,
-	} | {
-		["type"]: "function_call",
-		call_id: string,
-		name: string,
-		arguments: string,
-		id: string?,
-		status: ToolCallStatus?,
-	} | OutputItemImageGenerationCall | OutputMessage
-} | any?
+export type OpenAIResponsesInput =
+	string
+	| {
+		{
+			["type"]: "message"?,
+			role: "user" | "system" | "assistant" | "developer",
+			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
+		} | {
+			id: string,
+			["type"]: "message"?,
+			role: "user" | "system" | "developer",
+			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
+		} | {
+			["type"]: "function_call_output",
+			id: string,
+			call_id: string,
+			output: string,
+			status: ToolCallStatus?,
+		} | {
+			["type"]: "function_call",
+			call_id: string,
+			name: string,
+			arguments: string,
+			id: string?,
+			status: ToolCallStatus?,
+		} | OutputItemImageGenerationCall | OutputMessage
+	}
+	| any?
 
 export type OpenAIResponsesNonStreamingResponse = {
 	id: string,
@@ -847,21 +850,23 @@ export type OpenResponsesIncompleteEvent = {
 --[[
   Input for a response request - can be a string or array of items
 ]]
-export type OpenResponsesInput = string | {
-	(
-		OpenResponsesReasoning
-		| OpenResponsesEasyInputMessage
-		| OpenResponsesInputMessageItem
-		| OpenResponsesFunctionToolCall
-		| OpenResponsesFunctionCallOutput
-		| ResponsesOutputMessage
-		| ResponsesOutputItemReasoning
-		| ResponsesOutputItemFunctionCall
-		| ResponsesWebSearchCallOutput
-		| ResponsesOutputItemFileSearchCall
-		| ResponsesImageGenerationCall
-	)
-}
+export type OpenResponsesInput =
+	string
+	| {
+		(
+			OpenResponsesReasoning
+			| OpenResponsesEasyInputMessage
+			| OpenResponsesInputMessageItem
+			| OpenResponsesFunctionToolCall
+			| OpenResponsesFunctionCallOutput
+			| ResponsesOutputMessage
+			| ResponsesOutputItemReasoning
+			| ResponsesOutputItemFunctionCall
+			| ResponsesWebSearchCallOutput
+			| ResponsesOutputItemFileSearchCall
+			| ResponsesImageGenerationCall
+		)
+	}
 
 export type OpenResponsesInputMessageItem = {
 	id: string?,
