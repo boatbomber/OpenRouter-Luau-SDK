@@ -1,0 +1,17 @@
+# OpenRouter Luau SDK Generator Dependencies
+
+# OpenAPI parsing and validation
+openapi-pydantic==0.4.0
+pydantic>=2.0.0
+
+# Template engine for code generation
+jinja2>=3.1.0
+
+# YAML parsing (fallback if needed)
+pyyaml>=6.0.0
+
+# CLI and utilities
+click>=8.1.0
+
+# Type hints and validation
+typing-extensions>=4.0.0

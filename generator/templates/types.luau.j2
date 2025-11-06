@@ -1,0 +1,23 @@
+{{ header }}
+
+{% if description %}
+{{ format_comment(description, 0) }}
+{% endif %}
+
+export type ResultOk<T> = { type: "ok", value: T } -- Request succeeded
+export type ResultErr<E> = { type: "err", error: E } -- Request responded with an error
+export type ResultCrash = { type: "crash", error: string } -- Request failed to send
+export type Result<T, E> = ResultOk<T> | ResultErr<E> | ResultCrash
+
+export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "TRACE" | "PATCH"
+
+{% for type_def in types %}
+{% if not loop.first %}
+
+{% endif %}
+{%- if type_def.description %}
+{{ format_comment(type_def.description, 0) }}
+{%- endif %}
+export type {{ type_def.name }} = {{ type_def.type }}
+{% endfor %}
+return {}
