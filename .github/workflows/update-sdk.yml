@@ -49,10 +49,6 @@ jobs:
           curl -o input/openrouter.openapi.yaml \
             https://raw.githubusercontent.com/OpenRouterTeam/typescript-sdk/refs/heads/main/.speakeasy/in.openapi.yaml
 
-      - name: Generate SDK
-        run: |
-          python -m generator -i input/openrouter.openapi.yaml -o src/
-
       - name: Check for changes
         id: changes
         run: |
@@ -61,6 +57,11 @@ jobs:
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
+
+      - name: Generate SDK
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          python -m generator -i input/openrouter.openapi.yaml -o src/
 
       - name: Commit changes
         if: steps.changes.outputs.has_changes == 'true'
@@ -92,5 +93,4 @@ jobs:
             automated
             dependencies
           reviewers: "boatbomber"
-          delete-branch: true
 
