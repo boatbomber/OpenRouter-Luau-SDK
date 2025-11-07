@@ -1,0 +1,3913 @@
+--!strict
+-- This file is auto-generated from OpenRouter API
+-- DO NOT EDIT MANUALLY - Changes will be overwritten
+-- Last generated: 2025-11-07T02:07:39.822360Z (generator v1.0.0)
+-- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
+
+--[[
+  OpenAI-compatible Chat Completions and Completions API with additional
+  OpenRouter features
+]]
+
+export type ResultOk<T> = { type: "ok", value: T } -- Request succeeded
+export type ResultErr<E> = { type: "err", error: E } -- Request responded with an error
+export type ResultCrash = { type: "crash", error: string } -- Request failed to send
+export type Result<T, E> = ResultOk<T> | ResultErr<E> | ResultCrash
+
+export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "TRACE" | "PATCH"
+
+--[=[
+    @interface ActivityItem
+    @within OpenRouter
+    
+    @field date string -- Date of the activity (YYYY-MM-DD format); (Ex: "2025-08-24")
+    @field model string -- Model slug (e.g., "openai/gpt-4.1"); (Ex: "openai/gpt-4.1")
+    @field model_permaslug string -- Model permaslug (e.g., "openai/gpt-4.1-2025-04-14"); (Ex: "openai/gpt-4.1-2025-04-14")
+    @field endpoint_id string -- Unique identifier for the endpoint; (Ex: "550e8400-e29b-41d4-a716-446655440000")
+    @field provider_name string -- Name of the provider serving this endpoint; (Ex: "OpenAI")
+    @field usage number -- Total cost in USD (OpenRouter credits spent); (Ex: 0.015)
+    @field byok_usage_inference number -- BYOK inference cost in USD (external credits spent); (Ex: 0.012)
+    @field requests number -- Number of requests made; (Ex: 5)
+    @field prompt_tokens number -- Total prompt tokens used; (Ex: 50)
+    @field completion_tokens number -- Total completion tokens generated; (Ex: 125)
+    @field reasoning_tokens number -- Total reasoning tokens used; (Ex: 25)
+]=]
+export type ActivityItem = {
+	date: string,
+	model: string,
+	model_permaslug: string,
+	endpoint_id: string,
+	provider_name: string,
+	usage: number,
+	byok_usage_inference: number,
+	requests: number,
+	prompt_tokens: number,
+	completion_tokens: number,
+	reasoning_tokens: number,
+}
+
+--[=[
+    @interface BadGatewayResponseErrorData
+    @within OpenRouter
+    Error data for BadGatewayResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type BadGatewayResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface BadGatewayResponse
+    @within OpenRouter
+    Bad Gateway - Provider/upstream API failure
+    
+    @field error BadGatewayResponseErrorData
+    @field user_id string?
+]=]
+export type BadGatewayResponse = { error: BadGatewayResponseErrorData, user_id: string? }
+
+--[=[
+    @interface BadRequestResponseErrorData
+    @within OpenRouter
+    Error data for BadRequestResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type BadRequestResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface BadRequestResponse
+    @within OpenRouter
+    Bad Request - Invalid request parameters or malformed input
+    
+    @field error BadRequestResponseErrorData
+    @field user_id string?
+]=]
+export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: string? }
+
+--[=[
+    @type BigNumberUnion
+    @within OpenRouter
+    A value in string or number format that is a large number
+]=]
+export type BigNumberUnion = number | string
+
+export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
+
+--[=[
+    @interface ChatError
+    @within OpenRouter
+    
+    @field error { code: ((string | number) | nil), message: string, param: (string | nil)?, ["type"]: (string | nil)? }
+]=]
+export type ChatError = {
+	error: { code: string | number | nil, message: string, param: (string | nil)?, ["type"]: (string | nil)? },
+}
+
+--[=[
+    @interface ChatGenerationTokenUsage
+    @within OpenRouter
+    
+    @field completion_tokens number
+    @field prompt_tokens number
+    @field total_tokens number
+    @field completion_tokens_details { reasoning_tokens: number?, audio_tokens: number?, accepted_prediction_tokens: number?, rejected_prediction_tokens: number? }?
+    @field prompt_tokens_details ({ cached_tokens: number?, audio_tokens: number? } | nil)?
+]=]
+export type ChatGenerationTokenUsage = {
+	completion_tokens: number,
+	prompt_tokens: number,
+	total_tokens: number,
+	completion_tokens_details: {
+		reasoning_tokens: number?,
+		audio_tokens: number?,
+		accepted_prediction_tokens: number?,
+		rejected_prediction_tokens: number?,
+	}?,
+	prompt_tokens_details: ({ cached_tokens: number?, audio_tokens: number? } | nil)?,
+}
+
+--[=[
+    @interface ChatMessageContentItemAudio
+    @within OpenRouter
+    
+    @field type string
+    @field input_audio { data: string, format: ("wav" | "mp3" | "flac" | "m4a" | "ogg" | "pcm16" | "pcm24") }
+]=]
+export type ChatMessageContentItemAudio = {
+	["type"]: string,
+	input_audio: { data: string, format: "wav" | "mp3" | "flac" | "m4a" | "ogg" | "pcm16" | "pcm24" },
+}
+
+--[=[
+    @interface ChatMessageContentItemImage
+    @within OpenRouter
+    
+    @field type string
+    @field image_url { url: string, detail: ("auto" | "low" | "high")? }
+]=]
+export type ChatMessageContentItemImage = {
+	["type"]: string,
+	image_url: { url: string, detail: ("auto" | "low" | "high")? },
+}
+
+--[=[
+    @interface ChatMessageContentItemText
+    @within OpenRouter
+    
+    @field type string
+    @field text string
+]=]
+export type ChatMessageContentItemText = { ["type"]: string, text: string }
+
+--[=[
+    @interface ChatMessageContentItemVideo
+    @within OpenRouter
+    
+    @field type string
+    @field video_url { url: string }
+]=]
+export type ChatMessageContentItemVideo = { ["type"]: string, video_url: { url: string } }
+
+export type ChatMessageContentItem = (
+	ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo
+)
+
+--[=[
+    @interface ChatMessageTokenLogprob
+    @within OpenRouter
+    
+    @field token string
+    @field logprob number
+    @field bytes ({number} | nil)
+    @field top_logprobs {{ token: string, logprob: number, bytes: ({number} | nil) }}
+]=]
+export type ChatMessageTokenLogprob = {
+	token: string,
+	logprob: number,
+	bytes: { number } | nil,
+	top_logprobs: { { token: string, logprob: number, bytes: { number } | nil } },
+}
+
+--[=[
+    @interface ChatMessageTokenLogprobs
+    @within OpenRouter
+    
+    @field content ({ChatMessageTokenLogprob} | nil)
+    @field refusal ({ChatMessageTokenLogprob} | nil)
+]=]
+export type ChatMessageTokenLogprobs = {
+	content: { ChatMessageTokenLogprob } | nil,
+	refusal: { ChatMessageTokenLogprob } | nil,
+}
+
+--[=[
+    @interface ChatMessageToolCall
+    @within OpenRouter
+    
+    @field id string
+    @field type string
+    @field function { name: string, arguments: string }
+]=]
+export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: { name: string, arguments: string } }
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouter
+    
+    @field role string
+    @field content ((string | {ChatMessageContentItem}) | nil)?
+    @field name string?
+    @field tool_calls {ChatMessageToolCall}?
+    @field refusal (string | nil)?
+    @field reasoning (string | nil)?
+]=]
+export type AssistantMessage = {
+	role: string,
+	content: ((string | { ChatMessageContentItem }) | nil)?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: (string | nil)?,
+	reasoning: (string | nil)?,
+}
+
+--[=[
+    @interface ChatStreamOptions
+    @within OpenRouter
+    
+    @field include_usage boolean?
+]=]
+export type ChatStreamOptions = { include_usage: boolean? }
+
+--[=[
+    @interface ChatStreamingMessageToolCall
+    @within OpenRouter
+    
+    @field index number
+    @field id string?
+    @field type string?
+    @field function { name: string?, arguments: string? }?
+]=]
+export type ChatStreamingMessageToolCall = {
+	index: number,
+	id: string?,
+	["type"]: string?,
+	["function"]: { name: string?, arguments: string? }?,
+}
+
+--[=[
+    @interface ChatStreamingMessageChunk
+    @within OpenRouter
+    
+    @field role "assistant"?
+    @field content (string | nil)?
+    @field reasoning (string | nil)?
+    @field refusal (string | nil)?
+    @field tool_calls {ChatStreamingMessageToolCall}?
+]=]
+export type ChatStreamingMessageChunk = {
+	role: "assistant"?,
+	content: (string | nil)?,
+	reasoning: (string | nil)?,
+	refusal: (string | nil)?,
+	tool_calls: { ChatStreamingMessageToolCall }?,
+}
+
+export type CompletionFinishReason = "stop" | "length" | "content_filter" | nil
+
+--[=[
+    @interface CompletionLogprobs
+    @within OpenRouter
+    
+    @field tokens {string}
+    @field token_logprobs {number}
+    @field top_logprobs ({{ [string]: number }} | nil)
+    @field text_offset {number}
+]=]
+export type CompletionLogprobs = {
+	tokens: { string },
+	token_logprobs: { number },
+	top_logprobs: { { [string]: number } } | nil,
+	text_offset: { number },
+}
+
+--[=[
+    @interface CompletionChoice
+    @within OpenRouter
+    
+    @field text string
+    @field index number
+    @field logprobs (CompletionLogprobs | nil)
+    @field finish_reason CompletionFinishReason
+]=]
+export type CompletionChoice = {
+	text: string,
+	index: number,
+	logprobs: CompletionLogprobs | nil,
+	finish_reason: CompletionFinishReason,
+}
+
+--[=[
+    @interface CompletionUsage
+    @within OpenRouter
+    
+    @field prompt_tokens number
+    @field completion_tokens number
+    @field total_tokens number
+]=]
+export type CompletionUsage = { prompt_tokens: number, completion_tokens: number, total_tokens: number }
+
+--[=[
+    @interface CompletionResponse
+    @within OpenRouter
+    
+    @field id string
+    @field object string
+    @field created number
+    @field model string
+    @field system_fingerprint string?
+    @field choices {CompletionChoice}
+    @field usage CompletionUsage?
+]=]
+export type CompletionResponse = {
+	id: string,
+	object: string,
+	created: number,
+	model: string,
+	system_fingerprint: string?,
+	choices: { CompletionChoice },
+	usage: CompletionUsage?,
+}
+
+--[=[
+    @interface CreateChargeRequest
+    @within OpenRouter
+    Create a Coinbase charge for crypto payment
+    
+    @field amount number
+    @field sender string
+    @field chain_id number
+]=]
+export type CreateChargeRequest = { amount: number, sender: string, chain_id: number }
+
+--[=[
+    @interface DefaultParameters
+    @within OpenRouter
+    Default parameters for this model
+    
+    @field temperature number? -- Range: 0.0-2.0
+    @field top_p number? -- Range: 0.0-1.0
+    @field frequency_penalty number? -- Range: -2.0-2.0
+]=]
+export type DefaultParameters = { temperature: number?, top_p: number?, frequency_penalty: number? }?
+
+--[=[
+    @interface EdgeNetworkTimeoutResponseErrorData
+    @within OpenRouter
+    Error data for EdgeNetworkTimeoutResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type EdgeNetworkTimeoutResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface EdgeNetworkTimeoutResponse
+    @within OpenRouter
+    Infrastructure Timeout - Provider request timed out at edge network
+    
+    @field error EdgeNetworkTimeoutResponseErrorData
+    @field user_id string?
+]=]
+export type EdgeNetworkTimeoutResponse = { error: EdgeNetworkTimeoutResponseErrorData, user_id: string? }
+
+export type EndpointStatus = number
+
+--[=[
+    @interface FileCitation
+    @within OpenRouter
+    
+    @field type "file_citation"
+    @field file_id string
+    @field filename string
+    @field index number
+]=]
+export type FileCitation = { ["type"]: "file_citation", file_id: string, filename: string, index: number }
+
+--[=[
+    @interface FilePath
+    @within OpenRouter
+    
+    @field type "file_path"
+    @field file_id string
+    @field index number
+]=]
+export type FilePath = { ["type"]: "file_path", file_id: string, index: number }
+
+--[=[
+    @interface ForbiddenResponseErrorData
+    @within OpenRouter
+    Error data for ForbiddenResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type ForbiddenResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface ForbiddenResponse
+    @within OpenRouter
+    Forbidden - Authentication successful but insufficient permissions
+    
+    @field error ForbiddenResponseErrorData
+    @field user_id string?
+]=]
+export type ForbiddenResponse = { error: ForbiddenResponseErrorData, user_id: string? }
+
+export type ImageGenerationStatus = "in_progress" | "completed" | "generating" | "failed"
+
+export type InputModality = "text" | "image" | "file" | "audio" | "video"
+
+--[=[
+    @type InstructType
+    @within OpenRouter
+    Instruction format type
+]=]
+export type InstructType = (
+	"none"
+	| "airoboros"
+	| "alpaca"
+	| "alpaca-modif"
+	| "chatml"
+	| "claude"
+	| "code-llama"
+	| "gemma"
+	| "llama2"
+	| "llama3"
+	| "mistral"
+	| "nemotron"
+	| "neural"
+	| "openchat"
+	| "phi3"
+	| "rwkv"
+	| "vicuna"
+	| "zephyr"
+	| "deepseek-r1"
+	| "deepseek-v3.1"
+	| "qwq"
+	| "qwen3"
+)?
+
+--[=[
+    @interface InternalServerResponseErrorData
+    @within OpenRouter
+    Error data for InternalServerResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type InternalServerResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface InternalServerResponse
+    @within OpenRouter
+    Internal Server Error - Unexpected server error
+    
+    @field error InternalServerResponseErrorData
+    @field user_id string?
+]=]
+export type InternalServerResponse = { error: InternalServerResponseErrorData, user_id: string? }
+
+--[=[
+    @interface JSONSchemaConfig
+    @within OpenRouter
+    
+    @field name string
+    @field description string?
+    @field schema { [string]: any }?
+    @field strict (boolean | nil)?
+]=]
+export type JSONSchemaConfig = {
+	name: string,
+	description: string?,
+	schema: { [string]: any }?,
+	strict: (boolean | nil)?,
+}
+
+--[=[
+    @type ModelGroup
+    @within OpenRouter
+    Tokenizer type used by the model
+]=]
+export type ModelGroup = (
+	"Router"
+	| "Media"
+	| "Other"
+	| "GPT"
+	| "Claude"
+	| "Gemini"
+	| "Grok"
+	| "Cohere"
+	| "Nova"
+	| "Qwen"
+	| "Yi"
+	| "DeepSeek"
+	| "Mistral"
+	| "Llama2"
+	| "Llama3"
+	| "Llama4"
+	| "PaLM"
+	| "RWKV"
+	| "Qwen3"
+)
+
+export type ModelName = string
+
+--[=[
+    @interface ModelsCountResponse
+    @within OpenRouter
+    Model count data
+    
+    @field data { count: number } -- Model count data; (Ex: {"count":150})
+]=]
+export type ModelsCountResponse = { data: { count: number } }
+
+--[=[
+    @interface NamedToolChoice
+    @within OpenRouter
+    
+    @field type string
+    @field function { name: string }
+]=]
+export type NamedToolChoice = { ["type"]: string, ["function"]: { name: string } }
+
+--[=[
+    @interface NotFoundResponseErrorData
+    @within OpenRouter
+    Error data for NotFoundResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type NotFoundResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface NotFoundResponse
+    @within OpenRouter
+    Not Found - Resource does not exist
+    
+    @field error NotFoundResponseErrorData
+    @field user_id string?
+]=]
+export type NotFoundResponse = { error: NotFoundResponseErrorData, user_id: string? }
+
+--[=[
+    @interface OpenAIResponsesErrorEvent
+    @within OpenRouter
+    Event emitted when an error occurs during streaming
+    
+    @field type "error"
+    @field code string?
+    @field message string
+    @field param string?
+    @field sequence_number number
+]=]
+export type OpenAIResponsesErrorEvent = {
+	["type"]: "error",
+	code: string?,
+	message: string,
+	param: string?,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesImageGenCallCompleted
+    @within OpenRouter
+    
+    @field type "response.image_generation_call.completed"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallCompleted = {
+	["type"]: "response.image_generation_call.completed",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesImageGenCallGenerating
+    @within OpenRouter
+    
+    @field type "response.image_generation_call.generating"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallGenerating = {
+	["type"]: "response.image_generation_call.generating",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesImageGenCallInProgress
+    @within OpenRouter
+    
+    @field type "response.image_generation_call.in_progress"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallInProgress = {
+	["type"]: "response.image_generation_call.in_progress",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesImageGenCallPartialImage
+    @within OpenRouter
+    
+    @field type "response.image_generation_call.partial_image"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+    @field partial_image_b64 string
+    @field partial_image_index number
+]=]
+export type OpenAIResponsesImageGenCallPartialImage = {
+	["type"]: "response.image_generation_call.partial_image",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+	partial_image_b64: string,
+	partial_image_index: number,
+}
+
+export type OpenAIResponsesIncludable = (
+	"file_search_call.results"
+	| "message.input_image.image_url"
+	| "computer_call_output.output.image_url"
+	| "reasoning.encrypted_content"
+	| "code_interpreter_call.outputs"
+)
+
+--[=[
+    @interface OpenAIResponsesIncompleteDetails
+    @within OpenRouter
+    
+    @field reason ("max_output_tokens" | "content_filter")?
+]=]
+export type OpenAIResponsesIncompleteDetails = { reason: ("max_output_tokens" | "content_filter")? }?
+
+--[=[
+    @interface OpenAIResponsesReasoningDeltaEvent
+    @within OpenRouter
+    Event emitted when reasoning text delta is streamed
+    
+    @field type "response.reasoning_text.delta"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type OpenAIResponsesReasoningDeltaEvent = {
+	["type"]: "response.reasoning_text.delta",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesReasoningDoneEvent
+    @within OpenRouter
+    Event emitted when reasoning text streaming is complete
+    
+    @field type "response.reasoning_text.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field text string
+    @field sequence_number number
+]=]
+export type OpenAIResponsesReasoningDoneEvent = {
+	["type"]: "response.reasoning_text.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	text: string,
+	sequence_number: number,
+}
+
+export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minimal")?
+
+--[=[
+    @interface OpenAIResponsesReasoningSummaryTextDeltaEvent
+    @within OpenRouter
+    Event emitted when reasoning summary text delta is streamed
+    
+    @field type "response.reasoning_summary_text.delta"
+    @field item_id string
+    @field output_index number
+    @field summary_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type OpenAIResponsesReasoningSummaryTextDeltaEvent = {
+	["type"]: "response.reasoning_summary_text.delta",
+	item_id: string,
+	output_index: number,
+	summary_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesReasoningSummaryTextDoneEvent
+    @within OpenRouter
+    Event emitted when reasoning summary text streaming is complete
+    
+    @field type "response.reasoning_summary_text.done"
+    @field item_id string
+    @field output_index number
+    @field summary_index number
+    @field text string
+    @field sequence_number number
+]=]
+export type OpenAIResponsesReasoningSummaryTextDoneEvent = {
+	["type"]: "response.reasoning_summary_text.done",
+	item_id: string,
+	output_index: number,
+	summary_index: number,
+	text: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesRefusalContent
+    @within OpenRouter
+    
+    @field type "refusal"
+    @field refusal string
+]=]
+export type OpenAIResponsesRefusalContent = { ["type"]: "refusal", refusal: string }
+
+export type OpenAIResponsesResponseStatus = (
+	"completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued"
+)
+
+export type OpenAIResponsesServiceTier = ("auto" | "default" | "flex" | "priority" | "scale")?
+
+export type OpenAIResponsesToolChoice = "auto" | "none" | "required" | { ["type"]: "function", name: string } | {
+	["type"]: "web_search_preview_2025_03_11" | "web_search_preview",
+}
+
+export type OpenAIResponsesTruncation = ("auto" | "disabled")?
+
+--[=[
+    @interface OpenAIResponsesUsage
+    @within OpenRouter
+    
+    @field input_tokens number
+    @field input_tokens_details { cached_tokens: number }
+    @field output_tokens number
+    @field output_tokens_details { reasoning_tokens: number }
+    @field total_tokens number
+]=]
+export type OpenAIResponsesUsage = {
+	input_tokens: number,
+	input_tokens_details: { cached_tokens: number },
+	output_tokens: number,
+	output_tokens_details: { reasoning_tokens: number },
+	total_tokens: number,
+}
+
+--[=[
+    @type OpenResponsesErrorEvent
+    @within OpenRouter
+    Event emitted when an error occurs during streaming
+]=]
+export type OpenResponsesErrorEvent = OpenAIResponsesErrorEvent
+
+--[=[
+    @interface OpenResponsesFunctionCallArgumentsDeltaEvent
+    @within OpenRouter
+    Event emitted when function call arguments are being streamed
+    
+    @field type "response.function_call_arguments.delta"
+    @field item_id string
+    @field output_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type OpenResponsesFunctionCallArgumentsDeltaEvent = {
+	["type"]: "response.function_call_arguments.delta",
+	item_id: string,
+	output_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesFunctionCallArgumentsDoneEvent
+    @within OpenRouter
+    Event emitted when function call arguments streaming is complete
+    
+    @field type "response.function_call_arguments.done"
+    @field item_id string
+    @field output_index number
+    @field name string
+    @field arguments string
+    @field sequence_number number
+]=]
+export type OpenResponsesFunctionCallArgumentsDoneEvent = {
+	["type"]: "response.function_call_arguments.done",
+	item_id: string,
+	output_index: number,
+	name: string,
+	arguments: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesFunctionTool
+    @within OpenRouter
+    Function tool definition
+    
+    @field type "function"
+    @field name string
+    @field description string?
+    @field strict boolean?
+    @field parameters { [string]: any? }?
+]=]
+export type OpenResponsesFunctionTool = {
+	["type"]: "function",
+	name: string,
+	description: string?,
+	strict: boolean?,
+	parameters: { [string]: any? }?,
+}
+
+--[=[
+    @type OpenResponsesImageGenCallCompleted
+    @within OpenRouter
+    Image generation call completed
+]=]
+export type OpenResponsesImageGenCallCompleted = OpenAIResponsesImageGenCallCompleted
+
+--[=[
+    @type OpenResponsesImageGenCallGenerating
+    @within OpenRouter
+    Image generation call is generating
+]=]
+export type OpenResponsesImageGenCallGenerating = OpenAIResponsesImageGenCallGenerating
+
+--[=[
+    @type OpenResponsesImageGenCallInProgress
+    @within OpenRouter
+    Image generation call in progress
+]=]
+export type OpenResponsesImageGenCallInProgress = OpenAIResponsesImageGenCallInProgress
+
+--[=[
+    @type OpenResponsesImageGenCallPartialImage
+    @within OpenRouter
+    Image generation call with partial image
+]=]
+export type OpenResponsesImageGenCallPartialImage = OpenAIResponsesImageGenCallPartialImage
+
+--[=[
+    @type OpenResponsesReasoningDeltaEvent
+    @within OpenRouter
+    Event emitted when reasoning text delta is streamed
+]=]
+export type OpenResponsesReasoningDeltaEvent = OpenAIResponsesReasoningDeltaEvent
+
+--[=[
+    @type OpenResponsesReasoningDoneEvent
+    @within OpenRouter
+    Event emitted when reasoning text streaming is complete
+]=]
+export type OpenResponsesReasoningDoneEvent = OpenAIResponsesReasoningDoneEvent
+
+--[=[
+    @type OpenResponsesReasoningSummaryTextDeltaEvent
+    @within OpenRouter
+    Event emitted when reasoning summary text delta is streamed
+]=]
+export type OpenResponsesReasoningSummaryTextDeltaEvent = OpenAIResponsesReasoningSummaryTextDeltaEvent
+
+--[=[
+    @type OpenResponsesReasoningSummaryTextDoneEvent
+    @within OpenRouter
+    Event emitted when reasoning summary text streaming is complete
+]=]
+export type OpenResponsesReasoningSummaryTextDoneEvent = OpenAIResponsesReasoningSummaryTextDoneEvent
+
+--[=[
+    @interface OpenResponsesRefusalDeltaEvent
+    @within OpenRouter
+    Event emitted when a refusal delta is streamed
+    
+    @field type "response.refusal.delta"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type OpenResponsesRefusalDeltaEvent = {
+	["type"]: "response.refusal.delta",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesRefusalDoneEvent
+    @within OpenRouter
+    Event emitted when refusal streaming is complete
+    
+    @field type "response.refusal.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field refusal string
+    @field sequence_number number
+]=]
+export type OpenResponsesRefusalDoneEvent = {
+	["type"]: "response.refusal.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	refusal: string,
+	sequence_number: number,
+}
+
+--[=[
+    @type OpenResponsesRequestMetadata
+    @within OpenRouter
+    Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
+]=]
+export type OpenResponsesRequestMetadata = { [string]: string }?
+
+--[=[
+    @interface OpenResponsesTopLogprobs
+    @within OpenRouter
+    Alternative token with its log probability
+    
+    @field token string?
+    @field logprob number?
+]=]
+export type OpenResponsesTopLogprobs = { token: string?, logprob: number? }
+
+--[=[
+    @interface OpenResponsesLogProbs
+    @within OpenRouter
+    Log probability information for a token
+    
+    @field logprob number
+    @field token string
+    @field top_logprobs {OpenResponsesTopLogprobs}?
+]=]
+export type OpenResponsesLogProbs = { logprob: number, token: string, top_logprobs: { OpenResponsesTopLogprobs }? }
+
+--[=[
+    @interface OpenResponsesTextDeltaEvent
+    @within OpenRouter
+    Event emitted when a text delta is streamed
+    
+    @field type "response.output_text.delta"
+    @field logprobs {OpenResponsesLogProbs}
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type OpenResponsesTextDeltaEvent = {
+	["type"]: "response.output_text.delta",
+	logprobs: { OpenResponsesLogProbs },
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesTextDoneEvent
+    @within OpenRouter
+    Event emitted when text streaming is complete
+    
+    @field type "response.output_text.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field text string
+    @field sequence_number number
+    @field logprobs {OpenResponsesLogProbs}
+]=]
+export type OpenResponsesTextDoneEvent = {
+	["type"]: "response.output_text.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	text: string,
+	sequence_number: number,
+	logprobs: { OpenResponsesLogProbs },
+}
+
+--[=[
+    @type OpenResponsesUsage
+    @within OpenRouter
+    Token usage information for the response
+]=]
+export type OpenResponsesUsage = OpenAIResponsesUsage & {
+	cost: number?,
+	is_byok: boolean?,
+	cost_details: {
+		upstream_inference_cost: number?,
+		upstream_inference_input_cost: number,
+		upstream_inference_output_cost: number,
+	}?,
+}
+
+--[=[
+    @interface OutputItemFunctionCall
+    @within OpenRouter
+    
+    @field type "function_call"
+    @field id string?
+    @field name string
+    @field arguments string
+    @field call_id string
+    @field status ("completed" | "incomplete" | "in_progress")?
+]=]
+export type OutputItemFunctionCall = {
+	["type"]: "function_call",
+	id: string?,
+	name: string,
+	arguments: string,
+	call_id: string,
+	status: ("completed" | "incomplete" | "in_progress")?,
+}
+
+--[=[
+    @interface OutputItemImageGenerationCall
+    @within OpenRouter
+    
+    @field type "image_generation_call"
+    @field id string
+    @field result string?
+    @field status ImageGenerationStatus
+]=]
+export type OutputItemImageGenerationCall = {
+	["type"]: "image_generation_call",
+	id: string,
+	result: string?,
+	status: ImageGenerationStatus,
+}
+
+export type OutputModality = "text" | "image" | "embeddings"
+
+--[=[
+    @interface ModelArchitecture
+    @within OpenRouter
+    Model architecture information
+    
+    @field tokenizer ModelGroup?
+    @field instruct_type ("none" | "airoboros" | "alpaca" | "alpaca-modif" | "chatml" | "claude" | "code-llama" | "gemma" | "llama2" | "llama3" | "mistral" | "nemotron" | "neural" | "openchat" | "phi3" | "rwkv" | "vicuna" | "zephyr" | "deepseek-r1" | "deepseek-v3.1" | "qwq" | "qwen3")? -- Instruction format type; (Ex: "chatml")
+    @field modality string? -- Primary modality of the model; (Ex: "text->text")
+    @field input_modalities {InputModality} -- Supported input modalities
+    @field output_modalities {OutputModality} -- Supported output modalities
+]=]
+export type ModelArchitecture = {
+	tokenizer: ModelGroup?,
+	instruct_type: (
+		"none"
+		| "airoboros"
+		| "alpaca"
+		| "alpaca-modif"
+		| "chatml"
+		| "claude"
+		| "code-llama"
+		| "gemma"
+		| "llama2"
+		| "llama3"
+		| "mistral"
+		| "nemotron"
+		| "neural"
+		| "openchat"
+		| "phi3"
+		| "rwkv"
+		| "vicuna"
+		| "zephyr"
+		| "deepseek-r1"
+		| "deepseek-v3.1"
+		| "qwq"
+		| "qwen3"
+	)?,
+	modality: string?,
+	input_modalities: { InputModality },
+	output_modalities: { OutputModality },
+}
+
+export type Parameter = (
+	"temperature"
+	| "top_p"
+	| "top_k"
+	| "min_p"
+	| "top_a"
+	| "frequency_penalty"
+	| "presence_penalty"
+	| "repetition_penalty"
+	| "max_tokens"
+	| "logit_bias"
+	| "logprobs"
+	| "top_logprobs"
+	| "seed"
+	| "response_format"
+	| "structured_outputs"
+	| "stop"
+	| "tools"
+	| "tool_choice"
+	| "parallel_tool_calls"
+	| "include_reasoning"
+	| "reasoning"
+	| "web_search_options"
+	| "verbosity"
+)
+
+--[=[
+    @interface PayloadTooLargeResponseErrorData
+    @within OpenRouter
+    Error data for PayloadTooLargeResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type PayloadTooLargeResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface PayloadTooLargeResponse
+    @within OpenRouter
+    Payload Too Large - Request payload exceeds size limits
+    
+    @field error PayloadTooLargeResponseErrorData
+    @field user_id string?
+]=]
+export type PayloadTooLargeResponse = { error: PayloadTooLargeResponseErrorData, user_id: string? }
+
+--[=[
+    @interface PaymentRequiredResponseErrorData
+    @within OpenRouter
+    Error data for PaymentRequiredResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type PaymentRequiredResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface PaymentRequiredResponse
+    @within OpenRouter
+    Payment Required - Insufficient credits or quota to complete request
+    
+    @field error PaymentRequiredResponseErrorData
+    @field user_id string?
+]=]
+export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData, user_id: string? }
+
+--[=[
+    @interface PerRequestLimits
+    @within OpenRouter
+    Per-request token limits
+    
+    @field prompt_tokens number -- Maximum prompt tokens per request; (Ex: 1000)
+    @field completion_tokens number -- Maximum completion tokens per request; (Ex: 1000)
+]=]
+export type PerRequestLimits = { prompt_tokens: number, completion_tokens: number }?
+
+export type ProviderName = (
+	"AnyScale"
+	| "Cent-ML"
+	| "HuggingFace"
+	| "Hyperbolic 2"
+	| "Lepton"
+	| "Lynn 2"
+	| "Lynn"
+	| "Mancer"
+	| "Modal"
+	| "OctoAI"
+	| "Recursal"
+	| "Reflection"
+	| "Replicate"
+	| "SambaNova 2"
+	| "SF Compute"
+	| "Together 2"
+	| "01.AI"
+	| "AI21"
+	| "AionLabs"
+	| "Alibaba"
+	| "Amazon Bedrock"
+	| "Anthropic"
+	| "AtlasCloud"
+	| "Atoma"
+	| "Avian"
+	| "Azure"
+	| "BaseTen"
+	| "Cerebras"
+	| "Chutes"
+	| "Cirrascale"
+	| "Clarifai"
+	| "Cloudflare"
+	| "Cohere"
+	| "CrofAI"
+	| "Crusoe"
+	| "DeepInfra"
+	| "DeepSeek"
+	| "Enfer"
+	| "Featherless"
+	| "Fireworks"
+	| "Friendli"
+	| "GMICloud"
+	| "Google"
+	| "Google AI Studio"
+	| "Groq"
+	| "Hyperbolic"
+	| "Inception"
+	| "InferenceNet"
+	| "Infermatic"
+	| "Inflection"
+	| "InoCloud"
+	| "Kluster"
+	| "Lambda"
+	| "Liquid"
+	| "Mancer 2"
+	| "Meta"
+	| "Minimax"
+	| "ModelRun"
+	| "Mistral"
+	| "Modular"
+	| "Moonshot AI"
+	| "Morph"
+	| "NCompass"
+	| "Nebius"
+	| "NextBit"
+	| "Nineteen"
+	| "Novita"
+	| "Nvidia"
+	| "OpenAI"
+	| "OpenInference"
+	| "Parasail"
+	| "Perplexity"
+	| "Phala"
+	| "Relace"
+	| "SambaNova"
+	| "SiliconFlow"
+	| "Stealth"
+	| "Switchpoint"
+	| "Targon"
+	| "Together"
+	| "Ubicloud"
+	| "Venice"
+	| "WandB"
+	| "xAI"
+	| "Z.AI"
+	| "FakeProvider"
+)
+
+--[=[
+    @interface ProviderOverloadedResponseErrorData
+    @within OpenRouter
+    Error data for ProviderOverloadedResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type ProviderOverloadedResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface ProviderOverloadedResponse
+    @within OpenRouter
+    Provider Overloaded - Provider is temporarily overloaded
+    
+    @field error ProviderOverloadedResponseErrorData
+    @field user_id string?
+]=]
+export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErrorData, user_id: string? }
+
+--[=[
+    @interface PublicPricing
+    @within OpenRouter
+    Pricing information for the model
+    
+    @field prompt BigNumberUnion
+    @field completion BigNumberUnion
+    @field request BigNumberUnion?
+    @field image BigNumberUnion?
+    @field image_output BigNumberUnion?
+    @field audio BigNumberUnion?
+    @field input_audio_cache BigNumberUnion?
+    @field web_search BigNumberUnion?
+    @field internal_reasoning BigNumberUnion?
+    @field input_cache_read BigNumberUnion?
+    @field input_cache_write BigNumberUnion?
+    @field discount number?
+]=]
+export type PublicPricing = {
+	prompt: BigNumberUnion,
+	completion: BigNumberUnion,
+	request: BigNumberUnion?,
+	image: BigNumberUnion?,
+	image_output: BigNumberUnion?,
+	audio: BigNumberUnion?,
+	input_audio_cache: BigNumberUnion?,
+	web_search: BigNumberUnion?,
+	internal_reasoning: BigNumberUnion?,
+	input_cache_read: BigNumberUnion?,
+	input_cache_write: BigNumberUnion?,
+	discount: number?,
+}
+
+export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown"
+
+--[=[
+    @interface PublicEndpoint
+    @within OpenRouter
+    Information about a specific model endpoint
+    
+    @field name string
+    @field model_name string
+    @field context_length number
+    @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
+    @field provider_name ProviderName
+    @field tag string
+    @field quantization (Quantization & any)?
+    @field max_completion_tokens number?
+    @field max_prompt_tokens number?
+    @field supported_parameters {Parameter}
+    @field status EndpointStatus?
+    @field uptime_last_30m number?
+    @field supports_implicit_caching boolean
+]=]
+export type PublicEndpoint = {
+	name: string,
+	model_name: string,
+	context_length: number,
+	pricing: {
+		prompt: BigNumberUnion,
+		completion: BigNumberUnion,
+		request: BigNumberUnion?,
+		image: BigNumberUnion?,
+		image_output: BigNumberUnion?,
+		audio: BigNumberUnion?,
+		input_audio_cache: BigNumberUnion?,
+		web_search: BigNumberUnion?,
+		internal_reasoning: BigNumberUnion?,
+		input_cache_read: BigNumberUnion?,
+		input_cache_write: BigNumberUnion?,
+		discount: number?,
+	},
+	provider_name: ProviderName,
+	tag: string,
+	quantization: (Quantization & any)?,
+	max_completion_tokens: number?,
+	max_prompt_tokens: number?,
+	supported_parameters: { Parameter },
+	status: EndpointStatus?,
+	uptime_last_30m: number?,
+	supports_implicit_caching: boolean,
+}
+
+--[=[
+    @interface ListEndpointsResponse
+    @within OpenRouter
+    List of available endpoints for a model
+    
+    @field id string -- Unique identifier for the model; (Ex: "openai/gpt-4")
+    @field name string -- Display name of the model; (Ex: "GPT-4")
+    @field created number -- Unix timestamp of when the model was created; (Ex: 1692901234)
+    @field description string -- Description of the model; (Ex: "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.")
+    @field architecture (ModelArchitecture & { tokenizer: (ModelGroup & any)?, instruct_type: InstructType, modality: string?, input_modalities: {InputModality}, output_modalities: {OutputModality} })
+    @field endpoints {PublicEndpoint} -- List of available endpoints for this model
+]=]
+export type ListEndpointsResponse = {
+	id: string,
+	name: string,
+	created: number,
+	description: string,
+	architecture: ModelArchitecture & {
+		tokenizer: (ModelGroup & any)?,
+		instruct_type: InstructType,
+		modality: string?,
+		input_modalities: { InputModality },
+		output_modalities: { OutputModality },
+	},
+	endpoints: { PublicEndpoint },
+}
+
+--[=[
+    @interface ReasoningSummaryText
+    @within OpenRouter
+    
+    @field type "summary_text"
+    @field text string
+]=]
+export type ReasoningSummaryText = { ["type"]: "summary_text", text: string }
+
+--[=[
+    @interface OpenAIResponsesReasoningSummaryPartAddedEvent
+    @within OpenRouter
+    Event emitted when a reasoning summary part is added
+    
+    @field type "response.reasoning_summary_part.added"
+    @field output_index number
+    @field item_id string
+    @field summary_index number
+    @field part ReasoningSummaryText
+    @field sequence_number number
+]=]
+export type OpenAIResponsesReasoningSummaryPartAddedEvent = {
+	["type"]: "response.reasoning_summary_part.added",
+	output_index: number,
+	item_id: string,
+	summary_index: number,
+	part: ReasoningSummaryText,
+	sequence_number: number,
+}
+
+--[=[
+    @type OpenResponsesReasoningSummaryPartAddedEvent
+    @within OpenRouter
+    Event emitted when a reasoning summary part is added
+]=]
+export type OpenResponsesReasoningSummaryPartAddedEvent = OpenAIResponsesReasoningSummaryPartAddedEvent
+
+--[=[
+    @interface OpenResponsesReasoningSummaryPartDoneEvent
+    @within OpenRouter
+    Event emitted when a reasoning summary part is complete
+    
+    @field type "response.reasoning_summary_part.done"
+    @field output_index number
+    @field item_id string
+    @field summary_index number
+    @field part ReasoningSummaryText
+    @field sequence_number number
+]=]
+export type OpenResponsesReasoningSummaryPartDoneEvent = {
+	["type"]: "response.reasoning_summary_part.done",
+	output_index: number,
+	item_id: string,
+	summary_index: number,
+	part: ReasoningSummaryText,
+	sequence_number: number,
+}
+
+export type ReasoningSummaryVerbosity = "auto" | "concise" | "detailed"
+
+--[=[
+    @interface OpenAIResponsesReasoningConfig
+    @within OpenRouter
+    
+    @field effort OpenAIResponsesReasoningEffort?
+    @field summary ReasoningSummaryVerbosity?
+]=]
+export type OpenAIResponsesReasoningConfig = {
+	effort: OpenAIResponsesReasoningEffort?,
+	summary: ReasoningSummaryVerbosity?,
+}?
+
+--[=[
+    @type OpenResponsesReasoningConfig
+    @within OpenRouter
+    Configuration for reasoning mode in the response
+]=]
+export type OpenResponsesReasoningConfig = OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? }
+
+--[=[
+    @interface ReasoningTextContent
+    @within OpenRouter
+    
+    @field type "reasoning_text"
+    @field text string
+]=]
+export type ReasoningTextContent = { ["type"]: "reasoning_text", text: string }
+
+--[=[
+    @interface OutputItemReasoning
+    @within OpenRouter
+    
+    @field type "reasoning"
+    @field id string
+    @field content {ReasoningTextContent}?
+    @field summary {ReasoningSummaryText}
+    @field encrypted_content string?
+    @field status ("completed" | "incomplete" | "in_progress")?
+]=]
+export type OutputItemReasoning = {
+	["type"]: "reasoning",
+	id: string,
+	content: { ReasoningTextContent }?,
+	summary: { ReasoningSummaryText },
+	encrypted_content: string?,
+	status: ("completed" | "incomplete" | "in_progress")?,
+}
+
+--[=[
+    @type OpenResponsesReasoning
+    @within OpenRouter
+    Reasoning output item with signature and format extensions
+]=]
+export type OpenResponsesReasoning = OutputItemReasoning & {
+	signature: string?,
+	format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1")?,
+}
+
+--[=[
+    @interface RequestTimeoutResponseErrorData
+    @within OpenRouter
+    Error data for RequestTimeoutResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type RequestTimeoutResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface RequestTimeoutResponse
+    @within OpenRouter
+    Request Timeout - Operation exceeded time limit
+    
+    @field error RequestTimeoutResponseErrorData
+    @field user_id string?
+]=]
+export type RequestTimeoutResponse = { error: RequestTimeoutResponseErrorData, user_id: string? }
+
+--[=[
+    @interface ResponseFormatJSONSchema
+    @within OpenRouter
+    
+    @field type string
+    @field json_schema JSONSchemaConfig
+]=]
+export type ResponseFormatJSONSchema = { ["type"]: string, json_schema: JSONSchemaConfig }
+
+--[=[
+    @interface ResponseFormatTextGrammar
+    @within OpenRouter
+    
+    @field type string
+    @field grammar string
+]=]
+export type ResponseFormatTextGrammar = { ["type"]: string, grammar: string }
+
+--[=[
+    @interface CompletionCreateParams
+    @within OpenRouter
+    
+    @field model ModelName?
+    @field models {ModelName}?
+    @field prompt (string | {string} | {number} | {{number}})
+    @field best_of (number | nil)?
+    @field echo (boolean | nil)?
+    @field frequency_penalty (number | nil)?
+    @field logit_bias ({ [string]: number } | nil)?
+    @field logprobs (number | nil)?
+    @field max_tokens (number | nil)?
+    @field n (number | nil)?
+    @field presence_penalty (number | nil)?
+    @field seed (number | nil)?
+    @field stop ((string | {string}) | nil)?
+    @field stream boolean? -- Default: False
+    @field stream_options ({ include_usage: (boolean | nil)? } | nil)?
+    @field suffix (string | nil)?
+    @field temperature (number | nil)?
+    @field top_p (number | nil)?
+    @field user string?
+    @field metadata ({ [string]: string } | nil)?
+    @field response_format (({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar) | nil)?
+]=]
+export type CompletionCreateParams = {
+	model: ModelName?,
+	models: { ModelName }?,
+	prompt: string | { string } | { number } | { { number } },
+	best_of: (number | nil)?,
+	echo: (boolean | nil)?,
+	frequency_penalty: (number | nil)?,
+	logit_bias: ({ [string]: number } | nil)?,
+	logprobs: (number | nil)?,
+	max_tokens: (number | nil)?,
+	n: (number | nil)?,
+	presence_penalty: (number | nil)?,
+	seed: (number | nil)?,
+	stop: ((string | { string }) | nil)?,
+	stream: boolean?,
+	stream_options: ({ include_usage: (boolean | nil)? } | nil)?,
+	suffix: (string | nil)?,
+	temperature: (number | nil)?,
+	top_p: (number | nil)?,
+	user: string?,
+	metadata: ({ [string]: string } | nil)?,
+	response_format: (({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar) | nil)?,
+}
+
+--[=[
+    @interface ResponseInputAudio
+    @within OpenRouter
+    Audio input content item
+    
+    @field type "input_audio"
+    @field input_audio { data: string, format: ("mp3" | "wav") }
+]=]
+export type ResponseInputAudio = { ["type"]: "input_audio", input_audio: { data: string, format: "mp3" | "wav" } }
+
+--[=[
+    @interface ResponseInputFile
+    @within OpenRouter
+    File input content item
+    
+    @field type "input_file"
+    @field file_id string?
+    @field file_data string?
+    @field filename string?
+    @field file_url string?
+]=]
+export type ResponseInputFile = {
+	["type"]: "input_file",
+	file_id: string?,
+	file_data: string?,
+	filename: string?,
+	file_url: string?,
+}
+
+--[=[
+    @interface ResponseInputImage
+    @within OpenRouter
+    Image input content item
+    
+    @field type "input_image"
+    @field detail ("auto" | "high" | "low")
+    @field image_url string?
+]=]
+export type ResponseInputImage = { ["type"]: "input_image", detail: "auto" | "high" | "low", image_url: string? }
+
+--[=[
+    @interface ResponseInputText
+    @within OpenRouter
+    Text input content item
+    
+    @field type "input_text"
+    @field text string
+]=]
+export type ResponseInputText = { ["type"]: "input_text", text: string }
+
+--[=[
+    @interface OpenAIResponsesPrompt
+    @within OpenRouter
+    
+    @field id string
+    @field variables { [string]: (string | ResponseInputText | ResponseInputImage | ResponseInputFile) }?
+]=]
+export type OpenAIResponsesPrompt = {
+	id: string,
+	variables: { [string]: string | ResponseInputText | ResponseInputImage | ResponseInputFile }?,
+}?
+
+--[=[
+    @interface OpenResponsesEasyInputMessage
+    @within OpenRouter
+    
+    @field type "message"?
+    @field role ("user" | "system" | "assistant" | "developer")
+    @field content ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} | string)
+]=]
+export type OpenResponsesEasyInputMessage = {
+	["type"]: "message"?,
+	role: "user" | "system" | "assistant" | "developer",
+	content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
+}
+
+--[=[
+    @interface OpenResponsesInputMessageItem
+    @within OpenRouter
+    
+    @field id string?
+    @field type "message"?
+    @field role ("user" | "system" | "developer")
+    @field content {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)}
+]=]
+export type OpenResponsesInputMessageItem = {
+	id: string?,
+	["type"]: "message"?,
+	role: "user" | "system" | "developer",
+	content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
+}
+
+--[=[
+    @interface ResponsesErrorField
+    @within OpenRouter
+    Error information returned from the API
+    
+    @field code ("server_error" | "rate_limit_exceeded" | "invalid_prompt" | "vector_store_timeout" | "invalid_image" | "invalid_image_format" | "invalid_base64_image" | "invalid_image_url" | "image_too_large" | "image_too_small" | "image_parse_error" | "image_content_policy_violation" | "invalid_image_mode" | "image_file_too_large" | "unsupported_image_media_type" | "empty_image_file" | "failed_to_download_image" | "image_file_not_found")
+    @field message string
+]=]
+export type ResponsesErrorField = {
+	code: (
+		"server_error"
+		| "rate_limit_exceeded"
+		| "invalid_prompt"
+		| "vector_store_timeout"
+		| "invalid_image"
+		| "invalid_image_format"
+		| "invalid_base64_image"
+		| "invalid_image_url"
+		| "image_too_large"
+		| "image_too_small"
+		| "image_parse_error"
+		| "image_content_policy_violation"
+		| "invalid_image_mode"
+		| "image_file_too_large"
+		| "unsupported_image_media_type"
+		| "empty_image_file"
+		| "failed_to_download_image"
+		| "image_file_not_found"
+	),
+	message: string,
+}?
+
+--[=[
+    @interface ResponsesFormatJSONObject
+    @within OpenRouter
+    JSON object response format
+    
+    @field type "json_object"
+]=]
+export type ResponsesFormatJSONObject = { ["type"]: "json_object" }
+
+--[=[
+    @interface ResponsesFormatText
+    @within OpenRouter
+    Plain text response format
+    
+    @field type "text"
+]=]
+export type ResponsesFormatText = { ["type"]: "text" }
+
+--[=[
+    @interface ResponsesFormatTextJSONSchemaConfig
+    @within OpenRouter
+    JSON schema constrained response format
+    
+    @field type "json_schema"
+    @field name string
+    @field description string?
+    @field strict boolean?
+    @field schema { [string]: any? }
+]=]
+export type ResponsesFormatTextJSONSchemaConfig = {
+	["type"]: "json_schema",
+	name: string,
+	description: string?,
+	strict: boolean?,
+	schema: { [string]: any? },
+}
+
+--[=[
+    @type ResponseFormatTextConfig
+    @within OpenRouter
+    Text response format configuration
+]=]
+export type ResponseFormatTextConfig = (
+	ResponsesFormatText | ResponsesFormatJSONObject | ResponsesFormatTextJSONSchemaConfig
+)
+
+--[=[
+    @interface ResponseTextConfig
+    @within OpenRouter
+    Text output configuration including format and verbosity
+    
+    @field format ResponseFormatTextConfig?
+    @field verbosity ("high" | "low" | "medium")?
+]=]
+export type ResponseTextConfig = { format: ResponseFormatTextConfig?, verbosity: ("high" | "low" | "medium")? }
+
+--[=[
+    @type OpenResponsesResponseText
+    @within OpenRouter
+    Text output configuration including format and verbosity
+]=]
+export type OpenResponsesResponseText = ResponseTextConfig
+
+export type ResponsesImageGenerationCall = OutputItemImageGenerationCall
+
+export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
+
+--[=[
+    @interface ResponsesOutputItemReasoning
+    @within OpenRouter
+    An output item containing reasoning
+    
+    @field type "reasoning"
+    @field id string?
+    @field content {ReasoningTextContent}?
+    @field summary {ReasoningSummaryText}
+    @field encrypted_content string?
+    @field status ("completed" | "incomplete" | "in_progress")?
+]=]
+export type ResponsesOutputItemReasoning = {
+	["type"]: "reasoning",
+	id: string?,
+	content: { ReasoningTextContent }?,
+	summary: { ReasoningSummaryText },
+	encrypted_content: string?,
+	status: ("completed" | "incomplete" | "in_progress")?,
+}
+
+--[=[
+    @type ResponsesSearchContextSize
+    @within OpenRouter
+    Size of the search context for web search tools
+]=]
+export type ResponsesSearchContextSize = "low" | "medium" | "high"
+
+--[=[
+    @interface ResponsesWebSearchUserLocation
+    @within OpenRouter
+    User location information for web search
+    
+    @field type "approximate"?
+    @field city string?
+    @field country string?
+    @field region string?
+    @field timezone string?
+]=]
+export type ResponsesWebSearchUserLocation = {
+	["type"]: "approximate"?,
+	city: string?,
+	country: string?,
+	region: string?,
+	timezone: string?,
+}?
+
+--[=[
+    @interface OpenResponsesWebSearch20250826Tool
+    @within OpenRouter
+    Web search tool configuration (2025-08-26 version)
+    
+    @field type "web_search_2025_08_26"
+    @field filters { allowed_domains: {string}? }?
+    @field search_context_size ResponsesSearchContextSize?
+    @field user_location ResponsesWebSearchUserLocation?
+]=]
+export type OpenResponsesWebSearch20250826Tool = {
+	["type"]: "web_search_2025_08_26",
+	filters: { allowed_domains: { string }? }?,
+	search_context_size: ResponsesSearchContextSize?,
+	user_location: ResponsesWebSearchUserLocation?,
+}
+
+--[=[
+    @interface OpenResponsesWebSearchTool
+    @within OpenRouter
+    Web search tool configuration
+    
+    @field type "web_search"
+    @field filters { allowed_domains: {string}? }?
+    @field search_context_size ResponsesSearchContextSize?
+    @field user_location ResponsesWebSearchUserLocation?
+]=]
+export type OpenResponsesWebSearchTool = {
+	["type"]: "web_search",
+	filters: { allowed_domains: { string }? }?,
+	search_context_size: ResponsesSearchContextSize?,
+	user_location: ResponsesWebSearchUserLocation?,
+}
+
+--[=[
+    @interface ServiceUnavailableResponseErrorData
+    @within OpenRouter
+    Error data for ServiceUnavailableResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type ServiceUnavailableResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface ServiceUnavailableResponse
+    @within OpenRouter
+    Service Unavailable - Service temporarily unavailable
+    
+    @field error ServiceUnavailableResponseErrorData
+    @field user_id string?
+]=]
+export type ServiceUnavailableResponse = { error: ServiceUnavailableResponseErrorData, user_id: string? }
+
+--[=[
+    @interface SystemMessage
+    @within OpenRouter
+    
+    @field role string
+    @field content (string | {ChatMessageContentItemText})
+    @field name string?
+]=]
+export type SystemMessage = { role: string, content: string | { ChatMessageContentItemText }, name: string? }
+
+--[=[
+    @interface TooManyRequestsResponseErrorData
+    @within OpenRouter
+    Error data for TooManyRequestsResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type TooManyRequestsResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface TooManyRequestsResponse
+    @within OpenRouter
+    Too Many Requests - Rate limit exceeded
+    
+    @field error TooManyRequestsResponseErrorData
+    @field user_id string?
+]=]
+export type TooManyRequestsResponse = { error: TooManyRequestsResponseErrorData, user_id: string? }
+
+export type ToolCallStatus = "in_progress" | "completed" | "incomplete"
+
+--[=[
+    @interface OpenResponsesFunctionCallOutput
+    @within OpenRouter
+    The output from a function call execution
+    
+    @field type "function_call_output"
+    @field id string
+    @field call_id string
+    @field output string
+    @field status ToolCallStatus?
+]=]
+export type OpenResponsesFunctionCallOutput = {
+	["type"]: "function_call_output",
+	id: string,
+	call_id: string,
+	output: string,
+	status: ToolCallStatus?,
+}
+
+--[=[
+    @interface OpenResponsesFunctionToolCall
+    @within OpenRouter
+    A function call initiated by the model
+    
+    @field type "function_call"
+    @field call_id string
+    @field name string
+    @field arguments string
+    @field id string
+    @field status ToolCallStatus?
+]=]
+export type OpenResponsesFunctionToolCall = {
+	["type"]: "function_call",
+	call_id: string,
+	name: string,
+	arguments: string,
+	id: string,
+	status: ToolCallStatus?,
+}
+
+export type ToolChoiceOption = string | NamedToolChoice
+
+--[=[
+    @interface ToolDefinitionJson
+    @within OpenRouter
+    
+    @field type string
+    @field function { name: string, description: string?, parameters: { [string]: any }?, strict: (boolean | nil)? }
+]=]
+export type ToolDefinitionJson = {
+	["type"]: string,
+	["function"]: { name: string, description: string?, parameters: { [string]: any }?, strict: (boolean | nil)? },
+}
+
+--[=[
+    @interface ToolResponseMessage
+    @within OpenRouter
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})
+    @field tool_call_id string
+]=]
+export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
+
+--[=[
+    @interface TopProviderInfo
+    @within OpenRouter
+    Information about the top provider for this model
+    
+    @field context_length number? -- Context length from the top provider; (Ex: 8192)
+    @field max_completion_tokens number? -- Maximum completion tokens from the top provider; (Ex: 4096)
+    @field is_moderated boolean -- Whether the top provider moderates content; (Ex: true)
+]=]
+export type TopProviderInfo = { context_length: number?, max_completion_tokens: number?, is_moderated: boolean }
+
+--[=[
+    @interface Model
+    @within OpenRouter
+    Information about an AI model available on OpenRouter
+    
+    @field id string -- Unique identifier for the model; (Ex: "openai/gpt-4")
+    @field canonical_slug string -- Canonical slug for the model; (Ex: "openai/gpt-4")
+    @field hugging_face_id string? -- Hugging Face model identifier, if applicable; (Ex: "microsoft/DialoGPT-medium")
+    @field name string -- Display name of the model; (Ex: "GPT-4")
+    @field created number -- Unix timestamp of when the model was created; (Ex: 1692901234)
+    @field description string? -- Description of the model; (Ex: "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.")
+    @field pricing PublicPricing
+    @field context_length number? -- Maximum context length in tokens; (Ex: 8192)
+    @field architecture ModelArchitecture
+    @field top_provider TopProviderInfo
+    @field per_request_limits PerRequestLimits
+    @field supported_parameters {Parameter} -- List of supported parameters for this model
+    @field default_parameters DefaultParameters
+]=]
+export type Model = {
+	id: string,
+	canonical_slug: string,
+	hugging_face_id: string?,
+	name: string,
+	created: number,
+	description: string?,
+	pricing: PublicPricing,
+	context_length: number?,
+	architecture: ModelArchitecture,
+	top_provider: TopProviderInfo,
+	per_request_limits: PerRequestLimits,
+	supported_parameters: { Parameter },
+	default_parameters: DefaultParameters,
+}
+
+--[=[
+    @type ModelsListResponseData
+    @within OpenRouter
+    List of available models
+]=]
+export type ModelsListResponseData = { Model }
+
+--[=[
+    @interface ModelsListResponse
+    @within OpenRouter
+    List of available models
+    
+    @field data ModelsListResponseData
+]=]
+export type ModelsListResponse = { data: ModelsListResponseData }
+
+--[=[
+    @interface URLCitation
+    @within OpenRouter
+    
+    @field type "url_citation"
+    @field url string
+    @field title string
+    @field start_index number
+    @field end_index number
+]=]
+export type URLCitation = { ["type"]: "url_citation", url: string, title: string, start_index: number, end_index: number }
+
+export type OpenAIResponsesAnnotation = FileCitation | URLCitation | FilePath
+
+--[=[
+    @interface OpenResponsesOutputTextAnnotationAddedEvent
+    @within OpenRouter
+    Event emitted when a text annotation is added to output
+    
+    @field type "response.output_text.annotation.added"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field sequence_number number
+    @field annotation_index number
+    @field annotation OpenAIResponsesAnnotation
+]=]
+export type OpenResponsesOutputTextAnnotationAddedEvent = {
+	["type"]: "response.output_text.annotation.added",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	sequence_number: number,
+	annotation_index: number,
+	annotation: OpenAIResponsesAnnotation,
+}
+
+--[=[
+    @interface ResponseOutputText
+    @within OpenRouter
+    
+    @field type "output_text"
+    @field text string
+    @field annotations {OpenAIResponsesAnnotation}?
+]=]
+export type ResponseOutputText = { ["type"]: "output_text", text: string, annotations: { OpenAIResponsesAnnotation }? }
+
+--[=[
+    @interface OpenResponsesContentPartAddedEvent
+    @within OpenRouter
+    Event emitted when a new content part is added to an output item
+    
+    @field type "response.content_part.added"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field part (ResponseOutputText | OpenAIResponsesRefusalContent)
+    @field sequence_number number
+]=]
+export type OpenResponsesContentPartAddedEvent = {
+	["type"]: "response.content_part.added",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	part: ResponseOutputText | OpenAIResponsesRefusalContent,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesContentPartDoneEvent
+    @within OpenRouter
+    Event emitted when a content part is complete
+    
+    @field type "response.content_part.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field part (ResponseOutputText | OpenAIResponsesRefusalContent)
+    @field sequence_number number
+]=]
+export type OpenResponsesContentPartDoneEvent = {
+	["type"]: "response.content_part.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	part: ResponseOutputText | OpenAIResponsesRefusalContent,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OutputMessage
+    @within OpenRouter
+    
+    @field id string
+    @field role "assistant"
+    @field type "message"
+    @field status ("completed" | "incomplete" | "in_progress")?
+    @field content {(ResponseOutputText | OpenAIResponsesRefusalContent)}
+]=]
+export type OutputMessage = {
+	id: string,
+	role: "assistant",
+	["type"]: "message",
+	status: ("completed" | "incomplete" | "in_progress")?,
+	content: { ResponseOutputText | OpenAIResponsesRefusalContent },
+}
+
+export type OpenAIResponsesInput =
+	string
+	| {
+		{
+			["type"]: "message"?,
+			role: "user" | "system" | "assistant" | "developer",
+			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
+		} | {
+			id: string,
+			["type"]: "message"?,
+			role: "user" | "system" | "developer",
+			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
+		} | {
+			["type"]: "function_call_output",
+			id: string,
+			call_id: string,
+			output: string,
+			status: ToolCallStatus?,
+		} | {
+			["type"]: "function_call",
+			call_id: string,
+			name: string,
+			arguments: string,
+			id: string?,
+			status: ToolCallStatus?,
+		} | OutputItemImageGenerationCall | OutputMessage
+	}
+	| any?
+
+--[=[
+    @type ResponsesOutputMessage
+    @within OpenRouter
+    An output message item
+]=]
+export type ResponsesOutputMessage = OutputMessage
+
+--[=[
+    @interface UnauthorizedResponseErrorData
+    @within OpenRouter
+    Error data for UnauthorizedResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type UnauthorizedResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface UnauthorizedResponse
+    @within OpenRouter
+    Unauthorized - Authentication required or invalid credentials
+    
+    @field error UnauthorizedResponseErrorData
+    @field user_id string?
+]=]
+export type UnauthorizedResponse = { error: UnauthorizedResponseErrorData, user_id: string? }
+
+--[=[
+    @interface UnprocessableEntityResponseErrorData
+    @within OpenRouter
+    Error data for UnprocessableEntityResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type UnprocessableEntityResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface UnprocessableEntityResponse
+    @within OpenRouter
+    Unprocessable Entity - Semantic validation failure
+    
+    @field error UnprocessableEntityResponseErrorData
+    @field user_id string?
+]=]
+export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseErrorData, user_id: string? }
+
+--[=[
+    @interface UserMessage
+    @within OpenRouter
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})
+    @field name string?
+]=]
+export type UserMessage = { role: string, content: string | { ChatMessageContentItem }, name: string? }
+
+export type Message = (
+	SystemMessage
+	| UserMessage
+	| { role: string, content: string | { ChatMessageContentItemText }, name: string? }
+	| AssistantMessage
+	| ToolResponseMessage
+)
+
+--[=[
+    @interface ChatGenerationParams
+    @within OpenRouter
+    
+    @field messages {Message}
+    @field model ModelName?
+    @field models {ModelName}?
+    @field frequency_penalty (number | nil)?
+    @field logit_bias ({ [string]: number } | nil)?
+    @field logprobs (boolean | nil)?
+    @field top_logprobs (number | nil)?
+    @field max_completion_tokens (number | nil)?
+    @field max_tokens (number | nil)?
+    @field metadata { [string]: string }?
+    @field presence_penalty (number | nil)?
+    @field reasoning { effort: (("minimal" | "low" | "medium" | "high") | nil)?, summary: (ReasoningSummaryVerbosity | nil)? }?
+    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
+    @field seed (number | nil)?
+    @field stop ((string | {string}) | nil)?
+    @field stream boolean? -- Default: False
+    @field stream_options (ChatStreamOptions | nil)?
+    @field temperature (number | nil)? -- Default: 1
+    @field tool_choice ToolChoiceOption?
+    @field tools {ToolDefinitionJson}?
+    @field top_p (number | nil)? -- Default: 1
+    @field user string?
+]=]
+export type ChatGenerationParams = {
+	messages: { Message },
+	model: ModelName?,
+	models: { ModelName }?,
+	frequency_penalty: (number | nil)?,
+	logit_bias: ({ [string]: number } | nil)?,
+	logprobs: (boolean | nil)?,
+	top_logprobs: (number | nil)?,
+	max_completion_tokens: (number | nil)?,
+	max_tokens: (number | nil)?,
+	metadata: { [string]: string }?,
+	presence_penalty: (number | nil)?,
+	reasoning: { effort: (("minimal" | "low" | "medium" | "high") | nil)?, summary: (ReasoningSummaryVerbosity | nil)? }?,
+	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
+	seed: (number | nil)?,
+	stop: ((string | { string }) | nil)?,
+	stream: boolean?,
+	stream_options: (ChatStreamOptions | nil)?,
+	temperature: (number | nil)?,
+	tool_choice: ToolChoiceOption?,
+	tools: { ToolDefinitionJson }?,
+	top_p: (number | nil)?,
+	user: string?,
+}
+
+--[=[
+    @interface WebSearchPreviewToolUserLocation
+    @within OpenRouter
+    
+    @field type "approximate"
+    @field city string?
+    @field country string?
+    @field region string?
+    @field timezone string?
+]=]
+export type WebSearchPreviewToolUserLocation = {
+	["type"]: "approximate",
+	city: string?,
+	country: string?,
+	region: string?,
+	timezone: string?,
+}?
+
+--[=[
+    @interface OpenResponsesWebSearchPreview20250311Tool
+    @within OpenRouter
+    Web search preview tool configuration (2025-03-11 version)
+    
+    @field type "web_search_preview_2025_03_11"
+    @field search_context_size ResponsesSearchContextSize?
+    @field user_location WebSearchPreviewToolUserLocation?
+]=]
+export type OpenResponsesWebSearchPreview20250311Tool = {
+	["type"]: "web_search_preview_2025_03_11",
+	search_context_size: ResponsesSearchContextSize?,
+	user_location: WebSearchPreviewToolUserLocation?,
+}
+
+--[=[
+    @interface OpenResponsesWebSearchPreviewTool
+    @within OpenRouter
+    Web search preview tool configuration
+    
+    @field type "web_search_preview"
+    @field search_context_size ResponsesSearchContextSize?
+    @field user_location WebSearchPreviewToolUserLocation?
+]=]
+export type OpenResponsesWebSearchPreviewTool = {
+	["type"]: "web_search_preview",
+	search_context_size: ResponsesSearchContextSize?,
+	user_location: WebSearchPreviewToolUserLocation?,
+}
+
+export type WebSearchStatus = "completed" | "searching" | "in_progress" | "failed"
+
+--[=[
+    @interface OutputItemFileSearchCall
+    @within OpenRouter
+    
+    @field type "file_search_call"
+    @field id string
+    @field queries {string}
+    @field status WebSearchStatus
+]=]
+export type OutputItemFileSearchCall = {
+	["type"]: "file_search_call",
+	id: string,
+	queries: { string },
+	status: WebSearchStatus,
+}
+
+--[=[
+    @interface OutputItemWebSearchCall
+    @within OpenRouter
+    
+    @field type "web_search_call"
+    @field id string
+    @field status WebSearchStatus
+]=]
+export type OutputItemWebSearchCall = { ["type"]: "web_search_call", id: string, status: WebSearchStatus }
+
+--[=[
+    @interface OpenAIResponsesNonStreamingResponse
+    @within OpenRouter
+    
+    @field id string
+    @field object "response"
+    @field created_at number
+    @field model string
+    @field status OpenAIResponsesResponseStatus?
+    @field output {(OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)}
+    @field user string?
+    @field output_text string?
+    @field prompt_cache_key string?
+    @field safety_identifier string?
+    @field error ResponsesErrorField
+    @field incomplete_details OpenAIResponsesIncompleteDetails
+    @field usage OpenAIResponsesUsage?
+    @field max_tool_calls number?
+    @field top_logprobs number?
+    @field max_output_tokens number?
+    @field temperature number?
+    @field top_p number?
+    @field instructions OpenAIResponsesInput
+    @field metadata OpenResponsesRequestMetadata
+    @field tools {(OpenResponsesFunctionTool | OpenResponsesWebSearchPreviewTool | OpenResponsesWebSearchPreview20250311Tool | OpenResponsesWebSearchTool | OpenResponsesWebSearch20250826Tool)}
+    @field tool_choice OpenAIResponsesToolChoice
+    @field parallel_tool_calls boolean
+    @field prompt OpenAIResponsesPrompt?
+    @field background boolean?
+    @field previous_response_id string?
+    @field reasoning OpenAIResponsesReasoningConfig?
+    @field service_tier OpenAIResponsesServiceTier?
+    @field store boolean?
+    @field truncation OpenAIResponsesTruncation?
+    @field text ResponseTextConfig?
+]=]
+export type OpenAIResponsesNonStreamingResponse = {
+	id: string,
+	object: "response",
+	created_at: number,
+	model: string,
+	status: OpenAIResponsesResponseStatus?,
+	output: {
+		(
+			OutputMessage
+			| OutputItemReasoning
+			| OutputItemFunctionCall
+			| OutputItemWebSearchCall
+			| OutputItemFileSearchCall
+			| OutputItemImageGenerationCall
+		)
+	},
+	user: string?,
+	output_text: string?,
+	prompt_cache_key: string?,
+	safety_identifier: string?,
+	error: ResponsesErrorField,
+	incomplete_details: OpenAIResponsesIncompleteDetails,
+	usage: OpenAIResponsesUsage?,
+	max_tool_calls: number?,
+	top_logprobs: number?,
+	max_output_tokens: number?,
+	temperature: number?,
+	top_p: number?,
+	instructions: OpenAIResponsesInput,
+	metadata: OpenResponsesRequestMetadata,
+	tools: {
+		(
+			OpenResponsesFunctionTool
+			| OpenResponsesWebSearchPreviewTool
+			| OpenResponsesWebSearchPreview20250311Tool
+			| OpenResponsesWebSearchTool
+			| OpenResponsesWebSearch20250826Tool
+		)
+	},
+	tool_choice: OpenAIResponsesToolChoice,
+	parallel_tool_calls: boolean,
+	prompt: OpenAIResponsesPrompt?,
+	background: boolean?,
+	previous_response_id: string?,
+	reasoning: OpenAIResponsesReasoningConfig?,
+	service_tier: OpenAIResponsesServiceTier?,
+	store: boolean?,
+	truncation: OpenAIResponsesTruncation?,
+	text: ResponseTextConfig?,
+}
+
+--[=[
+    @interface OpenResponsesCompletedEvent
+    @within OpenRouter
+    Event emitted when a response has completed successfully
+    
+    @field type "response.completed"
+    @field response OpenAIResponsesNonStreamingResponse
+    @field sequence_number number
+]=]
+export type OpenResponsesCompletedEvent = {
+	["type"]: "response.completed",
+	response: OpenAIResponsesNonStreamingResponse,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesCreatedEvent
+    @within OpenRouter
+    Event emitted when a response is created
+    
+    @field type "response.created"
+    @field response OpenAIResponsesNonStreamingResponse
+    @field sequence_number number
+]=]
+export type OpenResponsesCreatedEvent = {
+	["type"]: "response.created",
+	response: OpenAIResponsesNonStreamingResponse,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesFailedEvent
+    @within OpenRouter
+    Event emitted when a response has failed
+    
+    @field type "response.failed"
+    @field response OpenAIResponsesNonStreamingResponse
+    @field sequence_number number
+]=]
+export type OpenResponsesFailedEvent = {
+	["type"]: "response.failed",
+	response: OpenAIResponsesNonStreamingResponse,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesInProgressEvent
+    @within OpenRouter
+    Event emitted when a response is in progress
+    
+    @field type "response.in_progress"
+    @field response OpenAIResponsesNonStreamingResponse
+    @field sequence_number number
+]=]
+export type OpenResponsesInProgressEvent = {
+	["type"]: "response.in_progress",
+	response: OpenAIResponsesNonStreamingResponse,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesIncompleteEvent
+    @within OpenRouter
+    Event emitted when a response is incomplete
+    
+    @field type "response.incomplete"
+    @field response OpenAIResponsesNonStreamingResponse
+    @field sequence_number number
+]=]
+export type OpenResponsesIncompleteEvent = {
+	["type"]: "response.incomplete",
+	response: OpenAIResponsesNonStreamingResponse,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesOutputItemAddedEvent
+    @within OpenRouter
+    Event emitted when a new output item is added to the response
+    
+    @field type "response.output_item.added"
+    @field output_index number
+    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
+    @field sequence_number number
+]=]
+export type OpenResponsesOutputItemAddedEvent = {
+	["type"]: "response.output_item.added",
+	output_index: number,
+	item: (
+		OutputMessage
+		| OutputItemReasoning
+		| OutputItemFunctionCall
+		| OutputItemWebSearchCall
+		| OutputItemFileSearchCall
+		| OutputItemImageGenerationCall
+	),
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesOutputItemDoneEvent
+    @within OpenRouter
+    Event emitted when an output item is complete
+    
+    @field type "response.output_item.done"
+    @field output_index number
+    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
+    @field sequence_number number
+]=]
+export type OpenResponsesOutputItemDoneEvent = {
+	["type"]: "response.output_item.done",
+	output_index: number,
+	item: (
+		OutputMessage
+		| OutputItemReasoning
+		| OutputItemFunctionCall
+		| OutputItemWebSearchCall
+		| OutputItemFileSearchCall
+		| OutputItemImageGenerationCall
+	),
+	sequence_number: number,
+}
+
+export type ResponsesOutputItemFileSearchCall = OutputItemFileSearchCall
+
+export type ResponsesWebSearchCallOutput = OutputItemWebSearchCall
+
+--[=[
+    @type OpenResponsesInput
+    @within OpenRouter
+    Input for a response request - can be a string or array of items
+]=]
+export type OpenResponsesInput =
+	string
+	| {
+		(
+			OpenResponsesReasoning
+			| OpenResponsesEasyInputMessage
+			| OpenResponsesInputMessageItem
+			| OpenResponsesFunctionToolCall
+			| OpenResponsesFunctionCallOutput
+			| ResponsesOutputMessage
+			| ResponsesOutputItemReasoning
+			| ResponsesOutputItemFunctionCall
+			| ResponsesWebSearchCallOutput
+			| ResponsesOutputItemFileSearchCall
+			| ResponsesImageGenerationCall
+		)
+	}
+
+--[=[
+    @interface OpenResponsesRequest
+    @within OpenRouter
+    Request schema for Responses endpoint
+    
+    @field input OpenResponsesInput?
+    @field instructions string?
+    @field metadata OpenResponsesRequestMetadata?
+    @field tools {(OpenResponsesFunctionTool | OpenResponsesWebSearchPreviewTool | OpenResponsesWebSearchPreview20250311Tool | OpenResponsesWebSearchTool | OpenResponsesWebSearch20250826Tool)}?
+    @field tool_choice OpenAIResponsesToolChoice?
+    @field parallel_tool_calls boolean?
+    @field model string?
+    @field models {string}?
+    @field text OpenResponsesResponseText?
+    @field reasoning OpenResponsesReasoningConfig?
+    @field max_output_tokens number?
+    @field temperature number? -- Range: 0.0-2.0
+    @field top_p number? -- Min: 0.0
+    @field top_k number?
+    @field prompt_cache_key string?
+    @field previous_response_id string?
+    @field prompt OpenAIResponsesPrompt?
+    @field include {OpenAIResponsesIncludable}?
+    @field background boolean?
+    @field safety_identifier string?
+    @field store boolean?
+    @field service_tier (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?
+    @field truncation (OpenAIResponsesTruncation & any)?
+    @field stream boolean? -- Default: False
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, experimental: {}? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? })}? -- Plugins you want to enable for this request, including their settings.
+    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
+]=]
+export type OpenResponsesRequest = {
+	input: OpenResponsesInput?,
+	instructions: string?,
+	metadata: OpenResponsesRequestMetadata?,
+	tools: {
+		(
+			OpenResponsesFunctionTool
+			| OpenResponsesWebSearchPreviewTool
+			| OpenResponsesWebSearchPreview20250311Tool
+			| OpenResponsesWebSearchTool
+			| OpenResponsesWebSearch20250826Tool
+		)
+	}?,
+	tool_choice: OpenAIResponsesToolChoice?,
+	parallel_tool_calls: boolean?,
+	model: string?,
+	models: { string }?,
+	text: OpenResponsesResponseText?,
+	reasoning: OpenResponsesReasoningConfig?,
+	max_output_tokens: number?,
+	temperature: number?,
+	top_p: number?,
+	top_k: number?,
+	prompt_cache_key: string?,
+	previous_response_id: string?,
+	prompt: OpenAIResponsesPrompt?,
+	include: { OpenAIResponsesIncludable }?,
+	background: boolean?,
+	safety_identifier: string?,
+	store: boolean?,
+	service_tier: (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?,
+	truncation: (OpenAIResponsesTruncation & any)?,
+	stream: boolean?,
+	provider: {
+		allow_fallbacks: boolean?,
+		require_parameters: boolean?,
+		data_collection: ("deny" | "allow")?,
+		zdr: boolean?,
+		order: { ProviderName | string }?,
+		only: { ProviderName | string }?,
+		ignore: { ProviderName | string }?,
+		quantizations: { Quantization }?,
+		sort: ("price" | "throughput" | "latency")?,
+		max_price: {
+			prompt: BigNumberUnion?,
+			completion: BigNumberUnion?,
+			image: BigNumberUnion?,
+			audio: BigNumberUnion?,
+			request: BigNumberUnion?,
+		}?,
+		experimental: {}?,
+	}?,
+	plugins: {
+		(
+			{ id: "moderation" }
+			| { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? }
+			| { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? }
+		)
+	}?,
+	user: string?,
+}
+
+--[=[
+    @type ResponsesOutputItem
+    @within OpenRouter
+    An output item from the response
+]=]
+export type ResponsesOutputItem = (
+	ResponsesOutputMessage
+	| ResponsesOutputItemReasoning
+	| ResponsesOutputItemFunctionCall
+	| ResponsesWebSearchCallOutput
+	| ResponsesOutputItemFileSearchCall
+	| ResponsesImageGenerationCall
+)
+
+--[=[
+    @type OpenResponsesNonStreamingResponse
+    @within OpenRouter
+    Complete non-streaming response from the Responses API
+]=]
+export type OpenResponsesNonStreamingResponse = (
+	OpenAIResponsesNonStreamingResponse & { output: { ResponsesOutputItem }?, usage: OpenResponsesUsage? }
+)
+
+--[=[
+    @type OpenResponsesStreamEvent
+    @within OpenRouter
+    Union of all possible event types emitted during response streaming
+]=]
+export type OpenResponsesStreamEvent = (
+	(OpenResponsesCreatedEvent & { response: OpenResponsesNonStreamingResponse? })
+	| (OpenResponsesInProgressEvent & { response: OpenResponsesNonStreamingResponse? })
+	| (OpenResponsesCompletedEvent & { response: OpenResponsesNonStreamingResponse? })
+	| (OpenResponsesIncompleteEvent & { response: OpenResponsesNonStreamingResponse? })
+	| (OpenResponsesFailedEvent & { response: OpenResponsesNonStreamingResponse? })
+	| OpenResponsesErrorEvent
+	| (OpenResponsesOutputItemAddedEvent & { item: ResponsesOutputItem? })
+	| (OpenResponsesOutputItemDoneEvent & { item: ResponsesOutputItem? })
+	| (
+		OpenResponsesContentPartAddedEvent
+		& { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }
+	)
+	| (
+		OpenResponsesContentPartDoneEvent
+		& { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }
+	)
+	| OpenResponsesTextDeltaEvent
+	| OpenResponsesTextDoneEvent
+	| OpenResponsesRefusalDeltaEvent
+	| OpenResponsesRefusalDoneEvent
+	| OpenResponsesOutputTextAnnotationAddedEvent
+	| OpenResponsesFunctionCallArgumentsDeltaEvent
+	| OpenResponsesFunctionCallArgumentsDoneEvent
+	| OpenResponsesReasoningDeltaEvent
+	| OpenResponsesReasoningDoneEvent
+	| OpenResponsesReasoningSummaryPartAddedEvent
+	| OpenResponsesReasoningSummaryPartDoneEvent
+	| OpenResponsesReasoningSummaryTextDeltaEvent
+	| OpenResponsesReasoningSummaryTextDoneEvent
+	| OpenResponsesImageGenCallInProgress
+	| OpenResponsesImageGenCallGenerating
+	| OpenResponsesImageGenCallPartialImage
+	| OpenResponsesImageGenCallCompleted
+)
+
+export type __schema0 = ChatCompletionFinishReason | nil
+
+--[=[
+    @interface ChatResponseChoice
+    @within OpenRouter
+    
+    @field finish_reason __schema0
+    @field index number
+    @field message AssistantMessage
+    @field logprobs (ChatMessageTokenLogprobs | nil)?
+]=]
+export type ChatResponseChoice = {
+	finish_reason: __schema0,
+	index: number,
+	message: AssistantMessage,
+	logprobs: (ChatMessageTokenLogprobs | nil)?,
+}
+
+--[=[
+    @interface ChatResponse
+    @within OpenRouter
+    
+    @field id string
+    @field choices {ChatResponseChoice}
+    @field created number
+    @field model string
+    @field object string
+    @field system_fingerprint (string | nil)?
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatResponse = {
+	id: string,
+	choices: { ChatResponseChoice },
+	created: number,
+	model: string,
+	object: string,
+	system_fingerprint: (string | nil)?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ChatStreamingChoice
+    @within OpenRouter
+    
+    @field delta ChatStreamingMessageChunk
+    @field finish_reason __schema0
+    @field index number
+    @field logprobs (ChatMessageTokenLogprobs | nil)?
+]=]
+export type ChatStreamingChoice = {
+	delta: ChatStreamingMessageChunk,
+	finish_reason: __schema0,
+	index: number,
+	logprobs: (ChatMessageTokenLogprobs | nil)?,
+}
+
+--[=[
+    @interface ChatStreamingResponseChunk
+    @within OpenRouter
+    
+    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: (string | nil)?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
+]=]
+export type ChatStreamingResponseChunk = {
+	data: {
+		id: string,
+		choices: { ChatStreamingChoice },
+		created: number,
+		model: string,
+		object: string,
+		system_fingerprint: (string | nil)?,
+		error: { message: string, code: number }?,
+		usage: ChatGenerationTokenUsage?,
+	},
+}
+
+--[=[
+    @type CreateResponses200Response
+    @within OpenRouter
+    200 Response type for createResponses
+]=]
+export type CreateResponses200Response = OpenResponsesNonStreamingResponse
+
+--[=[
+    @type CreateResponses400Response
+    @within OpenRouter
+    400 Response type for createResponses
+]=]
+export type CreateResponses400Response = BadRequestResponse
+
+--[=[
+    @type CreateResponses401Response
+    @within OpenRouter
+    401 Response type for createResponses
+]=]
+export type CreateResponses401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateResponses402Response
+    @within OpenRouter
+    402 Response type for createResponses
+]=]
+export type CreateResponses402Response = PaymentRequiredResponse
+
+--[=[
+    @type CreateResponses404Response
+    @within OpenRouter
+    404 Response type for createResponses
+]=]
+export type CreateResponses404Response = NotFoundResponse
+
+--[=[
+    @type CreateResponses408Response
+    @within OpenRouter
+    408 Response type for createResponses
+]=]
+export type CreateResponses408Response = RequestTimeoutResponse
+
+--[=[
+    @type CreateResponses413Response
+    @within OpenRouter
+    413 Response type for createResponses
+]=]
+export type CreateResponses413Response = PayloadTooLargeResponse
+
+--[=[
+    @type CreateResponses422Response
+    @within OpenRouter
+    422 Response type for createResponses
+]=]
+export type CreateResponses422Response = UnprocessableEntityResponse
+
+--[=[
+    @type CreateResponses429Response
+    @within OpenRouter
+    429 Response type for createResponses
+]=]
+export type CreateResponses429Response = TooManyRequestsResponse
+
+--[=[
+    @type CreateResponses500Response
+    @within OpenRouter
+    500 Response type for createResponses
+]=]
+export type CreateResponses500Response = InternalServerResponse
+
+--[=[
+    @type CreateResponses502Response
+    @within OpenRouter
+    502 Response type for createResponses
+]=]
+export type CreateResponses502Response = BadGatewayResponse
+
+--[=[
+    @type CreateResponses503Response
+    @within OpenRouter
+    503 Response type for createResponses
+]=]
+export type CreateResponses503Response = ServiceUnavailableResponse
+
+--[=[
+    @type CreateResponses524Response
+    @within OpenRouter
+    524 Response type for createResponses
+]=]
+export type CreateResponses524Response = EdgeNetworkTimeoutResponse
+
+--[=[
+    @type CreateResponses529Response
+    @within OpenRouter
+    529 Response type for createResponses
+]=]
+export type CreateResponses529Response = ProviderOverloadedResponse
+
+--[=[
+    @type GetUserActivity200Response
+    @within OpenRouter
+    200 Response type for getUserActivity
+]=]
+export type GetUserActivity200Response = { data: { ActivityItem } }
+
+--[=[
+    @type GetUserActivity400Response
+    @within OpenRouter
+    400 Response type for getUserActivity
+]=]
+export type GetUserActivity400Response = BadRequestResponse
+
+--[=[
+    @type GetUserActivity401Response
+    @within OpenRouter
+    401 Response type for getUserActivity
+]=]
+export type GetUserActivity401Response = UnauthorizedResponse
+
+--[=[
+    @type GetUserActivity403Response
+    @within OpenRouter
+    403 Response type for getUserActivity
+]=]
+export type GetUserActivity403Response = ForbiddenResponse
+
+--[=[
+    @type GetUserActivity500Response
+    @within OpenRouter
+    500 Response type for getUserActivity
+]=]
+export type GetUserActivity500Response = InternalServerResponse
+
+--[=[
+    @type GetCredits200Response
+    @within OpenRouter
+    200 Response type for getCredits
+]=]
+export type GetCredits200Response = {}
+
+--[=[
+    @type GetCredits401Response
+    @within OpenRouter
+    401 Response type for getCredits
+]=]
+export type GetCredits401Response = UnauthorizedResponse
+
+--[=[
+    @type GetCredits403Response
+    @within OpenRouter
+    403 Response type for getCredits
+]=]
+export type GetCredits403Response = ForbiddenResponse
+
+--[=[
+    @type GetCredits500Response
+    @within OpenRouter
+    500 Response type for getCredits
+]=]
+export type GetCredits500Response = InternalServerResponse
+
+--[=[
+    @type CreateCoinbaseCharge200Response
+    @within OpenRouter
+    200 Response type for createCoinbaseCharge
+]=]
+export type CreateCoinbaseCharge200Response = {
+	data: {
+		id: string,
+		created_at: string,
+		expires_at: string,
+		web3_data: {
+			transfer_intent: {
+				call_data: {
+					deadline: string,
+					fee_amount: string,
+					id: string,
+					operator: string,
+					prefix: string,
+					recipient: string,
+					recipient_amount: string,
+					recipient_currency: string,
+					refund_destination: string,
+					signature: string,
+				},
+				metadata: { chain_id: number, contract_address: string, sender: string },
+			},
+		},
+	},
+}
+
+--[=[
+    @type CreateCoinbaseCharge400Response
+    @within OpenRouter
+    400 Response type for createCoinbaseCharge
+]=]
+export type CreateCoinbaseCharge400Response = BadRequestResponse
+
+--[=[
+    @type CreateCoinbaseCharge401Response
+    @within OpenRouter
+    401 Response type for createCoinbaseCharge
+]=]
+export type CreateCoinbaseCharge401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateCoinbaseCharge429Response
+    @within OpenRouter
+    429 Response type for createCoinbaseCharge
+]=]
+export type CreateCoinbaseCharge429Response = TooManyRequestsResponse
+
+--[=[
+    @type CreateCoinbaseCharge500Response
+    @within OpenRouter
+    500 Response type for createCoinbaseCharge
+]=]
+export type CreateCoinbaseCharge500Response = InternalServerResponse
+
+--[=[
+    @type CreateEmbeddings200Response
+    @within OpenRouter
+    200 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings200Response = {
+	id: string?,
+	object: "list",
+	data: { { object: "embedding", embedding: { number } | string, index: number? } },
+	model: string,
+	usage: { prompt_tokens: number, total_tokens: number, cost: number? }?,
+}
+
+--[=[
+    @type CreateEmbeddings400Response
+    @within OpenRouter
+    400 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings400Response = BadRequestResponse
+
+--[=[
+    @type CreateEmbeddings401Response
+    @within OpenRouter
+    401 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateEmbeddings402Response
+    @within OpenRouter
+    402 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings402Response = PaymentRequiredResponse
+
+--[=[
+    @type CreateEmbeddings404Response
+    @within OpenRouter
+    404 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings404Response = NotFoundResponse
+
+--[=[
+    @type CreateEmbeddings429Response
+    @within OpenRouter
+    429 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings429Response = TooManyRequestsResponse
+
+--[=[
+    @type CreateEmbeddings500Response
+    @within OpenRouter
+    500 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings500Response = InternalServerResponse
+
+--[=[
+    @type CreateEmbeddings502Response
+    @within OpenRouter
+    502 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings502Response = BadGatewayResponse
+
+--[=[
+    @type CreateEmbeddings503Response
+    @within OpenRouter
+    503 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings503Response = ServiceUnavailableResponse
+
+--[=[
+    @type CreateEmbeddings524Response
+    @within OpenRouter
+    524 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings524Response = EdgeNetworkTimeoutResponse
+
+--[=[
+    @type CreateEmbeddings529Response
+    @within OpenRouter
+    529 Response type for createEmbeddings
+]=]
+export type CreateEmbeddings529Response = ProviderOverloadedResponse
+
+--[=[
+    @type GetGeneration200Response
+    @within OpenRouter
+    200 Response type for getGeneration
+]=]
+export type GetGeneration200Response = {
+	data: {
+		id: string,
+		upstream_id: string?,
+		total_cost: number,
+		cache_discount: number?,
+		upstream_inference_cost: number?,
+		created_at: string,
+		model: string,
+		app_id: number?,
+		streamed: boolean?,
+		cancelled: boolean?,
+		provider_name: string?,
+		latency: number?,
+		moderation_latency: number?,
+		generation_time: number?,
+		finish_reason: string?,
+		tokens_prompt: number?,
+		tokens_completion: number?,
+		native_tokens_prompt: number?,
+		native_tokens_completion: number?,
+		native_tokens_completion_images: number?,
+		native_tokens_reasoning: number?,
+		native_tokens_cached: number?,
+		num_media_prompt: number?,
+		num_input_audio_prompt: number?,
+		num_media_completion: number?,
+		num_search_results: number?,
+		origin: string,
+		usage: number,
+		is_byok: boolean,
+		native_finish_reason: string?,
+		external_user: string?,
+		api_type: ("completions" | "embeddings")?,
+	},
+}
+
+--[=[
+    @type GetGeneration401Response
+    @within OpenRouter
+    401 Response type for getGeneration
+]=]
+export type GetGeneration401Response = UnauthorizedResponse
+
+--[=[
+    @type GetGeneration402Response
+    @within OpenRouter
+    402 Response type for getGeneration
+]=]
+export type GetGeneration402Response = PaymentRequiredResponse
+
+--[=[
+    @type GetGeneration404Response
+    @within OpenRouter
+    404 Response type for getGeneration
+]=]
+export type GetGeneration404Response = NotFoundResponse
+
+--[=[
+    @type GetGeneration429Response
+    @within OpenRouter
+    429 Response type for getGeneration
+]=]
+export type GetGeneration429Response = TooManyRequestsResponse
+
+--[=[
+    @type GetGeneration500Response
+    @within OpenRouter
+    500 Response type for getGeneration
+]=]
+export type GetGeneration500Response = InternalServerResponse
+
+--[=[
+    @type GetGeneration502Response
+    @within OpenRouter
+    502 Response type for getGeneration
+]=]
+export type GetGeneration502Response = BadGatewayResponse
+
+--[=[
+    @type GetGeneration524Response
+    @within OpenRouter
+    524 Response type for getGeneration
+]=]
+export type GetGeneration524Response = EdgeNetworkTimeoutResponse
+
+--[=[
+    @type GetGeneration529Response
+    @within OpenRouter
+    529 Response type for getGeneration
+]=]
+export type GetGeneration529Response = ProviderOverloadedResponse
+
+--[=[
+    @type ListModelsCount200Response
+    @within OpenRouter
+    200 Response type for listModelsCount
+]=]
+export type ListModelsCount200Response = ModelsCountResponse
+
+--[=[
+    @type ListModelsCount500Response
+    @within OpenRouter
+    500 Response type for listModelsCount
+]=]
+export type ListModelsCount500Response = InternalServerResponse
+
+--[=[
+    @type GetModels200Response
+    @within OpenRouter
+    200 Response type for getModels
+]=]
+export type GetModels200Response = ModelsListResponse
+
+--[=[
+    @type GetModels400Response
+    @within OpenRouter
+    400 Response type for getModels
+]=]
+export type GetModels400Response = BadRequestResponse
+
+--[=[
+    @type GetModels500Response
+    @within OpenRouter
+    500 Response type for getModels
+]=]
+export type GetModels500Response = InternalServerResponse
+
+--[=[
+    @type ListModelsEmbeddings200Response
+    @within OpenRouter
+    200 Response type for listModelsEmbeddings
+]=]
+export type ListModelsEmbeddings200Response = ModelsListResponse
+
+--[=[
+    @type ListModelsEmbeddings400Response
+    @within OpenRouter
+    400 Response type for listModelsEmbeddings
+]=]
+export type ListModelsEmbeddings400Response = BadRequestResponse
+
+--[=[
+    @type ListModelsEmbeddings500Response
+    @within OpenRouter
+    500 Response type for listModelsEmbeddings
+]=]
+export type ListModelsEmbeddings500Response = InternalServerResponse
+
+--[=[
+    @type ListModelsUser200Response
+    @within OpenRouter
+    200 Response type for listModelsUser
+]=]
+export type ListModelsUser200Response = ModelsListResponse
+
+--[=[
+    @type ListModelsUser401Response
+    @within OpenRouter
+    401 Response type for listModelsUser
+]=]
+export type ListModelsUser401Response = UnauthorizedResponse
+
+--[=[
+    @type ListModelsUser500Response
+    @within OpenRouter
+    500 Response type for listModelsUser
+]=]
+export type ListModelsUser500Response = InternalServerResponse
+
+--[=[
+    @type ListEndpoints200Response
+    @within OpenRouter
+    200 Response type for listEndpoints
+]=]
+export type ListEndpoints200Response = { data: ListEndpointsResponse }
+
+--[=[
+    @type ListEndpoints404Response
+    @within OpenRouter
+    404 Response type for listEndpoints
+]=]
+export type ListEndpoints404Response = NotFoundResponse
+
+--[=[
+    @type ListEndpoints500Response
+    @within OpenRouter
+    500 Response type for listEndpoints
+]=]
+export type ListEndpoints500Response = InternalServerResponse
+
+--[=[
+    @type ListEndpointsZdr200Response
+    @within OpenRouter
+    200 Response type for listEndpointsZdr
+]=]
+export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
+
+--[=[
+    @type ListEndpointsZdr500Response
+    @within OpenRouter
+    500 Response type for listEndpointsZdr
+]=]
+export type ListEndpointsZdr500Response = InternalServerResponse
+
+--[=[
+    @type GetParameters200Response
+    @within OpenRouter
+    200 Response type for getParameters
+]=]
+export type GetParameters200Response = {
+	data: {
+		model: string,
+		supported_parameters: {
+			(
+				"temperature"
+				| "top_p"
+				| "top_k"
+				| "min_p"
+				| "top_a"
+				| "frequency_penalty"
+				| "presence_penalty"
+				| "repetition_penalty"
+				| "max_tokens"
+				| "logit_bias"
+				| "logprobs"
+				| "top_logprobs"
+				| "seed"
+				| "response_format"
+				| "structured_outputs"
+				| "stop"
+				| "tools"
+				| "tool_choice"
+				| "parallel_tool_calls"
+				| "include_reasoning"
+				| "reasoning"
+				| "web_search_options"
+				| "verbosity"
+			)
+		},
+	},
+}
+
+--[=[
+    @type GetParameters401Response
+    @within OpenRouter
+    401 Response type for getParameters
+]=]
+export type GetParameters401Response = UnauthorizedResponse
+
+--[=[
+    @type GetParameters404Response
+    @within OpenRouter
+    404 Response type for getParameters
+]=]
+export type GetParameters404Response = NotFoundResponse
+
+--[=[
+    @type GetParameters500Response
+    @within OpenRouter
+    500 Response type for getParameters
+]=]
+export type GetParameters500Response = InternalServerResponse
+
+--[=[
+    @type ListProviders200Response
+    @within OpenRouter
+    200 Response type for listProviders
+]=]
+export type ListProviders200Response = {
+	data: {
+		{
+			name: string,
+			slug: string,
+			privacy_policy_url: string?,
+			terms_of_service_url: string?,
+			status_page_url: string?,
+		}
+	},
+}
+
+--[=[
+    @type ListProviders500Response
+    @within OpenRouter
+    500 Response type for listProviders
+]=]
+export type ListProviders500Response = InternalServerResponse
+
+--[=[
+    @type List200Response
+    @within OpenRouter
+    200 Response type for list
+]=]
+export type List200Response = {
+	data: {
+		{
+			hash: string,
+			name: string,
+			label: string,
+			disabled: boolean,
+			limit: number?,
+			limit_remaining: number?,
+			limit_reset: string?,
+			include_byok_in_limit: boolean,
+			usage: number,
+			usage_daily: number,
+			usage_weekly: number,
+			usage_monthly: number,
+			byok_usage: number,
+			byok_usage_daily: number,
+			byok_usage_weekly: number,
+			byok_usage_monthly: number,
+			created_at: string,
+			updated_at: string?,
+		}
+	},
+}
+
+--[=[
+    @type List401Response
+    @within OpenRouter
+    401 Response type for list
+]=]
+export type List401Response = UnauthorizedResponse
+
+--[=[
+    @type List429Response
+    @within OpenRouter
+    429 Response type for list
+]=]
+export type List429Response = TooManyRequestsResponse
+
+--[=[
+    @type List500Response
+    @within OpenRouter
+    500 Response type for list
+]=]
+export type List500Response = InternalServerResponse
+
+--[=[
+    @type CreateKeys201Response
+    @within OpenRouter
+    201 Response type for createKeys
+]=]
+export type CreateKeys201Response = {
+	data: {
+		hash: string,
+		name: string,
+		label: string,
+		disabled: boolean,
+		limit: number?,
+		limit_remaining: number?,
+		limit_reset: string?,
+		include_byok_in_limit: boolean,
+		usage: number,
+		usage_daily: number,
+		usage_weekly: number,
+		usage_monthly: number,
+		byok_usage: number,
+		byok_usage_daily: number,
+		byok_usage_weekly: number,
+		byok_usage_monthly: number,
+		created_at: string,
+		updated_at: string?,
+	},
+	key: string,
+}
+
+--[=[
+    @type CreateKeys400Response
+    @within OpenRouter
+    400 Response type for createKeys
+]=]
+export type CreateKeys400Response = BadRequestResponse
+
+--[=[
+    @type CreateKeys401Response
+    @within OpenRouter
+    401 Response type for createKeys
+]=]
+export type CreateKeys401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateKeys429Response
+    @within OpenRouter
+    429 Response type for createKeys
+]=]
+export type CreateKeys429Response = TooManyRequestsResponse
+
+--[=[
+    @type CreateKeys500Response
+    @within OpenRouter
+    500 Response type for createKeys
+]=]
+export type CreateKeys500Response = InternalServerResponse
+
+--[=[
+    @type GetKey200Response
+    @within OpenRouter
+    200 Response type for getKey
+]=]
+export type GetKey200Response = {
+	data: {
+		hash: string,
+		name: string,
+		label: string,
+		disabled: boolean,
+		limit: number?,
+		limit_remaining: number?,
+		limit_reset: string?,
+		include_byok_in_limit: boolean,
+		usage: number,
+		usage_daily: number,
+		usage_weekly: number,
+		usage_monthly: number,
+		byok_usage: number,
+		byok_usage_daily: number,
+		byok_usage_weekly: number,
+		byok_usage_monthly: number,
+		created_at: string,
+		updated_at: string?,
+	},
+}
+
+--[=[
+    @type GetKey401Response
+    @within OpenRouter
+    401 Response type for getKey
+]=]
+export type GetKey401Response = UnauthorizedResponse
+
+--[=[
+    @type GetKey404Response
+    @within OpenRouter
+    404 Response type for getKey
+]=]
+export type GetKey404Response = NotFoundResponse
+
+--[=[
+    @type GetKey429Response
+    @within OpenRouter
+    429 Response type for getKey
+]=]
+export type GetKey429Response = TooManyRequestsResponse
+
+--[=[
+    @type GetKey500Response
+    @within OpenRouter
+    500 Response type for getKey
+]=]
+export type GetKey500Response = InternalServerResponse
+
+--[=[
+    @type DeleteKeys200Response
+    @within OpenRouter
+    200 Response type for deleteKeys
+]=]
+export type DeleteKeys200Response = { deleted: boolean }
+
+--[=[
+    @type DeleteKeys401Response
+    @within OpenRouter
+    401 Response type for deleteKeys
+]=]
+export type DeleteKeys401Response = UnauthorizedResponse
+
+--[=[
+    @type DeleteKeys404Response
+    @within OpenRouter
+    404 Response type for deleteKeys
+]=]
+export type DeleteKeys404Response = NotFoundResponse
+
+--[=[
+    @type DeleteKeys429Response
+    @within OpenRouter
+    429 Response type for deleteKeys
+]=]
+export type DeleteKeys429Response = TooManyRequestsResponse
+
+--[=[
+    @type DeleteKeys500Response
+    @within OpenRouter
+    500 Response type for deleteKeys
+]=]
+export type DeleteKeys500Response = InternalServerResponse
+
+--[=[
+    @type UpdateKeys200Response
+    @within OpenRouter
+    200 Response type for updateKeys
+]=]
+export type UpdateKeys200Response = {
+	data: {
+		hash: string,
+		name: string,
+		label: string,
+		disabled: boolean,
+		limit: number?,
+		limit_remaining: number?,
+		limit_reset: string?,
+		include_byok_in_limit: boolean,
+		usage: number,
+		usage_daily: number,
+		usage_weekly: number,
+		usage_monthly: number,
+		byok_usage: number,
+		byok_usage_daily: number,
+		byok_usage_weekly: number,
+		byok_usage_monthly: number,
+		created_at: string,
+		updated_at: string?,
+	},
+}
+
+--[=[
+    @type UpdateKeys400Response
+    @within OpenRouter
+    400 Response type for updateKeys
+]=]
+export type UpdateKeys400Response = BadRequestResponse
+
+--[=[
+    @type UpdateKeys401Response
+    @within OpenRouter
+    401 Response type for updateKeys
+]=]
+export type UpdateKeys401Response = UnauthorizedResponse
+
+--[=[
+    @type UpdateKeys404Response
+    @within OpenRouter
+    404 Response type for updateKeys
+]=]
+export type UpdateKeys404Response = NotFoundResponse
+
+--[=[
+    @type UpdateKeys429Response
+    @within OpenRouter
+    429 Response type for updateKeys
+]=]
+export type UpdateKeys429Response = TooManyRequestsResponse
+
+--[=[
+    @type UpdateKeys500Response
+    @within OpenRouter
+    500 Response type for updateKeys
+]=]
+export type UpdateKeys500Response = InternalServerResponse
+
+--[=[
+    @type GetCurrentKey200Response
+    @within OpenRouter
+    200 Response type for getCurrentKey
+]=]
+export type GetCurrentKey200Response = {
+	data: {
+		label: string,
+		limit: number?,
+		usage: number,
+		usage_daily: number,
+		usage_weekly: number,
+		usage_monthly: number,
+		byok_usage: number,
+		byok_usage_daily: number,
+		byok_usage_weekly: number,
+		byok_usage_monthly: number,
+		is_free_tier: boolean,
+		is_provisioning_key: boolean,
+		limit_remaining: number?,
+		limit_reset: string?,
+		include_byok_in_limit: boolean,
+		rate_limit: { requests: number, interval: string, note: string },
+	},
+}
+
+--[=[
+    @type GetCurrentKey401Response
+    @within OpenRouter
+    401 Response type for getCurrentKey
+]=]
+export type GetCurrentKey401Response = UnauthorizedResponse
+
+--[=[
+    @type GetCurrentKey500Response
+    @within OpenRouter
+    500 Response type for getCurrentKey
+]=]
+export type GetCurrentKey500Response = InternalServerResponse
+
+--[=[
+    @type ExchangeAuthCodeForAPIKey200Response
+    @within OpenRouter
+    200 Response type for exchangeAuthCodeForAPIKey
+]=]
+export type ExchangeAuthCodeForAPIKey200Response = { key: string, user_id: string? }
+
+--[=[
+    @type ExchangeAuthCodeForAPIKey400Response
+    @within OpenRouter
+    400 Response type for exchangeAuthCodeForAPIKey
+]=]
+export type ExchangeAuthCodeForAPIKey400Response = BadRequestResponse
+
+--[=[
+    @type ExchangeAuthCodeForAPIKey403Response
+    @within OpenRouter
+    403 Response type for exchangeAuthCodeForAPIKey
+]=]
+export type ExchangeAuthCodeForAPIKey403Response = ForbiddenResponse
+
+--[=[
+    @type ExchangeAuthCodeForAPIKey500Response
+    @within OpenRouter
+    500 Response type for exchangeAuthCodeForAPIKey
+]=]
+export type ExchangeAuthCodeForAPIKey500Response = InternalServerResponse
+
+--[=[
+    @type CreateAuthKeysCode200Response
+    @within OpenRouter
+    200 Response type for createAuthKeysCode
+]=]
+export type CreateAuthKeysCode200Response = { data: { id: string, app_id: number, created_at: string } }
+
+--[=[
+    @type CreateAuthKeysCode400Response
+    @within OpenRouter
+    400 Response type for createAuthKeysCode
+]=]
+export type CreateAuthKeysCode400Response = BadRequestResponse
+
+--[=[
+    @type CreateAuthKeysCode401Response
+    @within OpenRouter
+    401 Response type for createAuthKeysCode
+]=]
+export type CreateAuthKeysCode401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateAuthKeysCode500Response
+    @within OpenRouter
+    500 Response type for createAuthKeysCode
+]=]
+export type CreateAuthKeysCode500Response = InternalServerResponse
+
+--[=[
+    @type SendChatCompletionRequest200Response
+    @within OpenRouter
+    200 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest200Response = ChatResponse
+
+--[=[
+    @type SendChatCompletionRequest400Response
+    @within OpenRouter
+    400 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest400Response = ChatError
+
+--[=[
+    @type SendChatCompletionRequest401Response
+    @within OpenRouter
+    401 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest401Response = ChatError
+
+--[=[
+    @type SendChatCompletionRequest429Response
+    @within OpenRouter
+    429 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest429Response = ChatError
+
+--[=[
+    @type SendChatCompletionRequest500Response
+    @within OpenRouter
+    500 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest500Response = ChatError
+
+--[=[
+    @type CreateCompletions200Response
+    @within OpenRouter
+    200 Response type for createCompletions
+]=]
+export type CreateCompletions200Response = CompletionResponse
+
+--[=[
+    @type CreateCompletions400Response
+    @within OpenRouter
+    400 Response type for createCompletions
+]=]
+export type CreateCompletions400Response = ChatError
+
+--[=[
+    @type CreateCompletions401Response
+    @within OpenRouter
+    401 Response type for createCompletions
+]=]
+export type CreateCompletions401Response = ChatError
+
+--[=[
+    @type CreateCompletions429Response
+    @within OpenRouter
+    429 Response type for createCompletions
+]=]
+export type CreateCompletions429Response = ChatError
+
+--[=[
+    @type CreateCompletions500Response
+    @within OpenRouter
+    500 Response type for createCompletions
+]=]
+export type CreateCompletions500Response = ChatError
+return {}

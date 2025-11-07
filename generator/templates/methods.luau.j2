@@ -1,0 +1,108 @@
+{{ header }}
+
+{% if description %}
+{{ format_comment(description, 0) }}
+{%- endif %}
+
+local HttpService = game:GetService("HttpService")
+local Types = require(script.types)
+
+--- @class OpenRouter
+--- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
+local OpenRouter = {}
+OpenRouter.__index = OpenRouter
+
+type OpenRouterProto = {
+	apiKey: string,
+}
+
+export type OpenRouter = typeof(setmetatable({} :: OpenRouterProto, OpenRouter))
+
+function OpenRouter.new(apiKey: string): OpenRouter
+	local self = setmetatable({}, OpenRouter)
+	self.apiKey = apiKey
+	return self
+end
+
+function OpenRouter._buildQueryString(_self: OpenRouter, queryParams: { [string]: any }): string
+	local queryParts = {}
+	for key, value in queryParams do
+		if value then
+			table.insert(queryParts, key .. "=" .. tostring(value))
+		end
+	end
+
+	if #queryParts > 0 then
+		return "?" .. table.concat(queryParts, "&")
+	end
+	return ""
+end
+
+function OpenRouter._request<T, E>(self: OpenRouter, method: Types.HttpMethod, path: string, body: any?): Types.Result<T, E>
+	local ok, result = pcall(function()
+		return HttpService:RequestAsync({
+			Url = "{{ base_url }}" .. path,
+			Method = method,
+			Headers = {
+				["Authorization"] = "Bearer " .. self.apiKey,
+				["Content-Type"] = "application/json",
+				-- Used for usage rankings on openrouter.ai
+				["HTTP-Referer"] = `https://www.roblox.com/games/{game.GameId}/{game.Name}`,
+				["X-Title"] = game.Name,
+			},
+			Body = if body then HttpService:JSONEncode(body) else nil,
+		})
+	end)
+
+	if not ok then
+		return { type = "crash", error = tostring(result) }
+	end
+
+	if result.Success then
+		return { type = "ok", value = if result.Body then HttpService:JSONDecode(result.Body) else nil }
+	end
+
+	return { type = "err", error = if result.Body then HttpService:JSONDecode(result.Body) else nil }
+end
+
+{% for tag_name, tag_methods in methods_by_tag.items() %}
+--[[
+  ══════════════════════════════════════════════════════════════════════════════
+  {{ tag_name }}{% if tag_name in tag_descriptions and tag_descriptions[tag_name] %}: {{ tag_descriptions[tag_name] }}{% endif %}
+
+  ══════════════════════════════════════════════════════════════════════════════
+]]
+
+{% for method in tag_methods %}
+{% if method.doc_string %}
+{{ method.doc_string }}
+{%- endif %}
+{% if method.params %}
+function OpenRouter.{{ method.name }}(self: OpenRouter, {{ method.params }}): {{ method.return_type }}
+{% else %}
+function OpenRouter.{{ method.name }}(self: OpenRouter): {{ method.return_type }}
+{% endif %}
+{% if method.body %}
+{{ method.body | indent(2, first=True) }}
+{% else %}
+{% if method.has_query_params %}
+  local queryString = self:_buildQueryString({
+{% for param_name in method.query_params %}
+    ["{{ param_name }}"] = {{ param_name }},
+{% endfor %}
+  })
+  return self:_request("{{ method.http_method }}", `{{ method.path }}{queryString}`, {{ method.body_param }})
+{% else %}
+{% if method.has_path_vars %}
+  return self:_request("{{ method.http_method }}", `{{ method.path }}`, {{ method.body_param }})
+{% else %}
+  return self:_request("{{ method.http_method }}", "{{ method.path }}", {{ method.body_param }})
+{% endif %}
+{% endif %}
+{% endif %}
+end
+
+{% endfor %}
+{% endfor %}
+
+return OpenRouter

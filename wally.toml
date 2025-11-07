@@ -1,0 +1,18 @@
+[package]
+name = "boatbomber/openrouter-luau-sdk"
+description = "An SDK for using OpenRouter within Roblox"
+version = "0.1.0"
+license = "MPL 2.0"
+authors = ["boatbomber (https://boatbomber.com)"]
+registry = "https://github.com/upliftgames/wally-index"
+realm = "server"
+include = [
+    "src",
+    "src/**",
+    "wally.toml",
+    "wally.lock",
+    "default.project.json",
+    "README.md",
+    "LICENSE",
+]
+exclude = ["**"]
