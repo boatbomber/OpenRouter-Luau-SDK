@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T02:50:02.562500Z (generator v1.0.0)
+-- Last generated: 2025-11-07T03:02:28.543940Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -9,8 +9,8 @@
   OpenRouter features
 ]]
 
---- @class OpenRouter
---- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
+--- @class OpenRouterTypes
+--- The OpenRouterTypes contains auto-generated types from the OpenRouter APIs.
 
 export type ResultOk<T> = { type: "ok", value: T } -- Request succeeded
 export type ResultErr<E> = { type: "err", error: E } -- Request responded with an error
@@ -21,7 +21,7 @@ export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "OPTIONS" 
 
 --[=[
     @interface ActivityItem
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field date string -- Date of the activity (YYYY-MM-DD format); (Ex: "2025-08-24")
     @field model string -- Model slug (e.g., "openai/gpt-4.1"); (Ex: "openai/gpt-4.1")
@@ -51,7 +51,7 @@ export type ActivityItem = {
 
 --[=[
     @interface BadGatewayResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for BadGatewayResponse
     
     @field code number
@@ -62,7 +62,7 @@ export type BadGatewayResponseErrorData = { code: number, message: string, metad
 
 --[=[
     @interface BadGatewayResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Bad Gateway - Provider/upstream API failure
     
     @field error BadGatewayResponseErrorData
@@ -72,7 +72,7 @@ export type BadGatewayResponse = { error: BadGatewayResponseErrorData, user_id: 
 
 --[=[
     @interface BadRequestResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for BadRequestResponse
     
     @field code number
@@ -83,7 +83,7 @@ export type BadRequestResponseErrorData = { code: number, message: string, metad
 
 --[=[
     @interface BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Bad Request - Invalid request parameters or malformed input
     
     @field error BadRequestResponseErrorData
@@ -93,7 +93,7 @@ export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: 
 
 --[=[
     @type BigNumberUnion (number | string)
-    @within OpenRouter
+    @within OpenRouterTypes
     A value in string or number format that is a large number
 ]=]
 export type BigNumberUnion = number | string
@@ -102,7 +102,7 @@ export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "con
 
 --[=[
     @interface ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field error { code: ((string | number) | nil), message: string, param: (string | nil)?, ["type"]: (string | nil)? }
 ]=]
@@ -112,7 +112,7 @@ export type ChatError = {
 
 --[=[
     @interface ChatGenerationTokenUsage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field completion_tokens number
     @field prompt_tokens number
@@ -135,7 +135,7 @@ export type ChatGenerationTokenUsage = {
 
 --[=[
     @interface ChatMessageContentItemAudio
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field input_audio { data: string, format: ("wav" | "mp3" | "flac" | "m4a" | "ogg" | "pcm16" | "pcm24") }
@@ -147,7 +147,7 @@ export type ChatMessageContentItemAudio = {
 
 --[=[
     @interface ChatMessageContentItemImage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field image_url { url: string, detail: ("auto" | "low" | "high")? }
@@ -159,7 +159,7 @@ export type ChatMessageContentItemImage = {
 
 --[=[
     @interface ChatMessageContentItemText
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field text string
@@ -168,7 +168,7 @@ export type ChatMessageContentItemText = { ["type"]: string, text: string }
 
 --[=[
     @interface ChatMessageContentItemVideo
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field video_url { url: string }
@@ -181,7 +181,7 @@ export type ChatMessageContentItem = (
 
 --[=[
     @interface ChatMessageTokenLogprob
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field token string
     @field logprob number
@@ -197,7 +197,7 @@ export type ChatMessageTokenLogprob = {
 
 --[=[
     @interface ChatMessageTokenLogprobs
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field content ({ChatMessageTokenLogprob} | nil)
     @field refusal ({ChatMessageTokenLogprob} | nil)
@@ -209,7 +209,7 @@ export type ChatMessageTokenLogprobs = {
 
 --[=[
     @interface ChatMessageToolCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field type string
@@ -219,7 +219,7 @@ export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: 
 
 --[=[
     @interface AssistantMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field role string
     @field content ((string | {ChatMessageContentItem}) | nil)?
@@ -239,7 +239,7 @@ export type AssistantMessage = {
 
 --[=[
     @interface ChatStreamOptions
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field include_usage boolean?
 ]=]
@@ -247,7 +247,7 @@ export type ChatStreamOptions = { include_usage: boolean? }
 
 --[=[
     @interface ChatStreamingMessageToolCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field index number
     @field id string?
@@ -263,7 +263,7 @@ export type ChatStreamingMessageToolCall = {
 
 --[=[
     @interface ChatStreamingMessageChunk
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field role "assistant"?
     @field content (string | nil)?
@@ -283,7 +283,7 @@ export type CompletionFinishReason = "stop" | "length" | "content_filter" | nil
 
 --[=[
     @interface CompletionLogprobs
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field tokens {string}
     @field token_logprobs {number}
@@ -299,7 +299,7 @@ export type CompletionLogprobs = {
 
 --[=[
     @interface CompletionChoice
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field text string
     @field index number
@@ -315,7 +315,7 @@ export type CompletionChoice = {
 
 --[=[
     @interface CompletionUsage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field prompt_tokens number
     @field completion_tokens number
@@ -325,7 +325,7 @@ export type CompletionUsage = { prompt_tokens: number, completion_tokens: number
 
 --[=[
     @interface CompletionResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field object string
@@ -347,7 +347,7 @@ export type CompletionResponse = {
 
 --[=[
     @interface CreateChargeRequest
-    @within OpenRouter
+    @within OpenRouterTypes
     Create a Coinbase charge for crypto payment
     
     @field amount number
@@ -358,7 +358,7 @@ export type CreateChargeRequest = { amount: number, sender: string, chain_id: nu
 
 --[=[
     @interface DefaultParameters
-    @within OpenRouter
+    @within OpenRouterTypes
     Default parameters for this model
     
     @field temperature number? -- Range: 0.0-2.0
@@ -369,7 +369,7 @@ export type DefaultParameters = { temperature: number?, top_p: number?, frequenc
 
 --[=[
     @interface EdgeNetworkTimeoutResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for EdgeNetworkTimeoutResponse
     
     @field code number
@@ -380,7 +380,7 @@ export type EdgeNetworkTimeoutResponseErrorData = { code: number, message: strin
 
 --[=[
     @interface EdgeNetworkTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Infrastructure Timeout - Provider request timed out at edge network
     
     @field error EdgeNetworkTimeoutResponseErrorData
@@ -392,7 +392,7 @@ export type EndpointStatus = number
 
 --[=[
     @interface FileCitation
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "file_citation"
     @field file_id string
@@ -403,7 +403,7 @@ export type FileCitation = { ["type"]: "file_citation", file_id: string, filenam
 
 --[=[
     @interface FilePath
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "file_path"
     @field file_id string
@@ -413,7 +413,7 @@ export type FilePath = { ["type"]: "file_path", file_id: string, index: number }
 
 --[=[
     @interface ForbiddenResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for ForbiddenResponse
     
     @field code number
@@ -424,7 +424,7 @@ export type ForbiddenResponseErrorData = { code: number, message: string, metada
 
 --[=[
     @interface ForbiddenResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Forbidden - Authentication successful but insufficient permissions
     
     @field error ForbiddenResponseErrorData
@@ -438,7 +438,7 @@ export type InputModality = "text" | "image" | "file" | "audio" | "video"
 
 --[=[
     @type InstructType ("none" | "airoboros" | "alpaca" | "alpaca-modif" | "chatml" | "claude" | "code-llama" | "gemma" | "llama2" | "llama3" | "mistral" | "nemotron" | "neural" | "openchat" | "phi3" | "rwkv" | "vicuna" | "zephyr" | "deepseek-r1" | "deepseek-v3.1" | "qwq" | "qwen3")?
-    @within OpenRouter
+    @within OpenRouterTypes
     Instruction format type
 ]=]
 export type InstructType = (
@@ -468,7 +468,7 @@ export type InstructType = (
 
 --[=[
     @interface InternalServerResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for InternalServerResponse
     
     @field code number
@@ -479,7 +479,7 @@ export type InternalServerResponseErrorData = { code: number, message: string, m
 
 --[=[
     @interface InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Internal Server Error - Unexpected server error
     
     @field error InternalServerResponseErrorData
@@ -489,7 +489,7 @@ export type InternalServerResponse = { error: InternalServerResponseErrorData, u
 
 --[=[
     @interface JSONSchemaConfig
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field name string
     @field description string?
@@ -505,7 +505,7 @@ export type JSONSchemaConfig = {
 
 --[=[
     @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
-    @within OpenRouter
+    @within OpenRouterTypes
     Tokenizer type used by the model
 ]=]
 export type ModelGroup = (
@@ -534,7 +534,7 @@ export type ModelName = string
 
 --[=[
     @interface ModelsCountResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Model count data
     
     @field data { count: number } -- Model count data; (Ex: {"count":150})
@@ -543,7 +543,7 @@ export type ModelsCountResponse = { data: { count: number } }
 
 --[=[
     @interface NamedToolChoice
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field function { name: string }
@@ -552,7 +552,7 @@ export type NamedToolChoice = { ["type"]: string, ["function"]: { name: string }
 
 --[=[
     @interface NotFoundResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for NotFoundResponse
     
     @field code number
@@ -563,7 +563,7 @@ export type NotFoundResponseErrorData = { code: number, message: string, metadat
 
 --[=[
     @interface NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Not Found - Resource does not exist
     
     @field error NotFoundResponseErrorData
@@ -573,7 +573,7 @@ export type NotFoundResponse = { error: NotFoundResponseErrorData, user_id: stri
 
 --[=[
     @interface OpenAIResponsesErrorEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when an error occurs during streaming
     
     @field type "error"
@@ -592,7 +592,7 @@ export type OpenAIResponsesErrorEvent = {
 
 --[=[
     @interface OpenAIResponsesImageGenCallCompleted
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "response.image_generation_call.completed"
     @field item_id string
@@ -608,7 +608,7 @@ export type OpenAIResponsesImageGenCallCompleted = {
 
 --[=[
     @interface OpenAIResponsesImageGenCallGenerating
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "response.image_generation_call.generating"
     @field item_id string
@@ -624,7 +624,7 @@ export type OpenAIResponsesImageGenCallGenerating = {
 
 --[=[
     @interface OpenAIResponsesImageGenCallInProgress
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "response.image_generation_call.in_progress"
     @field item_id string
@@ -640,7 +640,7 @@ export type OpenAIResponsesImageGenCallInProgress = {
 
 --[=[
     @interface OpenAIResponsesImageGenCallPartialImage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "response.image_generation_call.partial_image"
     @field item_id string
@@ -668,7 +668,7 @@ export type OpenAIResponsesIncludable = (
 
 --[=[
     @interface OpenAIResponsesIncompleteDetails
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field reason ("max_output_tokens" | "content_filter")?
 ]=]
@@ -676,7 +676,7 @@ export type OpenAIResponsesIncompleteDetails = { reason: ("max_output_tokens" | 
 
 --[=[
     @interface OpenAIResponsesReasoningDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning text delta is streamed
     
     @field type "response.reasoning_text.delta"
@@ -697,7 +697,7 @@ export type OpenAIResponsesReasoningDeltaEvent = {
 
 --[=[
     @interface OpenAIResponsesReasoningDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning text streaming is complete
     
     @field type "response.reasoning_text.done"
@@ -720,7 +720,7 @@ export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minim
 
 --[=[
     @interface OpenAIResponsesReasoningSummaryTextDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning summary text delta is streamed
     
     @field type "response.reasoning_summary_text.delta"
@@ -741,7 +741,7 @@ export type OpenAIResponsesReasoningSummaryTextDeltaEvent = {
 
 --[=[
     @interface OpenAIResponsesReasoningSummaryTextDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning summary text streaming is complete
     
     @field type "response.reasoning_summary_text.done"
@@ -762,7 +762,7 @@ export type OpenAIResponsesReasoningSummaryTextDoneEvent = {
 
 --[=[
     @interface OpenAIResponsesRefusalContent
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "refusal"
     @field refusal string
@@ -783,7 +783,7 @@ export type OpenAIResponsesTruncation = ("auto" | "disabled")?
 
 --[=[
     @interface OpenAIResponsesUsage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field input_tokens number
     @field input_tokens_details { cached_tokens: number }
@@ -801,14 +801,14 @@ export type OpenAIResponsesUsage = {
 
 --[=[
     @type OpenResponsesErrorEvent OpenAIResponsesErrorEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when an error occurs during streaming
 ]=]
 export type OpenResponsesErrorEvent = OpenAIResponsesErrorEvent
 
 --[=[
     @interface OpenResponsesFunctionCallArgumentsDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when function call arguments are being streamed
     
     @field type "response.function_call_arguments.delta"
@@ -827,7 +827,7 @@ export type OpenResponsesFunctionCallArgumentsDeltaEvent = {
 
 --[=[
     @interface OpenResponsesFunctionCallArgumentsDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when function call arguments streaming is complete
     
     @field type "response.function_call_arguments.done"
@@ -848,7 +848,7 @@ export type OpenResponsesFunctionCallArgumentsDoneEvent = {
 
 --[=[
     @interface OpenResponsesFunctionTool
-    @within OpenRouter
+    @within OpenRouterTypes
     Function tool definition
     
     @field type "function"
@@ -867,63 +867,63 @@ export type OpenResponsesFunctionTool = {
 
 --[=[
     @type OpenResponsesImageGenCallCompleted OpenAIResponsesImageGenCallCompleted
-    @within OpenRouter
+    @within OpenRouterTypes
     Image generation call completed
 ]=]
 export type OpenResponsesImageGenCallCompleted = OpenAIResponsesImageGenCallCompleted
 
 --[=[
     @type OpenResponsesImageGenCallGenerating OpenAIResponsesImageGenCallGenerating
-    @within OpenRouter
+    @within OpenRouterTypes
     Image generation call is generating
 ]=]
 export type OpenResponsesImageGenCallGenerating = OpenAIResponsesImageGenCallGenerating
 
 --[=[
     @type OpenResponsesImageGenCallInProgress OpenAIResponsesImageGenCallInProgress
-    @within OpenRouter
+    @within OpenRouterTypes
     Image generation call in progress
 ]=]
 export type OpenResponsesImageGenCallInProgress = OpenAIResponsesImageGenCallInProgress
 
 --[=[
     @type OpenResponsesImageGenCallPartialImage OpenAIResponsesImageGenCallPartialImage
-    @within OpenRouter
+    @within OpenRouterTypes
     Image generation call with partial image
 ]=]
 export type OpenResponsesImageGenCallPartialImage = OpenAIResponsesImageGenCallPartialImage
 
 --[=[
     @type OpenResponsesReasoningDeltaEvent OpenAIResponsesReasoningDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning text delta is streamed
 ]=]
 export type OpenResponsesReasoningDeltaEvent = OpenAIResponsesReasoningDeltaEvent
 
 --[=[
     @type OpenResponsesReasoningDoneEvent OpenAIResponsesReasoningDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning text streaming is complete
 ]=]
 export type OpenResponsesReasoningDoneEvent = OpenAIResponsesReasoningDoneEvent
 
 --[=[
     @type OpenResponsesReasoningSummaryTextDeltaEvent OpenAIResponsesReasoningSummaryTextDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning summary text delta is streamed
 ]=]
 export type OpenResponsesReasoningSummaryTextDeltaEvent = OpenAIResponsesReasoningSummaryTextDeltaEvent
 
 --[=[
     @type OpenResponsesReasoningSummaryTextDoneEvent OpenAIResponsesReasoningSummaryTextDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when reasoning summary text streaming is complete
 ]=]
 export type OpenResponsesReasoningSummaryTextDoneEvent = OpenAIResponsesReasoningSummaryTextDoneEvent
 
 --[=[
     @interface OpenResponsesRefusalDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a refusal delta is streamed
     
     @field type "response.refusal.delta"
@@ -944,7 +944,7 @@ export type OpenResponsesRefusalDeltaEvent = {
 
 --[=[
     @interface OpenResponsesRefusalDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when refusal streaming is complete
     
     @field type "response.refusal.done"
@@ -965,14 +965,14 @@ export type OpenResponsesRefusalDoneEvent = {
 
 --[=[
     @type OpenResponsesRequestMetadata { [string]: string }?
-    @within OpenRouter
+    @within OpenRouterTypes
     Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
 ]=]
 export type OpenResponsesRequestMetadata = { [string]: string }?
 
 --[=[
     @interface OpenResponsesTopLogprobs
-    @within OpenRouter
+    @within OpenRouterTypes
     Alternative token with its log probability
     
     @field token string?
@@ -982,7 +982,7 @@ export type OpenResponsesTopLogprobs = { token: string?, logprob: number? }
 
 --[=[
     @interface OpenResponsesLogProbs
-    @within OpenRouter
+    @within OpenRouterTypes
     Log probability information for a token
     
     @field logprob number
@@ -993,7 +993,7 @@ export type OpenResponsesLogProbs = { logprob: number, token: string, top_logpro
 
 --[=[
     @interface OpenResponsesTextDeltaEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a text delta is streamed
     
     @field type "response.output_text.delta"
@@ -1016,7 +1016,7 @@ export type OpenResponsesTextDeltaEvent = {
 
 --[=[
     @interface OpenResponsesTextDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when text streaming is complete
     
     @field type "response.output_text.done"
@@ -1039,7 +1039,7 @@ export type OpenResponsesTextDoneEvent = {
 
 --[=[
     @type OpenResponsesUsage (OpenAIResponsesUsage & { cost: number?, is_byok: boolean?, cost_details: { upstream_inference_cost: number?, upstream_inference_input_cost: number, upstream_inference_output_cost: number }? })
-    @within OpenRouter
+    @within OpenRouterTypes
     Token usage information for the response
 ]=]
 export type OpenResponsesUsage = OpenAIResponsesUsage & {
@@ -1054,7 +1054,7 @@ export type OpenResponsesUsage = OpenAIResponsesUsage & {
 
 --[=[
     @interface OutputItemFunctionCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "function_call"
     @field id string?
@@ -1074,7 +1074,7 @@ export type OutputItemFunctionCall = {
 
 --[=[
     @interface OutputItemImageGenerationCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "image_generation_call"
     @field id string
@@ -1092,7 +1092,7 @@ export type OutputModality = "text" | "image" | "embeddings"
 
 --[=[
     @interface ModelArchitecture
-    @within OpenRouter
+    @within OpenRouterTypes
     Model architecture information
     
     @field tokenizer ModelGroup?
@@ -1160,7 +1160,7 @@ export type Parameter = (
 
 --[=[
     @interface PayloadTooLargeResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for PayloadTooLargeResponse
     
     @field code number
@@ -1171,7 +1171,7 @@ export type PayloadTooLargeResponseErrorData = { code: number, message: string, 
 
 --[=[
     @interface PayloadTooLargeResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Payload Too Large - Request payload exceeds size limits
     
     @field error PayloadTooLargeResponseErrorData
@@ -1181,7 +1181,7 @@ export type PayloadTooLargeResponse = { error: PayloadTooLargeResponseErrorData,
 
 --[=[
     @interface PaymentRequiredResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for PaymentRequiredResponse
     
     @field code number
@@ -1192,7 +1192,7 @@ export type PaymentRequiredResponseErrorData = { code: number, message: string, 
 
 --[=[
     @interface PaymentRequiredResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Payment Required - Insufficient credits or quota to complete request
     
     @field error PaymentRequiredResponseErrorData
@@ -1202,7 +1202,7 @@ export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData,
 
 --[=[
     @interface PerRequestLimits
-    @within OpenRouter
+    @within OpenRouterTypes
     Per-request token limits
     
     @field prompt_tokens number -- Maximum prompt tokens per request; (Ex: 1000)
@@ -1301,7 +1301,7 @@ export type ProviderName = (
 
 --[=[
     @interface ProviderOverloadedResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for ProviderOverloadedResponse
     
     @field code number
@@ -1312,7 +1312,7 @@ export type ProviderOverloadedResponseErrorData = { code: number, message: strin
 
 --[=[
     @interface ProviderOverloadedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Provider Overloaded - Provider is temporarily overloaded
     
     @field error ProviderOverloadedResponseErrorData
@@ -1322,7 +1322,7 @@ export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErro
 
 --[=[
     @interface PublicPricing
-    @within OpenRouter
+    @within OpenRouterTypes
     Pricing information for the model
     
     @field prompt BigNumberUnion
@@ -1357,7 +1357,7 @@ export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "b
 
 --[=[
     @interface PublicEndpoint
-    @within OpenRouter
+    @within OpenRouterTypes
     Information about a specific model endpoint
     
     @field name string
@@ -1405,7 +1405,7 @@ export type PublicEndpoint = {
 
 --[=[
     @interface ListEndpointsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     List of available endpoints for a model
     
     @field id string -- Unique identifier for the model; (Ex: "openai/gpt-4")
@@ -1432,7 +1432,7 @@ export type ListEndpointsResponse = {
 
 --[=[
     @interface ReasoningSummaryText
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "summary_text"
     @field text string
@@ -1441,7 +1441,7 @@ export type ReasoningSummaryText = { ["type"]: "summary_text", text: string }
 
 --[=[
     @interface OpenAIResponsesReasoningSummaryPartAddedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a reasoning summary part is added
     
     @field type "response.reasoning_summary_part.added"
@@ -1462,14 +1462,14 @@ export type OpenAIResponsesReasoningSummaryPartAddedEvent = {
 
 --[=[
     @type OpenResponsesReasoningSummaryPartAddedEvent OpenAIResponsesReasoningSummaryPartAddedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a reasoning summary part is added
 ]=]
 export type OpenResponsesReasoningSummaryPartAddedEvent = OpenAIResponsesReasoningSummaryPartAddedEvent
 
 --[=[
     @interface OpenResponsesReasoningSummaryPartDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a reasoning summary part is complete
     
     @field type "response.reasoning_summary_part.done"
@@ -1492,7 +1492,7 @@ export type ReasoningSummaryVerbosity = "auto" | "concise" | "detailed"
 
 --[=[
     @interface OpenAIResponsesReasoningConfig
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field effort OpenAIResponsesReasoningEffort?
     @field summary ReasoningSummaryVerbosity?
@@ -1504,14 +1504,14 @@ export type OpenAIResponsesReasoningConfig = {
 
 --[=[
     @type OpenResponsesReasoningConfig (OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? })
-    @within OpenRouter
+    @within OpenRouterTypes
     Configuration for reasoning mode in the response
 ]=]
 export type OpenResponsesReasoningConfig = OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? }
 
 --[=[
     @interface ReasoningTextContent
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "reasoning_text"
     @field text string
@@ -1520,7 +1520,7 @@ export type ReasoningTextContent = { ["type"]: "reasoning_text", text: string }
 
 --[=[
     @interface OutputItemReasoning
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "reasoning"
     @field id string
@@ -1540,7 +1540,7 @@ export type OutputItemReasoning = {
 
 --[=[
     @type OpenResponsesReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1")? })
-    @within OpenRouter
+    @within OpenRouterTypes
     Reasoning output item with signature and format extensions
 ]=]
 export type OpenResponsesReasoning = OutputItemReasoning & {
@@ -1550,7 +1550,7 @@ export type OpenResponsesReasoning = OutputItemReasoning & {
 
 --[=[
     @interface RequestTimeoutResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for RequestTimeoutResponse
     
     @field code number
@@ -1561,7 +1561,7 @@ export type RequestTimeoutResponseErrorData = { code: number, message: string, m
 
 --[=[
     @interface RequestTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Request Timeout - Operation exceeded time limit
     
     @field error RequestTimeoutResponseErrorData
@@ -1571,7 +1571,7 @@ export type RequestTimeoutResponse = { error: RequestTimeoutResponseErrorData, u
 
 --[=[
     @interface ResponseFormatJSONSchema
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field json_schema JSONSchemaConfig
@@ -1580,7 +1580,7 @@ export type ResponseFormatJSONSchema = { ["type"]: string, json_schema: JSONSche
 
 --[=[
     @interface ResponseFormatTextGrammar
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field grammar string
@@ -1589,7 +1589,7 @@ export type ResponseFormatTextGrammar = { ["type"]: string, grammar: string }
 
 --[=[
     @interface CompletionCreateParams
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field model ModelName?
     @field models {ModelName}?
@@ -1639,7 +1639,7 @@ export type CompletionCreateParams = {
 
 --[=[
     @interface ResponseInputAudio
-    @within OpenRouter
+    @within OpenRouterTypes
     Audio input content item
     
     @field type "input_audio"
@@ -1649,7 +1649,7 @@ export type ResponseInputAudio = { ["type"]: "input_audio", input_audio: { data:
 
 --[=[
     @interface ResponseInputFile
-    @within OpenRouter
+    @within OpenRouterTypes
     File input content item
     
     @field type "input_file"
@@ -1668,7 +1668,7 @@ export type ResponseInputFile = {
 
 --[=[
     @interface ResponseInputImage
-    @within OpenRouter
+    @within OpenRouterTypes
     Image input content item
     
     @field type "input_image"
@@ -1679,7 +1679,7 @@ export type ResponseInputImage = { ["type"]: "input_image", detail: "auto" | "hi
 
 --[=[
     @interface ResponseInputText
-    @within OpenRouter
+    @within OpenRouterTypes
     Text input content item
     
     @field type "input_text"
@@ -1689,7 +1689,7 @@ export type ResponseInputText = { ["type"]: "input_text", text: string }
 
 --[=[
     @interface OpenAIResponsesPrompt
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field variables { [string]: (string | ResponseInputText | ResponseInputImage | ResponseInputFile) }?
@@ -1701,7 +1701,7 @@ export type OpenAIResponsesPrompt = {
 
 --[=[
     @interface OpenResponsesEasyInputMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "message"?
     @field role ("user" | "system" | "assistant" | "developer")
@@ -1715,7 +1715,7 @@ export type OpenResponsesEasyInputMessage = {
 
 --[=[
     @interface OpenResponsesInputMessageItem
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string?
     @field type "message"?
@@ -1731,7 +1731,7 @@ export type OpenResponsesInputMessageItem = {
 
 --[=[
     @interface ResponsesErrorField
-    @within OpenRouter
+    @within OpenRouterTypes
     Error information returned from the API
     
     @field code ("server_error" | "rate_limit_exceeded" | "invalid_prompt" | "vector_store_timeout" | "invalid_image" | "invalid_image_format" | "invalid_base64_image" | "invalid_image_url" | "image_too_large" | "image_too_small" | "image_parse_error" | "image_content_policy_violation" | "invalid_image_mode" | "image_file_too_large" | "unsupported_image_media_type" | "empty_image_file" | "failed_to_download_image" | "image_file_not_found")
@@ -1763,7 +1763,7 @@ export type ResponsesErrorField = {
 
 --[=[
     @interface ResponsesFormatJSONObject
-    @within OpenRouter
+    @within OpenRouterTypes
     JSON object response format
     
     @field type "json_object"
@@ -1772,7 +1772,7 @@ export type ResponsesFormatJSONObject = { ["type"]: "json_object" }
 
 --[=[
     @interface ResponsesFormatText
-    @within OpenRouter
+    @within OpenRouterTypes
     Plain text response format
     
     @field type "text"
@@ -1781,7 +1781,7 @@ export type ResponsesFormatText = { ["type"]: "text" }
 
 --[=[
     @interface ResponsesFormatTextJSONSchemaConfig
-    @within OpenRouter
+    @within OpenRouterTypes
     JSON schema constrained response format
     
     @field type "json_schema"
@@ -1800,7 +1800,7 @@ export type ResponsesFormatTextJSONSchemaConfig = {
 
 --[=[
     @type ResponseFormatTextConfig (ResponsesFormatText | ResponsesFormatJSONObject | ResponsesFormatTextJSONSchemaConfig)
-    @within OpenRouter
+    @within OpenRouterTypes
     Text response format configuration
 ]=]
 export type ResponseFormatTextConfig = (
@@ -1809,7 +1809,7 @@ export type ResponseFormatTextConfig = (
 
 --[=[
     @interface ResponseTextConfig
-    @within OpenRouter
+    @within OpenRouterTypes
     Text output configuration including format and verbosity
     
     @field format ResponseFormatTextConfig?
@@ -1819,7 +1819,7 @@ export type ResponseTextConfig = { format: ResponseFormatTextConfig?, verbosity:
 
 --[=[
     @type OpenResponsesResponseText ResponseTextConfig
-    @within OpenRouter
+    @within OpenRouterTypes
     Text output configuration including format and verbosity
 ]=]
 export type OpenResponsesResponseText = ResponseTextConfig
@@ -1830,7 +1830,7 @@ export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
 
 --[=[
     @interface ResponsesOutputItemReasoning
-    @within OpenRouter
+    @within OpenRouterTypes
     An output item containing reasoning
     
     @field type "reasoning"
@@ -1851,14 +1851,14 @@ export type ResponsesOutputItemReasoning = {
 
 --[=[
     @type ResponsesSearchContextSize ("low" | "medium" | "high")
-    @within OpenRouter
+    @within OpenRouterTypes
     Size of the search context for web search tools
 ]=]
 export type ResponsesSearchContextSize = "low" | "medium" | "high"
 
 --[=[
     @interface ResponsesWebSearchUserLocation
-    @within OpenRouter
+    @within OpenRouterTypes
     User location information for web search
     
     @field type "approximate"?
@@ -1877,7 +1877,7 @@ export type ResponsesWebSearchUserLocation = {
 
 --[=[
     @interface OpenResponsesWebSearch20250826Tool
-    @within OpenRouter
+    @within OpenRouterTypes
     Web search tool configuration (2025-08-26 version)
     
     @field type "web_search_2025_08_26"
@@ -1894,7 +1894,7 @@ export type OpenResponsesWebSearch20250826Tool = {
 
 --[=[
     @interface OpenResponsesWebSearchTool
-    @within OpenRouter
+    @within OpenRouterTypes
     Web search tool configuration
     
     @field type "web_search"
@@ -1911,7 +1911,7 @@ export type OpenResponsesWebSearchTool = {
 
 --[=[
     @interface ServiceUnavailableResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for ServiceUnavailableResponse
     
     @field code number
@@ -1922,7 +1922,7 @@ export type ServiceUnavailableResponseErrorData = { code: number, message: strin
 
 --[=[
     @interface ServiceUnavailableResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Service Unavailable - Service temporarily unavailable
     
     @field error ServiceUnavailableResponseErrorData
@@ -1932,7 +1932,7 @@ export type ServiceUnavailableResponse = { error: ServiceUnavailableResponseErro
 
 --[=[
     @interface SystemMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field role string
     @field content (string | {ChatMessageContentItemText})
@@ -1942,7 +1942,7 @@ export type SystemMessage = { role: string, content: string | { ChatMessageConte
 
 --[=[
     @interface TooManyRequestsResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for TooManyRequestsResponse
     
     @field code number
@@ -1953,7 +1953,7 @@ export type TooManyRequestsResponseErrorData = { code: number, message: string, 
 
 --[=[
     @interface TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Too Many Requests - Rate limit exceeded
     
     @field error TooManyRequestsResponseErrorData
@@ -1965,7 +1965,7 @@ export type ToolCallStatus = "in_progress" | "completed" | "incomplete"
 
 --[=[
     @interface OpenResponsesFunctionCallOutput
-    @within OpenRouter
+    @within OpenRouterTypes
     The output from a function call execution
     
     @field type "function_call_output"
@@ -1984,7 +1984,7 @@ export type OpenResponsesFunctionCallOutput = {
 
 --[=[
     @interface OpenResponsesFunctionToolCall
-    @within OpenRouter
+    @within OpenRouterTypes
     A function call initiated by the model
     
     @field type "function_call"
@@ -2007,7 +2007,7 @@ export type ToolChoiceOption = string | NamedToolChoice
 
 --[=[
     @interface ToolDefinitionJson
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type string
     @field function { name: string, description: string?, parameters: { [string]: any }?, strict: (boolean | nil)? }
@@ -2019,7 +2019,7 @@ export type ToolDefinitionJson = {
 
 --[=[
     @interface ToolResponseMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field role string
     @field content (string | {ChatMessageContentItem})
@@ -2029,7 +2029,7 @@ export type ToolResponseMessage = { role: string, content: string | { ChatMessag
 
 --[=[
     @interface TopProviderInfo
-    @within OpenRouter
+    @within OpenRouterTypes
     Information about the top provider for this model
     
     @field context_length number? -- Context length from the top provider; (Ex: 8192)
@@ -2040,7 +2040,7 @@ export type TopProviderInfo = { context_length: number?, max_completion_tokens: 
 
 --[=[
     @interface Model
-    @within OpenRouter
+    @within OpenRouterTypes
     Information about an AI model available on OpenRouter
     
     @field id string -- Unique identifier for the model; (Ex: "openai/gpt-4")
@@ -2075,14 +2075,14 @@ export type Model = {
 
 --[=[
     @type ModelsListResponseData {Model}
-    @within OpenRouter
+    @within OpenRouterTypes
     List of available models
 ]=]
 export type ModelsListResponseData = { Model }
 
 --[=[
     @interface ModelsListResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     List of available models
     
     @field data ModelsListResponseData
@@ -2091,7 +2091,7 @@ export type ModelsListResponse = { data: ModelsListResponseData }
 
 --[=[
     @interface URLCitation
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "url_citation"
     @field url string
@@ -2105,7 +2105,7 @@ export type OpenAIResponsesAnnotation = FileCitation | URLCitation | FilePath
 
 --[=[
     @interface OpenResponsesOutputTextAnnotationAddedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a text annotation is added to output
     
     @field type "response.output_text.annotation.added"
@@ -2128,7 +2128,7 @@ export type OpenResponsesOutputTextAnnotationAddedEvent = {
 
 --[=[
     @interface ResponseOutputText
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "output_text"
     @field text string
@@ -2138,7 +2138,7 @@ export type ResponseOutputText = { ["type"]: "output_text", text: string, annota
 
 --[=[
     @interface OpenResponsesContentPartAddedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a new content part is added to an output item
     
     @field type "response.content_part.added"
@@ -2159,7 +2159,7 @@ export type OpenResponsesContentPartAddedEvent = {
 
 --[=[
     @interface OpenResponsesContentPartDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a content part is complete
     
     @field type "response.content_part.done"
@@ -2180,7 +2180,7 @@ export type OpenResponsesContentPartDoneEvent = {
 
 --[=[
     @interface OutputMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field role "assistant"
@@ -2227,14 +2227,14 @@ export type OpenAIResponsesInput =
 
 --[=[
     @type ResponsesOutputMessage OutputMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     An output message item
 ]=]
 export type ResponsesOutputMessage = OutputMessage
 
 --[=[
     @interface UnauthorizedResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for UnauthorizedResponse
     
     @field code number
@@ -2245,7 +2245,7 @@ export type UnauthorizedResponseErrorData = { code: number, message: string, met
 
 --[=[
     @interface UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Unauthorized - Authentication required or invalid credentials
     
     @field error UnauthorizedResponseErrorData
@@ -2255,7 +2255,7 @@ export type UnauthorizedResponse = { error: UnauthorizedResponseErrorData, user_
 
 --[=[
     @interface UnprocessableEntityResponseErrorData
-    @within OpenRouter
+    @within OpenRouterTypes
     Error data for UnprocessableEntityResponse
     
     @field code number
@@ -2266,7 +2266,7 @@ export type UnprocessableEntityResponseErrorData = { code: number, message: stri
 
 --[=[
     @interface UnprocessableEntityResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     Unprocessable Entity - Semantic validation failure
     
     @field error UnprocessableEntityResponseErrorData
@@ -2276,7 +2276,7 @@ export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseEr
 
 --[=[
     @interface UserMessage
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field role string
     @field content (string | {ChatMessageContentItem})
@@ -2294,7 +2294,7 @@ export type Message = (
 
 --[=[
     @interface ChatGenerationParams
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field messages {Message}
     @field model ModelName?
@@ -2346,7 +2346,7 @@ export type ChatGenerationParams = {
 
 --[=[
     @interface WebSearchPreviewToolUserLocation
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "approximate"
     @field city string?
@@ -2364,7 +2364,7 @@ export type WebSearchPreviewToolUserLocation = {
 
 --[=[
     @interface OpenResponsesWebSearchPreview20250311Tool
-    @within OpenRouter
+    @within OpenRouterTypes
     Web search preview tool configuration (2025-03-11 version)
     
     @field type "web_search_preview_2025_03_11"
@@ -2379,7 +2379,7 @@ export type OpenResponsesWebSearchPreview20250311Tool = {
 
 --[=[
     @interface OpenResponsesWebSearchPreviewTool
-    @within OpenRouter
+    @within OpenRouterTypes
     Web search preview tool configuration
     
     @field type "web_search_preview"
@@ -2396,7 +2396,7 @@ export type WebSearchStatus = "completed" | "searching" | "in_progress" | "faile
 
 --[=[
     @interface OutputItemFileSearchCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "file_search_call"
     @field id string
@@ -2412,7 +2412,7 @@ export type OutputItemFileSearchCall = {
 
 --[=[
     @interface OutputItemWebSearchCall
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field type "web_search_call"
     @field id string
@@ -2422,7 +2422,7 @@ export type OutputItemWebSearchCall = { ["type"]: "web_search_call", id: string,
 
 --[=[
     @interface OpenAIResponsesNonStreamingResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field object "response"
@@ -2509,7 +2509,7 @@ export type OpenAIResponsesNonStreamingResponse = {
 
 --[=[
     @interface OpenResponsesCompletedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a response has completed successfully
     
     @field type "response.completed"
@@ -2524,7 +2524,7 @@ export type OpenResponsesCompletedEvent = {
 
 --[=[
     @interface OpenResponsesCreatedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a response is created
     
     @field type "response.created"
@@ -2539,7 +2539,7 @@ export type OpenResponsesCreatedEvent = {
 
 --[=[
     @interface OpenResponsesFailedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a response has failed
     
     @field type "response.failed"
@@ -2554,7 +2554,7 @@ export type OpenResponsesFailedEvent = {
 
 --[=[
     @interface OpenResponsesInProgressEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a response is in progress
     
     @field type "response.in_progress"
@@ -2569,7 +2569,7 @@ export type OpenResponsesInProgressEvent = {
 
 --[=[
     @interface OpenResponsesIncompleteEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a response is incomplete
     
     @field type "response.incomplete"
@@ -2584,7 +2584,7 @@ export type OpenResponsesIncompleteEvent = {
 
 --[=[
     @interface OpenResponsesOutputItemAddedEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when a new output item is added to the response
     
     @field type "response.output_item.added"
@@ -2608,7 +2608,7 @@ export type OpenResponsesOutputItemAddedEvent = {
 
 --[=[
     @interface OpenResponsesOutputItemDoneEvent
-    @within OpenRouter
+    @within OpenRouterTypes
     Event emitted when an output item is complete
     
     @field type "response.output_item.done"
@@ -2636,7 +2636,7 @@ export type ResponsesWebSearchCallOutput = OutputItemWebSearchCall
 
 --[=[
     @type OpenResponsesInput (string | {(OpenResponsesReasoning | OpenResponsesEasyInputMessage | OpenResponsesInputMessageItem | OpenResponsesFunctionToolCall | OpenResponsesFunctionCallOutput | ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)})
-    @within OpenRouter
+    @within OpenRouterTypes
     Input for a response request - can be a string or array of items
 ]=]
 export type OpenResponsesInput =
@@ -2659,7 +2659,7 @@ export type OpenResponsesInput =
 
 --[=[
     @interface OpenResponsesRequest
-    @within OpenRouter
+    @within OpenRouterTypes
     Request schema for Responses endpoint
     
     @field input OpenResponsesInput?
@@ -2754,7 +2754,7 @@ export type OpenResponsesRequest = {
 
 --[=[
     @type ResponsesOutputItem (ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)
-    @within OpenRouter
+    @within OpenRouterTypes
     An output item from the response
 ]=]
 export type ResponsesOutputItem = (
@@ -2768,7 +2768,7 @@ export type ResponsesOutputItem = (
 
 --[=[
     @type OpenResponsesNonStreamingResponse (OpenAIResponsesNonStreamingResponse & { output: {ResponsesOutputItem}?, usage: OpenResponsesUsage? })
-    @within OpenRouter
+    @within OpenRouterTypes
     Complete non-streaming response from the Responses API
 ]=]
 export type OpenResponsesNonStreamingResponse = (
@@ -2777,7 +2777,7 @@ export type OpenResponsesNonStreamingResponse = (
 
 --[=[
     @type OpenResponsesStreamEvent ((OpenResponsesCreatedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesInProgressEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesCompletedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesIncompleteEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesFailedEvent & { response: OpenResponsesNonStreamingResponse? }) | OpenResponsesErrorEvent | (OpenResponsesOutputItemAddedEvent & { item: ResponsesOutputItem? }) | (OpenResponsesOutputItemDoneEvent & { item: ResponsesOutputItem? }) | (OpenResponsesContentPartAddedEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | (OpenResponsesContentPartDoneEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | OpenResponsesTextDeltaEvent | OpenResponsesTextDoneEvent | OpenResponsesRefusalDeltaEvent | OpenResponsesRefusalDoneEvent | OpenResponsesOutputTextAnnotationAddedEvent | OpenResponsesFunctionCallArgumentsDeltaEvent | OpenResponsesFunctionCallArgumentsDoneEvent | OpenResponsesReasoningDeltaEvent | OpenResponsesReasoningDoneEvent | OpenResponsesReasoningSummaryPartAddedEvent | OpenResponsesReasoningSummaryPartDoneEvent | OpenResponsesReasoningSummaryTextDeltaEvent | OpenResponsesReasoningSummaryTextDoneEvent | OpenResponsesImageGenCallInProgress | OpenResponsesImageGenCallGenerating | OpenResponsesImageGenCallPartialImage | OpenResponsesImageGenCallCompleted)
-    @within OpenRouter
+    @within OpenRouterTypes
     Union of all possible event types emitted during response streaming
 ]=]
 export type OpenResponsesStreamEvent = (
@@ -2820,7 +2820,7 @@ export type __schema0 = ChatCompletionFinishReason | nil
 
 --[=[
     @interface ChatResponseChoice
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field finish_reason __schema0
     @field index number
@@ -2836,7 +2836,7 @@ export type ChatResponseChoice = {
 
 --[=[
     @interface ChatResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field id string
     @field choices {ChatResponseChoice}
@@ -2858,7 +2858,7 @@ export type ChatResponse = {
 
 --[=[
     @interface ChatStreamingChoice
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field delta ChatStreamingMessageChunk
     @field finish_reason __schema0
@@ -2874,7 +2874,7 @@ export type ChatStreamingChoice = {
 
 --[=[
     @interface ChatStreamingResponseChunk
-    @within OpenRouter
+    @within OpenRouterTypes
     
     @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: (string | nil)?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
 ]=]
@@ -2893,168 +2893,168 @@ export type ChatStreamingResponseChunk = {
 
 --[=[
     @type CreateResponses200Response OpenResponsesNonStreamingResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for createResponses
 ]=]
 export type CreateResponses200Response = OpenResponsesNonStreamingResponse
 
 --[=[
     @type CreateResponses400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createResponses
 ]=]
 export type CreateResponses400Response = BadRequestResponse
 
 --[=[
     @type CreateResponses401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createResponses
 ]=]
 export type CreateResponses401Response = UnauthorizedResponse
 
 --[=[
     @type CreateResponses402Response PaymentRequiredResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     402 Response type for createResponses
 ]=]
 export type CreateResponses402Response = PaymentRequiredResponse
 
 --[=[
     @type CreateResponses404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for createResponses
 ]=]
 export type CreateResponses404Response = NotFoundResponse
 
 --[=[
     @type CreateResponses408Response RequestTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     408 Response type for createResponses
 ]=]
 export type CreateResponses408Response = RequestTimeoutResponse
 
 --[=[
     @type CreateResponses413Response PayloadTooLargeResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     413 Response type for createResponses
 ]=]
 export type CreateResponses413Response = PayloadTooLargeResponse
 
 --[=[
     @type CreateResponses422Response UnprocessableEntityResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     422 Response type for createResponses
 ]=]
 export type CreateResponses422Response = UnprocessableEntityResponse
 
 --[=[
     @type CreateResponses429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for createResponses
 ]=]
 export type CreateResponses429Response = TooManyRequestsResponse
 
 --[=[
     @type CreateResponses500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createResponses
 ]=]
 export type CreateResponses500Response = InternalServerResponse
 
 --[=[
     @type CreateResponses502Response BadGatewayResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     502 Response type for createResponses
 ]=]
 export type CreateResponses502Response = BadGatewayResponse
 
 --[=[
     @type CreateResponses503Response ServiceUnavailableResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     503 Response type for createResponses
 ]=]
 export type CreateResponses503Response = ServiceUnavailableResponse
 
 --[=[
     @type CreateResponses524Response EdgeNetworkTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     524 Response type for createResponses
 ]=]
 export type CreateResponses524Response = EdgeNetworkTimeoutResponse
 
 --[=[
     @type CreateResponses529Response ProviderOverloadedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     529 Response type for createResponses
 ]=]
 export type CreateResponses529Response = ProviderOverloadedResponse
 
 --[=[
     @type GetUserActivity200Response { data: {ActivityItem} }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getUserActivity
 ]=]
 export type GetUserActivity200Response = { data: { ActivityItem } }
 
 --[=[
     @type GetUserActivity400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for getUserActivity
 ]=]
 export type GetUserActivity400Response = BadRequestResponse
 
 --[=[
     @type GetUserActivity401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getUserActivity
 ]=]
 export type GetUserActivity401Response = UnauthorizedResponse
 
 --[=[
     @type GetUserActivity403Response ForbiddenResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     403 Response type for getUserActivity
 ]=]
 export type GetUserActivity403Response = ForbiddenResponse
 
 --[=[
     @type GetUserActivity500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getUserActivity
 ]=]
 export type GetUserActivity500Response = InternalServerResponse
 
 --[=[
     @type GetCredits200Response {}
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getCredits
 ]=]
 export type GetCredits200Response = {}
 
 --[=[
     @type GetCredits401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getCredits
 ]=]
 export type GetCredits401Response = UnauthorizedResponse
 
 --[=[
     @type GetCredits403Response ForbiddenResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     403 Response type for getCredits
 ]=]
 export type GetCredits403Response = ForbiddenResponse
 
 --[=[
     @type GetCredits500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getCredits
 ]=]
 export type GetCredits500Response = InternalServerResponse
 
 --[=[
     @type CreateCoinbaseCharge200Response { data: { id: string, created_at: string, expires_at: string, web3_data: { transfer_intent: { call_data: { deadline: string, fee_amount: string, id: string, operator: string, prefix: string, recipient: string, recipient_amount: string, recipient_currency: string, refund_destination: string, signature: string }, metadata: { chain_id: number, contract_address: string, sender: string } } } } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge200Response = {
@@ -3084,35 +3084,35 @@ export type CreateCoinbaseCharge200Response = {
 
 --[=[
     @type CreateCoinbaseCharge400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge400Response = BadRequestResponse
 
 --[=[
     @type CreateCoinbaseCharge401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge401Response = UnauthorizedResponse
 
 --[=[
     @type CreateCoinbaseCharge429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge429Response = TooManyRequestsResponse
 
 --[=[
     @type CreateCoinbaseCharge500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge500Response = InternalServerResponse
 
 --[=[
     @type CreateEmbeddings200Response { id: string?, object: "list", data: {{ object: "embedding", embedding: ({number} | string), index: number? }}, model: string, usage: { prompt_tokens: number, total_tokens: number, cost: number? }? }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings200Response = {
@@ -3125,77 +3125,77 @@ export type CreateEmbeddings200Response = {
 
 --[=[
     @type CreateEmbeddings400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings400Response = BadRequestResponse
 
 --[=[
     @type CreateEmbeddings401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings401Response = UnauthorizedResponse
 
 --[=[
     @type CreateEmbeddings402Response PaymentRequiredResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     402 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings402Response = PaymentRequiredResponse
 
 --[=[
     @type CreateEmbeddings404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings404Response = NotFoundResponse
 
 --[=[
     @type CreateEmbeddings429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings429Response = TooManyRequestsResponse
 
 --[=[
     @type CreateEmbeddings500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings500Response = InternalServerResponse
 
 --[=[
     @type CreateEmbeddings502Response BadGatewayResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     502 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings502Response = BadGatewayResponse
 
 --[=[
     @type CreateEmbeddings503Response ServiceUnavailableResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     503 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings503Response = ServiceUnavailableResponse
 
 --[=[
     @type CreateEmbeddings524Response EdgeNetworkTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     524 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings524Response = EdgeNetworkTimeoutResponse
 
 --[=[
     @type CreateEmbeddings529Response ProviderOverloadedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     529 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings529Response = ProviderOverloadedResponse
 
 --[=[
     @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")? } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getGeneration
 ]=]
 export type GetGeneration200Response = {
@@ -3237,175 +3237,175 @@ export type GetGeneration200Response = {
 
 --[=[
     @type GetGeneration401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getGeneration
 ]=]
 export type GetGeneration401Response = UnauthorizedResponse
 
 --[=[
     @type GetGeneration402Response PaymentRequiredResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     402 Response type for getGeneration
 ]=]
 export type GetGeneration402Response = PaymentRequiredResponse
 
 --[=[
     @type GetGeneration404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for getGeneration
 ]=]
 export type GetGeneration404Response = NotFoundResponse
 
 --[=[
     @type GetGeneration429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for getGeneration
 ]=]
 export type GetGeneration429Response = TooManyRequestsResponse
 
 --[=[
     @type GetGeneration500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getGeneration
 ]=]
 export type GetGeneration500Response = InternalServerResponse
 
 --[=[
     @type GetGeneration502Response BadGatewayResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     502 Response type for getGeneration
 ]=]
 export type GetGeneration502Response = BadGatewayResponse
 
 --[=[
     @type GetGeneration524Response EdgeNetworkTimeoutResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     524 Response type for getGeneration
 ]=]
 export type GetGeneration524Response = EdgeNetworkTimeoutResponse
 
 --[=[
     @type GetGeneration529Response ProviderOverloadedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     529 Response type for getGeneration
 ]=]
 export type GetGeneration529Response = ProviderOverloadedResponse
 
 --[=[
     @type ListModelsCount200Response ModelsCountResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listModelsCount
 ]=]
 export type ListModelsCount200Response = ModelsCountResponse
 
 --[=[
     @type ListModelsCount500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listModelsCount
 ]=]
 export type ListModelsCount500Response = InternalServerResponse
 
 --[=[
     @type GetModels200Response ModelsListResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getModels
 ]=]
 export type GetModels200Response = ModelsListResponse
 
 --[=[
     @type GetModels400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for getModels
 ]=]
 export type GetModels400Response = BadRequestResponse
 
 --[=[
     @type GetModels500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getModels
 ]=]
 export type GetModels500Response = InternalServerResponse
 
 --[=[
     @type ListModelsEmbeddings200Response ModelsListResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings200Response = ModelsListResponse
 
 --[=[
     @type ListModelsEmbeddings400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings400Response = BadRequestResponse
 
 --[=[
     @type ListModelsEmbeddings500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings500Response = InternalServerResponse
 
 --[=[
     @type ListModelsUser200Response ModelsListResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listModelsUser
 ]=]
 export type ListModelsUser200Response = ModelsListResponse
 
 --[=[
     @type ListModelsUser401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for listModelsUser
 ]=]
 export type ListModelsUser401Response = UnauthorizedResponse
 
 --[=[
     @type ListModelsUser500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listModelsUser
 ]=]
 export type ListModelsUser500Response = InternalServerResponse
 
 --[=[
     @type ListEndpoints200Response { data: ListEndpointsResponse }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listEndpoints
 ]=]
 export type ListEndpoints200Response = { data: ListEndpointsResponse }
 
 --[=[
     @type ListEndpoints404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for listEndpoints
 ]=]
 export type ListEndpoints404Response = NotFoundResponse
 
 --[=[
     @type ListEndpoints500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listEndpoints
 ]=]
 export type ListEndpoints500Response = InternalServerResponse
 
 --[=[
     @type ListEndpointsZdr200Response { data: {PublicEndpoint} }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listEndpointsZdr
 ]=]
 export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
 
 --[=[
     @type ListEndpointsZdr500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listEndpointsZdr
 ]=]
 export type ListEndpointsZdr500Response = InternalServerResponse
 
 --[=[
     @type GetParameters200Response { data: { model: string, supported_parameters: {("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "web_search_options" | "verbosity")} } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getParameters
 ]=]
 export type GetParameters200Response = {
@@ -3443,28 +3443,28 @@ export type GetParameters200Response = {
 
 --[=[
     @type GetParameters401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getParameters
 ]=]
 export type GetParameters401Response = UnauthorizedResponse
 
 --[=[
     @type GetParameters404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for getParameters
 ]=]
 export type GetParameters404Response = NotFoundResponse
 
 --[=[
     @type GetParameters500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getParameters
 ]=]
 export type GetParameters500Response = InternalServerResponse
 
 --[=[
     @type ListProviders200Response { data: {{ name: string, slug: string, privacy_policy_url: string?, terms_of_service_url: string?, status_page_url: string? }} }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for listProviders
 ]=]
 export type ListProviders200Response = {
@@ -3481,14 +3481,14 @@ export type ListProviders200Response = {
 
 --[=[
     @type ListProviders500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for listProviders
 ]=]
 export type ListProviders500Response = InternalServerResponse
 
 --[=[
     @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }} }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for list
 ]=]
 export type List200Response = {
@@ -3518,28 +3518,28 @@ export type List200Response = {
 
 --[=[
     @type List401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for list
 ]=]
 export type List401Response = UnauthorizedResponse
 
 --[=[
     @type List429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for list
 ]=]
 export type List429Response = TooManyRequestsResponse
 
 --[=[
     @type List500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for list
 ]=]
 export type List500Response = InternalServerResponse
 
 --[=[
     @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }, key: string }
-    @within OpenRouter
+    @within OpenRouterTypes
     201 Response type for createKeys
 ]=]
 export type CreateKeys201Response = {
@@ -3568,35 +3568,35 @@ export type CreateKeys201Response = {
 
 --[=[
     @type CreateKeys400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createKeys
 ]=]
 export type CreateKeys400Response = BadRequestResponse
 
 --[=[
     @type CreateKeys401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createKeys
 ]=]
 export type CreateKeys401Response = UnauthorizedResponse
 
 --[=[
     @type CreateKeys429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for createKeys
 ]=]
 export type CreateKeys429Response = TooManyRequestsResponse
 
 --[=[
     @type CreateKeys500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createKeys
 ]=]
 export type CreateKeys500Response = InternalServerResponse
 
 --[=[
     @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getKey
 ]=]
 export type GetKey200Response = {
@@ -3624,70 +3624,70 @@ export type GetKey200Response = {
 
 --[=[
     @type GetKey401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getKey
 ]=]
 export type GetKey401Response = UnauthorizedResponse
 
 --[=[
     @type GetKey404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for getKey
 ]=]
 export type GetKey404Response = NotFoundResponse
 
 --[=[
     @type GetKey429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for getKey
 ]=]
 export type GetKey429Response = TooManyRequestsResponse
 
 --[=[
     @type GetKey500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getKey
 ]=]
 export type GetKey500Response = InternalServerResponse
 
 --[=[
     @type DeleteKeys200Response { deleted: boolean }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for deleteKeys
 ]=]
 export type DeleteKeys200Response = { deleted: boolean }
 
 --[=[
     @type DeleteKeys401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for deleteKeys
 ]=]
 export type DeleteKeys401Response = UnauthorizedResponse
 
 --[=[
     @type DeleteKeys404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for deleteKeys
 ]=]
 export type DeleteKeys404Response = NotFoundResponse
 
 --[=[
     @type DeleteKeys429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for deleteKeys
 ]=]
 export type DeleteKeys429Response = TooManyRequestsResponse
 
 --[=[
     @type DeleteKeys500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for deleteKeys
 ]=]
 export type DeleteKeys500Response = InternalServerResponse
 
 --[=[
     @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for updateKeys
 ]=]
 export type UpdateKeys200Response = {
@@ -3715,42 +3715,42 @@ export type UpdateKeys200Response = {
 
 --[=[
     @type UpdateKeys400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for updateKeys
 ]=]
 export type UpdateKeys400Response = BadRequestResponse
 
 --[=[
     @type UpdateKeys401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for updateKeys
 ]=]
 export type UpdateKeys401Response = UnauthorizedResponse
 
 --[=[
     @type UpdateKeys404Response NotFoundResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     404 Response type for updateKeys
 ]=]
 export type UpdateKeys404Response = NotFoundResponse
 
 --[=[
     @type UpdateKeys429Response TooManyRequestsResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for updateKeys
 ]=]
 export type UpdateKeys429Response = TooManyRequestsResponse
 
 --[=[
     @type UpdateKeys500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for updateKeys
 ]=]
 export type UpdateKeys500Response = InternalServerResponse
 
 --[=[
     @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, rate_limit: { requests: number, interval: string, note: string } } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for getCurrentKey
 ]=]
 export type GetCurrentKey200Response = {
@@ -3776,140 +3776,140 @@ export type GetCurrentKey200Response = {
 
 --[=[
     @type GetCurrentKey401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for getCurrentKey
 ]=]
 export type GetCurrentKey401Response = UnauthorizedResponse
 
 --[=[
     @type GetCurrentKey500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for getCurrentKey
 ]=]
 export type GetCurrentKey500Response = InternalServerResponse
 
 --[=[
     @type ExchangeAuthCodeForAPIKey200Response { key: string, user_id: string? }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey200Response = { key: string, user_id: string? }
 
 --[=[
     @type ExchangeAuthCodeForAPIKey400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey400Response = BadRequestResponse
 
 --[=[
     @type ExchangeAuthCodeForAPIKey403Response ForbiddenResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     403 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey403Response = ForbiddenResponse
 
 --[=[
     @type ExchangeAuthCodeForAPIKey500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey500Response = InternalServerResponse
 
 --[=[
     @type CreateAuthKeysCode200Response { data: { id: string, app_id: number, created_at: string } }
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode200Response = { data: { id: string, app_id: number, created_at: string } }
 
 --[=[
     @type CreateAuthKeysCode400Response BadRequestResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode400Response = BadRequestResponse
 
 --[=[
     @type CreateAuthKeysCode401Response UnauthorizedResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode401Response = UnauthorizedResponse
 
 --[=[
     @type CreateAuthKeysCode500Response InternalServerResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode500Response = InternalServerResponse
 
 --[=[
     @type SendChatCompletionRequest200Response ChatResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest200Response = ChatResponse
 
 --[=[
     @type SendChatCompletionRequest400Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest400Response = ChatError
 
 --[=[
     @type SendChatCompletionRequest401Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest401Response = ChatError
 
 --[=[
     @type SendChatCompletionRequest429Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest429Response = ChatError
 
 --[=[
     @type SendChatCompletionRequest500Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest500Response = ChatError
 
 --[=[
     @type CreateCompletions200Response CompletionResponse
-    @within OpenRouter
+    @within OpenRouterTypes
     200 Response type for createCompletions
 ]=]
 export type CreateCompletions200Response = CompletionResponse
 
 --[=[
     @type CreateCompletions400Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     400 Response type for createCompletions
 ]=]
 export type CreateCompletions400Response = ChatError
 
 --[=[
     @type CreateCompletions401Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     401 Response type for createCompletions
 ]=]
 export type CreateCompletions401Response = ChatError
 
 --[=[
     @type CreateCompletions429Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     429 Response type for createCompletions
 ]=]
 export type CreateCompletions429Response = ChatError
 
 --[=[
     @type CreateCompletions500Response ChatError
-    @within OpenRouter
+    @within OpenRouterTypes
     500 Response type for createCompletions
 ]=]
 export type CreateCompletions500Response = ChatError

@@ -128,7 +128,7 @@ def format_simple_type_doc_comment(
     """
     if not description:
         return ""
-    return f"--[=[\n    @type {type_name} {type}\n    @within OpenRouter\n    {description}\n]=]"
+    return f"--[=[\n    @type {type_name} {type}\n    @within OpenRouterTypes\n    {description}\n]=]"
 
 
 def format_table_type_doc_comment(
@@ -145,7 +145,7 @@ def format_table_type_doc_comment(
     Returns:
         Formatted doc comment string
     """
-    lines = ["--[=[", f"@interface {name}", "@within OpenRouter"]
+    lines = ["--[=[", f"@interface {name}", "@within OpenRouterTypes"]
 
     if description:
         lines.append(description)

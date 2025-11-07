@@ -148,19 +148,21 @@ class MethodGenerator:
                 param, "param_in", getattr(param, "in_", "query")
             )  # Try param_in or in_
             param_required = getattr(param, "required", False)
-            param_type = self.type_converter.convert_parameter_type(param)
+            raw_param_type = self.type_converter.convert_parameter_type(param)
 
             # Prefix custom types with Types.
-            param_type = self._prefix_types_with_namespace(param_type)
+            param_type = self._prefix_types_with_namespace(raw_param_type)
 
             # Make optional parameters nullable
             if not param_required and not param_type.endswith("?"):
                 param_type += "?"
+                raw_param_type += "?"
 
             param_info.append(
                 {
                     "name": param_name,
                     "type": param_type,
+                    "raw_type": raw_param_type,
                     "in": param_in,
                     "required": param_required,
                     "description": getattr(param, "description", None)
@@ -173,13 +175,14 @@ class MethodGenerator:
             request_schema = operation.request_body.get("schema")
             if request_schema:
                 # Get the type for the request body
-                body_type = self.type_converter.convert_schema(request_schema)
+                raw_body_type = self.type_converter.convert_schema(request_schema)
                 # Prefix custom types with Types.
-                body_type = self._prefix_types_with_namespace(body_type)
+                body_type = self._prefix_types_with_namespace(raw_body_type)
                 param_info.append(
                     {
                         "name": "params",
                         "type": body_type,
+                        "raw_type": raw_body_type,
                         "in": "body",
                         "required": True,
                         "description": "Request body parameters",
@@ -232,6 +235,7 @@ class MethodGenerator:
         Returns:
             Formatted doc string
         """
+        raw_return_type = return_type.replace("Types.", "")
         linebreak = "\n    "
         doc_string = f"""
 --[=[
@@ -242,8 +246,8 @@ class MethodGenerator:
     @method {operation.operation_id}
     @within OpenRouter
     {linebreak.join([f"@tag {tag}" for tag in operation.tags])}
-    {linebreak+linebreak.join([f"@param {p['name']} {p['type']} -- {p['description']}" for p in param_info]) if param_info else ""}
-    @return {return_type}
+    {linebreak+linebreak.join([f"@param {p['name']} {p['raw_type']} -- {p['description']}" for p in param_info]) if param_info else ""}
+    @return {raw_return_type}
 ]=]
 """.strip()
         return doc_string

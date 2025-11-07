@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T02:50:02.570515Z (generator v1.0.0)
+-- Last generated: 2025-11-07T03:02:28.551447Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -11,6 +11,8 @@
 local HttpService = game:GetService("HttpService")
 local Types = require(script.types)
 
+--- @class OpenRouter
+--- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
 local OpenRouter = {}
 OpenRouter.__index = OpenRouter
 
@@ -82,8 +84,8 @@ end
     @within OpenRouter
     @tag beta.responses
     
-    @param params Types.OpenResponsesRequest -- Request body parameters
-    @return Types.Result<Types.CreateResponses200Response, Types.CreateResponses400Response | Types.CreateResponses401Response | Types.CreateResponses402Response | Types.CreateResponses404Response | Types.CreateResponses408Response | Types.CreateResponses413Response | Types.CreateResponses422Response | Types.CreateResponses429Response | Types.CreateResponses500Response | Types.CreateResponses502Response | Types.CreateResponses503Response | Types.CreateResponses524Response | Types.CreateResponses529Response>
+    @param params OpenResponsesRequest -- Request body parameters
+    @return Result<CreateResponses200Response, CreateResponses400Response | CreateResponses401Response | CreateResponses402Response | CreateResponses404Response | CreateResponses408Response | CreateResponses413Response | CreateResponses422Response | CreateResponses429Response | CreateResponses500Response | CreateResponses502Response | CreateResponses503Response | CreateResponses524Response | CreateResponses529Response>
 ]=]
 function OpenRouter.createResponses(
 	self: OpenRouter,
@@ -123,7 +125,7 @@ end
     @tag Analytics
     
     @param date string? -- Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
-    @return Types.Result<Types.GetUserActivity200Response, Types.GetUserActivity400Response | Types.GetUserActivity401Response | Types.GetUserActivity403Response | Types.GetUserActivity500Response>
+    @return Result<GetUserActivity200Response, GetUserActivity400Response | GetUserActivity401Response | GetUserActivity403Response | GetUserActivity500Response>
 ]=]
 function OpenRouter.getUserActivity(
 	self: OpenRouter,
@@ -156,7 +158,7 @@ end
     @within OpenRouter
     @tag Credits
     
-    @return Types.Result<Types.GetCredits200Response, Types.GetCredits401Response | Types.GetCredits403Response | Types.GetCredits500Response>
+    @return Result<GetCredits200Response, GetCredits401Response | GetCredits403Response | GetCredits500Response>
 ]=]
 function OpenRouter.getCredits(self: OpenRouter): Types.Result<
 	Types.GetCredits200Response,
@@ -174,8 +176,8 @@ end
     @within OpenRouter
     @tag Credits
     
-    @param params Types.CreateChargeRequest -- Request body parameters
-    @return Types.Result<Types.CreateCoinbaseCharge200Response, Types.CreateCoinbaseCharge400Response | Types.CreateCoinbaseCharge401Response | Types.CreateCoinbaseCharge429Response | Types.CreateCoinbaseCharge500Response>
+    @param params CreateChargeRequest -- Request body parameters
+    @return Result<CreateCoinbaseCharge200Response, CreateCoinbaseCharge400Response | CreateCoinbaseCharge401Response | CreateCoinbaseCharge429Response | CreateCoinbaseCharge500Response>
 ]=]
 function OpenRouter.createCoinbaseCharge(
 	self: OpenRouter,
@@ -205,8 +207,8 @@ end
     @within OpenRouter
     @tag Embeddings
     
-    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(Types.ProviderName | string)}?, only: {(Types.ProviderName | string)}?, ignore: {(Types.ProviderName | string)}?, quantizations: {Types.Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: Types.BigNumberUnion?, completion: Types.BigNumberUnion?, image: Types.BigNumberUnion?, audio: Types.BigNumberUnion?, request: Types.BigNumberUnion? }?, experimental: {}? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
-    @return Types.Result<Types.CreateEmbeddings200Response, Types.CreateEmbeddings400Response | Types.CreateEmbeddings401Response | Types.CreateEmbeddings402Response | Types.CreateEmbeddings404Response | Types.CreateEmbeddings429Response | Types.CreateEmbeddings500Response | Types.CreateEmbeddings502Response | Types.CreateEmbeddings503Response | Types.CreateEmbeddings524Response | Types.CreateEmbeddings529Response>
+    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, experimental: {}? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
+    @return Result<CreateEmbeddings200Response, CreateEmbeddings400Response | CreateEmbeddings401Response | CreateEmbeddings402Response | CreateEmbeddings404Response | CreateEmbeddings429Response | CreateEmbeddings500Response | CreateEmbeddings502Response | CreateEmbeddings503Response | CreateEmbeddings524Response | CreateEmbeddings529Response>
 ]=]
 function OpenRouter.createEmbeddings(
 	self: OpenRouter,
@@ -267,7 +269,7 @@ end
     @tag Generations
     
     @param id string -- No description provided
-    @return Types.Result<Types.GetGeneration200Response, Types.GetGeneration401Response | Types.GetGeneration402Response | Types.GetGeneration404Response | Types.GetGeneration429Response | Types.GetGeneration500Response | Types.GetGeneration502Response | Types.GetGeneration524Response | Types.GetGeneration529Response>
+    @return Result<GetGeneration200Response, GetGeneration401Response | GetGeneration402Response | GetGeneration404Response | GetGeneration429Response | GetGeneration500Response | GetGeneration502Response | GetGeneration524Response | GetGeneration529Response>
 ]=]
 function OpenRouter.getGeneration(
 	self: OpenRouter,
@@ -304,7 +306,7 @@ end
     @within OpenRouter
     @tag Models
     
-    @return Types.Result<Types.ListModelsCount200Response, Types.ListModelsCount500Response>
+    @return Result<ListModelsCount200Response, ListModelsCount500Response>
 ]=]
 function OpenRouter.listModelsCount(
 	self: OpenRouter
@@ -325,7 +327,7 @@ end
     @param supported_parameters string? -- No description provided
     @param use_rss string? -- No description provided
     @param use_rss_chat_links string? -- No description provided
-    @return Types.Result<Types.GetModels200Response, Types.GetModels400Response | Types.GetModels500Response>
+    @return Result<GetModels200Response, GetModels400Response | GetModels500Response>
 ]=]
 function OpenRouter.getModels(
 	self: OpenRouter,
@@ -355,7 +357,7 @@ end
     @within OpenRouter
     @tag Models
     
-    @return Types.Result<Types.ListModelsEmbeddings200Response, Types.ListModelsEmbeddings400Response | Types.ListModelsEmbeddings500Response>
+    @return Result<ListModelsEmbeddings200Response, ListModelsEmbeddings400Response | ListModelsEmbeddings500Response>
 ]=]
 function OpenRouter.listModelsEmbeddings(self: OpenRouter): Types.Result<
 	Types.ListModelsEmbeddings200Response,
@@ -373,7 +375,7 @@ end
     @within OpenRouter
     @tag Models
     
-    @return Types.Result<Types.ListModelsUser200Response, Types.ListModelsUser401Response | Types.ListModelsUser500Response>
+    @return Result<ListModelsUser200Response, ListModelsUser401Response | ListModelsUser500Response>
 ]=]
 function OpenRouter.listModelsUser(self: OpenRouter): Types.Result<
 	Types.ListModelsUser200Response,
@@ -399,7 +401,7 @@ end
     
     @param author string -- No description provided
     @param slug string -- No description provided
-    @return Types.Result<Types.ListEndpoints200Response, Types.ListEndpoints404Response | Types.ListEndpoints500Response>
+    @return Result<ListEndpoints200Response, ListEndpoints404Response | ListEndpoints500Response>
 ]=]
 function OpenRouter.listEndpoints(
 	self: OpenRouter,
@@ -421,7 +423,7 @@ end
     @within OpenRouter
     @tag Endpoints
     
-    @return Types.Result<Types.ListEndpointsZdr200Response, Types.ListEndpointsZdr500Response>
+    @return Result<ListEndpointsZdr200Response, ListEndpointsZdr500Response>
 ]=]
 function OpenRouter.listEndpointsZdr(
 	self: OpenRouter
@@ -447,7 +449,7 @@ end
     @param author string -- No description provided
     @param slug string -- No description provided
     @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "AtlasCloud" | "Atoma" | "Avian" | "Azure" | "BaseTen" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "CrofAI" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Enfer" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Kluster" | "Lambda" | "Liquid" | "Mancer 2" | "Meta" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Nineteen" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Ubicloud" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
-    @return Types.Result<Types.GetParameters200Response, Types.GetParameters401Response | Types.GetParameters404Response | Types.GetParameters500Response>
+    @return Result<GetParameters200Response, GetParameters401Response | GetParameters404Response | GetParameters500Response>
 ]=]
 function OpenRouter.getParameters(
 	self: OpenRouter,
@@ -548,7 +550,7 @@ end
     @within OpenRouter
     @tag Providers
     
-    @return Types.Result<Types.ListProviders200Response, Types.ListProviders500Response>
+    @return Result<ListProviders200Response, ListProviders500Response>
 ]=]
 function OpenRouter.listProviders(
 	self: OpenRouter
@@ -573,7 +575,7 @@ end
     
     @param include_disabled string? -- Whether to include disabled API keys in the response
     @param offset string? -- Number of API keys to skip for pagination
-    @return Types.Result<Types.List200Response, Types.List401Response | Types.List429Response | Types.List500Response>
+    @return Result<List200Response, List401Response | List429Response | List500Response>
 ]=]
 function OpenRouter.list(
 	self: OpenRouter,
@@ -600,7 +602,7 @@ end
     @tag API Keys
     
     @param params { name: string, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean? } -- Request body parameters
-    @return Types.Result<Types.CreateKeys201Response, Types.CreateKeys400Response | Types.CreateKeys401Response | Types.CreateKeys429Response | Types.CreateKeys500Response>
+    @return Result<CreateKeys201Response, CreateKeys400Response | CreateKeys401Response | CreateKeys429Response | CreateKeys500Response>
 ]=]
 function OpenRouter.createKeys(
 	self: OpenRouter,
@@ -630,7 +632,7 @@ end
     @tag API Keys
     
     @param hash string -- The hash identifier of the API key to retrieve
-    @return Types.Result<Types.GetKey200Response, Types.GetKey401Response | Types.GetKey404Response | Types.GetKey429Response | Types.GetKey500Response>
+    @return Result<GetKey200Response, GetKey401Response | GetKey404Response | GetKey429Response | GetKey500Response>
 ]=]
 function OpenRouter.getKey(
 	self: OpenRouter,
@@ -652,7 +654,7 @@ end
     @tag API Keys
     
     @param hash string -- The hash identifier of the API key to delete
-    @return Types.Result<Types.DeleteKeys200Response, Types.DeleteKeys401Response | Types.DeleteKeys404Response | Types.DeleteKeys429Response | Types.DeleteKeys500Response>
+    @return Result<DeleteKeys200Response, DeleteKeys401Response | DeleteKeys404Response | DeleteKeys429Response | DeleteKeys500Response>
 ]=]
 function OpenRouter.deleteKeys(
 	self: OpenRouter,
@@ -678,7 +680,7 @@ end
     
     @param hash string -- The hash identifier of the API key to update
     @param params { name: string?, disabled: boolean?, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean? } -- Request body parameters
-    @return Types.Result<Types.UpdateKeys200Response, Types.UpdateKeys400Response | Types.UpdateKeys401Response | Types.UpdateKeys404Response | Types.UpdateKeys429Response | Types.UpdateKeys500Response>
+    @return Result<UpdateKeys200Response, UpdateKeys400Response | UpdateKeys401Response | UpdateKeys404Response | UpdateKeys429Response | UpdateKeys500Response>
 ]=]
 function OpenRouter.updateKeys(
 	self: OpenRouter,
@@ -710,7 +712,7 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @return Types.Result<Types.GetCurrentKey200Response, Types.GetCurrentKey401Response | Types.GetCurrentKey500Response>
+    @return Result<GetCurrentKey200Response, GetCurrentKey401Response | GetCurrentKey500Response>
 ]=]
 function OpenRouter.getCurrentKey(self: OpenRouter): Types.Result<
 	Types.GetCurrentKey200Response,
@@ -735,7 +737,7 @@ end
     @tag OAuth
     
     @param params { code: string, code_verifier: string?, code_challenge_method: ("S256" | "plain")? } -- Request body parameters
-    @return Types.Result<Types.ExchangeAuthCodeForAPIKey200Response, Types.ExchangeAuthCodeForAPIKey400Response | Types.ExchangeAuthCodeForAPIKey403Response | Types.ExchangeAuthCodeForAPIKey500Response>
+    @return Result<ExchangeAuthCodeForAPIKey200Response, ExchangeAuthCodeForAPIKey400Response | ExchangeAuthCodeForAPIKey403Response | ExchangeAuthCodeForAPIKey500Response>
 ]=]
 function OpenRouter.exchangeAuthCodeForAPIKey(
 	self: OpenRouter,
@@ -763,7 +765,7 @@ end
     @tag OAuth
     
     @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number? } -- Request body parameters
-    @return Types.Result<Types.CreateAuthKeysCode200Response, Types.CreateAuthKeysCode400Response | Types.CreateAuthKeysCode401Response | Types.CreateAuthKeysCode500Response>
+    @return Result<CreateAuthKeysCode200Response, CreateAuthKeysCode400Response | CreateAuthKeysCode401Response | CreateAuthKeysCode500Response>
 ]=]
 function OpenRouter.createAuthKeysCode(
 	self: OpenRouter,
@@ -795,8 +797,8 @@ end
     @within OpenRouter
     @tag Chat
     
-    @param params Types.ChatGenerationParams -- Request body parameters
-    @return Types.Result<Types.SendChatCompletionRequest200Response, Types.SendChatCompletionRequest400Response | Types.SendChatCompletionRequest401Response | Types.SendChatCompletionRequest429Response | Types.SendChatCompletionRequest500Response>
+    @param params ChatGenerationParams -- Request body parameters
+    @return Result<SendChatCompletionRequest200Response, SendChatCompletionRequest400Response | SendChatCompletionRequest401Response | SendChatCompletionRequest429Response | SendChatCompletionRequest500Response>
 ]=]
 function OpenRouter.sendChatCompletionRequest(
 	self: OpenRouter,
@@ -826,8 +828,8 @@ end
     @within OpenRouter
     @tag Completions
     
-    @param params Types.CompletionCreateParams -- Request body parameters
-    @return Types.Result<Types.CreateCompletions200Response, Types.CreateCompletions400Response | Types.CreateCompletions401Response | Types.CreateCompletions429Response | Types.CreateCompletions500Response>
+    @param params CompletionCreateParams -- Request body parameters
+    @return Result<CreateCompletions200Response, CreateCompletions400Response | CreateCompletions401Response | CreateCompletions429Response | CreateCompletions500Response>
 ]=]
 function OpenRouter.createCompletions(
 	self: OpenRouter,
