@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T03:02:28.543940Z (generator v1.0.0)
+-- Last generated: 2025-11-07T03:27:57.255104Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -1366,7 +1366,7 @@ export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "b
     @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
     @field provider_name ProviderName
     @field tag string
-    @field quantization (Quantization & any)?
+    @field quantization Quantization?
     @field max_completion_tokens number?
     @field max_prompt_tokens number?
     @field supported_parameters {Parameter}
@@ -1394,7 +1394,7 @@ export type PublicEndpoint = {
 	},
 	provider_name: ProviderName,
 	tag: string,
-	quantization: (Quantization & any)?,
+	quantization: Quantization?,
 	max_completion_tokens: number?,
 	max_prompt_tokens: number?,
 	supported_parameters: { Parameter },
@@ -1412,7 +1412,7 @@ export type PublicEndpoint = {
     @field name string -- Display name of the model; (Ex: "GPT-4")
     @field created number -- Unix timestamp of when the model was created; (Ex: 1692901234)
     @field description string -- Description of the model; (Ex: "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.")
-    @field architecture (ModelArchitecture & { tokenizer: (ModelGroup & any)?, instruct_type: InstructType, modality: string?, input_modalities: {InputModality}, output_modalities: {OutputModality} })
+    @field architecture (ModelArchitecture & { tokenizer: ModelGroup?, instruct_type: InstructType, modality: string?, input_modalities: {InputModality}, output_modalities: {OutputModality} })
     @field endpoints {PublicEndpoint} -- List of available endpoints for this model
 ]=]
 export type ListEndpointsResponse = {
@@ -1421,7 +1421,7 @@ export type ListEndpointsResponse = {
 	created: number,
 	description: string,
 	architecture: ModelArchitecture & {
-		tokenizer: (ModelGroup & any)?,
+		tokenizer: ModelGroup?,
 		instruct_type: InstructType,
 		modality: string?,
 		input_modalities: { InputModality },
@@ -2196,34 +2196,31 @@ export type OutputMessage = {
 	content: { ResponseOutputText | OpenAIResponsesRefusalContent },
 }
 
-export type OpenAIResponsesInput =
-	string
-	| {
-		{
-			["type"]: "message"?,
-			role: "user" | "system" | "assistant" | "developer",
-			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
-		} | {
-			id: string,
-			["type"]: "message"?,
-			role: "user" | "system" | "developer",
-			content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
-		} | {
-			["type"]: "function_call_output",
-			id: string,
-			call_id: string,
-			output: string,
-			status: ToolCallStatus?,
-		} | {
-			["type"]: "function_call",
-			call_id: string,
-			name: string,
-			arguments: string,
-			id: string?,
-			status: ToolCallStatus?,
-		} | OutputItemImageGenerationCall | OutputMessage
-	}
-	| any?
+export type OpenAIResponsesInput = (string | {
+	{
+		["type"]: "message"?,
+		role: "user" | "system" | "assistant" | "developer",
+		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
+	} | {
+		id: string,
+		["type"]: "message"?,
+		role: "user" | "system" | "developer",
+		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
+	} | {
+		["type"]: "function_call_output",
+		id: string,
+		call_id: string,
+		output: string,
+		status: ToolCallStatus?,
+	} | {
+		["type"]: "function_call",
+		call_id: string,
+		name: string,
+		arguments: string,
+		id: string?,
+		status: ToolCallStatus?,
+	} | OutputItemImageGenerationCall | OutputMessage
+})?
 
 --[=[
     @type ResponsesOutputMessage OutputMessage
@@ -2684,7 +2681,7 @@ export type OpenResponsesInput =
     @field safety_identifier string?
     @field store boolean?
     @field service_tier (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?
-    @field truncation (OpenAIResponsesTruncation & any)?
+    @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
     @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, experimental: {}? }? -- When multiple model providers are available, optionally indicate your routing preference.
     @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? })}? -- Plugins you want to enable for this request, including their settings.
@@ -2721,7 +2718,7 @@ export type OpenResponsesRequest = {
 	safety_identifier: string?,
 	store: boolean?,
 	service_tier: (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?,
-	truncation: (OpenAIResponsesTruncation & any)?,
+	truncation: OpenAIResponsesTruncation?,
 	stream: boolean?,
 	provider: {
 		allow_fallbacks: boolean?,

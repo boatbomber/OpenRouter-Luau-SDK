@@ -213,6 +213,28 @@ class TypeConverter:
 
         types = []
         for sub_schema in schemas:
+            # Check if this schema only contains metadata properties (no actual type info)
+            # Common pattern in OpenAPI: anyOf with [type schemas..., {nullable: true}]
+            has_type_info = (
+                (hasattr(sub_schema, "type") and sub_schema.type)
+                or (hasattr(sub_schema, "ref") and sub_schema.ref)
+                or (hasattr(sub_schema, "properties") and sub_schema.properties)
+                or (hasattr(sub_schema, "allOf") and sub_schema.allOf)
+                or (hasattr(sub_schema, "anyOf") and sub_schema.anyOf)
+                or (hasattr(sub_schema, "oneOf") and sub_schema.oneOf)
+                or (hasattr(sub_schema, "items") and sub_schema.items)
+                or (hasattr(sub_schema, "enum") and sub_schema.enum)
+                or (hasattr(sub_schema, "additionalProperties") and sub_schema.additionalProperties is not None)
+            )
+
+            if not has_type_info:
+                # This schema has no type information, only metadata like example, description, nullable, etc.
+                # Check if it has nullable flag
+                if hasattr(sub_schema, "nullable") and sub_schema.nullable:
+                    nullable = True
+                # Skip this schema as it's just metadata
+                continue
+
             # Don't propagate nullable to union members
             type_str = self.convert_schema(sub_schema, nullable=False)
             if type_str and type_str not in types:
@@ -245,6 +267,28 @@ class TypeConverter:
         has_nullable_part = False
 
         for sub_schema in schemas:
+            # Check if this schema only contains metadata properties (no actual type info)
+            # Common pattern in OpenAPI: allOf with [$ref, {example: ...}] or [$ref, {nullable: true}]
+            has_type_info = (
+                (hasattr(sub_schema, "type") and sub_schema.type)
+                or (hasattr(sub_schema, "ref") and sub_schema.ref)
+                or (hasattr(sub_schema, "properties") and sub_schema.properties)
+                or (hasattr(sub_schema, "allOf") and sub_schema.allOf)
+                or (hasattr(sub_schema, "anyOf") and sub_schema.anyOf)
+                or (hasattr(sub_schema, "oneOf") and sub_schema.oneOf)
+                or (hasattr(sub_schema, "items") and sub_schema.items)
+                or (hasattr(sub_schema, "enum") and sub_schema.enum)
+                or (hasattr(sub_schema, "additionalProperties") and sub_schema.additionalProperties is not None)
+            )
+
+            if not has_type_info:
+                # This schema has no type information, only metadata like example, description, etc.
+                # Check if it has nullable flag
+                if hasattr(sub_schema, "nullable") and sub_schema.nullable:
+                    has_nullable_part = True
+                # Skip this schema as it's just metadata
+                continue
+
             # Try to merge objects
             if hasattr(sub_schema, "type") and sub_schema.type == "object":
                 if hasattr(sub_schema, "properties") and sub_schema.properties:
