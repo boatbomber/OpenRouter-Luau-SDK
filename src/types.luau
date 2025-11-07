@@ -1,13 +1,16 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T02:07:39.822360Z (generator v1.0.0)
+-- Last generated: 2025-11-07T02:50:02.562500Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
   OpenAI-compatible Chat Completions and Completions API with additional
   OpenRouter features
 ]]
+
+--- @class OpenRouter
+--- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
 
 export type ResultOk<T> = { type: "ok", value: T } -- Request succeeded
 export type ResultErr<E> = { type: "err", error: E } -- Request responded with an error
@@ -89,7 +92,7 @@ export type BadRequestResponseErrorData = { code: number, message: string, metad
 export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: string? }
 
 --[=[
-    @type BigNumberUnion
+    @type BigNumberUnion (number | string)
     @within OpenRouter
     A value in string or number format that is a large number
 ]=]
@@ -434,7 +437,7 @@ export type ImageGenerationStatus = "in_progress" | "completed" | "generating" |
 export type InputModality = "text" | "image" | "file" | "audio" | "video"
 
 --[=[
-    @type InstructType
+    @type InstructType ("none" | "airoboros" | "alpaca" | "alpaca-modif" | "chatml" | "claude" | "code-llama" | "gemma" | "llama2" | "llama3" | "mistral" | "nemotron" | "neural" | "openchat" | "phi3" | "rwkv" | "vicuna" | "zephyr" | "deepseek-r1" | "deepseek-v3.1" | "qwq" | "qwen3")?
     @within OpenRouter
     Instruction format type
 ]=]
@@ -501,7 +504,7 @@ export type JSONSchemaConfig = {
 }
 
 --[=[
-    @type ModelGroup
+    @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
     @within OpenRouter
     Tokenizer type used by the model
 ]=]
@@ -797,7 +800,7 @@ export type OpenAIResponsesUsage = {
 }
 
 --[=[
-    @type OpenResponsesErrorEvent
+    @type OpenResponsesErrorEvent OpenAIResponsesErrorEvent
     @within OpenRouter
     Event emitted when an error occurs during streaming
 ]=]
@@ -863,56 +866,56 @@ export type OpenResponsesFunctionTool = {
 }
 
 --[=[
-    @type OpenResponsesImageGenCallCompleted
+    @type OpenResponsesImageGenCallCompleted OpenAIResponsesImageGenCallCompleted
     @within OpenRouter
     Image generation call completed
 ]=]
 export type OpenResponsesImageGenCallCompleted = OpenAIResponsesImageGenCallCompleted
 
 --[=[
-    @type OpenResponsesImageGenCallGenerating
+    @type OpenResponsesImageGenCallGenerating OpenAIResponsesImageGenCallGenerating
     @within OpenRouter
     Image generation call is generating
 ]=]
 export type OpenResponsesImageGenCallGenerating = OpenAIResponsesImageGenCallGenerating
 
 --[=[
-    @type OpenResponsesImageGenCallInProgress
+    @type OpenResponsesImageGenCallInProgress OpenAIResponsesImageGenCallInProgress
     @within OpenRouter
     Image generation call in progress
 ]=]
 export type OpenResponsesImageGenCallInProgress = OpenAIResponsesImageGenCallInProgress
 
 --[=[
-    @type OpenResponsesImageGenCallPartialImage
+    @type OpenResponsesImageGenCallPartialImage OpenAIResponsesImageGenCallPartialImage
     @within OpenRouter
     Image generation call with partial image
 ]=]
 export type OpenResponsesImageGenCallPartialImage = OpenAIResponsesImageGenCallPartialImage
 
 --[=[
-    @type OpenResponsesReasoningDeltaEvent
+    @type OpenResponsesReasoningDeltaEvent OpenAIResponsesReasoningDeltaEvent
     @within OpenRouter
     Event emitted when reasoning text delta is streamed
 ]=]
 export type OpenResponsesReasoningDeltaEvent = OpenAIResponsesReasoningDeltaEvent
 
 --[=[
-    @type OpenResponsesReasoningDoneEvent
+    @type OpenResponsesReasoningDoneEvent OpenAIResponsesReasoningDoneEvent
     @within OpenRouter
     Event emitted when reasoning text streaming is complete
 ]=]
 export type OpenResponsesReasoningDoneEvent = OpenAIResponsesReasoningDoneEvent
 
 --[=[
-    @type OpenResponsesReasoningSummaryTextDeltaEvent
+    @type OpenResponsesReasoningSummaryTextDeltaEvent OpenAIResponsesReasoningSummaryTextDeltaEvent
     @within OpenRouter
     Event emitted when reasoning summary text delta is streamed
 ]=]
 export type OpenResponsesReasoningSummaryTextDeltaEvent = OpenAIResponsesReasoningSummaryTextDeltaEvent
 
 --[=[
-    @type OpenResponsesReasoningSummaryTextDoneEvent
+    @type OpenResponsesReasoningSummaryTextDoneEvent OpenAIResponsesReasoningSummaryTextDoneEvent
     @within OpenRouter
     Event emitted when reasoning summary text streaming is complete
 ]=]
@@ -961,7 +964,7 @@ export type OpenResponsesRefusalDoneEvent = {
 }
 
 --[=[
-    @type OpenResponsesRequestMetadata
+    @type OpenResponsesRequestMetadata { [string]: string }?
     @within OpenRouter
     Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
 ]=]
@@ -1035,7 +1038,7 @@ export type OpenResponsesTextDoneEvent = {
 }
 
 --[=[
-    @type OpenResponsesUsage
+    @type OpenResponsesUsage (OpenAIResponsesUsage & { cost: number?, is_byok: boolean?, cost_details: { upstream_inference_cost: number?, upstream_inference_input_cost: number, upstream_inference_output_cost: number }? })
     @within OpenRouter
     Token usage information for the response
 ]=]
@@ -1458,7 +1461,7 @@ export type OpenAIResponsesReasoningSummaryPartAddedEvent = {
 }
 
 --[=[
-    @type OpenResponsesReasoningSummaryPartAddedEvent
+    @type OpenResponsesReasoningSummaryPartAddedEvent OpenAIResponsesReasoningSummaryPartAddedEvent
     @within OpenRouter
     Event emitted when a reasoning summary part is added
 ]=]
@@ -1500,7 +1503,7 @@ export type OpenAIResponsesReasoningConfig = {
 }?
 
 --[=[
-    @type OpenResponsesReasoningConfig
+    @type OpenResponsesReasoningConfig (OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? })
     @within OpenRouter
     Configuration for reasoning mode in the response
 ]=]
@@ -1536,7 +1539,7 @@ export type OutputItemReasoning = {
 }
 
 --[=[
-    @type OpenResponsesReasoning
+    @type OpenResponsesReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1")? })
     @within OpenRouter
     Reasoning output item with signature and format extensions
 ]=]
@@ -1796,7 +1799,7 @@ export type ResponsesFormatTextJSONSchemaConfig = {
 }
 
 --[=[
-    @type ResponseFormatTextConfig
+    @type ResponseFormatTextConfig (ResponsesFormatText | ResponsesFormatJSONObject | ResponsesFormatTextJSONSchemaConfig)
     @within OpenRouter
     Text response format configuration
 ]=]
@@ -1815,7 +1818,7 @@ export type ResponseFormatTextConfig = (
 export type ResponseTextConfig = { format: ResponseFormatTextConfig?, verbosity: ("high" | "low" | "medium")? }
 
 --[=[
-    @type OpenResponsesResponseText
+    @type OpenResponsesResponseText ResponseTextConfig
     @within OpenRouter
     Text output configuration including format and verbosity
 ]=]
@@ -1847,7 +1850,7 @@ export type ResponsesOutputItemReasoning = {
 }
 
 --[=[
-    @type ResponsesSearchContextSize
+    @type ResponsesSearchContextSize ("low" | "medium" | "high")
     @within OpenRouter
     Size of the search context for web search tools
 ]=]
@@ -2071,7 +2074,7 @@ export type Model = {
 }
 
 --[=[
-    @type ModelsListResponseData
+    @type ModelsListResponseData {Model}
     @within OpenRouter
     List of available models
 ]=]
@@ -2223,7 +2226,7 @@ export type OpenAIResponsesInput =
 	| any?
 
 --[=[
-    @type ResponsesOutputMessage
+    @type ResponsesOutputMessage OutputMessage
     @within OpenRouter
     An output message item
 ]=]
@@ -2632,7 +2635,7 @@ export type ResponsesOutputItemFileSearchCall = OutputItemFileSearchCall
 export type ResponsesWebSearchCallOutput = OutputItemWebSearchCall
 
 --[=[
-    @type OpenResponsesInput
+    @type OpenResponsesInput (string | {(OpenResponsesReasoning | OpenResponsesEasyInputMessage | OpenResponsesInputMessageItem | OpenResponsesFunctionToolCall | OpenResponsesFunctionCallOutput | ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)})
     @within OpenRouter
     Input for a response request - can be a string or array of items
 ]=]
@@ -2750,7 +2753,7 @@ export type OpenResponsesRequest = {
 }
 
 --[=[
-    @type ResponsesOutputItem
+    @type ResponsesOutputItem (ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)
     @within OpenRouter
     An output item from the response
 ]=]
@@ -2764,7 +2767,7 @@ export type ResponsesOutputItem = (
 )
 
 --[=[
-    @type OpenResponsesNonStreamingResponse
+    @type OpenResponsesNonStreamingResponse (OpenAIResponsesNonStreamingResponse & { output: {ResponsesOutputItem}?, usage: OpenResponsesUsage? })
     @within OpenRouter
     Complete non-streaming response from the Responses API
 ]=]
@@ -2773,7 +2776,7 @@ export type OpenResponsesNonStreamingResponse = (
 )
 
 --[=[
-    @type OpenResponsesStreamEvent
+    @type OpenResponsesStreamEvent ((OpenResponsesCreatedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesInProgressEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesCompletedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesIncompleteEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesFailedEvent & { response: OpenResponsesNonStreamingResponse? }) | OpenResponsesErrorEvent | (OpenResponsesOutputItemAddedEvent & { item: ResponsesOutputItem? }) | (OpenResponsesOutputItemDoneEvent & { item: ResponsesOutputItem? }) | (OpenResponsesContentPartAddedEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | (OpenResponsesContentPartDoneEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | OpenResponsesTextDeltaEvent | OpenResponsesTextDoneEvent | OpenResponsesRefusalDeltaEvent | OpenResponsesRefusalDoneEvent | OpenResponsesOutputTextAnnotationAddedEvent | OpenResponsesFunctionCallArgumentsDeltaEvent | OpenResponsesFunctionCallArgumentsDoneEvent | OpenResponsesReasoningDeltaEvent | OpenResponsesReasoningDoneEvent | OpenResponsesReasoningSummaryPartAddedEvent | OpenResponsesReasoningSummaryPartDoneEvent | OpenResponsesReasoningSummaryTextDeltaEvent | OpenResponsesReasoningSummaryTextDoneEvent | OpenResponsesImageGenCallInProgress | OpenResponsesImageGenCallGenerating | OpenResponsesImageGenCallPartialImage | OpenResponsesImageGenCallCompleted)
     @within OpenRouter
     Union of all possible event types emitted during response streaming
 ]=]
@@ -2889,168 +2892,168 @@ export type ChatStreamingResponseChunk = {
 }
 
 --[=[
-    @type CreateResponses200Response
+    @type CreateResponses200Response OpenResponsesNonStreamingResponse
     @within OpenRouter
     200 Response type for createResponses
 ]=]
 export type CreateResponses200Response = OpenResponsesNonStreamingResponse
 
 --[=[
-    @type CreateResponses400Response
+    @type CreateResponses400Response BadRequestResponse
     @within OpenRouter
     400 Response type for createResponses
 ]=]
 export type CreateResponses400Response = BadRequestResponse
 
 --[=[
-    @type CreateResponses401Response
+    @type CreateResponses401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for createResponses
 ]=]
 export type CreateResponses401Response = UnauthorizedResponse
 
 --[=[
-    @type CreateResponses402Response
+    @type CreateResponses402Response PaymentRequiredResponse
     @within OpenRouter
     402 Response type for createResponses
 ]=]
 export type CreateResponses402Response = PaymentRequiredResponse
 
 --[=[
-    @type CreateResponses404Response
+    @type CreateResponses404Response NotFoundResponse
     @within OpenRouter
     404 Response type for createResponses
 ]=]
 export type CreateResponses404Response = NotFoundResponse
 
 --[=[
-    @type CreateResponses408Response
+    @type CreateResponses408Response RequestTimeoutResponse
     @within OpenRouter
     408 Response type for createResponses
 ]=]
 export type CreateResponses408Response = RequestTimeoutResponse
 
 --[=[
-    @type CreateResponses413Response
+    @type CreateResponses413Response PayloadTooLargeResponse
     @within OpenRouter
     413 Response type for createResponses
 ]=]
 export type CreateResponses413Response = PayloadTooLargeResponse
 
 --[=[
-    @type CreateResponses422Response
+    @type CreateResponses422Response UnprocessableEntityResponse
     @within OpenRouter
     422 Response type for createResponses
 ]=]
 export type CreateResponses422Response = UnprocessableEntityResponse
 
 --[=[
-    @type CreateResponses429Response
+    @type CreateResponses429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for createResponses
 ]=]
 export type CreateResponses429Response = TooManyRequestsResponse
 
 --[=[
-    @type CreateResponses500Response
+    @type CreateResponses500Response InternalServerResponse
     @within OpenRouter
     500 Response type for createResponses
 ]=]
 export type CreateResponses500Response = InternalServerResponse
 
 --[=[
-    @type CreateResponses502Response
+    @type CreateResponses502Response BadGatewayResponse
     @within OpenRouter
     502 Response type for createResponses
 ]=]
 export type CreateResponses502Response = BadGatewayResponse
 
 --[=[
-    @type CreateResponses503Response
+    @type CreateResponses503Response ServiceUnavailableResponse
     @within OpenRouter
     503 Response type for createResponses
 ]=]
 export type CreateResponses503Response = ServiceUnavailableResponse
 
 --[=[
-    @type CreateResponses524Response
+    @type CreateResponses524Response EdgeNetworkTimeoutResponse
     @within OpenRouter
     524 Response type for createResponses
 ]=]
 export type CreateResponses524Response = EdgeNetworkTimeoutResponse
 
 --[=[
-    @type CreateResponses529Response
+    @type CreateResponses529Response ProviderOverloadedResponse
     @within OpenRouter
     529 Response type for createResponses
 ]=]
 export type CreateResponses529Response = ProviderOverloadedResponse
 
 --[=[
-    @type GetUserActivity200Response
+    @type GetUserActivity200Response { data: {ActivityItem} }
     @within OpenRouter
     200 Response type for getUserActivity
 ]=]
 export type GetUserActivity200Response = { data: { ActivityItem } }
 
 --[=[
-    @type GetUserActivity400Response
+    @type GetUserActivity400Response BadRequestResponse
     @within OpenRouter
     400 Response type for getUserActivity
 ]=]
 export type GetUserActivity400Response = BadRequestResponse
 
 --[=[
-    @type GetUserActivity401Response
+    @type GetUserActivity401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getUserActivity
 ]=]
 export type GetUserActivity401Response = UnauthorizedResponse
 
 --[=[
-    @type GetUserActivity403Response
+    @type GetUserActivity403Response ForbiddenResponse
     @within OpenRouter
     403 Response type for getUserActivity
 ]=]
 export type GetUserActivity403Response = ForbiddenResponse
 
 --[=[
-    @type GetUserActivity500Response
+    @type GetUserActivity500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getUserActivity
 ]=]
 export type GetUserActivity500Response = InternalServerResponse
 
 --[=[
-    @type GetCredits200Response
+    @type GetCredits200Response {}
     @within OpenRouter
     200 Response type for getCredits
 ]=]
 export type GetCredits200Response = {}
 
 --[=[
-    @type GetCredits401Response
+    @type GetCredits401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getCredits
 ]=]
 export type GetCredits401Response = UnauthorizedResponse
 
 --[=[
-    @type GetCredits403Response
+    @type GetCredits403Response ForbiddenResponse
     @within OpenRouter
     403 Response type for getCredits
 ]=]
 export type GetCredits403Response = ForbiddenResponse
 
 --[=[
-    @type GetCredits500Response
+    @type GetCredits500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getCredits
 ]=]
 export type GetCredits500Response = InternalServerResponse
 
 --[=[
-    @type CreateCoinbaseCharge200Response
+    @type CreateCoinbaseCharge200Response { data: { id: string, created_at: string, expires_at: string, web3_data: { transfer_intent: { call_data: { deadline: string, fee_amount: string, id: string, operator: string, prefix: string, recipient: string, recipient_amount: string, recipient_currency: string, refund_destination: string, signature: string }, metadata: { chain_id: number, contract_address: string, sender: string } } } } }
     @within OpenRouter
     200 Response type for createCoinbaseCharge
 ]=]
@@ -3080,35 +3083,35 @@ export type CreateCoinbaseCharge200Response = {
 }
 
 --[=[
-    @type CreateCoinbaseCharge400Response
+    @type CreateCoinbaseCharge400Response BadRequestResponse
     @within OpenRouter
     400 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge400Response = BadRequestResponse
 
 --[=[
-    @type CreateCoinbaseCharge401Response
+    @type CreateCoinbaseCharge401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge401Response = UnauthorizedResponse
 
 --[=[
-    @type CreateCoinbaseCharge429Response
+    @type CreateCoinbaseCharge429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge429Response = TooManyRequestsResponse
 
 --[=[
-    @type CreateCoinbaseCharge500Response
+    @type CreateCoinbaseCharge500Response InternalServerResponse
     @within OpenRouter
     500 Response type for createCoinbaseCharge
 ]=]
 export type CreateCoinbaseCharge500Response = InternalServerResponse
 
 --[=[
-    @type CreateEmbeddings200Response
+    @type CreateEmbeddings200Response { id: string?, object: "list", data: {{ object: "embedding", embedding: ({number} | string), index: number? }}, model: string, usage: { prompt_tokens: number, total_tokens: number, cost: number? }? }
     @within OpenRouter
     200 Response type for createEmbeddings
 ]=]
@@ -3121,77 +3124,77 @@ export type CreateEmbeddings200Response = {
 }
 
 --[=[
-    @type CreateEmbeddings400Response
+    @type CreateEmbeddings400Response BadRequestResponse
     @within OpenRouter
     400 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings400Response = BadRequestResponse
 
 --[=[
-    @type CreateEmbeddings401Response
+    @type CreateEmbeddings401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings401Response = UnauthorizedResponse
 
 --[=[
-    @type CreateEmbeddings402Response
+    @type CreateEmbeddings402Response PaymentRequiredResponse
     @within OpenRouter
     402 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings402Response = PaymentRequiredResponse
 
 --[=[
-    @type CreateEmbeddings404Response
+    @type CreateEmbeddings404Response NotFoundResponse
     @within OpenRouter
     404 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings404Response = NotFoundResponse
 
 --[=[
-    @type CreateEmbeddings429Response
+    @type CreateEmbeddings429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings429Response = TooManyRequestsResponse
 
 --[=[
-    @type CreateEmbeddings500Response
+    @type CreateEmbeddings500Response InternalServerResponse
     @within OpenRouter
     500 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings500Response = InternalServerResponse
 
 --[=[
-    @type CreateEmbeddings502Response
+    @type CreateEmbeddings502Response BadGatewayResponse
     @within OpenRouter
     502 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings502Response = BadGatewayResponse
 
 --[=[
-    @type CreateEmbeddings503Response
+    @type CreateEmbeddings503Response ServiceUnavailableResponse
     @within OpenRouter
     503 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings503Response = ServiceUnavailableResponse
 
 --[=[
-    @type CreateEmbeddings524Response
+    @type CreateEmbeddings524Response EdgeNetworkTimeoutResponse
     @within OpenRouter
     524 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings524Response = EdgeNetworkTimeoutResponse
 
 --[=[
-    @type CreateEmbeddings529Response
+    @type CreateEmbeddings529Response ProviderOverloadedResponse
     @within OpenRouter
     529 Response type for createEmbeddings
 ]=]
 export type CreateEmbeddings529Response = ProviderOverloadedResponse
 
 --[=[
-    @type GetGeneration200Response
+    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")? } }
     @within OpenRouter
     200 Response type for getGeneration
 ]=]
@@ -3233,175 +3236,175 @@ export type GetGeneration200Response = {
 }
 
 --[=[
-    @type GetGeneration401Response
+    @type GetGeneration401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getGeneration
 ]=]
 export type GetGeneration401Response = UnauthorizedResponse
 
 --[=[
-    @type GetGeneration402Response
+    @type GetGeneration402Response PaymentRequiredResponse
     @within OpenRouter
     402 Response type for getGeneration
 ]=]
 export type GetGeneration402Response = PaymentRequiredResponse
 
 --[=[
-    @type GetGeneration404Response
+    @type GetGeneration404Response NotFoundResponse
     @within OpenRouter
     404 Response type for getGeneration
 ]=]
 export type GetGeneration404Response = NotFoundResponse
 
 --[=[
-    @type GetGeneration429Response
+    @type GetGeneration429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for getGeneration
 ]=]
 export type GetGeneration429Response = TooManyRequestsResponse
 
 --[=[
-    @type GetGeneration500Response
+    @type GetGeneration500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getGeneration
 ]=]
 export type GetGeneration500Response = InternalServerResponse
 
 --[=[
-    @type GetGeneration502Response
+    @type GetGeneration502Response BadGatewayResponse
     @within OpenRouter
     502 Response type for getGeneration
 ]=]
 export type GetGeneration502Response = BadGatewayResponse
 
 --[=[
-    @type GetGeneration524Response
+    @type GetGeneration524Response EdgeNetworkTimeoutResponse
     @within OpenRouter
     524 Response type for getGeneration
 ]=]
 export type GetGeneration524Response = EdgeNetworkTimeoutResponse
 
 --[=[
-    @type GetGeneration529Response
+    @type GetGeneration529Response ProviderOverloadedResponse
     @within OpenRouter
     529 Response type for getGeneration
 ]=]
 export type GetGeneration529Response = ProviderOverloadedResponse
 
 --[=[
-    @type ListModelsCount200Response
+    @type ListModelsCount200Response ModelsCountResponse
     @within OpenRouter
     200 Response type for listModelsCount
 ]=]
 export type ListModelsCount200Response = ModelsCountResponse
 
 --[=[
-    @type ListModelsCount500Response
+    @type ListModelsCount500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listModelsCount
 ]=]
 export type ListModelsCount500Response = InternalServerResponse
 
 --[=[
-    @type GetModels200Response
+    @type GetModels200Response ModelsListResponse
     @within OpenRouter
     200 Response type for getModels
 ]=]
 export type GetModels200Response = ModelsListResponse
 
 --[=[
-    @type GetModels400Response
+    @type GetModels400Response BadRequestResponse
     @within OpenRouter
     400 Response type for getModels
 ]=]
 export type GetModels400Response = BadRequestResponse
 
 --[=[
-    @type GetModels500Response
+    @type GetModels500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getModels
 ]=]
 export type GetModels500Response = InternalServerResponse
 
 --[=[
-    @type ListModelsEmbeddings200Response
+    @type ListModelsEmbeddings200Response ModelsListResponse
     @within OpenRouter
     200 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings200Response = ModelsListResponse
 
 --[=[
-    @type ListModelsEmbeddings400Response
+    @type ListModelsEmbeddings400Response BadRequestResponse
     @within OpenRouter
     400 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings400Response = BadRequestResponse
 
 --[=[
-    @type ListModelsEmbeddings500Response
+    @type ListModelsEmbeddings500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listModelsEmbeddings
 ]=]
 export type ListModelsEmbeddings500Response = InternalServerResponse
 
 --[=[
-    @type ListModelsUser200Response
+    @type ListModelsUser200Response ModelsListResponse
     @within OpenRouter
     200 Response type for listModelsUser
 ]=]
 export type ListModelsUser200Response = ModelsListResponse
 
 --[=[
-    @type ListModelsUser401Response
+    @type ListModelsUser401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for listModelsUser
 ]=]
 export type ListModelsUser401Response = UnauthorizedResponse
 
 --[=[
-    @type ListModelsUser500Response
+    @type ListModelsUser500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listModelsUser
 ]=]
 export type ListModelsUser500Response = InternalServerResponse
 
 --[=[
-    @type ListEndpoints200Response
+    @type ListEndpoints200Response { data: ListEndpointsResponse }
     @within OpenRouter
     200 Response type for listEndpoints
 ]=]
 export type ListEndpoints200Response = { data: ListEndpointsResponse }
 
 --[=[
-    @type ListEndpoints404Response
+    @type ListEndpoints404Response NotFoundResponse
     @within OpenRouter
     404 Response type for listEndpoints
 ]=]
 export type ListEndpoints404Response = NotFoundResponse
 
 --[=[
-    @type ListEndpoints500Response
+    @type ListEndpoints500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listEndpoints
 ]=]
 export type ListEndpoints500Response = InternalServerResponse
 
 --[=[
-    @type ListEndpointsZdr200Response
+    @type ListEndpointsZdr200Response { data: {PublicEndpoint} }
     @within OpenRouter
     200 Response type for listEndpointsZdr
 ]=]
 export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
 
 --[=[
-    @type ListEndpointsZdr500Response
+    @type ListEndpointsZdr500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listEndpointsZdr
 ]=]
 export type ListEndpointsZdr500Response = InternalServerResponse
 
 --[=[
-    @type GetParameters200Response
+    @type GetParameters200Response { data: { model: string, supported_parameters: {("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "web_search_options" | "verbosity")} } }
     @within OpenRouter
     200 Response type for getParameters
 ]=]
@@ -3439,28 +3442,28 @@ export type GetParameters200Response = {
 }
 
 --[=[
-    @type GetParameters401Response
+    @type GetParameters401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getParameters
 ]=]
 export type GetParameters401Response = UnauthorizedResponse
 
 --[=[
-    @type GetParameters404Response
+    @type GetParameters404Response NotFoundResponse
     @within OpenRouter
     404 Response type for getParameters
 ]=]
 export type GetParameters404Response = NotFoundResponse
 
 --[=[
-    @type GetParameters500Response
+    @type GetParameters500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getParameters
 ]=]
 export type GetParameters500Response = InternalServerResponse
 
 --[=[
-    @type ListProviders200Response
+    @type ListProviders200Response { data: {{ name: string, slug: string, privacy_policy_url: string?, terms_of_service_url: string?, status_page_url: string? }} }
     @within OpenRouter
     200 Response type for listProviders
 ]=]
@@ -3477,14 +3480,14 @@ export type ListProviders200Response = {
 }
 
 --[=[
-    @type ListProviders500Response
+    @type ListProviders500Response InternalServerResponse
     @within OpenRouter
     500 Response type for listProviders
 ]=]
 export type ListProviders500Response = InternalServerResponse
 
 --[=[
-    @type List200Response
+    @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }} }
     @within OpenRouter
     200 Response type for list
 ]=]
@@ -3514,28 +3517,28 @@ export type List200Response = {
 }
 
 --[=[
-    @type List401Response
+    @type List401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for list
 ]=]
 export type List401Response = UnauthorizedResponse
 
 --[=[
-    @type List429Response
+    @type List429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for list
 ]=]
 export type List429Response = TooManyRequestsResponse
 
 --[=[
-    @type List500Response
+    @type List500Response InternalServerResponse
     @within OpenRouter
     500 Response type for list
 ]=]
 export type List500Response = InternalServerResponse
 
 --[=[
-    @type CreateKeys201Response
+    @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }, key: string }
     @within OpenRouter
     201 Response type for createKeys
 ]=]
@@ -3564,35 +3567,35 @@ export type CreateKeys201Response = {
 }
 
 --[=[
-    @type CreateKeys400Response
+    @type CreateKeys400Response BadRequestResponse
     @within OpenRouter
     400 Response type for createKeys
 ]=]
 export type CreateKeys400Response = BadRequestResponse
 
 --[=[
-    @type CreateKeys401Response
+    @type CreateKeys401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for createKeys
 ]=]
 export type CreateKeys401Response = UnauthorizedResponse
 
 --[=[
-    @type CreateKeys429Response
+    @type CreateKeys429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for createKeys
 ]=]
 export type CreateKeys429Response = TooManyRequestsResponse
 
 --[=[
-    @type CreateKeys500Response
+    @type CreateKeys500Response InternalServerResponse
     @within OpenRouter
     500 Response type for createKeys
 ]=]
 export type CreateKeys500Response = InternalServerResponse
 
 --[=[
-    @type GetKey200Response
+    @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
     @within OpenRouter
     200 Response type for getKey
 ]=]
@@ -3620,70 +3623,70 @@ export type GetKey200Response = {
 }
 
 --[=[
-    @type GetKey401Response
+    @type GetKey401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getKey
 ]=]
 export type GetKey401Response = UnauthorizedResponse
 
 --[=[
-    @type GetKey404Response
+    @type GetKey404Response NotFoundResponse
     @within OpenRouter
     404 Response type for getKey
 ]=]
 export type GetKey404Response = NotFoundResponse
 
 --[=[
-    @type GetKey429Response
+    @type GetKey429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for getKey
 ]=]
 export type GetKey429Response = TooManyRequestsResponse
 
 --[=[
-    @type GetKey500Response
+    @type GetKey500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getKey
 ]=]
 export type GetKey500Response = InternalServerResponse
 
 --[=[
-    @type DeleteKeys200Response
+    @type DeleteKeys200Response { deleted: boolean }
     @within OpenRouter
     200 Response type for deleteKeys
 ]=]
 export type DeleteKeys200Response = { deleted: boolean }
 
 --[=[
-    @type DeleteKeys401Response
+    @type DeleteKeys401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for deleteKeys
 ]=]
 export type DeleteKeys401Response = UnauthorizedResponse
 
 --[=[
-    @type DeleteKeys404Response
+    @type DeleteKeys404Response NotFoundResponse
     @within OpenRouter
     404 Response type for deleteKeys
 ]=]
 export type DeleteKeys404Response = NotFoundResponse
 
 --[=[
-    @type DeleteKeys429Response
+    @type DeleteKeys429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for deleteKeys
 ]=]
 export type DeleteKeys429Response = TooManyRequestsResponse
 
 --[=[
-    @type DeleteKeys500Response
+    @type DeleteKeys500Response InternalServerResponse
     @within OpenRouter
     500 Response type for deleteKeys
 ]=]
 export type DeleteKeys500Response = InternalServerResponse
 
 --[=[
-    @type UpdateKeys200Response
+    @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
     @within OpenRouter
     200 Response type for updateKeys
 ]=]
@@ -3711,42 +3714,42 @@ export type UpdateKeys200Response = {
 }
 
 --[=[
-    @type UpdateKeys400Response
+    @type UpdateKeys400Response BadRequestResponse
     @within OpenRouter
     400 Response type for updateKeys
 ]=]
 export type UpdateKeys400Response = BadRequestResponse
 
 --[=[
-    @type UpdateKeys401Response
+    @type UpdateKeys401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for updateKeys
 ]=]
 export type UpdateKeys401Response = UnauthorizedResponse
 
 --[=[
-    @type UpdateKeys404Response
+    @type UpdateKeys404Response NotFoundResponse
     @within OpenRouter
     404 Response type for updateKeys
 ]=]
 export type UpdateKeys404Response = NotFoundResponse
 
 --[=[
-    @type UpdateKeys429Response
+    @type UpdateKeys429Response TooManyRequestsResponse
     @within OpenRouter
     429 Response type for updateKeys
 ]=]
 export type UpdateKeys429Response = TooManyRequestsResponse
 
 --[=[
-    @type UpdateKeys500Response
+    @type UpdateKeys500Response InternalServerResponse
     @within OpenRouter
     500 Response type for updateKeys
 ]=]
 export type UpdateKeys500Response = InternalServerResponse
 
 --[=[
-    @type GetCurrentKey200Response
+    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, rate_limit: { requests: number, interval: string, note: string } } }
     @within OpenRouter
     200 Response type for getCurrentKey
 ]=]
@@ -3772,140 +3775,140 @@ export type GetCurrentKey200Response = {
 }
 
 --[=[
-    @type GetCurrentKey401Response
+    @type GetCurrentKey401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for getCurrentKey
 ]=]
 export type GetCurrentKey401Response = UnauthorizedResponse
 
 --[=[
-    @type GetCurrentKey500Response
+    @type GetCurrentKey500Response InternalServerResponse
     @within OpenRouter
     500 Response type for getCurrentKey
 ]=]
 export type GetCurrentKey500Response = InternalServerResponse
 
 --[=[
-    @type ExchangeAuthCodeForAPIKey200Response
+    @type ExchangeAuthCodeForAPIKey200Response { key: string, user_id: string? }
     @within OpenRouter
     200 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey200Response = { key: string, user_id: string? }
 
 --[=[
-    @type ExchangeAuthCodeForAPIKey400Response
+    @type ExchangeAuthCodeForAPIKey400Response BadRequestResponse
     @within OpenRouter
     400 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey400Response = BadRequestResponse
 
 --[=[
-    @type ExchangeAuthCodeForAPIKey403Response
+    @type ExchangeAuthCodeForAPIKey403Response ForbiddenResponse
     @within OpenRouter
     403 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey403Response = ForbiddenResponse
 
 --[=[
-    @type ExchangeAuthCodeForAPIKey500Response
+    @type ExchangeAuthCodeForAPIKey500Response InternalServerResponse
     @within OpenRouter
     500 Response type for exchangeAuthCodeForAPIKey
 ]=]
 export type ExchangeAuthCodeForAPIKey500Response = InternalServerResponse
 
 --[=[
-    @type CreateAuthKeysCode200Response
+    @type CreateAuthKeysCode200Response { data: { id: string, app_id: number, created_at: string } }
     @within OpenRouter
     200 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode200Response = { data: { id: string, app_id: number, created_at: string } }
 
 --[=[
-    @type CreateAuthKeysCode400Response
+    @type CreateAuthKeysCode400Response BadRequestResponse
     @within OpenRouter
     400 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode400Response = BadRequestResponse
 
 --[=[
-    @type CreateAuthKeysCode401Response
+    @type CreateAuthKeysCode401Response UnauthorizedResponse
     @within OpenRouter
     401 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode401Response = UnauthorizedResponse
 
 --[=[
-    @type CreateAuthKeysCode500Response
+    @type CreateAuthKeysCode500Response InternalServerResponse
     @within OpenRouter
     500 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode500Response = InternalServerResponse
 
 --[=[
-    @type SendChatCompletionRequest200Response
+    @type SendChatCompletionRequest200Response ChatResponse
     @within OpenRouter
     200 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest200Response = ChatResponse
 
 --[=[
-    @type SendChatCompletionRequest400Response
+    @type SendChatCompletionRequest400Response ChatError
     @within OpenRouter
     400 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest400Response = ChatError
 
 --[=[
-    @type SendChatCompletionRequest401Response
+    @type SendChatCompletionRequest401Response ChatError
     @within OpenRouter
     401 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest401Response = ChatError
 
 --[=[
-    @type SendChatCompletionRequest429Response
+    @type SendChatCompletionRequest429Response ChatError
     @within OpenRouter
     429 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest429Response = ChatError
 
 --[=[
-    @type SendChatCompletionRequest500Response
+    @type SendChatCompletionRequest500Response ChatError
     @within OpenRouter
     500 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest500Response = ChatError
 
 --[=[
-    @type CreateCompletions200Response
+    @type CreateCompletions200Response CompletionResponse
     @within OpenRouter
     200 Response type for createCompletions
 ]=]
 export type CreateCompletions200Response = CompletionResponse
 
 --[=[
-    @type CreateCompletions400Response
+    @type CreateCompletions400Response ChatError
     @within OpenRouter
     400 Response type for createCompletions
 ]=]
 export type CreateCompletions400Response = ChatError
 
 --[=[
-    @type CreateCompletions401Response
+    @type CreateCompletions401Response ChatError
     @within OpenRouter
     401 Response type for createCompletions
 ]=]
 export type CreateCompletions401Response = ChatError
 
 --[=[
-    @type CreateCompletions429Response
+    @type CreateCompletions429Response ChatError
     @within OpenRouter
     429 Response type for createCompletions
 ]=]
 export type CreateCompletions429Response = ChatError
 
 --[=[
-    @type CreateCompletions500Response
+    @type CreateCompletions500Response ChatError
     @within OpenRouter
     500 Response type for createCompletions
 ]=]

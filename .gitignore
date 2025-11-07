@@ -3,6 +3,8 @@
 # https://github.com/luau-lang/luau
 # https://luau.org/
 
+build
+
 __pycache__/
 
 # Code coverage

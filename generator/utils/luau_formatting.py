@@ -114,7 +114,7 @@ def format_field_example(example: Optional[Any] = None) -> str:
 
 
 def format_simple_type_doc_comment(
-    type_name: str, description: Optional[str] = None
+    type_name: str, type: str, description: Optional[str] = None
 ) -> str:
     """
     Format a doc comment for a simple type.
@@ -128,9 +128,7 @@ def format_simple_type_doc_comment(
     """
     if not description:
         return ""
-    return (
-        f"--[=[\n    @type {type_name}\n    @within OpenRouter\n    {description}\n]=]"
-    )
+    return f"--[=[\n    @type {type_name} {type}\n    @within OpenRouter\n    {description}\n]=]"
 
 
 def format_table_type_doc_comment(
@@ -168,7 +166,9 @@ def format_table_type_doc_comment(
             # Add range constraint
             if field.minimum is not None or field.maximum is not None:
                 if field.minimum is not None and field.maximum is not None:
-                    field_comment_parts.append(f"Range: {field.minimum}-{field.maximum}")
+                    field_comment_parts.append(
+                        f"Range: {field.minimum}-{field.maximum}"
+                    )
                 elif field.minimum is not None:
                     field_comment_parts.append(f"Min: {field.minimum}")
                 elif field.maximum is not None:
@@ -176,7 +176,11 @@ def format_table_type_doc_comment(
 
             # Add default value
             if field.default is not None:
-                default_str = f"{field.default!r}" if isinstance(field.default, str) else str(field.default)
+                default_str = (
+                    f"{field.default!r}"
+                    if isinstance(field.default, str)
+                    else str(field.default)
+                )
                 field_comment_parts.append(f"Default: {default_str}")
 
             # Add example
@@ -215,9 +219,9 @@ def get_generation_header(source_file: str, external_docs: Optional[Any] = None)
 """
 
     # Add external documentation link if available
-    if external_docs and hasattr(external_docs, 'url'):
+    if external_docs and hasattr(external_docs, "url"):
         doc_line = f"-- Documentation: {external_docs.url}"
-        if hasattr(external_docs, 'description') and external_docs.description:
+        if hasattr(external_docs, "description") and external_docs.description:
             doc_line += f" - {external_docs.description}"
         header += doc_line + "\n"
 

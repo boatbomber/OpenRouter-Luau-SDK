@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T02:07:39.836495Z (generator v1.0.0)
+-- Last generated: 2025-11-07T02:50:02.570515Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -11,8 +11,6 @@
 local HttpService = game:GetService("HttpService")
 local Types = require(script.types)
 
---- @class OpenRouter
---- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
 local OpenRouter = {}
 OpenRouter.__index = OpenRouter
 
@@ -84,7 +82,7 @@ end
     @within OpenRouter
     @tag beta.responses
     
-    @param params -- Request body parameters
+    @param params Types.OpenResponsesRequest -- Request body parameters
     @return Types.Result<Types.CreateResponses200Response, Types.CreateResponses400Response | Types.CreateResponses401Response | Types.CreateResponses402Response | Types.CreateResponses404Response | Types.CreateResponses408Response | Types.CreateResponses413Response | Types.CreateResponses422Response | Types.CreateResponses429Response | Types.CreateResponses500Response | Types.CreateResponses502Response | Types.CreateResponses503Response | Types.CreateResponses524Response | Types.CreateResponses529Response>
 ]=]
 function OpenRouter.createResponses(
@@ -124,7 +122,7 @@ end
     @within OpenRouter
     @tag Analytics
     
-    @param date -- Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
+    @param date string? -- Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
     @return Types.Result<Types.GetUserActivity200Response, Types.GetUserActivity400Response | Types.GetUserActivity401Response | Types.GetUserActivity403Response | Types.GetUserActivity500Response>
 ]=]
 function OpenRouter.getUserActivity(
@@ -176,7 +174,7 @@ end
     @within OpenRouter
     @tag Credits
     
-    @param params -- Request body parameters
+    @param params Types.CreateChargeRequest -- Request body parameters
     @return Types.Result<Types.CreateCoinbaseCharge200Response, Types.CreateCoinbaseCharge400Response | Types.CreateCoinbaseCharge401Response | Types.CreateCoinbaseCharge429Response | Types.CreateCoinbaseCharge500Response>
 ]=]
 function OpenRouter.createCoinbaseCharge(
@@ -207,7 +205,7 @@ end
     @within OpenRouter
     @tag Embeddings
     
-    @param params -- Request body parameters
+    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(Types.ProviderName | string)}?, only: {(Types.ProviderName | string)}?, ignore: {(Types.ProviderName | string)}?, quantizations: {Types.Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: Types.BigNumberUnion?, completion: Types.BigNumberUnion?, image: Types.BigNumberUnion?, audio: Types.BigNumberUnion?, request: Types.BigNumberUnion? }?, experimental: {}? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
     @return Types.Result<Types.CreateEmbeddings200Response, Types.CreateEmbeddings400Response | Types.CreateEmbeddings401Response | Types.CreateEmbeddings402Response | Types.CreateEmbeddings404Response | Types.CreateEmbeddings429Response | Types.CreateEmbeddings500Response | Types.CreateEmbeddings502Response | Types.CreateEmbeddings503Response | Types.CreateEmbeddings524Response | Types.CreateEmbeddings529Response>
 ]=]
 function OpenRouter.createEmbeddings(
@@ -268,7 +266,7 @@ end
     @within OpenRouter
     @tag Generations
     
-    @param id -- No description provided
+    @param id string -- No description provided
     @return Types.Result<Types.GetGeneration200Response, Types.GetGeneration401Response | Types.GetGeneration402Response | Types.GetGeneration404Response | Types.GetGeneration429Response | Types.GetGeneration500Response | Types.GetGeneration502Response | Types.GetGeneration524Response | Types.GetGeneration529Response>
 ]=]
 function OpenRouter.getGeneration(
@@ -323,10 +321,10 @@ end
     @within OpenRouter
     @tag Models
     
-    @param category -- No description provided
-    @param supported_parameters -- No description provided
-    @param use_rss -- No description provided
-    @param use_rss_chat_links -- No description provided
+    @param category string? -- No description provided
+    @param supported_parameters string? -- No description provided
+    @param use_rss string? -- No description provided
+    @param use_rss_chat_links string? -- No description provided
     @return Types.Result<Types.GetModels200Response, Types.GetModels400Response | Types.GetModels500Response>
 ]=]
 function OpenRouter.getModels(
@@ -399,8 +397,8 @@ end
     @within OpenRouter
     @tag Endpoints
     
-    @param author -- No description provided
-    @param slug -- No description provided
+    @param author string -- No description provided
+    @param slug string -- No description provided
     @return Types.Result<Types.ListEndpoints200Response, Types.ListEndpoints404Response | Types.ListEndpoints500Response>
 ]=]
 function OpenRouter.listEndpoints(
@@ -446,9 +444,9 @@ end
     @within OpenRouter
     @tag Parameters
     
-    @param author -- No description provided
-    @param slug -- No description provided
-    @param provider -- No description provided
+    @param author string -- No description provided
+    @param slug string -- No description provided
+    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "AtlasCloud" | "Atoma" | "Avian" | "Azure" | "BaseTen" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "CrofAI" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Enfer" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Kluster" | "Lambda" | "Liquid" | "Mancer 2" | "Meta" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Nineteen" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Ubicloud" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
     @return Types.Result<Types.GetParameters200Response, Types.GetParameters401Response | Types.GetParameters404Response | Types.GetParameters500Response>
 ]=]
 function OpenRouter.getParameters(
@@ -573,8 +571,8 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param include_disabled -- Whether to include disabled API keys in the response
-    @param offset -- Number of API keys to skip for pagination
+    @param include_disabled string? -- Whether to include disabled API keys in the response
+    @param offset string? -- Number of API keys to skip for pagination
     @return Types.Result<Types.List200Response, Types.List401Response | Types.List429Response | Types.List500Response>
 ]=]
 function OpenRouter.list(
@@ -601,7 +599,7 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param params -- Request body parameters
+    @param params { name: string, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean? } -- Request body parameters
     @return Types.Result<Types.CreateKeys201Response, Types.CreateKeys400Response | Types.CreateKeys401Response | Types.CreateKeys429Response | Types.CreateKeys500Response>
 ]=]
 function OpenRouter.createKeys(
@@ -631,7 +629,7 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param hash -- The hash identifier of the API key to retrieve
+    @param hash string -- The hash identifier of the API key to retrieve
     @return Types.Result<Types.GetKey200Response, Types.GetKey401Response | Types.GetKey404Response | Types.GetKey429Response | Types.GetKey500Response>
 ]=]
 function OpenRouter.getKey(
@@ -653,7 +651,7 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param hash -- The hash identifier of the API key to delete
+    @param hash string -- The hash identifier of the API key to delete
     @return Types.Result<Types.DeleteKeys200Response, Types.DeleteKeys401Response | Types.DeleteKeys404Response | Types.DeleteKeys429Response | Types.DeleteKeys500Response>
 ]=]
 function OpenRouter.deleteKeys(
@@ -678,8 +676,8 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param hash -- The hash identifier of the API key to update
-    @param params -- Request body parameters
+    @param hash string -- The hash identifier of the API key to update
+    @param params { name: string?, disabled: boolean?, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean? } -- Request body parameters
     @return Types.Result<Types.UpdateKeys200Response, Types.UpdateKeys400Response | Types.UpdateKeys401Response | Types.UpdateKeys404Response | Types.UpdateKeys429Response | Types.UpdateKeys500Response>
 ]=]
 function OpenRouter.updateKeys(
@@ -736,7 +734,7 @@ end
     @within OpenRouter
     @tag OAuth
     
-    @param params -- Request body parameters
+    @param params { code: string, code_verifier: string?, code_challenge_method: ("S256" | "plain")? } -- Request body parameters
     @return Types.Result<Types.ExchangeAuthCodeForAPIKey200Response, Types.ExchangeAuthCodeForAPIKey400Response | Types.ExchangeAuthCodeForAPIKey403Response | Types.ExchangeAuthCodeForAPIKey500Response>
 ]=]
 function OpenRouter.exchangeAuthCodeForAPIKey(
@@ -764,7 +762,7 @@ end
     @within OpenRouter
     @tag OAuth
     
-    @param params -- Request body parameters
+    @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number? } -- Request body parameters
     @return Types.Result<Types.CreateAuthKeysCode200Response, Types.CreateAuthKeysCode400Response | Types.CreateAuthKeysCode401Response | Types.CreateAuthKeysCode500Response>
 ]=]
 function OpenRouter.createAuthKeysCode(
@@ -797,7 +795,7 @@ end
     @within OpenRouter
     @tag Chat
     
-    @param params -- Request body parameters
+    @param params Types.ChatGenerationParams -- Request body parameters
     @return Types.Result<Types.SendChatCompletionRequest200Response, Types.SendChatCompletionRequest400Response | Types.SendChatCompletionRequest401Response | Types.SendChatCompletionRequest429Response | Types.SendChatCompletionRequest500Response>
 ]=]
 function OpenRouter.sendChatCompletionRequest(
@@ -828,7 +826,7 @@ end
     @within OpenRouter
     @tag Completions
     
-    @param params -- Request body parameters
+    @param params Types.CompletionCreateParams -- Request body parameters
     @return Types.Result<Types.CreateCompletions200Response, Types.CreateCompletions400Response | Types.CreateCompletions401Response | Types.CreateCompletions429Response | Types.CreateCompletions500Response>
 ]=]
 function OpenRouter.createCompletions(

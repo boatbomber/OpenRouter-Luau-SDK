@@ -102,9 +102,7 @@ class MethodGenerator:
         params = ", ".join(params_list) if params_list else ""
 
         # Determine body parameter
-        body_param = next(
-            (p["name"] for p in param_info if p["in"] == "body"), "nil"
-        )
+        body_param = next((p["name"] for p in param_info if p["in"] == "body"), "nil")
 
         # Determine return type
         return_type = self._determine_return_type(operation)
@@ -244,7 +242,7 @@ class MethodGenerator:
     @method {operation.operation_id}
     @within OpenRouter
     {linebreak.join([f"@tag {tag}" for tag in operation.tags])}
-    {linebreak+linebreak.join([f"@param {p['name']} -- {p['description']}" for p in param_info]) if param_info else ""}
+    {linebreak+linebreak.join([f"@param {p['name']} {p['type']} -- {p['description']}" for p in param_info]) if param_info else ""}
     @return {return_type}
 ]=]
 """.strip()

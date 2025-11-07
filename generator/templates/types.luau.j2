@@ -4,6 +4,10 @@
 {{ format_comment(description, 0) }}
 {% endif %}
 
+--- @class OpenRouter
+--- The OpenRouter class is an auto-generated class for interacting with the OpenRouter APIs.
+
+
 export type ResultOk<T> = { type: "ok", value: T } -- Request succeeded
 export type ResultErr<E> = { type: "err", error: E } -- Request responded with an error
 export type ResultCrash = { type: "crash", error: string } -- Request failed to send
@@ -18,7 +22,7 @@ export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "OPTIONS" 
 {%- if type_def.is_table_type %}
 {{ format_table_type_doc_comment(type_def.name, type_def.description, type_def.fields) }}
 {%- elif type_def.needs_doc_comment %}
-{{ format_simple_type_doc_comment(type_def.name, type_def.description) }}
+{{ format_simple_type_doc_comment(type_def.name, type_def.type, type_def.description) }}
 {% endif %}
 export type {{ type_def.name }} = {{ type_def.type }}
 {% endfor %}
