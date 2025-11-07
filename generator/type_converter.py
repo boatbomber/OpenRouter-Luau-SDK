@@ -128,7 +128,25 @@ class TypeConverter:
         if hasattr(schema, "properties") and schema.properties:
             return self._convert_object(schema, nullable)
 
-        # Default to any
+        # Check if this is an intentionally empty schema (just metadata like nullable)
+        # This is a valid OpenAPI pattern meaning "any type"
+        has_type_info = (
+            (hasattr(schema, "type") and schema.type)
+            or (hasattr(schema, "ref") and schema.ref)
+            or (hasattr(schema, "properties") and schema.properties)
+            or (hasattr(schema, "allOf") and schema.allOf)
+            or (hasattr(schema, "anyOf") and schema.anyOf)
+            or (hasattr(schema, "oneOf") and schema.oneOf)
+            or (hasattr(schema, "items") and schema.items)
+            or (hasattr(schema, "enum") and schema.enum)
+        )
+
+        if not has_type_info:
+            # Schema with no type info - valid pattern for "any type"
+            # Don't warn, just return any (possibly nullable)
+            return "any?" if nullable else "any"
+
+        # Default to any (with warning for unexpected cases)
         warning = f"No type information found for '{name or 'unknown'}', defaulting to 'any'"
         logger.warning(warning)
         self.conversion_warnings.append(warning)
