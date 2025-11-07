@@ -21,7 +21,7 @@ export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "OPTIONS" 
 {% endif %}
 {%- if type_def.is_table_type %}
 {{ format_table_type_doc_comment(type_def.name, type_def.description, type_def.fields) }}
-{%- elif type_def.needs_doc_comment %}
+{%- else %}
 {{ format_simple_type_doc_comment(type_def.name, type_def.type, type_def.description) }}
 {% endif %}
 export type {{ type_def.name }} = {{ type_def.type }}

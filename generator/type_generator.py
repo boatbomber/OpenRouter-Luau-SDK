@@ -48,11 +48,6 @@ class TypeDefinition:
         """Check if this is a table type requiring field documentation."""
         return bool(self.fields and self.type.strip().rstrip("?").startswith("{"))
 
-    @property
-    def needs_doc_comment(self) -> bool:
-        """Check if type needs documentation."""
-        return bool(self.description or self.fields)
-
 
 class TypeGenerator:
     """

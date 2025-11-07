@@ -124,11 +124,13 @@ def format_simple_type_doc_comment(
         description: Description text
 
     Returns:
-        Formatted doc comment string, or empty string if no description
+        Formatted doc comment string
     """
-    if not description:
-        return ""
-    return f"--[=[\n    @type {type_name} {type}\n    @within OpenRouterTypes\n    {description}\n]=]"
+    return (
+        f"--[=[\n    @type {type_name} {type}\n    @within OpenRouterTypes\n"
+        + (f"    {description}\n" if description else "")
+        + "]=]"
+    )
 
 
 def format_table_type_doc_comment(

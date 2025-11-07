@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T03:27:57.255104Z (generator v1.0.0)
+-- Last generated: 2025-11-07T03:38:10.964765Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -98,6 +98,10 @@ export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: 
 ]=]
 export type BigNumberUnion = number | string
 
+--[=[
+    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")
+    @within OpenRouterTypes
+]=]
 export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
 
 --[=[
@@ -175,6 +179,10 @@ export type ChatMessageContentItemText = { ["type"]: string, text: string }
 ]=]
 export type ChatMessageContentItemVideo = { ["type"]: string, video_url: { url: string } }
 
+--[=[
+    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo)
+    @within OpenRouterTypes
+]=]
 export type ChatMessageContentItem = (
 	ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo
 )
@@ -279,6 +287,10 @@ export type ChatStreamingMessageChunk = {
 	tool_calls: { ChatStreamingMessageToolCall }?,
 }
 
+--[=[
+    @type CompletionFinishReason (("stop" | "length" | "content_filter") | nil)
+    @within OpenRouterTypes
+]=]
 export type CompletionFinishReason = "stop" | "length" | "content_filter" | nil
 
 --[=[
@@ -388,6 +400,10 @@ export type EdgeNetworkTimeoutResponseErrorData = { code: number, message: strin
 ]=]
 export type EdgeNetworkTimeoutResponse = { error: EdgeNetworkTimeoutResponseErrorData, user_id: string? }
 
+--[=[
+    @type EndpointStatus number
+    @within OpenRouterTypes
+]=]
 export type EndpointStatus = number
 
 --[=[
@@ -432,8 +448,16 @@ export type ForbiddenResponseErrorData = { code: number, message: string, metada
 ]=]
 export type ForbiddenResponse = { error: ForbiddenResponseErrorData, user_id: string? }
 
+--[=[
+    @type ImageGenerationStatus ("in_progress" | "completed" | "generating" | "failed")
+    @within OpenRouterTypes
+]=]
 export type ImageGenerationStatus = "in_progress" | "completed" | "generating" | "failed"
 
+--[=[
+    @type InputModality ("text" | "image" | "file" | "audio" | "video")
+    @within OpenRouterTypes
+]=]
 export type InputModality = "text" | "image" | "file" | "audio" | "video"
 
 --[=[
@@ -530,6 +554,10 @@ export type ModelGroup = (
 	| "Qwen3"
 )
 
+--[=[
+    @type ModelName string
+    @within OpenRouterTypes
+]=]
 export type ModelName = string
 
 --[=[
@@ -658,6 +686,10 @@ export type OpenAIResponsesImageGenCallPartialImage = {
 	partial_image_index: number,
 }
 
+--[=[
+    @type OpenAIResponsesIncludable ("file_search_call.results" | "message.input_image.image_url" | "computer_call_output.output.image_url" | "reasoning.encrypted_content" | "code_interpreter_call.outputs")
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesIncludable = (
 	"file_search_call.results"
 	| "message.input_image.image_url"
@@ -716,6 +748,10 @@ export type OpenAIResponsesReasoningDoneEvent = {
 	sequence_number: number,
 }
 
+--[=[
+    @type OpenAIResponsesReasoningEffort ("high" | "medium" | "low" | "minimal")?
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minimal")?
 
 --[=[
@@ -769,16 +805,32 @@ export type OpenAIResponsesReasoningSummaryTextDoneEvent = {
 ]=]
 export type OpenAIResponsesRefusalContent = { ["type"]: "refusal", refusal: string }
 
+--[=[
+    @type OpenAIResponsesResponseStatus ("completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued")
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesResponseStatus = (
 	"completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued"
 )
 
+--[=[
+    @type OpenAIResponsesServiceTier ("auto" | "default" | "flex" | "priority" | "scale")?
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesServiceTier = ("auto" | "default" | "flex" | "priority" | "scale")?
 
+--[=[
+    @type OpenAIResponsesToolChoice ("auto" | "none" | "required" | { ["type"]: "function", name: string } | { ["type"]: ("web_search_preview_2025_03_11" | "web_search_preview") })
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesToolChoice = "auto" | "none" | "required" | { ["type"]: "function", name: string } | {
 	["type"]: "web_search_preview_2025_03_11" | "web_search_preview",
 }
 
+--[=[
+    @type OpenAIResponsesTruncation ("auto" | "disabled")?
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesTruncation = ("auto" | "disabled")?
 
 --[=[
@@ -1088,6 +1140,10 @@ export type OutputItemImageGenerationCall = {
 	status: ImageGenerationStatus,
 }
 
+--[=[
+    @type OutputModality ("text" | "image" | "embeddings")
+    @within OpenRouterTypes
+]=]
 export type OutputModality = "text" | "image" | "embeddings"
 
 --[=[
@@ -1132,6 +1188,10 @@ export type ModelArchitecture = {
 	output_modalities: { OutputModality },
 }
 
+--[=[
+    @type Parameter ("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "web_search_options" | "verbosity")
+    @within OpenRouterTypes
+]=]
 export type Parameter = (
 	"temperature"
 	| "top_p"
@@ -1210,6 +1270,10 @@ export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData,
 ]=]
 export type PerRequestLimits = { prompt_tokens: number, completion_tokens: number }?
 
+--[=[
+    @type ProviderName ("AnyScale" | "Cent-ML" | "HuggingFace" | "Hyperbolic 2" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Modal" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Together 2" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "AtlasCloud" | "Atoma" | "Avian" | "Azure" | "BaseTen" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "CrofAI" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Enfer" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "InoCloud" | "Kluster" | "Lambda" | "Liquid" | "Mancer 2" | "Meta" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Nineteen" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Ubicloud" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
+    @within OpenRouterTypes
+]=]
 export type ProviderName = (
 	"AnyScale"
 	| "Cent-ML"
@@ -1353,6 +1417,10 @@ export type PublicPricing = {
 	discount: number?,
 }
 
+--[=[
+    @type Quantization ("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")
+    @within OpenRouterTypes
+]=]
 export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown"
 
 --[=[
@@ -1488,6 +1556,10 @@ export type OpenResponsesReasoningSummaryPartDoneEvent = {
 	sequence_number: number,
 }
 
+--[=[
+    @type ReasoningSummaryVerbosity ("auto" | "concise" | "detailed")
+    @within OpenRouterTypes
+]=]
 export type ReasoningSummaryVerbosity = "auto" | "concise" | "detailed"
 
 --[=[
@@ -1824,8 +1896,16 @@ export type ResponseTextConfig = { format: ResponseFormatTextConfig?, verbosity:
 ]=]
 export type OpenResponsesResponseText = ResponseTextConfig
 
+--[=[
+    @type ResponsesImageGenerationCall OutputItemImageGenerationCall
+    @within OpenRouterTypes
+]=]
 export type ResponsesImageGenerationCall = OutputItemImageGenerationCall
 
+--[=[
+    @type ResponsesOutputItemFunctionCall OutputItemFunctionCall
+    @within OpenRouterTypes
+]=]
 export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
 
 --[=[
@@ -1961,6 +2041,10 @@ export type TooManyRequestsResponseErrorData = { code: number, message: string, 
 ]=]
 export type TooManyRequestsResponse = { error: TooManyRequestsResponseErrorData, user_id: string? }
 
+--[=[
+    @type ToolCallStatus ("in_progress" | "completed" | "incomplete")
+    @within OpenRouterTypes
+]=]
 export type ToolCallStatus = "in_progress" | "completed" | "incomplete"
 
 --[=[
@@ -2003,6 +2087,10 @@ export type OpenResponsesFunctionToolCall = {
 	status: ToolCallStatus?,
 }
 
+--[=[
+    @type ToolChoiceOption (string | NamedToolChoice)
+    @within OpenRouterTypes
+]=]
 export type ToolChoiceOption = string | NamedToolChoice
 
 --[=[
@@ -2101,6 +2189,10 @@ export type ModelsListResponse = { data: ModelsListResponseData }
 ]=]
 export type URLCitation = { ["type"]: "url_citation", url: string, title: string, start_index: number, end_index: number }
 
+--[=[
+    @type OpenAIResponsesAnnotation (FileCitation | URLCitation | FilePath)
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesAnnotation = FileCitation | URLCitation | FilePath
 
 --[=[
@@ -2196,6 +2288,10 @@ export type OutputMessage = {
 	content: { ResponseOutputText | OpenAIResponsesRefusalContent },
 }
 
+--[=[
+    @type OpenAIResponsesInput (string | {({ ["type"]: "message"?, role: ("user" | "system" | "assistant" | "developer"), content: ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} | string) } | { id: string, ["type"]: "message"?, role: ("user" | "system" | "developer"), content: {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} } | { ["type"]: "function_call_output", id: string, call_id: string, output: string, status: ToolCallStatus? } | { ["type"]: "function_call", call_id: string, name: string, arguments: string, id: string?, status: ToolCallStatus? } | OutputItemImageGenerationCall | OutputMessage)})?
+    @within OpenRouterTypes
+]=]
 export type OpenAIResponsesInput = (string | {
 	{
 		["type"]: "message"?,
@@ -2281,6 +2377,10 @@ export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseEr
 ]=]
 export type UserMessage = { role: string, content: string | { ChatMessageContentItem }, name: string? }
 
+--[=[
+    @type Message (SystemMessage | UserMessage | { role: string, content: (string | {ChatMessageContentItemText}), name: string? } | AssistantMessage | ToolResponseMessage)
+    @within OpenRouterTypes
+]=]
 export type Message = (
 	SystemMessage
 	| UserMessage
@@ -2389,6 +2489,10 @@ export type OpenResponsesWebSearchPreviewTool = {
 	user_location: WebSearchPreviewToolUserLocation?,
 }
 
+--[=[
+    @type WebSearchStatus ("completed" | "searching" | "in_progress" | "failed")
+    @within OpenRouterTypes
+]=]
 export type WebSearchStatus = "completed" | "searching" | "in_progress" | "failed"
 
 --[=[
@@ -2627,8 +2731,16 @@ export type OpenResponsesOutputItemDoneEvent = {
 	sequence_number: number,
 }
 
+--[=[
+    @type ResponsesOutputItemFileSearchCall OutputItemFileSearchCall
+    @within OpenRouterTypes
+]=]
 export type ResponsesOutputItemFileSearchCall = OutputItemFileSearchCall
 
+--[=[
+    @type ResponsesWebSearchCallOutput OutputItemWebSearchCall
+    @within OpenRouterTypes
+]=]
 export type ResponsesWebSearchCallOutput = OutputItemWebSearchCall
 
 --[=[
@@ -2813,6 +2925,10 @@ export type OpenResponsesStreamEvent = (
 	| OpenResponsesImageGenCallCompleted
 )
 
+--[=[
+    @type __schema0 (ChatCompletionFinishReason | nil)
+    @within OpenRouterTypes
+]=]
 export type __schema0 = ChatCompletionFinishReason | nil
 
 --[=[
