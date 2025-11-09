@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T03:38:10.972776Z (generator v1.0.0)
+-- Last generated: 2025-11-09T04:36:54.699039Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -207,7 +207,7 @@ end
     @within OpenRouter
     @tag Embeddings
     
-    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, experimental: {}? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
+    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
     @return Result<CreateEmbeddings200Response, CreateEmbeddings400Response | CreateEmbeddings401Response | CreateEmbeddings402Response | CreateEmbeddings404Response | CreateEmbeddings429Response | CreateEmbeddings500Response | CreateEmbeddings502Response | CreateEmbeddings503Response | CreateEmbeddings524Response | CreateEmbeddings529Response>
 ]=]
 function OpenRouter.createEmbeddings(
@@ -220,6 +220,7 @@ function OpenRouter.createEmbeddings(
 			require_parameters: boolean?,
 			data_collection: ("deny" | "allow")?,
 			zdr: boolean?,
+			enforce_distillable_text: boolean?,
 			order: { Types.ProviderName | string }?,
 			only: { Types.ProviderName | string }?,
 			ignore: { Types.ProviderName | string }?,
@@ -232,7 +233,6 @@ function OpenRouter.createEmbeddings(
 				audio: Types.BigNumberUnion?,
 				request: Types.BigNumberUnion?,
 			}?,
-			experimental: {}?,
 		}?,
 		encoding_format: ("float" | "base64")?,
 		user: string?,

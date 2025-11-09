@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-07T03:38:10.964765Z (generator v1.0.0)
+-- Last generated: 2025-11-09T04:36:54.687531Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -108,11 +108,9 @@ export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "con
     @interface ChatError
     @within OpenRouterTypes
     
-    @field error { code: ((string | number) | nil), message: string, param: (string | nil)?, ["type"]: (string | nil)? }
+    @field error { code: (string | number)?, message: string, param: string?, ["type"]: string? }
 ]=]
-export type ChatError = {
-	error: { code: string | number | nil, message: string, param: (string | nil)?, ["type"]: (string | nil)? },
-}
+export type ChatError = { error: { code: (string | number)?, message: string, param: string?, ["type"]: string? } }
 
 --[=[
     @interface ChatGenerationTokenUsage
@@ -122,7 +120,7 @@ export type ChatError = {
     @field prompt_tokens number
     @field total_tokens number
     @field completion_tokens_details { reasoning_tokens: number?, audio_tokens: number?, accepted_prediction_tokens: number?, rejected_prediction_tokens: number? }?
-    @field prompt_tokens_details ({ cached_tokens: number?, audio_tokens: number? } | nil)?
+    @field prompt_tokens_details { cached_tokens: number?, audio_tokens: number?, video_tokens: number? }?
 ]=]
 export type ChatGenerationTokenUsage = {
 	completion_tokens: number,
@@ -134,7 +132,7 @@ export type ChatGenerationTokenUsage = {
 		accepted_prediction_tokens: number?,
 		rejected_prediction_tokens: number?,
 	}?,
-	prompt_tokens_details: ({ cached_tokens: number?, audio_tokens: number? } | nil)?,
+	prompt_tokens_details: { cached_tokens: number?, audio_tokens: number?, video_tokens: number? }?,
 }
 
 --[=[
@@ -193,27 +191,24 @@ export type ChatMessageContentItem = (
     
     @field token string
     @field logprob number
-    @field bytes ({number} | nil)
-    @field top_logprobs {{ token: string, logprob: number, bytes: ({number} | nil) }}
+    @field bytes {number}?
+    @field top_logprobs {{ token: string, logprob: number, bytes: {number}? }}
 ]=]
 export type ChatMessageTokenLogprob = {
 	token: string,
 	logprob: number,
-	bytes: { number } | nil,
-	top_logprobs: { { token: string, logprob: number, bytes: { number } | nil } },
+	bytes: { number }?,
+	top_logprobs: { { token: string, logprob: number, bytes: { number }? } },
 }
 
 --[=[
     @interface ChatMessageTokenLogprobs
     @within OpenRouterTypes
     
-    @field content ({ChatMessageTokenLogprob} | nil)
-    @field refusal ({ChatMessageTokenLogprob} | nil)
+    @field content {ChatMessageTokenLogprob}?
+    @field refusal {ChatMessageTokenLogprob}?
 ]=]
-export type ChatMessageTokenLogprobs = {
-	content: { ChatMessageTokenLogprob } | nil,
-	refusal: { ChatMessageTokenLogprob } | nil,
-}
+export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, refusal: { ChatMessageTokenLogprob }? }
 
 --[=[
     @interface ChatMessageToolCall
@@ -230,19 +225,19 @@ export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: 
     @within OpenRouterTypes
     
     @field role string
-    @field content ((string | {ChatMessageContentItem}) | nil)?
+    @field content (string | {ChatMessageContentItem})?
     @field name string?
     @field tool_calls {ChatMessageToolCall}?
-    @field refusal (string | nil)?
-    @field reasoning (string | nil)?
+    @field refusal string?
+    @field reasoning string?
 ]=]
 export type AssistantMessage = {
 	role: string,
-	content: ((string | { ChatMessageContentItem }) | nil)?,
+	content: (string | { ChatMessageContentItem })?,
 	name: string?,
 	tool_calls: { ChatMessageToolCall }?,
-	refusal: (string | nil)?,
-	reasoning: (string | nil)?,
+	refusal: string?,
+	reasoning: string?,
 }
 
 --[=[
@@ -274,24 +269,24 @@ export type ChatStreamingMessageToolCall = {
     @within OpenRouterTypes
     
     @field role "assistant"?
-    @field content (string | nil)?
-    @field reasoning (string | nil)?
-    @field refusal (string | nil)?
+    @field content string?
+    @field reasoning string?
+    @field refusal string?
     @field tool_calls {ChatStreamingMessageToolCall}?
 ]=]
 export type ChatStreamingMessageChunk = {
 	role: "assistant"?,
-	content: (string | nil)?,
-	reasoning: (string | nil)?,
-	refusal: (string | nil)?,
+	content: string?,
+	reasoning: string?,
+	refusal: string?,
 	tool_calls: { ChatStreamingMessageToolCall }?,
 }
 
 --[=[
-    @type CompletionFinishReason (("stop" | "length" | "content_filter") | nil)
+    @type CompletionFinishReason ("stop" | "length" | "content_filter")?
     @within OpenRouterTypes
 ]=]
-export type CompletionFinishReason = "stop" | "length" | "content_filter" | nil
+export type CompletionFinishReason = ("stop" | "length" | "content_filter")?
 
 --[=[
     @interface CompletionLogprobs
@@ -299,13 +294,13 @@ export type CompletionFinishReason = "stop" | "length" | "content_filter" | nil
     
     @field tokens {string}
     @field token_logprobs {number}
-    @field top_logprobs ({{ [string]: number }} | nil)
+    @field top_logprobs {{ [string]: number }}?
     @field text_offset {number}
 ]=]
 export type CompletionLogprobs = {
 	tokens: { string },
 	token_logprobs: { number },
-	top_logprobs: { { [string]: number } } | nil,
+	top_logprobs: { { [string]: number } }?,
 	text_offset: { number },
 }
 
@@ -315,13 +310,13 @@ export type CompletionLogprobs = {
     
     @field text string
     @field index number
-    @field logprobs (CompletionLogprobs | nil)
+    @field logprobs CompletionLogprobs?
     @field finish_reason CompletionFinishReason
 ]=]
 export type CompletionChoice = {
 	text: string,
 	index: number,
-	logprobs: CompletionLogprobs | nil,
+	logprobs: CompletionLogprobs?,
 	finish_reason: CompletionFinishReason,
 }
 
@@ -518,14 +513,9 @@ export type InternalServerResponse = { error: InternalServerResponseErrorData, u
     @field name string
     @field description string?
     @field schema { [string]: any }?
-    @field strict (boolean | nil)?
+    @field strict boolean?
 ]=]
-export type JSONSchemaConfig = {
-	name: string,
-	description: string?,
-	schema: { [string]: any }?,
-	strict: (boolean | nil)?,
-}
+export type JSONSchemaConfig = { name: string, description: string?, schema: { [string]: any }?, strict: boolean? }
 
 --[=[
     @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
@@ -1666,47 +1656,47 @@ export type ResponseFormatTextGrammar = { ["type"]: string, grammar: string }
     @field model ModelName?
     @field models {ModelName}?
     @field prompt (string | {string} | {number} | {{number}})
-    @field best_of (number | nil)?
-    @field echo (boolean | nil)?
-    @field frequency_penalty (number | nil)?
-    @field logit_bias ({ [string]: number } | nil)?
-    @field logprobs (number | nil)?
-    @field max_tokens (number | nil)?
-    @field n (number | nil)?
-    @field presence_penalty (number | nil)?
-    @field seed (number | nil)?
-    @field stop ((string | {string}) | nil)?
+    @field best_of number?
+    @field echo boolean?
+    @field frequency_penalty number?
+    @field logit_bias { [string]: number }?
+    @field logprobs number?
+    @field max_tokens number?
+    @field n number?
+    @field presence_penalty number?
+    @field seed number?
+    @field stop (string | {string})?
     @field stream boolean? -- Default: False
-    @field stream_options ({ include_usage: (boolean | nil)? } | nil)?
-    @field suffix (string | nil)?
-    @field temperature (number | nil)?
-    @field top_p (number | nil)?
+    @field stream_options { include_usage: boolean? }?
+    @field suffix string?
+    @field temperature number?
+    @field top_p number?
     @field user string?
-    @field metadata ({ [string]: string } | nil)?
-    @field response_format (({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar) | nil)?
+    @field metadata { [string]: string }?
+    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
 ]=]
 export type CompletionCreateParams = {
 	model: ModelName?,
 	models: { ModelName }?,
 	prompt: string | { string } | { number } | { { number } },
-	best_of: (number | nil)?,
-	echo: (boolean | nil)?,
-	frequency_penalty: (number | nil)?,
-	logit_bias: ({ [string]: number } | nil)?,
-	logprobs: (number | nil)?,
-	max_tokens: (number | nil)?,
-	n: (number | nil)?,
-	presence_penalty: (number | nil)?,
-	seed: (number | nil)?,
-	stop: ((string | { string }) | nil)?,
+	best_of: number?,
+	echo: boolean?,
+	frequency_penalty: number?,
+	logit_bias: { [string]: number }?,
+	logprobs: number?,
+	max_tokens: number?,
+	n: number?,
+	presence_penalty: number?,
+	seed: number?,
+	stop: (string | { string })?,
 	stream: boolean?,
-	stream_options: ({ include_usage: (boolean | nil)? } | nil)?,
-	suffix: (string | nil)?,
-	temperature: (number | nil)?,
-	top_p: (number | nil)?,
+	stream_options: { include_usage: boolean? }?,
+	suffix: string?,
+	temperature: number?,
+	top_p: number?,
 	user: string?,
-	metadata: ({ [string]: string } | nil)?,
-	response_format: (({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar) | nil)?,
+	metadata: { [string]: string }?,
+	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
 }
 
 --[=[
@@ -2098,11 +2088,11 @@ export type ToolChoiceOption = string | NamedToolChoice
     @within OpenRouterTypes
     
     @field type string
-    @field function { name: string, description: string?, parameters: { [string]: any }?, strict: (boolean | nil)? }
+    @field function { name: string, description: string?, parameters: { [string]: any }?, strict: boolean? }
 ]=]
 export type ToolDefinitionJson = {
 	["type"]: string,
-	["function"]: { name: string, description: string?, parameters: { [string]: any }?, strict: (boolean | nil)? },
+	["function"]: { name: string, description: string?, parameters: { [string]: any }?, strict: boolean? },
 }
 
 --[=[
@@ -2396,48 +2386,48 @@ export type Message = (
     @field messages {Message}
     @field model ModelName?
     @field models {ModelName}?
-    @field frequency_penalty (number | nil)?
-    @field logit_bias ({ [string]: number } | nil)?
-    @field logprobs (boolean | nil)?
-    @field top_logprobs (number | nil)?
-    @field max_completion_tokens (number | nil)?
-    @field max_tokens (number | nil)?
+    @field frequency_penalty number?
+    @field logit_bias { [string]: number }?
+    @field logprobs boolean?
+    @field top_logprobs number?
+    @field max_completion_tokens number?
+    @field max_tokens number?
     @field metadata { [string]: string }?
-    @field presence_penalty (number | nil)?
-    @field reasoning { effort: (("minimal" | "low" | "medium" | "high") | nil)?, summary: (ReasoningSummaryVerbosity | nil)? }?
+    @field presence_penalty number?
+    @field reasoning { effort: ("minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?
     @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
-    @field seed (number | nil)?
-    @field stop ((string | {string}) | nil)?
+    @field seed number?
+    @field stop (string | {string})?
     @field stream boolean? -- Default: False
-    @field stream_options (ChatStreamOptions | nil)?
-    @field temperature (number | nil)? -- Default: 1
+    @field stream_options ChatStreamOptions?
+    @field temperature number? -- Default: 1
     @field tool_choice ToolChoiceOption?
     @field tools {ToolDefinitionJson}?
-    @field top_p (number | nil)? -- Default: 1
+    @field top_p number? -- Default: 1
     @field user string?
 ]=]
 export type ChatGenerationParams = {
 	messages: { Message },
 	model: ModelName?,
 	models: { ModelName }?,
-	frequency_penalty: (number | nil)?,
-	logit_bias: ({ [string]: number } | nil)?,
-	logprobs: (boolean | nil)?,
-	top_logprobs: (number | nil)?,
-	max_completion_tokens: (number | nil)?,
-	max_tokens: (number | nil)?,
+	frequency_penalty: number?,
+	logit_bias: { [string]: number }?,
+	logprobs: boolean?,
+	top_logprobs: number?,
+	max_completion_tokens: number?,
+	max_tokens: number?,
 	metadata: { [string]: string }?,
-	presence_penalty: (number | nil)?,
-	reasoning: { effort: (("minimal" | "low" | "medium" | "high") | nil)?, summary: (ReasoningSummaryVerbosity | nil)? }?,
+	presence_penalty: number?,
+	reasoning: { effort: ("minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?,
 	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
-	seed: (number | nil)?,
-	stop: ((string | { string }) | nil)?,
+	seed: number?,
+	stop: (string | { string })?,
 	stream: boolean?,
-	stream_options: (ChatStreamOptions | nil)?,
-	temperature: (number | nil)?,
+	stream_options: ChatStreamOptions?,
+	temperature: number?,
 	tool_choice: ToolChoiceOption?,
 	tools: { ToolDefinitionJson }?,
-	top_p: (number | nil)?,
+	top_p: number?,
 	user: string?,
 }
 
@@ -2795,7 +2785,7 @@ export type OpenResponsesInput =
     @field service_tier (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, experimental: {}? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }? -- When multiple model providers are available, optionally indicate your routing preference.
     @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? })}? -- Plugins you want to enable for this request, including their settings.
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
 ]=]
@@ -2837,6 +2827,7 @@ export type OpenResponsesRequest = {
 		require_parameters: boolean?,
 		data_collection: ("deny" | "allow")?,
 		zdr: boolean?,
+		enforce_distillable_text: boolean?,
 		order: { ProviderName | string }?,
 		only: { ProviderName | string }?,
 		ignore: { ProviderName | string }?,
@@ -2849,7 +2840,6 @@ export type OpenResponsesRequest = {
 			audio: BigNumberUnion?,
 			request: BigNumberUnion?,
 		}?,
-		experimental: {}?,
 	}?,
 	plugins: {
 		(
@@ -2926,10 +2916,10 @@ export type OpenResponsesStreamEvent = (
 )
 
 --[=[
-    @type __schema0 (ChatCompletionFinishReason | nil)
+    @type __schema0 ChatCompletionFinishReason?
     @within OpenRouterTypes
 ]=]
-export type __schema0 = ChatCompletionFinishReason | nil
+export type __schema0 = ChatCompletionFinishReason?
 
 --[=[
     @interface ChatResponseChoice
@@ -2938,13 +2928,13 @@ export type __schema0 = ChatCompletionFinishReason | nil
     @field finish_reason __schema0
     @field index number
     @field message AssistantMessage
-    @field logprobs (ChatMessageTokenLogprobs | nil)?
+    @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatResponseChoice = {
 	finish_reason: __schema0,
 	index: number,
 	message: AssistantMessage,
-	logprobs: (ChatMessageTokenLogprobs | nil)?,
+	logprobs: ChatMessageTokenLogprobs?,
 }
 
 --[=[
@@ -2956,7 +2946,7 @@ export type ChatResponseChoice = {
     @field created number
     @field model string
     @field object string
-    @field system_fingerprint (string | nil)?
+    @field system_fingerprint string?
     @field usage ChatGenerationTokenUsage?
 ]=]
 export type ChatResponse = {
@@ -2965,7 +2955,7 @@ export type ChatResponse = {
 	created: number,
 	model: string,
 	object: string,
-	system_fingerprint: (string | nil)?,
+	system_fingerprint: string?,
 	usage: ChatGenerationTokenUsage?,
 }
 
@@ -2976,20 +2966,20 @@ export type ChatResponse = {
     @field delta ChatStreamingMessageChunk
     @field finish_reason __schema0
     @field index number
-    @field logprobs (ChatMessageTokenLogprobs | nil)?
+    @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatStreamingChoice = {
 	delta: ChatStreamingMessageChunk,
 	finish_reason: __schema0,
 	index: number,
-	logprobs: (ChatMessageTokenLogprobs | nil)?,
+	logprobs: ChatMessageTokenLogprobs?,
 }
 
 --[=[
     @interface ChatStreamingResponseChunk
     @within OpenRouterTypes
     
-    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: (string | nil)?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
+    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
 ]=]
 export type ChatStreamingResponseChunk = {
 	data: {
@@ -2998,7 +2988,7 @@ export type ChatStreamingResponseChunk = {
 		created: number,
 		model: string,
 		object: string,
-		system_fingerprint: (string | nil)?,
+		system_fingerprint: string?,
 		error: { message: string, code: number }?,
 		usage: ChatGenerationTokenUsage?,
 	},
