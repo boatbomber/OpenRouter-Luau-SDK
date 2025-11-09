@@ -264,6 +264,16 @@ class TypeConverter:
             self.conversion_warnings.append(warning)
             return "any?" if nullable else "any"
 
+        # Check if nil is one of the union members - if so, remove it and mark as nullable
+        # This avoids redundant patterns like (number | nil)? and produces number? instead
+        if "nil" in types:
+            types.remove("nil")
+            nullable = True
+
+            # If we only have nil left, just return nil
+            if not types:
+                return "nil"
+
         if len(types) == 1:
             result = types[0]
         else:
