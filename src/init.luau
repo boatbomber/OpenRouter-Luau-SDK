@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-09T04:36:54.699039Z (generator v1.0.0)
+-- Last generated: 2025-11-16T01:47:28.048338Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -253,6 +253,24 @@ function OpenRouter.createEmbeddings(
 	return self:_request("POST", "/embeddings", params)
 end
 
+--[=[
+    Returns a list of all available embeddings models and their properties
+
+    Endpoint: GET /embeddings/models
+
+    @method listEmbeddingsModels
+    @within OpenRouter
+    @tag Embeddings
+    
+    @return Result<ListEmbeddingsModels200Response, ListEmbeddingsModels400Response | ListEmbeddingsModels500Response>
+]=]
+function OpenRouter.listEmbeddingsModels(self: OpenRouter): Types.Result<
+	Types.ListEmbeddingsModels200Response,
+	Types.ListEmbeddingsModels400Response | Types.ListEmbeddingsModels500Response
+>
+	return self:_request("GET", "/embeddings/models", nil)
+end
+
 --[[
   ══════════════════════════════════════════════════════════════════════════════
   Generations: Generation history endpoints
@@ -346,24 +364,6 @@ function OpenRouter.getModels(
 		["use_rss_chat_links"] = use_rss_chat_links,
 	})
 	return self:_request("GET", `/models{queryString}`, nil)
-end
-
---[=[
-    Returns a list of all available embeddings models and their properties
-
-    Endpoint: GET /models/embeddings
-
-    @method listModelsEmbeddings
-    @within OpenRouter
-    @tag Models
-    
-    @return Result<ListModelsEmbeddings200Response, ListModelsEmbeddings400Response | ListModelsEmbeddings500Response>
-]=]
-function OpenRouter.listModelsEmbeddings(self: OpenRouter): Types.Result<
-	Types.ListModelsEmbeddings200Response,
-	Types.ListModelsEmbeddings400Response | Types.ListModelsEmbeddings500Response
->
-	return self:_request("GET", "/models/embeddings", nil)
 end
 
 --[=[
@@ -601,7 +601,7 @@ end
     @within OpenRouter
     @tag API Keys
     
-    @param params { name: string, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean? } -- Request body parameters
+    @param params { name: string, limit: number?, limit_reset: ("daily" | "weekly" | "monthly")?, include_byok_in_limit: boolean?, expires_at: string? } -- Request body parameters
     @return Result<CreateKeys201Response, CreateKeys400Response | CreateKeys401Response | CreateKeys429Response | CreateKeys500Response>
 ]=]
 function OpenRouter.createKeys(
@@ -611,6 +611,7 @@ function OpenRouter.createKeys(
 		limit: number?,
 		limit_reset: ("daily" | "weekly" | "monthly")?,
 		include_byok_in_limit: boolean?,
+		expires_at: string?,
 	}
 ): Types.Result<
 	Types.CreateKeys201Response,
@@ -764,7 +765,7 @@ end
     @within OpenRouter
     @tag OAuth
     
-    @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number? } -- Request body parameters
+    @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number?, expires_at: string? } -- Request body parameters
     @return Result<CreateAuthKeysCode200Response, CreateAuthKeysCode400Response | CreateAuthKeysCode401Response | CreateAuthKeysCode500Response>
 ]=]
 function OpenRouter.createAuthKeysCode(
@@ -774,6 +775,7 @@ function OpenRouter.createAuthKeysCode(
 		code_challenge: string?,
 		code_challenge_method: ("S256" | "plain")?,
 		limit: number?,
+		expires_at: string?,
 	}
 ): Types.Result<
 	Types.CreateAuthKeysCode200Response,
