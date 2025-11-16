@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-09T04:36:54.687531Z (generator v1.0.0)
+-- Last generated: 2025-11-16T01:47:28.037168Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -1899,25 +1899,11 @@ export type ResponsesImageGenerationCall = OutputItemImageGenerationCall
 export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
 
 --[=[
-    @interface ResponsesOutputItemReasoning
+    @type ResponsesOutputItemReasoning OutputItemReasoning
     @within OpenRouterTypes
     An output item containing reasoning
-    
-    @field type "reasoning"
-    @field id string?
-    @field content {ReasoningTextContent}?
-    @field summary {ReasoningSummaryText}
-    @field encrypted_content string?
-    @field status ("completed" | "incomplete" | "in_progress")?
 ]=]
-export type ResponsesOutputItemReasoning = {
-	["type"]: "reasoning",
-	id: string?,
-	content: { ReasoningTextContent }?,
-	summary: { ReasoningSummaryText },
-	encrypted_content: string?,
-	status: ("completed" | "incomplete" | "in_progress")?,
-}
+export type ResponsesOutputItemReasoning = OutputItemReasoning
 
 --[=[
     @type ResponsesSearchContextSize ("low" | "medium" | "high")
@@ -2032,10 +2018,10 @@ export type TooManyRequestsResponseErrorData = { code: number, message: string, 
 export type TooManyRequestsResponse = { error: TooManyRequestsResponseErrorData, user_id: string? }
 
 --[=[
-    @type ToolCallStatus ("in_progress" | "completed" | "incomplete")
+    @type ToolCallStatus ("in_progress" | "completed" | "incomplete")?
     @within OpenRouterTypes
 ]=]
-export type ToolCallStatus = "in_progress" | "completed" | "incomplete"
+export type ToolCallStatus = ("in_progress" | "completed" | "incomplete")?
 
 --[=[
     @interface OpenResponsesFunctionCallOutput
@@ -2043,14 +2029,14 @@ export type ToolCallStatus = "in_progress" | "completed" | "incomplete"
     The output from a function call execution
     
     @field type "function_call_output"
-    @field id string
+    @field id string?
     @field call_id string
     @field output string
     @field status ToolCallStatus?
 ]=]
 export type OpenResponsesFunctionCallOutput = {
 	["type"]: "function_call_output",
-	id: string,
+	id: string?,
 	call_id: string,
 	output: string,
 	status: ToolCallStatus?,
@@ -2279,7 +2265,7 @@ export type OutputMessage = {
 }
 
 --[=[
-    @type OpenAIResponsesInput (string | {({ ["type"]: "message"?, role: ("user" | "system" | "assistant" | "developer"), content: ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} | string) } | { id: string, ["type"]: "message"?, role: ("user" | "system" | "developer"), content: {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} } | { ["type"]: "function_call_output", id: string, call_id: string, output: string, status: ToolCallStatus? } | { ["type"]: "function_call", call_id: string, name: string, arguments: string, id: string?, status: ToolCallStatus? } | OutputItemImageGenerationCall | OutputMessage)})?
+    @type OpenAIResponsesInput (string | {({ ["type"]: "message"?, role: ("user" | "system" | "assistant" | "developer"), content: ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} | string) } | { id: string, ["type"]: "message"?, role: ("user" | "system" | "developer"), content: {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} } | { ["type"]: "function_call_output", id: string?, call_id: string, output: string, status: ToolCallStatus? } | { ["type"]: "function_call", call_id: string, name: string, arguments: string, id: string?, status: ToolCallStatus? } | OutputItemImageGenerationCall | OutputMessage)})?
     @within OpenRouterTypes
 ]=]
 export type OpenAIResponsesInput = (string | {
@@ -2294,7 +2280,7 @@ export type OpenAIResponsesInput = (string | {
 		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
 	} | {
 		["type"]: "function_call_output",
-		id: string,
+		id: string?,
 		call_id: string,
 		output: string,
 		status: ToolCallStatus?,
@@ -3297,6 +3283,27 @@ export type CreateEmbeddings524Response = EdgeNetworkTimeoutResponse
 export type CreateEmbeddings529Response = ProviderOverloadedResponse
 
 --[=[
+    @type ListEmbeddingsModels200Response ModelsListResponse
+    @within OpenRouterTypes
+    200 Response type for listEmbeddingsModels
+]=]
+export type ListEmbeddingsModels200Response = ModelsListResponse
+
+--[=[
+    @type ListEmbeddingsModels400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for listEmbeddingsModels
+]=]
+export type ListEmbeddingsModels400Response = BadRequestResponse
+
+--[=[
+    @type ListEmbeddingsModels500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listEmbeddingsModels
+]=]
+export type ListEmbeddingsModels500Response = InternalServerResponse
+
+--[=[
     @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")? } }
     @within OpenRouterTypes
     200 Response type for getGeneration
@@ -3428,27 +3435,6 @@ export type GetModels400Response = BadRequestResponse
     500 Response type for getModels
 ]=]
 export type GetModels500Response = InternalServerResponse
-
---[=[
-    @type ListModelsEmbeddings200Response ModelsListResponse
-    @within OpenRouterTypes
-    200 Response type for listModelsEmbeddings
-]=]
-export type ListModelsEmbeddings200Response = ModelsListResponse
-
---[=[
-    @type ListModelsEmbeddings400Response BadRequestResponse
-    @within OpenRouterTypes
-    400 Response type for listModelsEmbeddings
-]=]
-export type ListModelsEmbeddings400Response = BadRequestResponse
-
---[=[
-    @type ListModelsEmbeddings500Response InternalServerResponse
-    @within OpenRouterTypes
-    500 Response type for listModelsEmbeddings
-]=]
-export type ListModelsEmbeddings500Response = InternalServerResponse
 
 --[=[
     @type ListModelsUser200Response ModelsListResponse
@@ -3590,7 +3576,7 @@ export type ListProviders200Response = {
 export type ListProviders500Response = InternalServerResponse
 
 --[=[
-    @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }} }
+    @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? }} }
     @within OpenRouterTypes
     200 Response type for list
 ]=]
@@ -3615,6 +3601,7 @@ export type List200Response = {
 			byok_usage_monthly: number,
 			created_at: string,
 			updated_at: string?,
+			expires_at: string?,
 		}
 	},
 }
@@ -3641,7 +3628,7 @@ export type List429Response = TooManyRequestsResponse
 export type List500Response = InternalServerResponse
 
 --[=[
-    @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? }, key: string }
+    @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? }, key: string }
     @within OpenRouterTypes
     201 Response type for createKeys
 ]=]
@@ -3665,6 +3652,7 @@ export type CreateKeys201Response = {
 		byok_usage_monthly: number,
 		created_at: string,
 		updated_at: string?,
+		expires_at: string?,
 	},
 	key: string,
 }
@@ -3698,7 +3686,7 @@ export type CreateKeys429Response = TooManyRequestsResponse
 export type CreateKeys500Response = InternalServerResponse
 
 --[=[
-    @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
+    @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? } }
     @within OpenRouterTypes
     200 Response type for getKey
 ]=]
@@ -3722,6 +3710,7 @@ export type GetKey200Response = {
 		byok_usage_monthly: number,
 		created_at: string,
 		updated_at: string?,
+		expires_at: string?,
 	},
 }
 
@@ -3789,7 +3778,7 @@ export type DeleteKeys429Response = TooManyRequestsResponse
 export type DeleteKeys500Response = InternalServerResponse
 
 --[=[
-    @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string? } }
+    @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? } }
     @within OpenRouterTypes
     200 Response type for updateKeys
 ]=]
@@ -3813,6 +3802,7 @@ export type UpdateKeys200Response = {
 		byok_usage_monthly: number,
 		created_at: string,
 		updated_at: string?,
+		expires_at: string?,
 	},
 }
 
@@ -3852,7 +3842,7 @@ export type UpdateKeys429Response = TooManyRequestsResponse
 export type UpdateKeys500Response = InternalServerResponse
 
 --[=[
-    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, rate_limit: { requests: number, interval: string, note: string } } }
+    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, rate_limit: { requests: number, interval: string, note: string } } }
     @within OpenRouterTypes
     200 Response type for getCurrentKey
 ]=]
@@ -3873,6 +3863,7 @@ export type GetCurrentKey200Response = {
 		limit_remaining: number?,
 		limit_reset: string?,
 		include_byok_in_limit: boolean,
+		expires_at: string?,
 		rate_limit: { requests: number, interval: string, note: string },
 	},
 }
