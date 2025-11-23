@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-16T01:47:28.048338Z (generator v1.0.0)
+-- Last generated: 2025-11-23T01:54:05.362785Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -207,25 +207,32 @@ end
     @within OpenRouter
     @tag Embeddings
     
-    @param params { input: (string | {string} | {number} | {{number}}), model: string, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }?, encoding_format: ("float" | "base64")?, user: string? } -- Request body parameters
+    @param params { input: (string | {string} | {number} | {{number}} | {{ content: {({ ["type"]: "text", text: string } | { ["type"]: "image_url", image_url: { url: string } })} }}), model: string, encoding_format: ("float" | "base64")?, dimensions: number?, user: string?, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }?, input_type: string? } -- Request body parameters
     @return Result<CreateEmbeddings200Response, CreateEmbeddings400Response | CreateEmbeddings401Response | CreateEmbeddings402Response | CreateEmbeddings404Response | CreateEmbeddings429Response | CreateEmbeddings500Response | CreateEmbeddings502Response | CreateEmbeddings503Response | CreateEmbeddings524Response | CreateEmbeddings529Response>
 ]=]
 function OpenRouter.createEmbeddings(
 	self: OpenRouter,
 	params: {
-		input: string | { string } | { number } | { { number } },
+		input: string | { string } | { number } | { { number } } | {
+			{
+				content: { { ["type"]: "text", text: string } | { ["type"]: "image_url", image_url: { url: string } } },
+			}
+		},
 		model: string,
+		encoding_format: ("float" | "base64")?,
+		dimensions: number?,
+		user: string?,
 		provider: {
 			allow_fallbacks: boolean?,
 			require_parameters: boolean?,
-			data_collection: ("deny" | "allow")?,
+			data_collection: Types.DataCollection?,
 			zdr: boolean?,
 			enforce_distillable_text: boolean?,
 			order: { Types.ProviderName | string }?,
 			only: { Types.ProviderName | string }?,
 			ignore: { Types.ProviderName | string }?,
 			quantizations: { Types.Quantization }?,
-			sort: ("price" | "throughput" | "latency")?,
+			sort: Types.ProviderSort?,
 			max_price: {
 				prompt: Types.BigNumberUnion?,
 				completion: Types.BigNumberUnion?,
@@ -234,8 +241,7 @@ function OpenRouter.createEmbeddings(
 				request: Types.BigNumberUnion?,
 			}?,
 		}?,
-		encoding_format: ("float" | "base64")?,
-		user: string?,
+		input_type: string?,
 	}
 ): Types.Result<
 	Types.CreateEmbeddings200Response,
@@ -343,16 +349,12 @@ end
     
     @param category string? -- No description provided
     @param supported_parameters string? -- No description provided
-    @param use_rss string? -- No description provided
-    @param use_rss_chat_links string? -- No description provided
     @return Result<GetModels200Response, GetModels400Response | GetModels500Response>
 ]=]
 function OpenRouter.getModels(
 	self: OpenRouter,
 	category: string?,
-	supported_parameters: string?,
-	use_rss: string?,
-	use_rss_chat_links: string?
+	supported_parameters: string?
 ): Types.Result<
 	Types.GetModels200Response,
 	Types.GetModels400Response | Types.GetModels500Response
@@ -360,8 +362,6 @@ function OpenRouter.getModels(
 	local queryString = self:_buildQueryString({
 		["category"] = category,
 		["supported_parameters"] = supported_parameters,
-		["use_rss"] = use_rss,
-		["use_rss_chat_links"] = use_rss_chat_links,
 	})
 	return self:_request("GET", `/models{queryString}`, nil)
 end
@@ -448,7 +448,7 @@ end
     
     @param author string -- No description provided
     @param slug string -- No description provided
-    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "AtlasCloud" | "Atoma" | "Avian" | "Azure" | "BaseTen" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "CrofAI" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Enfer" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Kluster" | "Lambda" | "Liquid" | "Mancer 2" | "Meta" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Nineteen" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Ubicloud" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
+    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "Arcee" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
     @return Result<GetParameters200Response, GetParameters401Response | GetParameters404Response | GetParameters500Response>
 ]=]
 function OpenRouter.getParameters(
@@ -461,22 +461,21 @@ function OpenRouter.getParameters(
 		| "Alibaba"
 		| "Amazon Bedrock"
 		| "Anthropic"
+		| "Arcee"
 		| "AtlasCloud"
-		| "Atoma"
 		| "Avian"
 		| "Azure"
 		| "BaseTen"
+		| "Black Forest Labs"
 		| "Cerebras"
 		| "Chutes"
 		| "Cirrascale"
 		| "Clarifai"
 		| "Cloudflare"
 		| "Cohere"
-		| "CrofAI"
 		| "Crusoe"
 		| "DeepInfra"
 		| "DeepSeek"
-		| "Enfer"
 		| "Featherless"
 		| "Fireworks"
 		| "Friendli"
@@ -489,11 +488,8 @@ function OpenRouter.getParameters(
 		| "InferenceNet"
 		| "Infermatic"
 		| "Inflection"
-		| "Kluster"
-		| "Lambda"
 		| "Liquid"
 		| "Mancer 2"
-		| "Meta"
 		| "Minimax"
 		| "ModelRun"
 		| "Mistral"
@@ -503,7 +499,6 @@ function OpenRouter.getParameters(
 		| "NCompass"
 		| "Nebius"
 		| "NextBit"
-		| "Nineteen"
 		| "Novita"
 		| "Nvidia"
 		| "OpenAI"
@@ -518,7 +513,6 @@ function OpenRouter.getParameters(
 		| "Switchpoint"
 		| "Targon"
 		| "Together"
-		| "Ubicloud"
 		| "Venice"
 		| "WandB"
 		| "xAI"
