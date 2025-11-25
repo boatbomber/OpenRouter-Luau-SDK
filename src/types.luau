@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-16T01:47:28.037168Z (generator v1.0.0)
+-- Last generated: 2025-11-23T01:54:05.351288Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -99,10 +99,10 @@ export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: 
 export type BigNumberUnion = number | string
 
 --[=[
-    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")
+    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")?
     @within OpenRouterTypes
 ]=]
-export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
+export type ChatCompletionFinishReason = ("tool_calls" | "stop" | "length" | "content_filter" | "error")?
 
 --[=[
     @interface ChatError
@@ -148,6 +148,18 @@ export type ChatMessageContentItemAudio = {
 }
 
 --[=[
+    @interface ChatMessageContentItemFile
+    @within OpenRouterTypes
+    
+    @field type string
+    @field file { file_data: string, file_id: string?, filename: string? }
+]=]
+export type ChatMessageContentItemFile = {
+	["type"]: string,
+	file: { file_data: string, file_id: string?, filename: string? },
+}
+
+--[=[
     @interface ChatMessageContentItemImage
     @within OpenRouterTypes
     
@@ -167,23 +179,6 @@ export type ChatMessageContentItemImage = {
     @field text string
 ]=]
 export type ChatMessageContentItemText = { ["type"]: string, text: string }
-
---[=[
-    @interface ChatMessageContentItemVideo
-    @within OpenRouterTypes
-    
-    @field type string
-    @field video_url { url: string }
-]=]
-export type ChatMessageContentItemVideo = { ["type"]: string, video_url: { url: string } }
-
---[=[
-    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo)
-    @within OpenRouterTypes
-]=]
-export type ChatMessageContentItem = (
-	ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo
-)
 
 --[=[
     @interface ChatMessageTokenLogprob
@@ -219,26 +214,6 @@ export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, 
     @field function { name: string, arguments: string }
 ]=]
 export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: { name: string, arguments: string } }
-
---[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})?
-    @field name string?
-    @field tool_calls {ChatMessageToolCall}?
-    @field refusal string?
-    @field reasoning string?
-]=]
-export type AssistantMessage = {
-	role: string,
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-}
 
 --[=[
     @interface ChatStreamOptions
@@ -280,6 +255,41 @@ export type ChatStreamingMessageChunk = {
 	reasoning: string?,
 	refusal: string?,
 	tool_calls: { ChatStreamingMessageToolCall }?,
+}
+
+--[=[
+    @interface ChatStreamingChoice
+    @within OpenRouterTypes
+    
+    @field delta ChatStreamingMessageChunk
+    @field finish_reason ChatCompletionFinishReason
+    @field index number
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatStreamingChoice = {
+	delta: ChatStreamingMessageChunk,
+	finish_reason: ChatCompletionFinishReason,
+	index: number,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatStreamingResponseChunk
+    @within OpenRouterTypes
+    
+    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
+]=]
+export type ChatStreamingResponseChunk = {
+	data: {
+		id: string,
+		choices: { ChatStreamingChoice },
+		created: number,
+		model: string,
+		object: string,
+		system_fingerprint: string?,
+		error: { message: string, code: number }?,
+		usage: ChatGenerationTokenUsage?,
+	},
 }
 
 --[=[
@@ -362,6 +372,16 @@ export type CompletionResponse = {
     @field chain_id number
 ]=]
 export type CreateChargeRequest = { amount: number, sender: string, chain_id: number }
+
+--[=[
+    @type DataCollection ("deny" | "allow")?
+    @within OpenRouterTypes
+    Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers which store user data non-transiently and may train on it
+
+- deny: use only providers which do not collect user data.
+]=]
+export type DataCollection = ("deny" | "allow")?
 
 --[=[
     @interface DefaultParameters
@@ -739,10 +759,10 @@ export type OpenAIResponsesReasoningDoneEvent = {
 }
 
 --[=[
-    @type OpenAIResponsesReasoningEffort ("high" | "medium" | "low" | "minimal")?
+    @type OpenAIResponsesReasoningEffort ("high" | "medium" | "low" | "minimal" | "none")?
     @within OpenRouterTypes
 ]=]
-export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minimal")?
+export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minimal" | "none")?
 
 --[=[
     @interface OpenAIResponsesReasoningSummaryTextDeltaEvent
@@ -1261,48 +1281,30 @@ export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData,
 export type PerRequestLimits = { prompt_tokens: number, completion_tokens: number }?
 
 --[=[
-    @type ProviderName ("AnyScale" | "Cent-ML" | "HuggingFace" | "Hyperbolic 2" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Modal" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Together 2" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "AtlasCloud" | "Atoma" | "Avian" | "Azure" | "BaseTen" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "CrofAI" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Enfer" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "InoCloud" | "Kluster" | "Lambda" | "Liquid" | "Mancer 2" | "Meta" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Nineteen" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Ubicloud" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
+    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "Arcee" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
-	"AnyScale"
-	| "Cent-ML"
-	| "HuggingFace"
-	| "Hyperbolic 2"
-	| "Lepton"
-	| "Lynn 2"
-	| "Lynn"
-	| "Mancer"
-	| "Modal"
-	| "OctoAI"
-	| "Recursal"
-	| "Reflection"
-	| "Replicate"
-	| "SambaNova 2"
-	| "SF Compute"
-	| "Together 2"
-	| "01.AI"
-	| "AI21"
+	"AI21"
 	| "AionLabs"
 	| "Alibaba"
 	| "Amazon Bedrock"
 	| "Anthropic"
+	| "Arcee"
 	| "AtlasCloud"
-	| "Atoma"
 	| "Avian"
 	| "Azure"
 	| "BaseTen"
+	| "Black Forest Labs"
 	| "Cerebras"
 	| "Chutes"
 	| "Cirrascale"
 	| "Clarifai"
 	| "Cloudflare"
 	| "Cohere"
-	| "CrofAI"
 	| "Crusoe"
 	| "DeepInfra"
 	| "DeepSeek"
-	| "Enfer"
 	| "Featherless"
 	| "Fireworks"
 	| "Friendli"
@@ -1315,12 +1317,8 @@ export type ProviderName = (
 	| "InferenceNet"
 	| "Infermatic"
 	| "Inflection"
-	| "InoCloud"
-	| "Kluster"
-	| "Lambda"
 	| "Liquid"
 	| "Mancer 2"
-	| "Meta"
 	| "Minimax"
 	| "ModelRun"
 	| "Mistral"
@@ -1330,7 +1328,6 @@ export type ProviderName = (
 	| "NCompass"
 	| "Nebius"
 	| "NextBit"
-	| "Nineteen"
 	| "Novita"
 	| "Nvidia"
 	| "OpenAI"
@@ -1345,7 +1342,6 @@ export type ProviderName = (
 	| "Switchpoint"
 	| "Targon"
 	| "Together"
-	| "Ubicloud"
 	| "Venice"
 	| "WandB"
 	| "xAI"
@@ -1375,6 +1371,13 @@ export type ProviderOverloadedResponseErrorData = { code: number, message: strin
 export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErrorData, user_id: string? }
 
 --[=[
+    @type ProviderSort ("price" | "throughput" | "latency")?
+    @within OpenRouterTypes
+    The sorting strategy to use for this request, if "order" is not specified. When set, no load balancing is performed.
+]=]
+export type ProviderSort = ("price" | "throughput" | "latency")?
+
+--[=[
     @interface PublicPricing
     @within OpenRouterTypes
     Pricing information for the model
@@ -1383,6 +1386,7 @@ export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErro
     @field completion BigNumberUnion
     @field request BigNumberUnion?
     @field image BigNumberUnion?
+    @field image_token BigNumberUnion?
     @field image_output BigNumberUnion?
     @field audio BigNumberUnion?
     @field input_audio_cache BigNumberUnion?
@@ -1397,6 +1401,7 @@ export type PublicPricing = {
 	completion: BigNumberUnion,
 	request: BigNumberUnion?,
 	image: BigNumberUnion?,
+	image_token: BigNumberUnion?,
 	image_output: BigNumberUnion?,
 	audio: BigNumberUnion?,
 	input_audio_cache: BigNumberUnion?,
@@ -1421,7 +1426,7 @@ export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "b
     @field name string
     @field model_name string
     @field context_length number
-    @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
+    @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_token: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
     @field provider_name ProviderName
     @field tag string
     @field quantization Quantization?
@@ -1441,6 +1446,7 @@ export type PublicEndpoint = {
 		completion: BigNumberUnion,
 		request: BigNumberUnion?,
 		image: BigNumberUnion?,
+		image_token: BigNumberUnion?,
 		image_output: BigNumberUnion?,
 		audio: BigNumberUnion?,
 		input_audio_cache: BigNumberUnion?,
@@ -1601,13 +1607,13 @@ export type OutputItemReasoning = {
 }
 
 --[=[
-    @type OpenResponsesReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1")? })
+    @type OpenResponsesReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
     @within OpenRouterTypes
     Reasoning output item with signature and format extensions
 ]=]
 export type OpenResponsesReasoning = OutputItemReasoning & {
 	signature: string?,
-	format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1")?,
+	format: ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?,
 }
 
 --[=[
@@ -2082,16 +2088,6 @@ export type ToolDefinitionJson = {
 }
 
 --[=[
-    @interface ToolResponseMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})
-    @field tool_call_id string
-]=]
-export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
-
---[=[
     @interface TopProviderInfo
     @within OpenRouterTypes
     Information about the top provider for this model
@@ -2344,6 +2340,102 @@ export type UnprocessableEntityResponseErrorData = { code: number, message: stri
 export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseErrorData, user_id: string? }
 
 --[=[
+    @interface VideoURL
+    @within OpenRouterTypes
+    
+    @field url string
+]=]
+export type VideoURL = { url: string }
+
+--[=[
+    @type ChatMessageContentItemVideo ({ ["type"]: string, video_url: VideoURL } | { ["type"]: string, video_url: { url: string } })
+    @within OpenRouterTypes
+]=]
+export type ChatMessageContentItemVideo = (
+	{ ["type"]: string, video_url: VideoURL } | { ["type"]: string, video_url: { url: string } }
+)
+
+--[=[
+    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo | ChatMessageContentItemFile)
+    @within OpenRouterTypes
+]=]
+export type ChatMessageContentItem = (
+	ChatMessageContentItemText
+	| ChatMessageContentItemImage
+	| ChatMessageContentItemAudio
+	| ChatMessageContentItemVideo
+	| ChatMessageContentItemFile
+)
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})?
+    @field name string?
+    @field tool_calls {ChatMessageToolCall}?
+    @field refusal string?
+    @field reasoning string?
+]=]
+export type AssistantMessage = {
+	role: string,
+	content: (string | { ChatMessageContentItem })?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+}
+
+--[=[
+    @interface ChatResponseChoice
+    @within OpenRouterTypes
+    
+    @field finish_reason ChatCompletionFinishReason
+    @field index number
+    @field message AssistantMessage
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatResponseChoice = {
+	finish_reason: ChatCompletionFinishReason,
+	index: number,
+	message: AssistantMessage,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatResponse
+    @within OpenRouterTypes
+    
+    @field id string
+    @field choices {ChatResponseChoice}
+    @field created number
+    @field model string
+    @field object string
+    @field system_fingerprint string?
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatResponse = {
+	id: string,
+	choices: { ChatResponseChoice },
+	created: number,
+	model: string,
+	object: string,
+	system_fingerprint: string?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ToolResponseMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})
+    @field tool_call_id string
+]=]
+export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
+
+--[=[
     @interface UserMessage
     @within OpenRouterTypes
     
@@ -2380,7 +2472,7 @@ export type Message = (
     @field max_tokens number?
     @field metadata { [string]: string }?
     @field presence_penalty number?
-    @field reasoning { effort: ("minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?
+    @field reasoning { effort: ("none" | "minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?
     @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
     @field seed number?
     @field stop (string | {string})?
@@ -2404,7 +2496,7 @@ export type ChatGenerationParams = {
 	max_tokens: number?,
 	metadata: { [string]: string }?,
 	presence_penalty: number?,
-	reasoning: { effort: ("minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?,
+	reasoning: { effort: ("none" | "minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?,
 	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
 	seed: number?,
 	stop: (string | { string })?,
@@ -2771,7 +2863,7 @@ export type OpenResponsesInput =
     @field service_tier (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }? -- When multiple model providers are available, optionally indicate your routing preference.
     @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? })}? -- Plugins you want to enable for this request, including their settings.
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
 ]=]
@@ -2811,14 +2903,14 @@ export type OpenResponsesRequest = {
 	provider: {
 		allow_fallbacks: boolean?,
 		require_parameters: boolean?,
-		data_collection: ("deny" | "allow")?,
+		data_collection: DataCollection?,
 		zdr: boolean?,
 		enforce_distillable_text: boolean?,
 		order: { ProviderName | string }?,
 		only: { ProviderName | string }?,
 		ignore: { ProviderName | string }?,
 		quantizations: { Quantization }?,
-		sort: ("price" | "throughput" | "latency")?,
+		sort: ProviderSort?,
 		max_price: {
 			prompt: BigNumberUnion?,
 			completion: BigNumberUnion?,
@@ -2900,85 +2992,6 @@ export type OpenResponsesStreamEvent = (
 	| OpenResponsesImageGenCallPartialImage
 	| OpenResponsesImageGenCallCompleted
 )
-
---[=[
-    @type __schema0 ChatCompletionFinishReason?
-    @within OpenRouterTypes
-]=]
-export type __schema0 = ChatCompletionFinishReason?
-
---[=[
-    @interface ChatResponseChoice
-    @within OpenRouterTypes
-    
-    @field finish_reason __schema0
-    @field index number
-    @field message AssistantMessage
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatResponseChoice = {
-	finish_reason: __schema0,
-	index: number,
-	message: AssistantMessage,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatResponse
-    @within OpenRouterTypes
-    
-    @field id string
-    @field choices {ChatResponseChoice}
-    @field created number
-    @field model string
-    @field object string
-    @field system_fingerprint string?
-    @field usage ChatGenerationTokenUsage?
-]=]
-export type ChatResponse = {
-	id: string,
-	choices: { ChatResponseChoice },
-	created: number,
-	model: string,
-	object: string,
-	system_fingerprint: string?,
-	usage: ChatGenerationTokenUsage?,
-}
-
---[=[
-    @interface ChatStreamingChoice
-    @within OpenRouterTypes
-    
-    @field delta ChatStreamingMessageChunk
-    @field finish_reason __schema0
-    @field index number
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatStreamingChoice = {
-	delta: ChatStreamingMessageChunk,
-	finish_reason: __schema0,
-	index: number,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatStreamingResponseChunk
-    @within OpenRouterTypes
-    
-    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
-]=]
-export type ChatStreamingResponseChunk = {
-	data: {
-		id: string,
-		choices: { ChatStreamingChoice },
-		created: number,
-		model: string,
-		object: string,
-		system_fingerprint: string?,
-		error: { message: string, code: number }?,
-		usage: ChatGenerationTokenUsage?,
-	},
-}
 
 --[=[
     @type CreateResponses200Response OpenResponsesNonStreamingResponse
