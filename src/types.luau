@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-23T01:54:05.351288Z (generator v1.0.0)
+-- Last generated: 2025-12-07T00:29:25.777822Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -99,10 +99,10 @@ export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: 
 export type BigNumberUnion = number | string
 
 --[=[
-    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")?
+    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")
     @within OpenRouterTypes
 ]=]
-export type ChatCompletionFinishReason = ("tool_calls" | "stop" | "length" | "content_filter" | "error")?
+export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
 
 --[=[
     @interface ChatError
@@ -140,24 +140,18 @@ export type ChatGenerationTokenUsage = {
     @within OpenRouterTypes
     
     @field type string
-    @field input_audio { data: string, format: ("wav" | "mp3" | "flac" | "m4a" | "ogg" | "pcm16" | "pcm24") }
+    @field input_audio { data: string, format: string }
 ]=]
-export type ChatMessageContentItemAudio = {
-	["type"]: string,
-	input_audio: { data: string, format: "wav" | "mp3" | "flac" | "m4a" | "ogg" | "pcm16" | "pcm24" },
-}
+export type ChatMessageContentItemAudio = { ["type"]: string, input_audio: { data: string, format: string } }
 
 --[=[
-    @interface ChatMessageContentItemFile
+    @interface ChatMessageContentItemCacheControl
     @within OpenRouterTypes
     
     @field type string
-    @field file { file_data: string, file_id: string?, filename: string? }
+    @field ttl ("5m" | "1h")?
 ]=]
-export type ChatMessageContentItemFile = {
-	["type"]: string,
-	file: { file_data: string, file_id: string?, filename: string? },
-}
+export type ChatMessageContentItemCacheControl = { ["type"]: string, ttl: ("5m" | "1h")? }
 
 --[=[
     @interface ChatMessageContentItemImage
@@ -177,8 +171,27 @@ export type ChatMessageContentItemImage = {
     
     @field type string
     @field text string
+    @field cache_control ChatMessageContentItemCacheControl?
 ]=]
-export type ChatMessageContentItemText = { ["type"]: string, text: string }
+export type ChatMessageContentItemText = {
+	["type"]: string,
+	text: string,
+	cache_control: ChatMessageContentItemCacheControl?,
+}
+
+--[=[
+    @type ChatMessageContentItemVideo { ["type"]: string, video_url: { url: string } }
+    @within OpenRouterTypes
+]=]
+export type ChatMessageContentItemVideo = { ["type"]: string, video_url: { url: string } }
+
+--[=[
+    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo)
+    @within OpenRouterTypes
+]=]
+export type ChatMessageContentItem = (
+	ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo
+)
 
 --[=[
     @interface ChatMessageTokenLogprob
@@ -214,6 +227,26 @@ export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, 
     @field function { name: string, arguments: string }
 ]=]
 export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: { name: string, arguments: string } }
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})?
+    @field name string?
+    @field tool_calls {ChatMessageToolCall}?
+    @field refusal string?
+    @field reasoning string?
+]=]
+export type AssistantMessage = {
+	role: string,
+	content: (string | { ChatMessageContentItem })?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+}
 
 --[=[
     @interface ChatStreamOptions
@@ -258,41 +291,6 @@ export type ChatStreamingMessageChunk = {
 }
 
 --[=[
-    @interface ChatStreamingChoice
-    @within OpenRouterTypes
-    
-    @field delta ChatStreamingMessageChunk
-    @field finish_reason ChatCompletionFinishReason
-    @field index number
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatStreamingChoice = {
-	delta: ChatStreamingMessageChunk,
-	finish_reason: ChatCompletionFinishReason,
-	index: number,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatStreamingResponseChunk
-    @within OpenRouterTypes
-    
-    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
-]=]
-export type ChatStreamingResponseChunk = {
-	data: {
-		id: string,
-		choices: { ChatStreamingChoice },
-		created: number,
-		model: string,
-		object: string,
-		system_fingerprint: string?,
-		error: { message: string, code: number }?,
-		usage: ChatGenerationTokenUsage?,
-	},
-}
-
---[=[
     @type CompletionFinishReason ("stop" | "length" | "content_filter")?
     @within OpenRouterTypes
 ]=]
@@ -322,12 +320,16 @@ export type CompletionLogprobs = {
     @field index number
     @field logprobs CompletionLogprobs?
     @field finish_reason CompletionFinishReason
+    @field native_finish_reason string?
+    @field reasoning string?
 ]=]
 export type CompletionChoice = {
 	text: string,
 	index: number,
 	logprobs: CompletionLogprobs?,
 	finish_reason: CompletionFinishReason,
+	native_finish_reason: string?,
+	reasoning: string?,
 }
 
 --[=[
@@ -348,6 +350,7 @@ export type CompletionUsage = { prompt_tokens: number, completion_tokens: number
     @field object string
     @field created number
     @field model string
+    @field provider string?
     @field system_fingerprint string?
     @field choices {CompletionChoice}
     @field usage CompletionUsage?
@@ -357,6 +360,7 @@ export type CompletionResponse = {
 	object: string,
 	created: number,
 	model: string,
+	provider: string?,
 	system_fingerprint: string?,
 	choices: { CompletionChoice },
 	usage: CompletionUsage?,
@@ -1281,7 +1285,7 @@ export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData,
 export type PerRequestLimits = { prompt_tokens: number, completion_tokens: number }?
 
 --[=[
-    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "Arcee" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
+    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
@@ -1289,12 +1293,14 @@ export type ProviderName = (
 	| "AionLabs"
 	| "Alibaba"
 	| "Amazon Bedrock"
+	| "Amazon Nova"
 	| "Anthropic"
-	| "Arcee"
+	| "Arcee AI"
 	| "AtlasCloud"
 	| "Avian"
 	| "Azure"
 	| "BaseTen"
+	| "BytePlus"
 	| "Black Forest Labs"
 	| "Cerebras"
 	| "Chutes"
@@ -1309,6 +1315,7 @@ export type ProviderName = (
 	| "Fireworks"
 	| "Friendli"
 	| "GMICloud"
+	| "GoPomelo"
 	| "Google"
 	| "Google AI Studio"
 	| "Groq"
@@ -1339,6 +1346,7 @@ export type ProviderName = (
 	| "SambaNova"
 	| "SiliconFlow"
 	| "Stealth"
+	| "StreamLake"
 	| "Switchpoint"
 	| "Targon"
 	| "Together"
@@ -2088,6 +2096,16 @@ export type ToolDefinitionJson = {
 }
 
 --[=[
+    @interface ToolResponseMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})
+    @field tool_call_id string
+]=]
+export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
+
+--[=[
     @interface TopProviderInfo
     @within OpenRouterTypes
     Information about the top provider for this model
@@ -2340,102 +2358,6 @@ export type UnprocessableEntityResponseErrorData = { code: number, message: stri
 export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseErrorData, user_id: string? }
 
 --[=[
-    @interface VideoURL
-    @within OpenRouterTypes
-    
-    @field url string
-]=]
-export type VideoURL = { url: string }
-
---[=[
-    @type ChatMessageContentItemVideo ({ ["type"]: string, video_url: VideoURL } | { ["type"]: string, video_url: { url: string } })
-    @within OpenRouterTypes
-]=]
-export type ChatMessageContentItemVideo = (
-	{ ["type"]: string, video_url: VideoURL } | { ["type"]: string, video_url: { url: string } }
-)
-
---[=[
-    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo | ChatMessageContentItemFile)
-    @within OpenRouterTypes
-]=]
-export type ChatMessageContentItem = (
-	ChatMessageContentItemText
-	| ChatMessageContentItemImage
-	| ChatMessageContentItemAudio
-	| ChatMessageContentItemVideo
-	| ChatMessageContentItemFile
-)
-
---[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})?
-    @field name string?
-    @field tool_calls {ChatMessageToolCall}?
-    @field refusal string?
-    @field reasoning string?
-]=]
-export type AssistantMessage = {
-	role: string,
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-}
-
---[=[
-    @interface ChatResponseChoice
-    @within OpenRouterTypes
-    
-    @field finish_reason ChatCompletionFinishReason
-    @field index number
-    @field message AssistantMessage
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatResponseChoice = {
-	finish_reason: ChatCompletionFinishReason,
-	index: number,
-	message: AssistantMessage,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatResponse
-    @within OpenRouterTypes
-    
-    @field id string
-    @field choices {ChatResponseChoice}
-    @field created number
-    @field model string
-    @field object string
-    @field system_fingerprint string?
-    @field usage ChatGenerationTokenUsage?
-]=]
-export type ChatResponse = {
-	id: string,
-	choices: { ChatResponseChoice },
-	created: number,
-	model: string,
-	object: string,
-	system_fingerprint: string?,
-	usage: ChatGenerationTokenUsage?,
-}
-
---[=[
-    @interface ToolResponseMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})
-    @field tool_call_id string
-]=]
-export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
-
---[=[
     @interface UserMessage
     @within OpenRouterTypes
     
@@ -2483,6 +2405,7 @@ export type Message = (
     @field tools {ToolDefinitionJson}?
     @field top_p number? -- Default: 1
     @field user string?
+    @field debug { echo_upstream_body: boolean? }?
 ]=]
 export type ChatGenerationParams = {
 	messages: { Message },
@@ -2507,6 +2430,7 @@ export type ChatGenerationParams = {
 	tools: { ToolDefinitionJson }?,
 	top_p: number?,
 	user: string?,
+	debug: { echo_upstream_body: boolean? }?,
 }
 
 --[=[
@@ -2859,12 +2783,12 @@ export type OpenResponsesInput =
     @field include {OpenAIResponsesIncludable}?
     @field background boolean?
     @field safety_identifier string?
-    @field store boolean?
-    @field service_tier (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?
+    @field store boolean? -- Default: False
+    @field service_tier "auto"? -- Default: 'auto'
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
     @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? })}? -- Plugins you want to enable for this request, including their settings.
+    @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: "response-healing" })}? -- Plugins you want to enable for this request, including their settings.
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
 ]=]
 export type OpenResponsesRequest = {
@@ -2897,7 +2821,7 @@ export type OpenResponsesRequest = {
 	background: boolean?,
 	safety_identifier: string?,
 	store: boolean?,
-	service_tier: (OpenAIResponsesServiceTier & ("auto" | "default" | "flex" | "scale" | "priority"))?,
+	service_tier: "auto"?,
 	truncation: OpenAIResponsesTruncation?,
 	stream: boolean?,
 	provider: {
@@ -2924,6 +2848,7 @@ export type OpenResponsesRequest = {
 			{ id: "moderation" }
 			| { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? }
 			| { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? }
+			| { id: "response-healing" }
 		)
 	}?,
 	user: string?,
@@ -2992,6 +2917,85 @@ export type OpenResponsesStreamEvent = (
 	| OpenResponsesImageGenCallPartialImage
 	| OpenResponsesImageGenCallCompleted
 )
+
+--[=[
+    @type __schema0 ChatCompletionFinishReason?
+    @within OpenRouterTypes
+]=]
+export type __schema0 = ChatCompletionFinishReason?
+
+--[=[
+    @interface ChatResponseChoice
+    @within OpenRouterTypes
+    
+    @field finish_reason __schema0
+    @field index number
+    @field message AssistantMessage
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatResponseChoice = {
+	finish_reason: __schema0,
+	index: number,
+	message: AssistantMessage,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatResponse
+    @within OpenRouterTypes
+    
+    @field id string
+    @field choices {ChatResponseChoice}
+    @field created number
+    @field model string
+    @field object string
+    @field system_fingerprint string?
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatResponse = {
+	id: string,
+	choices: { ChatResponseChoice },
+	created: number,
+	model: string,
+	object: string,
+	system_fingerprint: string?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ChatStreamingChoice
+    @within OpenRouterTypes
+    
+    @field delta ChatStreamingMessageChunk
+    @field finish_reason __schema0
+    @field index number
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatStreamingChoice = {
+	delta: ChatStreamingMessageChunk,
+	finish_reason: __schema0,
+	index: number,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatStreamingResponseChunk
+    @within OpenRouterTypes
+    
+    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
+]=]
+export type ChatStreamingResponseChunk = {
+	data: {
+		id: string,
+		choices: { ChatStreamingChoice },
+		created: number,
+		model: string,
+		object: string,
+		system_fingerprint: string?,
+		error: { message: string, code: number }?,
+		usage: ChatGenerationTokenUsage?,
+	},
+}
 
 --[=[
     @type CreateResponses200Response OpenResponsesNonStreamingResponse
@@ -3127,11 +3131,11 @@ export type GetUserActivity403Response = ForbiddenResponse
 export type GetUserActivity500Response = InternalServerResponse
 
 --[=[
-    @type GetCredits200Response {}
+    @type GetCredits200Response { data: { total_credits: number, total_usage: number } }
     @within OpenRouterTypes
     200 Response type for getCredits
 ]=]
-export type GetCredits200Response = {}
+export type GetCredits200Response = { data: { total_credits: number, total_usage: number } }
 
 --[=[
     @type GetCredits401Response UnauthorizedResponse

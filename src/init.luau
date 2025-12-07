@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-11-23T01:54:05.362785Z (generator v1.0.0)
+-- Last generated: 2025-12-07T00:29:25.789862Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -349,12 +349,16 @@ end
     
     @param category string? -- No description provided
     @param supported_parameters string? -- No description provided
+    @param use_rss string? -- No description provided
+    @param use_rss_chat_links string? -- No description provided
     @return Result<GetModels200Response, GetModels400Response | GetModels500Response>
 ]=]
 function OpenRouter.getModels(
 	self: OpenRouter,
 	category: string?,
-	supported_parameters: string?
+	supported_parameters: string?,
+	use_rss: string?,
+	use_rss_chat_links: string?
 ): Types.Result<
 	Types.GetModels200Response,
 	Types.GetModels400Response | Types.GetModels500Response
@@ -362,6 +366,8 @@ function OpenRouter.getModels(
 	local queryString = self:_buildQueryString({
 		["category"] = category,
 		["supported_parameters"] = supported_parameters,
+		["use_rss"] = use_rss,
+		["use_rss_chat_links"] = use_rss_chat_links,
 	})
 	return self:_request("GET", `/models{queryString}`, nil)
 end
@@ -448,7 +454,7 @@ end
     
     @param author string -- No description provided
     @param slug string -- No description provided
-    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Anthropic" | "Arcee" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
+    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
     @return Result<GetParameters200Response, GetParameters401Response | GetParameters404Response | GetParameters500Response>
 ]=]
 function OpenRouter.getParameters(
@@ -460,12 +466,14 @@ function OpenRouter.getParameters(
 		| "AionLabs"
 		| "Alibaba"
 		| "Amazon Bedrock"
+		| "Amazon Nova"
 		| "Anthropic"
-		| "Arcee"
+		| "Arcee AI"
 		| "AtlasCloud"
 		| "Avian"
 		| "Azure"
 		| "BaseTen"
+		| "BytePlus"
 		| "Black Forest Labs"
 		| "Cerebras"
 		| "Chutes"
@@ -480,6 +488,7 @@ function OpenRouter.getParameters(
 		| "Fireworks"
 		| "Friendli"
 		| "GMICloud"
+		| "GoPomelo"
 		| "Google"
 		| "Google AI Studio"
 		| "Groq"
@@ -510,6 +519,7 @@ function OpenRouter.getParameters(
 		| "SambaNova"
 		| "SiliconFlow"
 		| "Stealth"
+		| "StreamLake"
 		| "Switchpoint"
 		| "Targon"
 		| "Together"
