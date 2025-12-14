@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-12-07T00:29:25.777822Z (generator v1.0.0)
+-- Last generated: 2025-12-14T00:29:23.421872Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -92,11 +92,11 @@ export type BadRequestResponseErrorData = { code: number, message: string, metad
 export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: string? }
 
 --[=[
-    @type BigNumberUnion (number | string)
+    @type BigNumberUnion string
     @within OpenRouterTypes
-    A value in string or number format that is a large number
+    A value in string format that is a large number
 ]=]
-export type BigNumberUnion = number | string
+export type BigNumberUnion = string
 
 --[=[
     @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")
@@ -763,10 +763,10 @@ export type OpenAIResponsesReasoningDoneEvent = {
 }
 
 --[=[
-    @type OpenAIResponsesReasoningEffort ("high" | "medium" | "low" | "minimal" | "none")?
+    @type OpenAIResponsesReasoningEffort ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
     @within OpenRouterTypes
 ]=]
-export type OpenAIResponsesReasoningEffort = ("high" | "medium" | "low" | "minimal" | "none")?
+export type OpenAIResponsesReasoningEffort = ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
 
 --[=[
     @interface OpenAIResponsesReasoningSummaryTextDeltaEvent
@@ -1285,7 +1285,7 @@ export type PaymentRequiredResponse = { error: PaymentRequiredResponseErrorData,
 export type PerRequestLimits = { prompt_tokens: number, completion_tokens: number }?
 
 --[=[
-    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "xAI" | "Z.AI" | "FakeProvider")
+    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Sourceful" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
@@ -1325,6 +1325,7 @@ export type ProviderName = (
 	| "Infermatic"
 	| "Inflection"
 	| "Liquid"
+	| "Mara"
 	| "Mancer 2"
 	| "Minimax"
 	| "ModelRun"
@@ -1345,6 +1346,7 @@ export type ProviderName = (
 	| "Relace"
 	| "SambaNova"
 	| "SiliconFlow"
+	| "Sourceful"
 	| "Stealth"
 	| "StreamLake"
 	| "Switchpoint"
@@ -1352,6 +1354,7 @@ export type ProviderName = (
 	| "Together"
 	| "Venice"
 	| "WandB"
+	| "Xiaomi"
 	| "xAI"
 	| "Z.AI"
 	| "FakeProvider"
@@ -2380,60 +2383,6 @@ export type Message = (
 )
 
 --[=[
-    @interface ChatGenerationParams
-    @within OpenRouterTypes
-    
-    @field messages {Message}
-    @field model ModelName?
-    @field models {ModelName}?
-    @field frequency_penalty number?
-    @field logit_bias { [string]: number }?
-    @field logprobs boolean?
-    @field top_logprobs number?
-    @field max_completion_tokens number?
-    @field max_tokens number?
-    @field metadata { [string]: string }?
-    @field presence_penalty number?
-    @field reasoning { effort: ("none" | "minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?
-    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
-    @field seed number?
-    @field stop (string | {string})?
-    @field stream boolean? -- Default: False
-    @field stream_options ChatStreamOptions?
-    @field temperature number? -- Default: 1
-    @field tool_choice ToolChoiceOption?
-    @field tools {ToolDefinitionJson}?
-    @field top_p number? -- Default: 1
-    @field user string?
-    @field debug { echo_upstream_body: boolean? }?
-]=]
-export type ChatGenerationParams = {
-	messages: { Message },
-	model: ModelName?,
-	models: { ModelName }?,
-	frequency_penalty: number?,
-	logit_bias: { [string]: number }?,
-	logprobs: boolean?,
-	top_logprobs: number?,
-	max_completion_tokens: number?,
-	max_tokens: number?,
-	metadata: { [string]: string }?,
-	presence_penalty: number?,
-	reasoning: { effort: ("none" | "minimal" | "low" | "medium" | "high")?, summary: ReasoningSummaryVerbosity? }?,
-	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
-	seed: number?,
-	stop: (string | { string })?,
-	stream: boolean?,
-	stream_options: ChatStreamOptions?,
-	temperature: number?,
-	tool_choice: ToolChoiceOption?,
-	tools: { ToolDefinitionJson }?,
-	top_p: number?,
-	user: string?,
-	debug: { echo_upstream_body: boolean? }?,
-}
-
---[=[
     @interface WebSearchPreviewToolUserLocation
     @within OpenRouterTypes
     
@@ -2787,9 +2736,11 @@ export type OpenResponsesInput =
     @field service_tier "auto"? -- Default: 'auto'
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "moderation" } | { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: "response-healing" })}? -- Plugins you want to enable for this request, including their settings.
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", enabled: boolean?, max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- Routing strategy for multiple models: "fallback" (default) uses secondary models as backups, "sort" sorts all endpoints together by routing criteria.
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
 ]=]
 export type OpenResponsesRequest = {
 	input: OpenResponsesInput?,
@@ -2842,16 +2793,26 @@ export type OpenResponsesRequest = {
 			audio: BigNumberUnion?,
 			request: BigNumberUnion?,
 		}?,
+		min_throughput: number?,
+		max_latency: number?,
 	}?,
 	plugins: {
-		(
-			{ id: "moderation" }
-			| { id: "web", max_results: number?, search_prompt: string?, engine: ("native" | "exa")? }
-			| { id: "file-parser", max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? }
-			| { id: "response-healing" }
-		)
+		{ id: "moderation" } | {
+			id: "web",
+			enabled: boolean?,
+			max_results: number?,
+			search_prompt: string?,
+			engine: ("native" | "exa")?,
+		} | {
+			id: "file-parser",
+			enabled: boolean?,
+			max_files: number?,
+			pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
+		} | { id: "response-healing", enabled: boolean? }
 	}?,
+	route: ("fallback" | "sort")?,
 	user: string?,
+	session_id: string?,
 }
 
 --[=[
@@ -2919,22 +2880,205 @@ export type OpenResponsesStreamEvent = (
 )
 
 --[=[
-    @type __schema0 ChatCompletionFinishReason?
+    @type __schema0 {(("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Sourceful" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider") | string)}
     @within OpenRouterTypes
 ]=]
-export type __schema0 = ChatCompletionFinishReason?
+export type __schema0 = {
+	(
+		"AI21"
+		| "AionLabs"
+		| "Alibaba"
+		| "Amazon Bedrock"
+		| "Amazon Nova"
+		| "Anthropic"
+		| "Arcee AI"
+		| "AtlasCloud"
+		| "Avian"
+		| "Azure"
+		| "BaseTen"
+		| "BytePlus"
+		| "Black Forest Labs"
+		| "Cerebras"
+		| "Chutes"
+		| "Cirrascale"
+		| "Clarifai"
+		| "Cloudflare"
+		| "Cohere"
+		| "Crusoe"
+		| "DeepInfra"
+		| "DeepSeek"
+		| "Featherless"
+		| "Fireworks"
+		| "Friendli"
+		| "GMICloud"
+		| "GoPomelo"
+		| "Google"
+		| "Google AI Studio"
+		| "Groq"
+		| "Hyperbolic"
+		| "Inception"
+		| "InferenceNet"
+		| "Infermatic"
+		| "Inflection"
+		| "Liquid"
+		| "Mara"
+		| "Mancer 2"
+		| "Minimax"
+		| "ModelRun"
+		| "Mistral"
+		| "Modular"
+		| "Moonshot AI"
+		| "Morph"
+		| "NCompass"
+		| "Nebius"
+		| "NextBit"
+		| "Novita"
+		| "Nvidia"
+		| "OpenAI"
+		| "OpenInference"
+		| "Parasail"
+		| "Perplexity"
+		| "Phala"
+		| "Relace"
+		| "SambaNova"
+		| "SiliconFlow"
+		| "Sourceful"
+		| "Stealth"
+		| "StreamLake"
+		| "Switchpoint"
+		| "Targon"
+		| "Together"
+		| "Venice"
+		| "WandB"
+		| "Xiaomi"
+		| "xAI"
+		| "Z.AI"
+		| "FakeProvider"
+	)
+	| string
+}
+
+--[=[
+    @type __schema1 (number | string)
+    @within OpenRouterTypes
+]=]
+export type __schema1 = number | string
+
+--[=[
+    @interface ChatGenerationParams
+    @within OpenRouterTypes
+    
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema0?, only: __schema0?, ignore: __schema0?, quantizations: {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: __schema1?, completion: __schema1?, image: __schema1?, audio: __schema1?, request: __schema1? }?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- Routing strategy for multiple models: "fallback" (default) uses secondary models as backups, "sort" sorts all endpoints together by routing criteria.
+    @field user string?
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field messages {Message}
+    @field model ModelName?
+    @field models {ModelName}?
+    @field frequency_penalty number?
+    @field logit_bias { [string]: number }?
+    @field logprobs boolean?
+    @field top_logprobs number?
+    @field max_completion_tokens number?
+    @field max_tokens number?
+    @field metadata { [string]: string }?
+    @field presence_penalty number?
+    @field reasoning { effort: ("none" | "minimal" | "low" | "medium" | "high" | "xhigh")?, summary: ReasoningSummaryVerbosity? }?
+    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
+    @field seed number?
+    @field stop (string | {string})?
+    @field stream boolean? -- Default: False
+    @field stream_options ChatStreamOptions?
+    @field temperature number? -- Default: 1
+    @field tool_choice ToolChoiceOption?
+    @field tools {ToolDefinitionJson}?
+    @field top_p number? -- Default: 1
+    @field debug { echo_upstream_body: boolean? }?
+]=]
+export type ChatGenerationParams = {
+	provider: {
+		allow_fallbacks: boolean?,
+		require_parameters: boolean?,
+		data_collection: ("deny" | "allow")?,
+		zdr: boolean?,
+		enforce_distillable_text: boolean?,
+		order: __schema0?,
+		only: __schema0?,
+		ignore: __schema0?,
+		quantizations: { "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown" }?,
+		sort: ("price" | "throughput" | "latency")?,
+		max_price: {
+			prompt: __schema1?,
+			completion: __schema1?,
+			image: __schema1?,
+			audio: __schema1?,
+			request: __schema1?,
+		}?,
+		min_throughput: number?,
+		max_latency: number?,
+	}?,
+	plugins: {
+		{ id: string } | {
+			id: string,
+			enabled: boolean?,
+			max_results: number?,
+			search_prompt: string?,
+			engine: ("native" | "exa")?,
+		} | {
+			id: string,
+			enabled: boolean?,
+			max_files: number?,
+			pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
+		} | { id: string, enabled: boolean? }
+	}?,
+	route: ("fallback" | "sort")?,
+	user: string?,
+	session_id: string?,
+	messages: { Message },
+	model: ModelName?,
+	models: { ModelName }?,
+	frequency_penalty: number?,
+	logit_bias: { [string]: number }?,
+	logprobs: boolean?,
+	top_logprobs: number?,
+	max_completion_tokens: number?,
+	max_tokens: number?,
+	metadata: { [string]: string }?,
+	presence_penalty: number?,
+	reasoning: {
+		effort: ("none" | "minimal" | "low" | "medium" | "high" | "xhigh")?,
+		summary: ReasoningSummaryVerbosity?,
+	}?,
+	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
+	seed: number?,
+	stop: (string | { string })?,
+	stream: boolean?,
+	stream_options: ChatStreamOptions?,
+	temperature: number?,
+	tool_choice: ToolChoiceOption?,
+	tools: { ToolDefinitionJson }?,
+	top_p: number?,
+	debug: { echo_upstream_body: boolean? }?,
+}
+
+--[=[
+    @type __schema2 ChatCompletionFinishReason?
+    @within OpenRouterTypes
+]=]
+export type __schema2 = ChatCompletionFinishReason?
 
 --[=[
     @interface ChatResponseChoice
     @within OpenRouterTypes
     
-    @field finish_reason __schema0
+    @field finish_reason __schema2
     @field index number
     @field message AssistantMessage
     @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatResponseChoice = {
-	finish_reason: __schema0,
+	finish_reason: __schema2,
 	index: number,
 	message: AssistantMessage,
 	logprobs: ChatMessageTokenLogprobs?,
@@ -2967,13 +3111,13 @@ export type ChatResponse = {
     @within OpenRouterTypes
     
     @field delta ChatStreamingMessageChunk
-    @field finish_reason __schema0
+    @field finish_reason __schema2
     @field index number
     @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatStreamingChoice = {
 	delta: ChatStreamingMessageChunk,
-	finish_reason: __schema0,
+	finish_reason: __schema2,
 	index: number,
 	logprobs: ChatMessageTokenLogprobs?,
 }
