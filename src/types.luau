@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-12-14T00:29:23.421872Z (generator v1.0.0)
+-- Last generated: 2026-01-04T00:30:44.892311Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -270,24 +270,6 @@ export type ChatStreamingMessageToolCall = {
 	id: string?,
 	["type"]: string?,
 	["function"]: { name: string?, arguments: string? }?,
-}
-
---[=[
-    @interface ChatStreamingMessageChunk
-    @within OpenRouterTypes
-    
-    @field role "assistant"?
-    @field content string?
-    @field reasoning string?
-    @field refusal string?
-    @field tool_calls {ChatStreamingMessageToolCall}?
-]=]
-export type ChatStreamingMessageChunk = {
-	role: "assistant"?,
-	content: string?,
-	reasoning: string?,
-	refusal: string?,
-	tool_calls: { ChatStreamingMessageToolCall }?,
 }
 
 --[=[
@@ -1203,7 +1185,23 @@ export type ModelArchitecture = {
 }
 
 --[=[
-    @type Parameter ("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "web_search_options" | "verbosity")
+    @type PDFParserEngine ("mistral-ocr" | "pdf-text" | "native")
+    @within OpenRouterTypes
+    The engine to use for parsing PDF files.
+]=]
+export type PDFParserEngine = "mistral-ocr" | "pdf-text" | "native"
+
+--[=[
+    @interface PDFParserOptions
+    @within OpenRouterTypes
+    Options for PDF parsing.
+    
+    @field engine PDFParserEngine?
+]=]
+export type PDFParserOptions = { engine: PDFParserEngine? }
+
+--[=[
+    @type Parameter ("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "reasoning_effort" | "web_search_options" | "verbosity")
     @within OpenRouterTypes
 ]=]
 export type Parameter = (
@@ -1228,6 +1226,7 @@ export type Parameter = (
 	| "parallel_tool_calls"
 	| "include_reasoning"
 	| "reasoning"
+	| "reasoning_effort"
 	| "web_search_options"
 	| "verbosity"
 )
@@ -1382,11 +1381,25 @@ export type ProviderOverloadedResponseErrorData = { code: number, message: strin
 export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErrorData, user_id: string? }
 
 --[=[
-    @type ProviderSort ("price" | "throughput" | "latency")?
+    @type ProviderSort ("price" | "throughput" | "latency")
     @within OpenRouterTypes
-    The sorting strategy to use for this request, if "order" is not specified. When set, no load balancing is performed.
 ]=]
-export type ProviderSort = ("price" | "throughput" | "latency")?
+export type ProviderSort = "price" | "throughput" | "latency"
+
+--[=[
+    @interface ProviderSortConfig
+    @within OpenRouterTypes
+    
+    @field by ProviderSort?
+    @field partition ("model" | "none")?
+]=]
+export type ProviderSortConfig = { by: ProviderSort?, partition: ("model" | "none")? }
+
+--[=[
+    @type ProviderSortUnion (ProviderSort | ProviderSortConfig)
+    @within OpenRouterTypes
+]=]
+export type ProviderSortUnion = ProviderSort | ProviderSortConfig
 
 --[=[
     @interface PublicPricing
@@ -1428,6 +1441,54 @@ export type PublicPricing = {
     @within OpenRouterTypes
 ]=]
 export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown"
+
+--[=[
+    @interface ProviderPreferences
+    @within OpenRouterTypes
+    Provider routing preferences for the request.
+    
+    @field allow_fallbacks boolean? -- Whether to allow backup providers to serve requests
+- true: (default) when the primary provider (or your custom providers in "order") is unavailable, use the next best provider.
+- false: use only the primary/custom provider, and return the upstream error if it's unavailable.
+
+    @field require_parameters boolean? -- Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest.
+    @field data_collection DataCollection?
+    @field zdr boolean? -- Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used.; (Ex: true)
+    @field enforce_distillable_text boolean? -- Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used.; (Ex: true)
+    @field order {(ProviderName | string)}? -- An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message.
+    @field only {(ProviderName | string)}? -- List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request.
+    @field ignore {(ProviderName | string)}? -- List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request.
+    @field quantizations {Quantization}? -- A list of quantization levels to filter the provider by.
+    @field sort (ProviderSort & (ProviderSort | ProviderSortConfig))?
+    @field max_price { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }? -- The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion.
+    @field preferred_min_throughput number? -- Preferred minimum throughput (in tokens per second). Endpoints below this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold.; (Ex: 100)
+    @field preferred_max_latency number? -- Preferred maximum latency (in seconds). Endpoints above this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold.; (Ex: 5)
+    @field min_throughput number? -- @deprecated; **DEPRECATED** Use preferred_min_throughput instead. Backwards-compatible alias for preferred_min_throughput.; (Ex: 100)
+    @field max_latency number? -- @deprecated; **DEPRECATED** Use preferred_max_latency instead. Backwards-compatible alias for preferred_max_latency.; (Ex: 5)
+]=]
+export type ProviderPreferences = {
+	allow_fallbacks: boolean?,
+	require_parameters: boolean?,
+	data_collection: DataCollection?,
+	zdr: boolean?,
+	enforce_distillable_text: boolean?,
+	order: { ProviderName | string }?,
+	only: { ProviderName | string }?,
+	ignore: { ProviderName | string }?,
+	quantizations: { Quantization }?,
+	sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?,
+	max_price: {
+		prompt: BigNumberUnion?,
+		completion: BigNumberUnion?,
+		image: BigNumberUnion?,
+		audio: BigNumberUnion?,
+		request: BigNumberUnion?,
+	}?,
+	preferred_min_throughput: number?,
+	preferred_max_latency: number?,
+	min_throughput: number?,
+	max_latency: number?,
+}
 
 --[=[
     @interface PublicEndpoint
@@ -2383,6 +2444,13 @@ export type Message = (
 )
 
 --[=[
+    @type WebSearchEngine ("native" | "exa")
+    @within OpenRouterTypes
+    The search engine to use for web search.
+]=]
+export type WebSearchEngine = "native" | "exa"
+
+--[=[
     @interface WebSearchPreviewToolUserLocation
     @within OpenRouterTypes
     
@@ -2736,9 +2804,9 @@ export type OpenResponsesInput =
     @field service_tier "auto"? -- Default: 'auto'
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: "file-parser", enabled: boolean?, max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
-    @field route ("fallback" | "sort")? -- Routing strategy for multiple models: "fallback" (default) uses secondary models as backups, "sort" sorts all endpoints together by routing criteria.
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort | ProviderSortConfig)?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: number?, preferred_max_latency: number?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
     @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
 ]=]
@@ -2785,7 +2853,7 @@ export type OpenResponsesRequest = {
 		only: { ProviderName | string }?,
 		ignore: { ProviderName | string }?,
 		quantizations: { Quantization }?,
-		sort: ProviderSort?,
+		sort: (ProviderSort | ProviderSortConfig)?,
 		max_price: {
 			prompt: BigNumberUnion?,
 			completion: BigNumberUnion?,
@@ -2793,22 +2861,18 @@ export type OpenResponsesRequest = {
 			audio: BigNumberUnion?,
 			request: BigNumberUnion?,
 		}?,
+		preferred_min_throughput: number?,
+		preferred_max_latency: number?,
 		min_throughput: number?,
 		max_latency: number?,
 	}?,
 	plugins: {
-		{ id: "moderation" } | {
-			id: "web",
-			enabled: boolean?,
-			max_results: number?,
-			search_prompt: string?,
-			engine: ("native" | "exa")?,
-		} | {
-			id: "file-parser",
-			enabled: boolean?,
-			max_files: number?,
-			pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
-		} | { id: "response-healing", enabled: boolean? }
+		(
+			{ id: "moderation" }
+			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
+			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
+			| { id: "response-healing", enabled: boolean? }
+		)
 	}?,
 	route: ("fallback" | "sort")?,
 	user: string?,
@@ -2968,9 +3032,9 @@ export type __schema1 = number | string
     @interface ChatGenerationParams
     @within OpenRouterTypes
     
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema0?, only: __schema0?, ignore: __schema0?, quantizations: {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?, sort: ("price" | "throughput" | "latency")?, max_price: { prompt: __schema1?, completion: __schema1?, image: __schema1?, audio: __schema1?, request: __schema1? }?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, max_files: number?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
-    @field route ("fallback" | "sort")? -- Routing strategy for multiple models: "fallback" (default) uses secondary models as backups, "sort" sorts all endpoints together by routing criteria.
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema0?, only: __schema0?, ignore: __schema0?, quantizations: {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?, sort: ProviderSortUnion?, max_price: { prompt: __schema1?, completion: __schema1?, image: __schema1?, audio: __schema1?, request: __schema1? }?, preferred_min_throughput: number?, preferred_max_latency: number?, min_throughput: number?, max_latency: number? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")?
     @field user string?
     @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
     @field messages {Message}
@@ -2984,7 +3048,7 @@ export type __schema1 = number | string
     @field max_tokens number?
     @field metadata { [string]: string }?
     @field presence_penalty number?
-    @field reasoning { effort: ("none" | "minimal" | "low" | "medium" | "high" | "xhigh")?, summary: ReasoningSummaryVerbosity? }?
+    @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ReasoningSummaryVerbosity? }?
     @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
     @field seed number?
     @field stop (string | {string})?
@@ -3007,7 +3071,7 @@ export type ChatGenerationParams = {
 		only: __schema0?,
 		ignore: __schema0?,
 		quantizations: { "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown" }?,
-		sort: ("price" | "throughput" | "latency")?,
+		sort: ProviderSortUnion?,
 		max_price: {
 			prompt: __schema1?,
 			completion: __schema1?,
@@ -3015,22 +3079,18 @@ export type ChatGenerationParams = {
 			audio: __schema1?,
 			request: __schema1?,
 		}?,
+		preferred_min_throughput: number?,
+		preferred_max_latency: number?,
 		min_throughput: number?,
 		max_latency: number?,
 	}?,
 	plugins: {
-		{ id: string } | {
-			id: string,
-			enabled: boolean?,
-			max_results: number?,
-			search_prompt: string?,
-			engine: ("native" | "exa")?,
-		} | {
-			id: string,
-			enabled: boolean?,
-			max_files: number?,
-			pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
-		} | { id: string, enabled: boolean? }
+		(
+			{ id: string }
+			| { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? }
+			| { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? }
+			| { id: string, enabled: boolean? }
+		)
 	}?,
 	route: ("fallback" | "sort")?,
 	user: string?,
@@ -3047,7 +3107,7 @@ export type ChatGenerationParams = {
 	metadata: { [string]: string }?,
 	presence_penalty: number?,
 	reasoning: {
-		effort: ("none" | "minimal" | "low" | "medium" | "high" | "xhigh")?,
+		effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?,
 		summary: ReasoningSummaryVerbosity?,
 	}?,
 	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
@@ -3069,18 +3129,50 @@ export type ChatGenerationParams = {
 export type __schema2 = ChatCompletionFinishReason?
 
 --[=[
+    @type __schema4 string?
+    @within OpenRouterTypes
+]=]
+export type __schema4 = string?
+
+--[=[
+    @type __schema5 ("unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @within OpenRouterTypes
+]=]
+export type __schema5 = (
+	"unknown" | "openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1"
+)?
+
+--[=[
+    @type __schema6 number
+    @within OpenRouterTypes
+]=]
+export type __schema6 = number
+
+--[=[
+    @type __schema3 ({ ["type"]: string, summary: string, id: __schema4?, format: __schema5?, index: __schema6? } | { ["type"]: string, data: string, id: __schema4?, format: __schema5?, index: __schema6? } | { ["type"]: string, text: string?, signature: string?, id: __schema4?, format: __schema5?, index: __schema6? })
+    @within OpenRouterTypes
+]=]
+export type __schema3 = (
+	{ ["type"]: string, summary: string, id: __schema4?, format: __schema5?, index: __schema6? }
+	| { ["type"]: string, data: string, id: __schema4?, format: __schema5?, index: __schema6? }
+	| { ["type"]: string, text: string?, signature: string?, id: __schema4?, format: __schema5?, index: __schema6? }
+)
+
+--[=[
     @interface ChatResponseChoice
     @within OpenRouterTypes
     
     @field finish_reason __schema2
     @field index number
     @field message AssistantMessage
+    @field reasoning_details {__schema3}?
     @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatResponseChoice = {
 	finish_reason: __schema2,
 	index: number,
 	message: AssistantMessage,
+	reasoning_details: { __schema3 }?,
 	logprobs: ChatMessageTokenLogprobs?,
 }
 
@@ -3104,6 +3196,26 @@ export type ChatResponse = {
 	object: string,
 	system_fingerprint: string?,
 	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ChatStreamingMessageChunk
+    @within OpenRouterTypes
+    
+    @field role "assistant"?
+    @field content string?
+    @field reasoning string?
+    @field refusal string?
+    @field tool_calls {ChatStreamingMessageToolCall}?
+    @field reasoning_details {__schema3}?
+]=]
+export type ChatStreamingMessageChunk = {
+	role: "assistant"?,
+	content: string?,
+	reasoning: string?,
+	refusal: string?,
+	tool_calls: { ChatStreamingMessageToolCall }?,
+	reasoning_details: { __schema3 }?,
 }
 
 --[=[
@@ -3654,7 +3766,7 @@ export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
 export type ListEndpointsZdr500Response = InternalServerResponse
 
 --[=[
-    @type GetParameters200Response { data: { model: string, supported_parameters: {("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "web_search_options" | "verbosity")} } }
+    @type GetParameters200Response { data: { model: string, supported_parameters: {("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "reasoning_effort" | "web_search_options" | "verbosity")} } }
     @within OpenRouterTypes
     200 Response type for getParameters
 ]=]
@@ -3684,6 +3796,7 @@ export type GetParameters200Response = {
 				| "parallel_tool_calls"
 				| "include_reasoning"
 				| "reasoning"
+				| "reasoning_effort"
 				| "web_search_options"
 				| "verbosity"
 			)
