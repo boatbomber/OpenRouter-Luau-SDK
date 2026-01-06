@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2025-12-14T00:29:23.432984Z (generator v1.0.0)
+-- Last generated: 2026-01-04T00:30:44.905596Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -207,7 +207,7 @@ end
     @within OpenRouter
     @tag Embeddings
     
-    @param params { input: (string | {string} | {number} | {{number}} | {{ content: {({ ["type"]: "text", text: string } | { ["type"]: "image_url", image_url: { url: string } })} }}), model: string, encoding_format: ("float" | "base64")?, dimensions: number?, user: string?, provider: { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: ProviderSort?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, min_throughput: number?, max_latency: number? }?, input_type: string? } -- Request body parameters
+    @param params { input: (string | {string} | {number} | {{number}} | {{ content: {({ ["type"]: "text", text: string } | { ["type"]: "image_url", image_url: { url: string } })} }}), model: string, encoding_format: ("float" | "base64")?, dimensions: number?, user: string?, provider: ProviderPreferences?, input_type: string? } -- Request body parameters
     @return Result<CreateEmbeddings200Response, CreateEmbeddings400Response | CreateEmbeddings401Response | CreateEmbeddings402Response | CreateEmbeddings404Response | CreateEmbeddings429Response | CreateEmbeddings500Response | CreateEmbeddings502Response | CreateEmbeddings503Response | CreateEmbeddings524Response | CreateEmbeddings529Response>
 ]=]
 function OpenRouter.createEmbeddings(
@@ -222,27 +222,7 @@ function OpenRouter.createEmbeddings(
 		encoding_format: ("float" | "base64")?,
 		dimensions: number?,
 		user: string?,
-		provider: {
-			allow_fallbacks: boolean?,
-			require_parameters: boolean?,
-			data_collection: Types.DataCollection?,
-			zdr: boolean?,
-			enforce_distillable_text: boolean?,
-			order: { Types.ProviderName | string }?,
-			only: { Types.ProviderName | string }?,
-			ignore: { Types.ProviderName | string }?,
-			quantizations: { Types.Quantization }?,
-			sort: Types.ProviderSort?,
-			max_price: {
-				prompt: Types.BigNumberUnion?,
-				completion: Types.BigNumberUnion?,
-				image: Types.BigNumberUnion?,
-				audio: Types.BigNumberUnion?,
-				request: Types.BigNumberUnion?,
-			}?,
-			min_throughput: number?,
-			max_latency: number?,
-		}?,
+		provider: Types.ProviderPreferences?,
 		input_type: string?,
 	}
 ): Types.Result<
@@ -456,84 +436,14 @@ end
     
     @param author string -- No description provided
     @param slug string -- No description provided
-    @param provider ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "GoPomelo" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "SiliconFlow" | "Sourceful" | "Stealth" | "StreamLake" | "Switchpoint" | "Targon" | "Together" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")? -- No description provided
+    @param provider ProviderName? -- No description provided
     @return Result<GetParameters200Response, GetParameters401Response | GetParameters404Response | GetParameters500Response>
 ]=]
 function OpenRouter.getParameters(
 	self: OpenRouter,
 	author: string,
 	slug: string,
-	provider: (
-		"AI21"
-		| "AionLabs"
-		| "Alibaba"
-		| "Amazon Bedrock"
-		| "Amazon Nova"
-		| "Anthropic"
-		| "Arcee AI"
-		| "AtlasCloud"
-		| "Avian"
-		| "Azure"
-		| "BaseTen"
-		| "BytePlus"
-		| "Black Forest Labs"
-		| "Cerebras"
-		| "Chutes"
-		| "Cirrascale"
-		| "Clarifai"
-		| "Cloudflare"
-		| "Cohere"
-		| "Crusoe"
-		| "DeepInfra"
-		| "DeepSeek"
-		| "Featherless"
-		| "Fireworks"
-		| "Friendli"
-		| "GMICloud"
-		| "GoPomelo"
-		| "Google"
-		| "Google AI Studio"
-		| "Groq"
-		| "Hyperbolic"
-		| "Inception"
-		| "InferenceNet"
-		| "Infermatic"
-		| "Inflection"
-		| "Liquid"
-		| "Mara"
-		| "Mancer 2"
-		| "Minimax"
-		| "ModelRun"
-		| "Mistral"
-		| "Modular"
-		| "Moonshot AI"
-		| "Morph"
-		| "NCompass"
-		| "Nebius"
-		| "NextBit"
-		| "Novita"
-		| "Nvidia"
-		| "OpenAI"
-		| "OpenInference"
-		| "Parasail"
-		| "Perplexity"
-		| "Phala"
-		| "Relace"
-		| "SambaNova"
-		| "SiliconFlow"
-		| "Sourceful"
-		| "Stealth"
-		| "StreamLake"
-		| "Switchpoint"
-		| "Targon"
-		| "Together"
-		| "Venice"
-		| "WandB"
-		| "Xiaomi"
-		| "xAI"
-		| "Z.AI"
-		| "FakeProvider"
-	)?
+	provider: Types.ProviderName?
 ): Types.Result<
 	Types.GetParameters200Response,
 	Types.GetParameters401Response | Types.GetParameters404Response | Types.GetParameters500Response
