@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-01-18T00:30:07.796620Z (generator v1.0.0)
+-- Last generated: 2026-01-24T21:38:03.202234Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -111,12 +111,47 @@ end
 
 --[[
   ══════════════════════════════════════════════════════════════════════════════
+  anthropic.messages: anthropic.messages endpoints
+  ══════════════════════════════════════════════════════════════════════════════
+]]
+
+--[=[
+    Creates a message using the Anthropic Messages API format. Supports text, images, PDFs, tools, and extended thinking.
+
+    Endpoint: POST /messages
+
+    @method createMessages
+    @within OpenRouter
+    @tag anthropic.messages
+    
+    @param params AnthropicMessagesRequest -- Request body parameters
+    @return Result<CreateMessages200Response, CreateMessages400Response | CreateMessages401Response | CreateMessages403Response | CreateMessages404Response | CreateMessages429Response | CreateMessages500Response | CreateMessages503Response | CreateMessages529Response>
+]=]
+function OpenRouter.createMessages(
+	self: OpenRouter,
+	params: Types.AnthropicMessagesRequest
+): Types.Result<
+	Types.CreateMessages200Response,
+	Types.CreateMessages400Response
+	| Types.CreateMessages401Response
+	| Types.CreateMessages403Response
+	| Types.CreateMessages404Response
+	| Types.CreateMessages429Response
+	| Types.CreateMessages500Response
+	| Types.CreateMessages503Response
+	| Types.CreateMessages529Response
+>
+	return self:_request("POST", "/messages", params)
+end
+
+--[[
+  ══════════════════════════════════════════════════════════════════════════════
   Analytics: Analytics and usage endpoints
   ══════════════════════════════════════════════════════════════════════════════
 ]]
 
 --[=[
-    Returns user activity data grouped by endpoint for the last 30 (completed) UTC days
+    Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: GET /activity
 
@@ -150,7 +185,7 @@ end
 ]]
 
 --[=[
-    Get total credits purchased and used for the authenticated user
+    Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: GET /credits
 
@@ -329,7 +364,7 @@ end
     @within OpenRouter
     @tag Models
     
-    @param category string? -- No description provided
+    @param category ("programming" | "roleplay" | "marketing" | "marketing/seo" | "technology" | "science" | "translation" | "legal" | "finance" | "health" | "trivia" | "academia")? -- Filter models by use case category
     @param supported_parameters string? -- No description provided
     @param use_rss string? -- No description provided
     @param use_rss_chat_links string? -- No description provided
@@ -337,7 +372,20 @@ end
 ]=]
 function OpenRouter.getModels(
 	self: OpenRouter,
-	category: string?,
+	category: (
+		"programming"
+		| "roleplay"
+		| "marketing"
+		| "marketing/seo"
+		| "technology"
+		| "science"
+		| "translation"
+		| "legal"
+		| "finance"
+		| "health"
+		| "trivia"
+		| "academia"
+	)?,
 	supported_parameters: string?,
 	use_rss: string?,
 	use_rss_chat_links: string?
@@ -355,7 +403,7 @@ function OpenRouter.getModels(
 end
 
 --[=[
-    List models filtered by user provider preferences
+    List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/logging#enterprise-eu-in-region-routing).
 
     Endpoint: GET /models/user
 
@@ -363,11 +411,11 @@ end
     @within OpenRouter
     @tag Models
     
-    @return Result<ListModelsUser200Response, ListModelsUser401Response | ListModelsUser500Response>
+    @return Result<ListModelsUser200Response, ListModelsUser401Response | ListModelsUser404Response | ListModelsUser500Response>
 ]=]
 function OpenRouter.listModelsUser(self: OpenRouter): Types.Result<
 	Types.ListModelsUser200Response,
-	Types.ListModelsUser401Response | Types.ListModelsUser500Response
+	Types.ListModelsUser401Response | Types.ListModelsUser404Response | Types.ListModelsUser500Response
 >
 	return self:_request("GET", "/models/user", nil)
 end
@@ -421,41 +469,6 @@ end
 
 --[[
   ══════════════════════════════════════════════════════════════════════════════
-  Parameters: Parameters endpoints
-  ══════════════════════════════════════════════════════════════════════════════
-]]
-
---[=[
-    Get a model's supported parameters and data about which are most popular
-
-    Endpoint: GET /parameters/{author}/{slug}
-
-    @method getParameters
-    @within OpenRouter
-    @tag Parameters
-    
-    @param author string -- No description provided
-    @param slug string -- No description provided
-    @param provider ProviderName? -- No description provided
-    @return Result<GetParameters200Response, GetParameters401Response | GetParameters404Response | GetParameters500Response>
-]=]
-function OpenRouter.getParameters(
-	self: OpenRouter,
-	author: string,
-	slug: string,
-	provider: Types.ProviderName?
-): Types.Result<
-	Types.GetParameters200Response,
-	Types.GetParameters401Response | Types.GetParameters404Response | Types.GetParameters500Response
->
-	local queryString = self:_buildQueryString({
-		["provider"] = provider,
-	})
-	return self:_request("GET", `/parameters/{author}/{slug}{queryString}`, nil)
-end
-
---[[
-  ══════════════════════════════════════════════════════════════════════════════
   Providers: Provider information endpoints
   ══════════════════════════════════════════════════════════════════════════════
 ]]
@@ -484,7 +497,7 @@ end
 ]]
 
 --[=[
-    List API keys
+    List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: GET /keys
 
@@ -512,7 +525,7 @@ function OpenRouter.list(
 end
 
 --[=[
-    Create a new API key
+    Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: POST /keys
 
@@ -543,7 +556,7 @@ function OpenRouter.createKeys(
 end
 
 --[=[
-    Get a single API key
+    Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: GET /keys/{hash}
 
@@ -565,7 +578,7 @@ function OpenRouter.getKey(
 end
 
 --[=[
-    Delete an API key
+    Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: DELETE /keys/{hash}
 
@@ -590,7 +603,7 @@ function OpenRouter.deleteKeys(
 end
 
 --[=[
-    Update an API key
+    Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
     Endpoint: PATCH /keys/{hash}
 
@@ -639,6 +652,377 @@ function OpenRouter.getCurrentKey(self: OpenRouter): Types.Result<
 	Types.GetCurrentKey401Response | Types.GetCurrentKey500Response
 >
 	return self:_request("GET", "/key", nil)
+end
+
+--[[
+  ══════════════════════════════════════════════════════════════════════════════
+  Guardrails: Guardrails endpoints
+  ══════════════════════════════════════════════════════════════════════════════
+]]
+
+--[=[
+    List all guardrails for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails
+
+    @method listGuardrails
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param limit string? -- Maximum number of records to return (max 100)
+    @param offset string? -- Number of records to skip for pagination
+    @return Result<ListGuardrails200Response, ListGuardrails401Response | ListGuardrails500Response>
+]=]
+function OpenRouter.listGuardrails(
+	self: OpenRouter,
+	limit: string?,
+	offset: string?
+): Types.Result<
+	Types.ListGuardrails200Response,
+	Types.ListGuardrails401Response | Types.ListGuardrails500Response
+>
+	local queryString = self:_buildQueryString({
+		["limit"] = limit,
+		["offset"] = offset,
+	})
+	return self:_request("GET", `/guardrails{queryString}`, nil)
+end
+
+--[=[
+    Create a new guardrail for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: POST /guardrails
+
+    @method createGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param params { name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
+    @return Result<CreateGuardrail201Response, CreateGuardrail400Response | CreateGuardrail401Response | CreateGuardrail500Response>
+]=]
+function OpenRouter.createGuardrail(
+	self: OpenRouter,
+	params: {
+		name: string,
+		description: string?,
+		limit_usd: number?,
+		reset_interval: ("daily" | "weekly" | "monthly")?,
+		allowed_providers: { string }?,
+		allowed_models: { string }?,
+		enforce_zdr: boolean?,
+	}
+): Types.Result<
+	Types.CreateGuardrail201Response,
+	Types.CreateGuardrail400Response | Types.CreateGuardrail401Response | Types.CreateGuardrail500Response
+>
+	return self:_request("POST", "/guardrails", params)
+end
+
+--[=[
+    Get a single guardrail by ID. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails/{id}
+
+    @method getGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail to retrieve
+    @return Result<GetGuardrail200Response, GetGuardrail401Response | GetGuardrail404Response | GetGuardrail500Response>
+]=]
+function OpenRouter.getGuardrail(
+	self: OpenRouter,
+	id: string
+): Types.Result<
+	Types.GetGuardrail200Response,
+	Types.GetGuardrail401Response | Types.GetGuardrail404Response | Types.GetGuardrail500Response
+>
+	return self:_request("GET", `/guardrails/{id}`, nil)
+end
+
+--[=[
+    Delete an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: DELETE /guardrails/{id}
+
+    @method deleteGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail to delete
+    @return Result<DeleteGuardrail200Response, DeleteGuardrail401Response | DeleteGuardrail404Response | DeleteGuardrail500Response>
+]=]
+function OpenRouter.deleteGuardrail(
+	self: OpenRouter,
+	id: string
+): Types.Result<
+	Types.DeleteGuardrail200Response,
+	Types.DeleteGuardrail401Response | Types.DeleteGuardrail404Response | Types.DeleteGuardrail500Response
+>
+	return self:_request("DELETE", `/guardrails/{id}`, nil)
+end
+
+--[=[
+    Update an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: PATCH /guardrails/{id}
+
+    @method updateGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail to update
+    @param params { name: string?, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
+    @return Result<UpdateGuardrail200Response, UpdateGuardrail400Response | UpdateGuardrail401Response | UpdateGuardrail404Response | UpdateGuardrail500Response>
+]=]
+function OpenRouter.updateGuardrail(
+	self: OpenRouter,
+	id: string,
+	params: {
+		name: string?,
+		description: string?,
+		limit_usd: number?,
+		reset_interval: ("daily" | "weekly" | "monthly")?,
+		allowed_providers: { string }?,
+		allowed_models: { string }?,
+		enforce_zdr: boolean?,
+	}
+): Types.Result<
+	Types.UpdateGuardrail200Response,
+	Types.UpdateGuardrail400Response
+	| Types.UpdateGuardrail401Response
+	| Types.UpdateGuardrail404Response
+	| Types.UpdateGuardrail500Response
+>
+	return self:_request("PATCH", `/guardrails/{id}`, params)
+end
+
+--[=[
+    List all API key guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails/assignments/keys
+
+    @method listKeyAssignments
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param limit string? -- Maximum number of records to return (max 100)
+    @param offset string? -- Number of records to skip for pagination
+    @return Result<ListKeyAssignments200Response, ListKeyAssignments401Response | ListKeyAssignments500Response>
+]=]
+function OpenRouter.listKeyAssignments(
+	self: OpenRouter,
+	limit: string?,
+	offset: string?
+): Types.Result<
+	Types.ListKeyAssignments200Response,
+	Types.ListKeyAssignments401Response | Types.ListKeyAssignments500Response
+>
+	local queryString = self:_buildQueryString({
+		["limit"] = limit,
+		["offset"] = offset,
+	})
+	return self:_request("GET", `/guardrails/assignments/keys{queryString}`, nil)
+end
+
+--[=[
+    List all organization member guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails/assignments/members
+
+    @method listMemberAssignments
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param limit string? -- Maximum number of records to return (max 100)
+    @param offset string? -- Number of records to skip for pagination
+    @return Result<ListMemberAssignments200Response, ListMemberAssignments401Response | ListMemberAssignments500Response>
+]=]
+function OpenRouter.listMemberAssignments(
+	self: OpenRouter,
+	limit: string?,
+	offset: string?
+): Types.Result<
+	Types.ListMemberAssignments200Response,
+	Types.ListMemberAssignments401Response | Types.ListMemberAssignments500Response
+>
+	local queryString = self:_buildQueryString({
+		["limit"] = limit,
+		["offset"] = offset,
+	})
+	return self:_request("GET", `/guardrails/assignments/members{queryString}`, nil)
+end
+
+--[=[
+    List all API key assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails/{id}/assignments/keys
+
+    @method listGuardrailKeyAssignments
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param limit string? -- Maximum number of records to return (max 100)
+    @param offset string? -- Number of records to skip for pagination
+    @return Result<ListGuardrailKeyAssignments200Response, ListGuardrailKeyAssignments401Response | ListGuardrailKeyAssignments404Response | ListGuardrailKeyAssignments500Response>
+]=]
+function OpenRouter.listGuardrailKeyAssignments(
+	self: OpenRouter,
+	id: string,
+	limit: string?,
+	offset: string?
+): Types.Result<
+	Types.ListGuardrailKeyAssignments200Response,
+	Types.ListGuardrailKeyAssignments401Response
+	| Types.ListGuardrailKeyAssignments404Response
+	| Types.ListGuardrailKeyAssignments500Response
+>
+	local queryString = self:_buildQueryString({
+		["limit"] = limit,
+		["offset"] = offset,
+	})
+	return self:_request("GET", `/guardrails/{id}/assignments/keys{queryString}`, nil)
+end
+
+--[=[
+    Assign multiple API keys to a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: POST /guardrails/{id}/assignments/keys
+
+    @method bulkAssignKeysToGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param params { key_hashes: {string} } -- Request body parameters
+    @return Result<BulkAssignKeysToGuardrail200Response, BulkAssignKeysToGuardrail400Response | BulkAssignKeysToGuardrail401Response | BulkAssignKeysToGuardrail404Response | BulkAssignKeysToGuardrail500Response>
+]=]
+function OpenRouter.bulkAssignKeysToGuardrail(
+	self: OpenRouter,
+	id: string,
+	params: { key_hashes: { string } }
+): Types.Result<
+	Types.BulkAssignKeysToGuardrail200Response,
+	Types.BulkAssignKeysToGuardrail400Response
+	| Types.BulkAssignKeysToGuardrail401Response
+	| Types.BulkAssignKeysToGuardrail404Response
+	| Types.BulkAssignKeysToGuardrail500Response
+>
+	return self:_request("POST", `/guardrails/{id}/assignments/keys`, params)
+end
+
+--[=[
+    List all organization member assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: GET /guardrails/{id}/assignments/members
+
+    @method listGuardrailMemberAssignments
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param limit string? -- Maximum number of records to return (max 100)
+    @param offset string? -- Number of records to skip for pagination
+    @return Result<ListGuardrailMemberAssignments200Response, ListGuardrailMemberAssignments401Response | ListGuardrailMemberAssignments404Response | ListGuardrailMemberAssignments500Response>
+]=]
+function OpenRouter.listGuardrailMemberAssignments(
+	self: OpenRouter,
+	id: string,
+	limit: string?,
+	offset: string?
+): Types.Result<
+	Types.ListGuardrailMemberAssignments200Response,
+	Types.ListGuardrailMemberAssignments401Response
+	| Types.ListGuardrailMemberAssignments404Response
+	| Types.ListGuardrailMemberAssignments500Response
+>
+	local queryString = self:_buildQueryString({
+		["limit"] = limit,
+		["offset"] = offset,
+	})
+	return self:_request("GET", `/guardrails/{id}/assignments/members{queryString}`, nil)
+end
+
+--[=[
+    Assign multiple organization members to a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: POST /guardrails/{id}/assignments/members
+
+    @method bulkAssignMembersToGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param params { member_user_ids: {string} } -- Request body parameters
+    @return Result<BulkAssignMembersToGuardrail200Response, BulkAssignMembersToGuardrail400Response | BulkAssignMembersToGuardrail401Response | BulkAssignMembersToGuardrail404Response | BulkAssignMembersToGuardrail500Response>
+]=]
+function OpenRouter.bulkAssignMembersToGuardrail(
+	self: OpenRouter,
+	id: string,
+	params: { member_user_ids: { string } }
+): Types.Result<
+	Types.BulkAssignMembersToGuardrail200Response,
+	Types.BulkAssignMembersToGuardrail400Response
+	| Types.BulkAssignMembersToGuardrail401Response
+	| Types.BulkAssignMembersToGuardrail404Response
+	| Types.BulkAssignMembersToGuardrail500Response
+>
+	return self:_request("POST", `/guardrails/{id}/assignments/members`, params)
+end
+
+--[=[
+    Unassign multiple API keys from a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: POST /guardrails/{id}/assignments/keys/remove
+
+    @method bulkUnassignKeysFromGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param params { key_hashes: {string} } -- Request body parameters
+    @return Result<BulkUnassignKeysFromGuardrail200Response, BulkUnassignKeysFromGuardrail400Response | BulkUnassignKeysFromGuardrail401Response | BulkUnassignKeysFromGuardrail404Response | BulkUnassignKeysFromGuardrail500Response>
+]=]
+function OpenRouter.bulkUnassignKeysFromGuardrail(
+	self: OpenRouter,
+	id: string,
+	params: { key_hashes: { string } }
+): Types.Result<
+	Types.BulkUnassignKeysFromGuardrail200Response,
+	Types.BulkUnassignKeysFromGuardrail400Response
+	| Types.BulkUnassignKeysFromGuardrail401Response
+	| Types.BulkUnassignKeysFromGuardrail404Response
+	| Types.BulkUnassignKeysFromGuardrail500Response
+>
+	return self:_request("POST", `/guardrails/{id}/assignments/keys/remove`, params)
+end
+
+--[=[
+    Unassign multiple organization members from a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+    Endpoint: POST /guardrails/{id}/assignments/members/remove
+
+    @method bulkUnassignMembersFromGuardrail
+    @within OpenRouter
+    @tag Guardrails
+    
+    @param id string -- The unique identifier of the guardrail
+    @param params { member_user_ids: {string} } -- Request body parameters
+    @return Result<BulkUnassignMembersFromGuardrail200Response, BulkUnassignMembersFromGuardrail400Response | BulkUnassignMembersFromGuardrail401Response | BulkUnassignMembersFromGuardrail404Response | BulkUnassignMembersFromGuardrail500Response>
+]=]
+function OpenRouter.bulkUnassignMembersFromGuardrail(
+	self: OpenRouter,
+	id: string,
+	params: { member_user_ids: { string } }
+): Types.Result<
+	Types.BulkUnassignMembersFromGuardrail200Response,
+	Types.BulkUnassignMembersFromGuardrail400Response
+	| Types.BulkUnassignMembersFromGuardrail401Response
+	| Types.BulkUnassignMembersFromGuardrail404Response
+	| Types.BulkUnassignMembersFromGuardrail500Response
+>
+	return self:_request("POST", `/guardrails/{id}/assignments/members/remove`, params)
 end
 
 --[[
@@ -732,37 +1116,6 @@ function OpenRouter.sendChatCompletionRequest(
 	| Types.SendChatCompletionRequest500Response
 >
 	return self:_request("POST", "/chat/completions", params)
-end
-
---[[
-  ══════════════════════════════════════════════════════════════════════════════
-  Completions: Text completion endpoints
-  ══════════════════════════════════════════════════════════════════════════════
-]]
-
---[=[
-    Creates a completion for the provided prompt and parameters. Supports both streaming and non-streaming modes.
-
-    Endpoint: POST /completions
-
-    @method createCompletions
-    @within OpenRouter
-    @tag Completions
-    
-    @param params CompletionCreateParams -- Request body parameters
-    @return Result<CreateCompletions200Response, CreateCompletions400Response | CreateCompletions401Response | CreateCompletions429Response | CreateCompletions500Response>
-]=]
-function OpenRouter.createCompletions(
-	self: OpenRouter,
-	params: Types.CompletionCreateParams
-): Types.Result<
-	Types.CreateCompletions200Response,
-	Types.CreateCompletions400Response
-	| Types.CreateCompletions401Response
-	| Types.CreateCompletions429Response
-	| Types.CreateCompletions500Response
->
-	return self:_request("POST", "/completions", params)
 end
 
 return OpenRouter
