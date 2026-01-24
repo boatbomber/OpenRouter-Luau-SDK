@@ -126,11 +126,12 @@ def format_simple_type_doc_comment(
     Returns:
         Formatted doc comment string
     """
-    return (
-        f"--[=[\n    @type {type_name} {type}\n    @within OpenRouterTypes\n"
-        + (f"    {description}\n" if description else "")
-        + "]=]"
-    )
+    lines = ["--[=[", f"@type {type_name} {type}", "@within OpenRouterTypes"]
+
+    if description:
+        lines.extend(description.splitlines())
+
+    return "\n    ".join(lines) + "\n]=]"
 
 
 def format_table_type_doc_comment(
@@ -163,7 +164,7 @@ def format_table_type_doc_comment(
 
             # Add description
             if field.description:
-                field_comment_parts.append(field.description)
+                field_comment_parts.extend(field.description.splitlines())
 
             # Add range constraint
             if field.minimum is not None or field.maximum is not None:
