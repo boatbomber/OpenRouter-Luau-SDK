@@ -1,12 +1,11 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-01-18T00:30:07.784734Z (generator v1.0.0)
+-- Last generated: 2026-01-24T21:38:03.188256Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
-  OpenAI-compatible Chat Completions and Completions API with additional
-  OpenRouter features
+  OpenAI-compatible API with additional OpenRouter features
 ]]
 
 --- @class OpenRouterTypes
@@ -50,6 +49,266 @@ export type ActivityItem = {
 }
 
 --[=[
+    @type AnthropicMessagesStreamEvent ({ ["type"]: "message_start", message: { id: string, ["type"]: "message", role: "assistant", content: {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}, model: string, stop_reason: any?, stop_sequence: any?, usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? } } } | { ["type"]: "message_delta", delta: { stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal" | "model_context_window_exceeded")?, stop_sequence: string? }, usage: { input_tokens: number?, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, server_tool_use: { web_search_requests: number }? } } | { ["type"]: "message_stop" } | { ["type"]: "content_block_start", index: number, content_block: ({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) }) } | { ["type"]: "content_block_delta", index: number, delta: ({ ["type"]: "text_delta", text: string } | { ["type"]: "input_json_delta", partial_json: string } | { ["type"]: "thinking_delta", thinking: string } | { ["type"]: "signature_delta", signature: string } | { ["type"]: "citations_delta", citation: ({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number }) }) } | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | { ["type"]: "error", error: { ["type"]: string, message: string } })
+    @within OpenRouterTypes
+    Union of all possible streaming events
+]=]
+export type AnthropicMessagesStreamEvent =
+	{
+		["type"]: "message_start",
+		message: {
+			id: string,
+			["type"]: "message",
+			role: "assistant",
+			content: {
+				(
+					{
+						["type"]: "text",
+						text: string,
+						citations: {
+							{
+								["type"]: "char_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_char_index: number,
+								end_char_index: number,
+								file_id: string?,
+							} | {
+								["type"]: "page_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_page_number: number,
+								end_page_number: number,
+								file_id: string?,
+							} | {
+								["type"]: "content_block_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_block_index: number,
+								end_block_index: number,
+								file_id: string?,
+							} | {
+								["type"]: "web_search_result_location",
+								cited_text: string,
+								encrypted_index: string,
+								title: string?,
+								url: string,
+							} | {
+								["type"]: "search_result_location",
+								cited_text: string,
+								search_result_index: number,
+								source: string,
+								title: string?,
+								start_block_index: number,
+								end_block_index: number,
+							}
+						}?,
+					}
+					| { ["type"]: "tool_use", id: string, name: string, input: any? }
+					| { ["type"]: "thinking", thinking: string, signature: string }
+					| { ["type"]: "redacted_thinking", data: string }
+					| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
+					| {
+						["type"]: "web_search_tool_result",
+						tool_use_id: string,
+						content: {
+							{
+								["type"]: "web_search_result",
+								encrypted_content: string,
+								page_age: string?,
+								title: string,
+								url: string,
+							}
+						} | {
+							["type"]: "web_search_tool_result_error",
+							error_code: (
+								"invalid_tool_input"
+								| "unavailable"
+								| "max_uses_exceeded"
+								| "too_many_requests"
+								| "query_too_long"
+							),
+						},
+					}
+				)
+			},
+			model: string,
+			stop_reason: any?,
+			stop_sequence: any?,
+			usage: {
+				input_tokens: number,
+				output_tokens: number,
+				cache_creation_input_tokens: number?,
+				cache_read_input_tokens: number?,
+				cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+				server_tool_use: { web_search_requests: number }?,
+				service_tier: ("standard" | "priority" | "batch")?,
+			},
+		},
+	}
+	| {
+		["type"]: "message_delta",
+		delta: {
+			stop_reason: (
+				"end_turn"
+				| "max_tokens"
+				| "stop_sequence"
+				| "tool_use"
+				| "pause_turn"
+				| "refusal"
+				| "model_context_window_exceeded"
+			)?,
+			stop_sequence: string?,
+		},
+		usage: {
+			input_tokens: number?,
+			output_tokens: number,
+			cache_creation_input_tokens: number?,
+			cache_read_input_tokens: number?,
+			server_tool_use: { web_search_requests: number }?,
+		},
+	}
+	| { ["type"]: "message_stop" }
+	| {
+		["type"]: "content_block_start",
+		index: number,
+		content_block: (
+			{
+				["type"]: "text",
+				text: string,
+				citations: {
+					{
+						["type"]: "char_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_char_index: number,
+						end_char_index: number,
+						file_id: string?,
+					} | {
+						["type"]: "page_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_page_number: number,
+						end_page_number: number,
+						file_id: string?,
+					} | {
+						["type"]: "content_block_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_block_index: number,
+						end_block_index: number,
+						file_id: string?,
+					} | {
+						["type"]: "web_search_result_location",
+						cited_text: string,
+						encrypted_index: string,
+						title: string?,
+						url: string,
+					} | {
+						["type"]: "search_result_location",
+						cited_text: string,
+						search_result_index: number,
+						source: string,
+						title: string?,
+						start_block_index: number,
+						end_block_index: number,
+					}
+				}?,
+			}
+			| { ["type"]: "tool_use", id: string, name: string, input: any? }
+			| { ["type"]: "thinking", thinking: string, signature: string }
+			| { ["type"]: "redacted_thinking", data: string }
+			| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
+			| {
+				["type"]: "web_search_tool_result",
+				tool_use_id: string,
+				content: {
+					{
+						["type"]: "web_search_result",
+						encrypted_content: string,
+						page_age: string?,
+						title: string,
+						url: string,
+					}
+				} | {
+					["type"]: "web_search_tool_result_error",
+					error_code: (
+						"invalid_tool_input"
+						| "unavailable"
+						| "max_uses_exceeded"
+						| "too_many_requests"
+						| "query_too_long"
+					),
+				},
+			}
+		),
+	}
+	| {
+		["type"]: "content_block_delta",
+		index: number,
+		delta: (
+			{ ["type"]: "text_delta", text: string }
+			| { ["type"]: "input_json_delta", partial_json: string }
+			| { ["type"]: "thinking_delta", thinking: string }
+			| { ["type"]: "signature_delta", signature: string }
+			| {
+				["type"]: "citations_delta",
+				citation: {
+					["type"]: "char_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_char_index: number,
+					end_char_index: number,
+					file_id: string?,
+				} | {
+					["type"]: "page_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_page_number: number,
+					end_page_number: number,
+					file_id: string?,
+				} | {
+					["type"]: "content_block_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_block_index: number,
+					end_block_index: number,
+					file_id: string?,
+				} | {
+					["type"]: "web_search_result_location",
+					cited_text: string,
+					encrypted_index: string,
+					title: string?,
+					url: string,
+				} | {
+					["type"]: "search_result_location",
+					cited_text: string,
+					search_result_index: number,
+					source: string,
+					title: string?,
+					start_block_index: number,
+					end_block_index: number,
+				},
+			}
+		),
+	}
+	| { ["type"]: "content_block_stop", index: number }
+	| { ["type"]: "ping" }
+	| {
+		["type"]: "error",
+		error: { ["type"]: string, message: string },
+	}
+
+--[=[
     @interface BadGatewayResponseErrorData
     @within OpenRouterTypes
     Error data for BadGatewayResponse
@@ -90,6 +349,127 @@ export type BadRequestResponseErrorData = { code: number, message: string, metad
     @field user_id string?
 ]=]
 export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: string? }
+
+--[=[
+    @interface BaseAnthropicMessagesResponse
+    @within OpenRouterTypes
+    
+    @field id string
+    @field type "message"
+    @field role "assistant"
+    @field content {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}
+    @field model string
+    @field stop_reason ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal" | "model_context_window_exceeded")?
+    @field stop_sequence string?
+    @field usage { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? }
+]=]
+export type BaseAnthropicMessagesResponse = {
+	id: string,
+	["type"]: "message",
+	role: "assistant",
+	content: {
+		(
+			{
+				["type"]: "text",
+				text: string,
+				citations: {
+					{
+						["type"]: "char_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_char_index: number,
+						end_char_index: number,
+						file_id: string?,
+					} | {
+						["type"]: "page_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_page_number: number,
+						end_page_number: number,
+						file_id: string?,
+					} | {
+						["type"]: "content_block_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_block_index: number,
+						end_block_index: number,
+						file_id: string?,
+					} | {
+						["type"]: "web_search_result_location",
+						cited_text: string,
+						encrypted_index: string,
+						title: string?,
+						url: string,
+					} | {
+						["type"]: "search_result_location",
+						cited_text: string,
+						search_result_index: number,
+						source: string,
+						title: string?,
+						start_block_index: number,
+						end_block_index: number,
+					}
+				}?,
+			}
+			| { ["type"]: "tool_use", id: string, name: string, input: any? }
+			| { ["type"]: "thinking", thinking: string, signature: string }
+			| { ["type"]: "redacted_thinking", data: string }
+			| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
+			| {
+				["type"]: "web_search_tool_result",
+				tool_use_id: string,
+				content: {
+					{
+						["type"]: "web_search_result",
+						encrypted_content: string,
+						page_age: string?,
+						title: string,
+						url: string,
+					}
+				} | {
+					["type"]: "web_search_tool_result_error",
+					error_code: (
+						"invalid_tool_input"
+						| "unavailable"
+						| "max_uses_exceeded"
+						| "too_many_requests"
+						| "query_too_long"
+					),
+				},
+			}
+		)
+	},
+	model: string,
+	stop_reason: (
+		"end_turn"
+		| "max_tokens"
+		| "stop_sequence"
+		| "tool_use"
+		| "pause_turn"
+		| "refusal"
+		| "model_context_window_exceeded"
+	)?,
+	stop_sequence: string?,
+	usage: {
+		input_tokens: number,
+		output_tokens: number,
+		cache_creation_input_tokens: number?,
+		cache_read_input_tokens: number?,
+		cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+		server_tool_use: { web_search_requests: number }?,
+		service_tier: ("standard" | "priority" | "batch")?,
+	},
+}
+
+--[=[
+    @type AnthropicMessagesResponse BaseAnthropicMessagesResponse
+    @within OpenRouterTypes
+    Non-streaming response from the Anthropic Messages API with OpenRouter extensions
+]=]
+export type AnthropicMessagesResponse = BaseAnthropicMessagesResponse
 
 --[=[
     @type BigNumberUnion string
@@ -234,26 +614,6 @@ export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, 
 export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: { name: string, arguments: string } }
 
 --[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})?
-    @field name string?
-    @field tool_calls {ChatMessageToolCall}?
-    @field refusal string?
-    @field reasoning string?
-]=]
-export type AssistantMessage = {
-	role: string,
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-}
-
---[=[
     @interface ChatStreamOptions
     @within OpenRouterTypes
     
@@ -278,82 +638,6 @@ export type ChatStreamingMessageToolCall = {
 }
 
 --[=[
-    @type CompletionFinishReason ("stop" | "length" | "content_filter")?
-    @within OpenRouterTypes
-]=]
-export type CompletionFinishReason = ("stop" | "length" | "content_filter")?
-
---[=[
-    @interface CompletionLogprobs
-    @within OpenRouterTypes
-    
-    @field tokens {string}
-    @field token_logprobs {number}
-    @field top_logprobs {{ [string]: number }}?
-    @field text_offset {number}
-]=]
-export type CompletionLogprobs = {
-	tokens: { string },
-	token_logprobs: { number },
-	top_logprobs: { { [string]: number } }?,
-	text_offset: { number },
-}
-
---[=[
-    @interface CompletionChoice
-    @within OpenRouterTypes
-    
-    @field text string
-    @field index number
-    @field logprobs CompletionLogprobs?
-    @field finish_reason CompletionFinishReason
-    @field native_finish_reason string?
-    @field reasoning string?
-]=]
-export type CompletionChoice = {
-	text: string,
-	index: number,
-	logprobs: CompletionLogprobs?,
-	finish_reason: CompletionFinishReason,
-	native_finish_reason: string?,
-	reasoning: string?,
-}
-
---[=[
-    @interface CompletionUsage
-    @within OpenRouterTypes
-    
-    @field prompt_tokens number
-    @field completion_tokens number
-    @field total_tokens number
-]=]
-export type CompletionUsage = { prompt_tokens: number, completion_tokens: number, total_tokens: number }
-
---[=[
-    @interface CompletionResponse
-    @within OpenRouterTypes
-    
-    @field id string
-    @field object string
-    @field created number
-    @field model string
-    @field provider string?
-    @field system_fingerprint string?
-    @field choices {CompletionChoice}
-    @field usage CompletionUsage?
-]=]
-export type CompletionResponse = {
-	id: string,
-	object: string,
-	created: number,
-	model: string,
-	provider: string?,
-	system_fingerprint: string?,
-	choices: { CompletionChoice },
-	usage: CompletionUsage?,
-}
-
---[=[
     @interface CreateChargeRequest
     @within OpenRouterTypes
     Create a Coinbase charge for crypto payment
@@ -368,9 +652,9 @@ export type CreateChargeRequest = { amount: number, sender: string, chain_id: nu
     @type DataCollection ("deny" | "allow")?
     @within OpenRouterTypes
     Data collection setting. If no available model provider meets the requirement, your request will return an error.
-- allow: (default) allow providers which store user data non-transiently and may train on it
-
-- deny: use only providers which do not collect user data.
+    - allow: (default) allow providers which store user data non-transiently and may train on it
+    
+    - deny: use only providers which do not collect user data.
 ]=]
 export type DataCollection = ("deny" | "allow")?
 
@@ -1106,6 +1390,292 @@ export type OpenResponsesUsage = OpenAIResponsesUsage & {
 }
 
 --[=[
+    @interface OpenRouterAnthropicMessageParam
+    @within OpenRouterTypes
+    Anthropic message with OpenRouter extensions
+    
+    @field role ("user" | "assistant")
+    @field content (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "document", source: ({ ["type"]: "base64", media_type: "application/pdf", data: string } | { ["type"]: "text", media_type: "text/plain", data: string } | { ["type"]: "content", content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}) } | { ["type"]: "url", url: string }), citations: { enabled: boolean? }?, context: string?, title: string?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_use", id: string, name: string, input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_result", tool_use_id: string, content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})?, is_error: boolean?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, title: string, url: string, page_age: string? }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "search_result", source: string, title: string, content: {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }}, citations: { enabled: boolean? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})
+]=]
+export type OpenRouterAnthropicMessageParam = {
+	role: "user" | "assistant",
+	content: string | {
+		(
+			{
+				["type"]: "text",
+				text: string,
+				citations: {
+					{
+						["type"]: "char_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_char_index: number,
+						end_char_index: number,
+					} | {
+						["type"]: "page_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_page_number: number,
+						end_page_number: number,
+					} | {
+						["type"]: "content_block_location",
+						cited_text: string,
+						document_index: number,
+						document_title: string?,
+						start_block_index: number,
+						end_block_index: number,
+					} | {
+						["type"]: "web_search_result_location",
+						cited_text: string,
+						encrypted_index: string,
+						title: string?,
+						url: string,
+					} | {
+						["type"]: "search_result_location",
+						cited_text: string,
+						search_result_index: number,
+						source: string,
+						title: string?,
+						start_block_index: number,
+						end_block_index: number,
+					}
+				}?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "image",
+				source: {
+					["type"]: "base64",
+					media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+					data: string,
+				} | { ["type"]: "url", url: string },
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "document",
+				source: (
+					{ ["type"]: "base64", media_type: "application/pdf", data: string }
+					| { ["type"]: "text", media_type: "text/plain", data: string }
+					| {
+						["type"]: "content",
+						content: string | {
+							{
+								["type"]: "text",
+								text: string,
+								citations: {
+									{
+										["type"]: "char_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_char_index: number,
+										end_char_index: number,
+									} | {
+										["type"]: "page_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_page_number: number,
+										end_page_number: number,
+									} | {
+										["type"]: "content_block_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_block_index: number,
+										end_block_index: number,
+									} | {
+										["type"]: "web_search_result_location",
+										cited_text: string,
+										encrypted_index: string,
+										title: string?,
+										url: string,
+									} | {
+										["type"]: "search_result_location",
+										cited_text: string,
+										search_result_index: number,
+										source: string,
+										title: string?,
+										start_block_index: number,
+										end_block_index: number,
+									}
+								}?,
+								cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+							} | {
+								["type"]: "image",
+								source: {
+									["type"]: "base64",
+									media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+									data: string,
+								} | { ["type"]: "url", url: string },
+								cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+							}
+						},
+					}
+					| { ["type"]: "url", url: string }
+				),
+				citations: { enabled: boolean? }?,
+				context: string?,
+				title: string?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "tool_use",
+				id: string,
+				name: string,
+				input: any?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "tool_result",
+				tool_use_id: string,
+				content: (string | {
+					{
+						["type"]: "text",
+						text: string,
+						citations: {
+							{
+								["type"]: "char_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_char_index: number,
+								end_char_index: number,
+							} | {
+								["type"]: "page_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_page_number: number,
+								end_page_number: number,
+							} | {
+								["type"]: "content_block_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_block_index: number,
+								end_block_index: number,
+							} | {
+								["type"]: "web_search_result_location",
+								cited_text: string,
+								encrypted_index: string,
+								title: string?,
+								url: string,
+							} | {
+								["type"]: "search_result_location",
+								cited_text: string,
+								search_result_index: number,
+								source: string,
+								title: string?,
+								start_block_index: number,
+								end_block_index: number,
+							}
+						}?,
+						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+					} | {
+						["type"]: "image",
+						source: {
+							["type"]: "base64",
+							media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+							data: string,
+						} | { ["type"]: "url", url: string },
+						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+					}
+				})?,
+				is_error: boolean?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| { ["type"]: "thinking", thinking: string, signature: string }
+			| { ["type"]: "redacted_thinking", data: string }
+			| {
+				["type"]: "server_tool_use",
+				id: string,
+				name: "web_search",
+				input: any?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "web_search_tool_result",
+				tool_use_id: string,
+				content: {
+					{
+						["type"]: "web_search_result",
+						encrypted_content: string,
+						title: string,
+						url: string,
+						page_age: string?,
+					}
+				} | {
+					["type"]: "web_search_tool_result_error",
+					error_code: (
+						"invalid_tool_input"
+						| "unavailable"
+						| "max_uses_exceeded"
+						| "too_many_requests"
+						| "query_too_long"
+					),
+				},
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+			| {
+				["type"]: "search_result",
+				source: string,
+				title: string,
+				content: {
+					{
+						["type"]: "text",
+						text: string,
+						citations: {
+							{
+								["type"]: "char_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_char_index: number,
+								end_char_index: number,
+							} | {
+								["type"]: "page_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_page_number: number,
+								end_page_number: number,
+							} | {
+								["type"]: "content_block_location",
+								cited_text: string,
+								document_index: number,
+								document_title: string?,
+								start_block_index: number,
+								end_block_index: number,
+							} | {
+								["type"]: "web_search_result_location",
+								cited_text: string,
+								encrypted_index: string,
+								title: string?,
+								url: string,
+							} | {
+								["type"]: "search_result_location",
+								cited_text: string,
+								search_result_index: number,
+								source: string,
+								title: string?,
+								start_block_index: number,
+								end_block_index: number,
+							}
+						}?,
+						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+					}
+				},
+				citations: { enabled: boolean? }?,
+				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+			}
+		)
+	},
+}
+
+--[=[
     @interface OutputItemFunctionCall
     @within OpenRouterTypes
     
@@ -1142,10 +1712,10 @@ export type OutputItemImageGenerationCall = {
 }
 
 --[=[
-    @type OutputModality ("text" | "image" | "embeddings")
+    @type OutputModality ("text" | "image" | "embeddings" | "audio")
     @within OpenRouterTypes
 ]=]
-export type OutputModality = "text" | "image" | "embeddings"
+export type OutputModality = "text" | "image" | "embeddings" | "audio"
 
 --[=[
     @interface ModelArchitecture
@@ -1469,6 +2039,7 @@ export type ProviderSortUnion = ProviderSort | ProviderSortConfig
     @field image_token BigNumberUnion?
     @field image_output BigNumberUnion?
     @field audio BigNumberUnion?
+    @field audio_output BigNumberUnion?
     @field input_audio_cache BigNumberUnion?
     @field web_search BigNumberUnion?
     @field internal_reasoning BigNumberUnion?
@@ -1484,6 +2055,7 @@ export type PublicPricing = {
 	image_token: BigNumberUnion?,
 	image_output: BigNumberUnion?,
 	audio: BigNumberUnion?,
+	audio_output: BigNumberUnion?,
 	input_audio_cache: BigNumberUnion?,
 	web_search: BigNumberUnion?,
 	internal_reasoning: BigNumberUnion?,
@@ -1503,10 +2075,7 @@ export type Quantization = "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "b
     @within OpenRouterTypes
     Provider routing preferences for the request.
     
-    @field allow_fallbacks boolean? -- Whether to allow backup providers to serve requests
-- true: (default) when the primary provider (or your custom providers in "order") is unavailable, use the next best provider.
-- false: use only the primary/custom provider, and return the upstream error if it's unavailable.
-
+    @field allow_fallbacks boolean? -- Whether to allow backup providers to serve requests; - true: (default) when the primary provider (or your custom providers in "order") is unavailable, use the next best provider.; - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
     @field require_parameters boolean? -- Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest.
     @field data_collection DataCollection?
     @field zdr boolean? -- Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used.; (Ex: true)
@@ -1548,9 +2117,10 @@ export type ProviderPreferences = {
     Information about a specific model endpoint
     
     @field name string
+    @field model_id string -- The unique identifier for the model (permaslug); (Ex: "openai/gpt-4")
     @field model_name string
     @field context_length number
-    @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_token: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
+    @field pricing { prompt: BigNumberUnion, completion: BigNumberUnion, request: BigNumberUnion?, image: BigNumberUnion?, image_token: BigNumberUnion?, image_output: BigNumberUnion?, audio: BigNumberUnion?, audio_output: BigNumberUnion?, input_audio_cache: BigNumberUnion?, web_search: BigNumberUnion?, internal_reasoning: BigNumberUnion?, input_cache_read: BigNumberUnion?, input_cache_write: BigNumberUnion?, discount: number? }
     @field provider_name ProviderName
     @field tag string
     @field quantization Quantization?
@@ -1565,6 +2135,7 @@ export type ProviderPreferences = {
 ]=]
 export type PublicEndpoint = {
 	name: string,
+	model_id: string,
 	model_name: string,
 	context_length: number,
 	pricing: {
@@ -1575,6 +2146,7 @@ export type PublicEndpoint = {
 		image_token: BigNumberUnion?,
 		image_output: BigNumberUnion?,
 		audio: BigNumberUnion?,
+		audio_output: BigNumberUnion?,
 		input_audio_cache: BigNumberUnion?,
 		web_search: BigNumberUnion?,
 		internal_reasoning: BigNumberUnion?,
@@ -1789,56 +2361,6 @@ export type ResponseFormatJSONSchema = { ["type"]: string, json_schema: JSONSche
     @field grammar string
 ]=]
 export type ResponseFormatTextGrammar = { ["type"]: string, grammar: string }
-
---[=[
-    @interface CompletionCreateParams
-    @within OpenRouterTypes
-    
-    @field model ModelName?
-    @field models {ModelName}?
-    @field prompt (string | {string} | {number} | {{number}})
-    @field best_of number?
-    @field echo boolean?
-    @field frequency_penalty number?
-    @field logit_bias { [string]: number }?
-    @field logprobs number?
-    @field max_tokens number?
-    @field n number?
-    @field presence_penalty number?
-    @field seed number?
-    @field stop (string | {string})?
-    @field stream boolean? -- Default: False
-    @field stream_options { include_usage: boolean? }?
-    @field suffix string?
-    @field temperature number?
-    @field top_p number?
-    @field user string?
-    @field metadata { [string]: string }?
-    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
-]=]
-export type CompletionCreateParams = {
-	model: ModelName?,
-	models: { ModelName }?,
-	prompt: string | { string } | { number } | { { number } },
-	best_of: number?,
-	echo: boolean?,
-	frequency_penalty: number?,
-	logit_bias: { [string]: number }?,
-	logprobs: number?,
-	max_tokens: number?,
-	n: number?,
-	presence_penalty: number?,
-	seed: number?,
-	stop: (string | { string })?,
-	stream: boolean?,
-	stream_options: { include_usage: boolean? }?,
-	suffix: string?,
-	temperature: number?,
-	top_p: number?,
-	user: string?,
-	metadata: { [string]: string }?,
-	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
-}
 
 --[=[
     @interface ResponseInputAudio
@@ -2290,6 +2812,7 @@ export type TopProviderInfo = { context_length: number?, max_completion_tokens: 
     @field per_request_limits PerRequestLimits
     @field supported_parameters {Parameter} -- List of supported parameters for this model
     @field default_parameters DefaultParameters
+    @field expiration_date string? -- The date after which the model may be removed. ISO 8601 date string (YYYY-MM-DD) or null if no expiration.; (Ex: "2025-06-01")
 ]=]
 export type Model = {
 	id: string,
@@ -2305,6 +2828,7 @@ export type Model = {
 	per_request_limits: PerRequestLimits,
 	supported_parameters: { Parameter },
 	default_parameters: DefaultParameters,
+	expiration_date: string?,
 }
 
 --[=[
@@ -2537,23 +3061,167 @@ export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseEr
 export type UserMessage = { role: string, content: string | { ChatMessageContentItem }, name: string? }
 
 --[=[
-    @type Message (SystemMessage | UserMessage | { role: string, content: (string | {ChatMessageContentItemText}), name: string? } | AssistantMessage | ToolResponseMessage)
-    @within OpenRouterTypes
-]=]
-export type Message = (
-	SystemMessage
-	| UserMessage
-	| { role: string, content: string | { ChatMessageContentItemText }, name: string? }
-	| AssistantMessage
-	| ToolResponseMessage
-)
-
---[=[
     @type WebSearchEngine ("native" | "exa")
     @within OpenRouterTypes
     The search engine to use for web search.
 ]=]
 export type WebSearchEngine = "native" | "exa"
+
+--[=[
+    @interface AnthropicMessagesRequest
+    @within OpenRouterTypes
+    Request schema for Anthropic Messages API endpoint
+    
+    @field model string
+    @field max_tokens number
+    @field messages {OpenRouterAnthropicMessageParam}
+    @field system (string | {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }})?
+    @field metadata { user_id: string? }?
+    @field stop_sequences {string}?
+    @field stream boolean?
+    @field temperature number?
+    @field top_p number?
+    @field top_k number?
+    @field tools {({ name: string, description: string?, input_schema: { [string]: any? }, ["type"]: "custom"?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "bash_20250124", name: "bash", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "text_editor_20250124", name: "str_replace_editor", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_20250305", name: "web_search", allowed_domains: {string}?, blocked_domains: {string}?, max_uses: number?, user_location: { ["type"]: "approximate", city: string?, country: string?, region: string?, timezone: string? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}?
+    @field tool_choice ({ ["type"]: "auto", disable_parallel_tool_use: boolean? } | { ["type"]: "any", disable_parallel_tool_use: boolean? } | { ["type"]: "none" } | { ["type"]: "tool", name: string, disable_parallel_tool_use: boolean? })?
+    @field thinking ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" })?
+    @field service_tier ("auto" | "standard_only")?
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
+    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field models {string}?
+]=]
+export type AnthropicMessagesRequest = {
+	model: string,
+	max_tokens: number,
+	messages: { OpenRouterAnthropicMessageParam },
+	system: (string | {
+		{
+			["type"]: "text",
+			text: string,
+			citations: {
+				{
+					["type"]: "char_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_char_index: number,
+					end_char_index: number,
+				} | {
+					["type"]: "page_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_page_number: number,
+					end_page_number: number,
+				} | {
+					["type"]: "content_block_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_block_index: number,
+					end_block_index: number,
+				} | {
+					["type"]: "web_search_result_location",
+					cited_text: string,
+					encrypted_index: string,
+					title: string?,
+					url: string,
+				} | {
+					["type"]: "search_result_location",
+					cited_text: string,
+					search_result_index: number,
+					source: string,
+					title: string?,
+					start_block_index: number,
+					end_block_index: number,
+				}
+			}?,
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		}
+	})?,
+	metadata: { user_id: string? }?,
+	stop_sequences: { string }?,
+	stream: boolean?,
+	temperature: number?,
+	top_p: number?,
+	top_k: number?,
+	tools: {
+		{
+			name: string,
+			description: string?,
+			input_schema: { [string]: any? },
+			["type"]: "custom"?,
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		} | {
+			["type"]: "bash_20250124",
+			name: "bash",
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		} | {
+			["type"]: "text_editor_20250124",
+			name: "str_replace_editor",
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		} | {
+			["type"]: "web_search_20250305",
+			name: "web_search",
+			allowed_domains: { string }?,
+			blocked_domains: { string }?,
+			max_uses: number?,
+			user_location: {
+				["type"]: "approximate",
+				city: string?,
+				country: string?,
+				region: string?,
+				timezone: string?,
+			}?,
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		}
+	}?,
+	tool_choice: (
+		{ ["type"]: "auto", disable_parallel_tool_use: boolean? }
+		| { ["type"]: "any", disable_parallel_tool_use: boolean? }
+		| { ["type"]: "none" }
+		| { ["type"]: "tool", name: string, disable_parallel_tool_use: boolean? }
+	)?,
+	thinking: ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" })?,
+	service_tier: ("auto" | "standard_only")?,
+	provider: {
+		allow_fallbacks: boolean?,
+		require_parameters: boolean?,
+		data_collection: DataCollection?,
+		zdr: boolean?,
+		enforce_distillable_text: boolean?,
+		order: { ProviderName | string }?,
+		only: { ProviderName | string }?,
+		ignore: { ProviderName | string }?,
+		quantizations: { Quantization }?,
+		sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?,
+		max_price: {
+			prompt: BigNumberUnion?,
+			completion: BigNumberUnion?,
+			image: BigNumberUnion?,
+			audio: BigNumberUnion?,
+			request: BigNumberUnion?,
+		}?,
+		preferred_min_throughput: PreferredMinThroughput?,
+		preferred_max_latency: PreferredMaxLatency?,
+	}?,
+	plugins: {
+		(
+			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
+			| { id: "moderation" }
+			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
+			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
+			| { id: "response-healing", enabled: boolean? }
+		)
+	}?,
+	route: ("fallback" | "sort")?,
+	user: string?,
+	session_id: string?,
+	models: { string }?,
+}
 
 --[=[
     @interface WebSearchPreviewToolUserLocation
@@ -3152,6 +3820,97 @@ export type __schema0 = {
 export type __schema1 = number | string
 
 --[=[
+    @type __schema3 string?
+    @within OpenRouterTypes
+]=]
+export type __schema3 = string?
+
+--[=[
+    @type __schema4 ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @within OpenRouterTypes
+]=]
+export type __schema4 = (
+	"unknown"
+	| "openai-responses-v1"
+	| "azure-openai-responses-v1"
+	| "xai-responses-v1"
+	| "anthropic-claude-v1"
+	| "google-gemini-v1"
+)?
+
+--[=[
+    @type __schema5 number
+    @within OpenRouterTypes
+]=]
+export type __schema5 = number
+
+--[=[
+    @type __schema2 ({ ["type"]: string, summary: string, id: __schema3?, format: __schema4?, index: __schema5? } | { ["type"]: string, data: string, id: __schema3?, format: __schema4?, index: __schema5? } | { ["type"]: string, text: string?, signature: string?, id: __schema3?, format: __schema4?, index: __schema5? })
+    @within OpenRouterTypes
+]=]
+export type __schema2 = (
+	{ ["type"]: string, summary: string, id: __schema3?, format: __schema4?, index: __schema5? }
+	| { ["type"]: string, data: string, id: __schema3?, format: __schema4?, index: __schema5? }
+	| { ["type"]: string, text: string?, signature: string?, id: __schema3?, format: __schema4?, index: __schema5? }
+)
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})?
+    @field name string?
+    @field tool_calls {ChatMessageToolCall}?
+    @field refusal string?
+    @field reasoning string?
+    @field reasoning_details {__schema2}?
+    @field images {{ image_url: { url: string } }}?
+]=]
+export type AssistantMessage = {
+	role: string,
+	content: (string | { ChatMessageContentItem })?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+	reasoning_details: { __schema2 }?,
+	images: { { image_url: { url: string } } }?,
+}
+
+--[=[
+    @interface ChatStreamingMessageChunk
+    @within OpenRouterTypes
+    
+    @field role "assistant"?
+    @field content string?
+    @field reasoning string?
+    @field refusal string?
+    @field tool_calls {ChatStreamingMessageToolCall}?
+    @field reasoning_details {__schema2}?
+]=]
+export type ChatStreamingMessageChunk = {
+	role: "assistant"?,
+	content: string?,
+	reasoning: string?,
+	refusal: string?,
+	tool_calls: { ChatStreamingMessageToolCall }?,
+	reasoning_details: { __schema2 }?,
+}
+
+--[=[
+    @type Message (SystemMessage | UserMessage | { role: string, content: (string | {ChatMessageContentItemText}), name: string? } | AssistantMessage | ToolResponseMessage)
+    @within OpenRouterTypes
+]=]
+export type Message = (
+	SystemMessage
+	| UserMessage
+	| { role: string, content: string | { ChatMessageContentItemText }, name: string? }
+	| AssistantMessage
+	| ToolResponseMessage
+)
+
+--[=[
     @interface ChatGenerationParams
     @within OpenRouterTypes
     
@@ -3249,61 +4008,24 @@ export type ChatGenerationParams = {
 }
 
 --[=[
-    @type __schema2 ChatCompletionFinishReason?
+    @type __schema6 ChatCompletionFinishReason?
     @within OpenRouterTypes
 ]=]
-export type __schema2 = ChatCompletionFinishReason?
-
---[=[
-    @type __schema4 string?
-    @within OpenRouterTypes
-]=]
-export type __schema4 = string?
-
---[=[
-    @type __schema5 ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
-    @within OpenRouterTypes
-]=]
-export type __schema5 = (
-	"unknown"
-	| "openai-responses-v1"
-	| "azure-openai-responses-v1"
-	| "xai-responses-v1"
-	| "anthropic-claude-v1"
-	| "google-gemini-v1"
-)?
-
---[=[
-    @type __schema6 number
-    @within OpenRouterTypes
-]=]
-export type __schema6 = number
-
---[=[
-    @type __schema3 ({ ["type"]: string, summary: string, id: __schema4?, format: __schema5?, index: __schema6? } | { ["type"]: string, data: string, id: __schema4?, format: __schema5?, index: __schema6? } | { ["type"]: string, text: string?, signature: string?, id: __schema4?, format: __schema5?, index: __schema6? })
-    @within OpenRouterTypes
-]=]
-export type __schema3 = (
-	{ ["type"]: string, summary: string, id: __schema4?, format: __schema5?, index: __schema6? }
-	| { ["type"]: string, data: string, id: __schema4?, format: __schema5?, index: __schema6? }
-	| { ["type"]: string, text: string?, signature: string?, id: __schema4?, format: __schema5?, index: __schema6? }
-)
+export type __schema6 = ChatCompletionFinishReason?
 
 --[=[
     @interface ChatResponseChoice
     @within OpenRouterTypes
     
-    @field finish_reason __schema2
+    @field finish_reason __schema6
     @field index number
     @field message AssistantMessage
-    @field reasoning_details {__schema3}?
     @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatResponseChoice = {
-	finish_reason: __schema2,
+	finish_reason: __schema6,
 	index: number,
 	message: AssistantMessage,
-	reasoning_details: { __schema3 }?,
 	logprobs: ChatMessageTokenLogprobs?,
 }
 
@@ -3330,37 +4052,17 @@ export type ChatResponse = {
 }
 
 --[=[
-    @interface ChatStreamingMessageChunk
-    @within OpenRouterTypes
-    
-    @field role "assistant"?
-    @field content string?
-    @field reasoning string?
-    @field refusal string?
-    @field tool_calls {ChatStreamingMessageToolCall}?
-    @field reasoning_details {__schema3}?
-]=]
-export type ChatStreamingMessageChunk = {
-	role: "assistant"?,
-	content: string?,
-	reasoning: string?,
-	refusal: string?,
-	tool_calls: { ChatStreamingMessageToolCall }?,
-	reasoning_details: { __schema3 }?,
-}
-
---[=[
     @interface ChatStreamingChoice
     @within OpenRouterTypes
     
     @field delta ChatStreamingMessageChunk
-    @field finish_reason __schema2
+    @field finish_reason __schema6
     @field index number
     @field logprobs ChatMessageTokenLogprobs?
 ]=]
 export type ChatStreamingChoice = {
 	delta: ChatStreamingMessageChunk,
-	finish_reason: __schema2,
+	finish_reason: __schema6,
 	index: number,
 	logprobs: ChatMessageTokenLogprobs?,
 }
@@ -3481,6 +4183,69 @@ export type CreateResponses524Response = EdgeNetworkTimeoutResponse
     529 Response type for createResponses
 ]=]
 export type CreateResponses529Response = ProviderOverloadedResponse
+
+--[=[
+    @type CreateMessages200Response AnthropicMessagesResponse
+    @within OpenRouterTypes
+    200 Response type for createMessages
+]=]
+export type CreateMessages200Response = AnthropicMessagesResponse
+
+--[=[
+    @type CreateMessages400Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    400 Response type for createMessages
+]=]
+export type CreateMessages400Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages401Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    401 Response type for createMessages
+]=]
+export type CreateMessages401Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages403Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    403 Response type for createMessages
+]=]
+export type CreateMessages403Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages404Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    404 Response type for createMessages
+]=]
+export type CreateMessages404Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages429Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    429 Response type for createMessages
+]=]
+export type CreateMessages429Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages500Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    500 Response type for createMessages
+]=]
+export type CreateMessages500Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages503Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    503 Response type for createMessages
+]=]
+export type CreateMessages503Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
+
+--[=[
+    @type CreateMessages529Response { ["type"]: "error", error: { ["type"]: string, message: string } }
+    @within OpenRouterTypes
+    529 Response type for createMessages
+]=]
+export type CreateMessages529Response = { ["type"]: "error", error: { ["type"]: string, message: string } }
 
 --[=[
     @type GetUserActivity200Response { data: {ActivityItem} }
@@ -3856,6 +4621,13 @@ export type ListModelsUser200Response = ModelsListResponse
 export type ListModelsUser401Response = UnauthorizedResponse
 
 --[=[
+    @type ListModelsUser404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for listModelsUser
+]=]
+export type ListModelsUser404Response = NotFoundResponse
+
+--[=[
     @type ListModelsUser500Response InternalServerResponse
     @within OpenRouterTypes
     500 Response type for listModelsUser
@@ -3896,66 +4668,6 @@ export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
     500 Response type for listEndpointsZdr
 ]=]
 export type ListEndpointsZdr500Response = InternalServerResponse
-
---[=[
-    @type GetParameters200Response { data: { model: string, supported_parameters: {("temperature" | "top_p" | "top_k" | "min_p" | "top_a" | "frequency_penalty" | "presence_penalty" | "repetition_penalty" | "max_tokens" | "logit_bias" | "logprobs" | "top_logprobs" | "seed" | "response_format" | "structured_outputs" | "stop" | "tools" | "tool_choice" | "parallel_tool_calls" | "include_reasoning" | "reasoning" | "reasoning_effort" | "web_search_options" | "verbosity")} } }
-    @within OpenRouterTypes
-    200 Response type for getParameters
-]=]
-export type GetParameters200Response = {
-	data: {
-		model: string,
-		supported_parameters: {
-			(
-				"temperature"
-				| "top_p"
-				| "top_k"
-				| "min_p"
-				| "top_a"
-				| "frequency_penalty"
-				| "presence_penalty"
-				| "repetition_penalty"
-				| "max_tokens"
-				| "logit_bias"
-				| "logprobs"
-				| "top_logprobs"
-				| "seed"
-				| "response_format"
-				| "structured_outputs"
-				| "stop"
-				| "tools"
-				| "tool_choice"
-				| "parallel_tool_calls"
-				| "include_reasoning"
-				| "reasoning"
-				| "reasoning_effort"
-				| "web_search_options"
-				| "verbosity"
-			)
-		},
-	},
-}
-
---[=[
-    @type GetParameters401Response UnauthorizedResponse
-    @within OpenRouterTypes
-    401 Response type for getParameters
-]=]
-export type GetParameters401Response = UnauthorizedResponse
-
---[=[
-    @type GetParameters404Response NotFoundResponse
-    @within OpenRouterTypes
-    404 Response type for getParameters
-]=]
-export type GetParameters404Response = NotFoundResponse
-
---[=[
-    @type GetParameters500Response InternalServerResponse
-    @within OpenRouterTypes
-    500 Response type for getParameters
-]=]
-export type GetParameters500Response = InternalServerResponse
 
 --[=[
     @type ListProviders200Response { data: {{ name: string, slug: string, privacy_policy_url: string?, terms_of_service_url: string?, status_page_url: string? }} }
@@ -4248,6 +4960,489 @@ export type UpdateKeys429Response = TooManyRequestsResponse
 export type UpdateKeys500Response = InternalServerResponse
 
 --[=[
+    @type ListGuardrails200Response { data: {{ id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? }}, total_count: number }
+    @within OpenRouterTypes
+    200 Response type for listGuardrails
+]=]
+export type ListGuardrails200Response = {
+	data: {
+		{
+			id: string,
+			name: string,
+			description: string?,
+			limit_usd: number?,
+			reset_interval: ("daily" | "weekly" | "monthly")?,
+			allowed_providers: { string }?,
+			allowed_models: { string }?,
+			enforce_zdr: boolean?,
+			created_at: string,
+			updated_at: string?,
+		}
+	},
+	total_count: number,
+}
+
+--[=[
+    @type ListGuardrails401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for listGuardrails
+]=]
+export type ListGuardrails401Response = UnauthorizedResponse
+
+--[=[
+    @type ListGuardrails500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listGuardrails
+]=]
+export type ListGuardrails500Response = InternalServerResponse
+
+--[=[
+    @type CreateGuardrail201Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @within OpenRouterTypes
+    201 Response type for createGuardrail
+]=]
+export type CreateGuardrail201Response = {
+	data: {
+		id: string,
+		name: string,
+		description: string?,
+		limit_usd: number?,
+		reset_interval: ("daily" | "weekly" | "monthly")?,
+		allowed_providers: { string }?,
+		allowed_models: { string }?,
+		enforce_zdr: boolean?,
+		created_at: string,
+		updated_at: string?,
+	},
+}
+
+--[=[
+    @type CreateGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for createGuardrail
+]=]
+export type CreateGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type CreateGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for createGuardrail
+]=]
+export type CreateGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for createGuardrail
+]=]
+export type CreateGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type GetGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @within OpenRouterTypes
+    200 Response type for getGuardrail
+]=]
+export type GetGuardrail200Response = {
+	data: {
+		id: string,
+		name: string,
+		description: string?,
+		limit_usd: number?,
+		reset_interval: ("daily" | "weekly" | "monthly")?,
+		allowed_providers: { string }?,
+		allowed_models: { string }?,
+		enforce_zdr: boolean?,
+		created_at: string,
+		updated_at: string?,
+	},
+}
+
+--[=[
+    @type GetGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for getGuardrail
+]=]
+export type GetGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type GetGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for getGuardrail
+]=]
+export type GetGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type GetGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for getGuardrail
+]=]
+export type GetGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type DeleteGuardrail200Response { deleted: boolean }
+    @within OpenRouterTypes
+    200 Response type for deleteGuardrail
+]=]
+export type DeleteGuardrail200Response = { deleted: boolean }
+
+--[=[
+    @type DeleteGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for deleteGuardrail
+]=]
+export type DeleteGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type DeleteGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for deleteGuardrail
+]=]
+export type DeleteGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type DeleteGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for deleteGuardrail
+]=]
+export type DeleteGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type UpdateGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @within OpenRouterTypes
+    200 Response type for updateGuardrail
+]=]
+export type UpdateGuardrail200Response = {
+	data: {
+		id: string,
+		name: string,
+		description: string?,
+		limit_usd: number?,
+		reset_interval: ("daily" | "weekly" | "monthly")?,
+		allowed_providers: { string }?,
+		allowed_models: { string }?,
+		enforce_zdr: boolean?,
+		created_at: string,
+		updated_at: string?,
+	},
+}
+
+--[=[
+    @type UpdateGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for updateGuardrail
+]=]
+export type UpdateGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type UpdateGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for updateGuardrail
+]=]
+export type UpdateGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type UpdateGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for updateGuardrail
+]=]
+export type UpdateGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type UpdateGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for updateGuardrail
+]=]
+export type UpdateGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type ListKeyAssignments200Response { data: {{ id: string, key_hash: string, guardrail_id: string, key_name: string, key_label: string, assigned_by: string?, created_at: string }}, total_count: number }
+    @within OpenRouterTypes
+    200 Response type for listKeyAssignments
+]=]
+export type ListKeyAssignments200Response = {
+	data: {
+		{
+			id: string,
+			key_hash: string,
+			guardrail_id: string,
+			key_name: string,
+			key_label: string,
+			assigned_by: string?,
+			created_at: string,
+		}
+	},
+	total_count: number,
+}
+
+--[=[
+    @type ListKeyAssignments401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for listKeyAssignments
+]=]
+export type ListKeyAssignments401Response = UnauthorizedResponse
+
+--[=[
+    @type ListKeyAssignments500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listKeyAssignments
+]=]
+export type ListKeyAssignments500Response = InternalServerResponse
+
+--[=[
+    @type ListMemberAssignments200Response { data: {{ id: string, user_id: string, organization_id: string, guardrail_id: string, assigned_by: string?, created_at: string }}, total_count: number }
+    @within OpenRouterTypes
+    200 Response type for listMemberAssignments
+]=]
+export type ListMemberAssignments200Response = {
+	data: {
+		{
+			id: string,
+			user_id: string,
+			organization_id: string,
+			guardrail_id: string,
+			assigned_by: string?,
+			created_at: string,
+		}
+	},
+	total_count: number,
+}
+
+--[=[
+    @type ListMemberAssignments401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for listMemberAssignments
+]=]
+export type ListMemberAssignments401Response = UnauthorizedResponse
+
+--[=[
+    @type ListMemberAssignments500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listMemberAssignments
+]=]
+export type ListMemberAssignments500Response = InternalServerResponse
+
+--[=[
+    @type ListGuardrailKeyAssignments200Response { data: {{ id: string, key_hash: string, guardrail_id: string, key_name: string, key_label: string, assigned_by: string?, created_at: string }}, total_count: number }
+    @within OpenRouterTypes
+    200 Response type for listGuardrailKeyAssignments
+]=]
+export type ListGuardrailKeyAssignments200Response = {
+	data: {
+		{
+			id: string,
+			key_hash: string,
+			guardrail_id: string,
+			key_name: string,
+			key_label: string,
+			assigned_by: string?,
+			created_at: string,
+		}
+	},
+	total_count: number,
+}
+
+--[=[
+    @type ListGuardrailKeyAssignments401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for listGuardrailKeyAssignments
+]=]
+export type ListGuardrailKeyAssignments401Response = UnauthorizedResponse
+
+--[=[
+    @type ListGuardrailKeyAssignments404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for listGuardrailKeyAssignments
+]=]
+export type ListGuardrailKeyAssignments404Response = NotFoundResponse
+
+--[=[
+    @type ListGuardrailKeyAssignments500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listGuardrailKeyAssignments
+]=]
+export type ListGuardrailKeyAssignments500Response = InternalServerResponse
+
+--[=[
+    @type BulkAssignKeysToGuardrail200Response { assigned_count: number }
+    @within OpenRouterTypes
+    200 Response type for bulkAssignKeysToGuardrail
+]=]
+export type BulkAssignKeysToGuardrail200Response = { assigned_count: number }
+
+--[=[
+    @type BulkAssignKeysToGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for bulkAssignKeysToGuardrail
+]=]
+export type BulkAssignKeysToGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type BulkAssignKeysToGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for bulkAssignKeysToGuardrail
+]=]
+export type BulkAssignKeysToGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type BulkAssignKeysToGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for bulkAssignKeysToGuardrail
+]=]
+export type BulkAssignKeysToGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type BulkAssignKeysToGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for bulkAssignKeysToGuardrail
+]=]
+export type BulkAssignKeysToGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type ListGuardrailMemberAssignments200Response { data: {{ id: string, user_id: string, organization_id: string, guardrail_id: string, assigned_by: string?, created_at: string }}, total_count: number }
+    @within OpenRouterTypes
+    200 Response type for listGuardrailMemberAssignments
+]=]
+export type ListGuardrailMemberAssignments200Response = {
+	data: {
+		{
+			id: string,
+			user_id: string,
+			organization_id: string,
+			guardrail_id: string,
+			assigned_by: string?,
+			created_at: string,
+		}
+	},
+	total_count: number,
+}
+
+--[=[
+    @type ListGuardrailMemberAssignments401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for listGuardrailMemberAssignments
+]=]
+export type ListGuardrailMemberAssignments401Response = UnauthorizedResponse
+
+--[=[
+    @type ListGuardrailMemberAssignments404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for listGuardrailMemberAssignments
+]=]
+export type ListGuardrailMemberAssignments404Response = NotFoundResponse
+
+--[=[
+    @type ListGuardrailMemberAssignments500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for listGuardrailMemberAssignments
+]=]
+export type ListGuardrailMemberAssignments500Response = InternalServerResponse
+
+--[=[
+    @type BulkAssignMembersToGuardrail200Response { assigned_count: number }
+    @within OpenRouterTypes
+    200 Response type for bulkAssignMembersToGuardrail
+]=]
+export type BulkAssignMembersToGuardrail200Response = { assigned_count: number }
+
+--[=[
+    @type BulkAssignMembersToGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for bulkAssignMembersToGuardrail
+]=]
+export type BulkAssignMembersToGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type BulkAssignMembersToGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for bulkAssignMembersToGuardrail
+]=]
+export type BulkAssignMembersToGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type BulkAssignMembersToGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for bulkAssignMembersToGuardrail
+]=]
+export type BulkAssignMembersToGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type BulkAssignMembersToGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for bulkAssignMembersToGuardrail
+]=]
+export type BulkAssignMembersToGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type BulkUnassignKeysFromGuardrail200Response { unassigned_count: number }
+    @within OpenRouterTypes
+    200 Response type for bulkUnassignKeysFromGuardrail
+]=]
+export type BulkUnassignKeysFromGuardrail200Response = { unassigned_count: number }
+
+--[=[
+    @type BulkUnassignKeysFromGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for bulkUnassignKeysFromGuardrail
+]=]
+export type BulkUnassignKeysFromGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type BulkUnassignKeysFromGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for bulkUnassignKeysFromGuardrail
+]=]
+export type BulkUnassignKeysFromGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type BulkUnassignKeysFromGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for bulkUnassignKeysFromGuardrail
+]=]
+export type BulkUnassignKeysFromGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type BulkUnassignKeysFromGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for bulkUnassignKeysFromGuardrail
+]=]
+export type BulkUnassignKeysFromGuardrail500Response = InternalServerResponse
+
+--[=[
+    @type BulkUnassignMembersFromGuardrail200Response { unassigned_count: number }
+    @within OpenRouterTypes
+    200 Response type for bulkUnassignMembersFromGuardrail
+]=]
+export type BulkUnassignMembersFromGuardrail200Response = { unassigned_count: number }
+
+--[=[
+    @type BulkUnassignMembersFromGuardrail400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for bulkUnassignMembersFromGuardrail
+]=]
+export type BulkUnassignMembersFromGuardrail400Response = BadRequestResponse
+
+--[=[
+    @type BulkUnassignMembersFromGuardrail401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for bulkUnassignMembersFromGuardrail
+]=]
+export type BulkUnassignMembersFromGuardrail401Response = UnauthorizedResponse
+
+--[=[
+    @type BulkUnassignMembersFromGuardrail404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for bulkUnassignMembersFromGuardrail
+]=]
+export type BulkUnassignMembersFromGuardrail404Response = NotFoundResponse
+
+--[=[
+    @type BulkUnassignMembersFromGuardrail500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for bulkUnassignMembersFromGuardrail
+]=]
+export type BulkUnassignMembersFromGuardrail500Response = InternalServerResponse
+
+--[=[
     @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, rate_limit: { requests: number, interval: string, note: string } } }
     @within OpenRouterTypes
     200 Response type for getCurrentKey
@@ -4378,39 +5573,4 @@ export type SendChatCompletionRequest429Response = ChatError
     500 Response type for sendChatCompletionRequest
 ]=]
 export type SendChatCompletionRequest500Response = ChatError
-
---[=[
-    @type CreateCompletions200Response CompletionResponse
-    @within OpenRouterTypes
-    200 Response type for createCompletions
-]=]
-export type CreateCompletions200Response = CompletionResponse
-
---[=[
-    @type CreateCompletions400Response ChatError
-    @within OpenRouterTypes
-    400 Response type for createCompletions
-]=]
-export type CreateCompletions400Response = ChatError
-
---[=[
-    @type CreateCompletions401Response ChatError
-    @within OpenRouterTypes
-    401 Response type for createCompletions
-]=]
-export type CreateCompletions401Response = ChatError
-
---[=[
-    @type CreateCompletions429Response ChatError
-    @within OpenRouterTypes
-    429 Response type for createCompletions
-]=]
-export type CreateCompletions429Response = ChatError
-
---[=[
-    @type CreateCompletions500Response ChatError
-    @within OpenRouterTypes
-    500 Response type for createCompletions
-]=]
-export type CreateCompletions500Response = ChatError
 return {}
