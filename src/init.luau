@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-01-24T21:38:03.202234Z (generator v1.0.0)
+-- Last generated: 2026-02-01T00:38:27.566186Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -111,7 +111,7 @@ end
 
 --[[
   ══════════════════════════════════════════════════════════════════════════════
-  anthropic.messages: anthropic.messages endpoints
+  Anthropic Messages: Anthropic Messages endpoints
   ══════════════════════════════════════════════════════════════════════════════
 ]]
 
@@ -122,7 +122,7 @@ end
 
     @method createMessages
     @within OpenRouter
-    @tag anthropic.messages
+    @tag Anthropic Messages
     
     @param params AnthropicMessagesRequest -- Request body parameters
     @return Result<CreateMessages200Response, CreateMessages400Response | CreateMessages401Response | CreateMessages403Response | CreateMessages404Response | CreateMessages429Response | CreateMessages500Response | CreateMessages503Response | CreateMessages529Response>
