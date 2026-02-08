@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-02-01T00:38:27.566186Z (generator v1.0.0)
+-- Last generated: 2026-02-08T00:43:23.058462Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -151,7 +151,7 @@ end
 ]]
 
 --[=[
-    Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /activity
 
@@ -185,7 +185,7 @@ end
 ]]
 
 --[=[
-    Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Get total credits purchased and used for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /credits
 
@@ -497,7 +497,7 @@ end
 ]]
 
 --[=[
-    List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /keys
 
@@ -525,7 +525,7 @@ function OpenRouter.list(
 end
 
 --[=[
-    Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Create a new API key for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /keys
 
@@ -556,7 +556,7 @@ function OpenRouter.createKeys(
 end
 
 --[=[
-    Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Get a single API key by hash. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /keys/{hash}
 
@@ -578,7 +578,7 @@ function OpenRouter.getKey(
 end
 
 --[=[
-    Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Delete an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: DELETE /keys/{hash}
 
@@ -603,7 +603,7 @@ function OpenRouter.deleteKeys(
 end
 
 --[=[
-    Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Update an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: PATCH /keys/{hash}
 
@@ -661,7 +661,7 @@ end
 ]]
 
 --[=[
-    List all guardrails for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all guardrails for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails
 
@@ -689,7 +689,7 @@ function OpenRouter.listGuardrails(
 end
 
 --[=[
-    Create a new guardrail for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Create a new guardrail for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /guardrails
 
@@ -719,7 +719,7 @@ function OpenRouter.createGuardrail(
 end
 
 --[=[
-    Get a single guardrail by ID. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Get a single guardrail by ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails/{id}
 
@@ -741,7 +741,7 @@ function OpenRouter.getGuardrail(
 end
 
 --[=[
-    Delete an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Delete an existing guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: DELETE /guardrails/{id}
 
@@ -763,7 +763,7 @@ function OpenRouter.deleteGuardrail(
 end
 
 --[=[
-    Update an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Update an existing guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: PATCH /guardrails/{id}
 
@@ -798,7 +798,7 @@ function OpenRouter.updateGuardrail(
 end
 
 --[=[
-    List all API key guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all API key guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails/assignments/keys
 
@@ -826,7 +826,7 @@ function OpenRouter.listKeyAssignments(
 end
 
 --[=[
-    List all organization member guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all organization member guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails/assignments/members
 
@@ -854,7 +854,7 @@ function OpenRouter.listMemberAssignments(
 end
 
 --[=[
-    List all API key assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all API key assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails/{id}/assignments/keys
 
@@ -886,7 +886,7 @@ function OpenRouter.listGuardrailKeyAssignments(
 end
 
 --[=[
-    Assign multiple API keys to a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Assign multiple API keys to a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /guardrails/{id}/assignments/keys
 
@@ -913,7 +913,7 @@ function OpenRouter.bulkAssignKeysToGuardrail(
 end
 
 --[=[
-    List all organization member assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    List all organization member assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: GET /guardrails/{id}/assignments/members
 
@@ -945,7 +945,7 @@ function OpenRouter.listGuardrailMemberAssignments(
 end
 
 --[=[
-    Assign multiple organization members to a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Assign multiple organization members to a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /guardrails/{id}/assignments/members
 
@@ -972,7 +972,7 @@ function OpenRouter.bulkAssignMembersToGuardrail(
 end
 
 --[=[
-    Unassign multiple API keys from a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Unassign multiple API keys from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /guardrails/{id}/assignments/keys/remove
 
@@ -999,7 +999,7 @@ function OpenRouter.bulkUnassignKeysFromGuardrail(
 end
 
 --[=[
-    Unassign multiple organization members from a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+    Unassign multiple organization members from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
     Endpoint: POST /guardrails/{id}/assignments/members/remove
 

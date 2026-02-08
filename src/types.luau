@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-02-01T00:38:27.552801Z (generator v1.0.0)
+-- Last generated: 2026-02-08T00:43:23.044320Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -49,7 +49,7 @@ export type ActivityItem = {
 }
 
 --[=[
-    @type AnthropicMessagesStreamEvent ({ ["type"]: "message_start", message: { id: string, ["type"]: "message", role: "assistant", content: {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}, model: string, stop_reason: any?, stop_sequence: any?, usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? } } } | { ["type"]: "message_delta", delta: { stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal" | "model_context_window_exceeded")?, stop_sequence: string? }, usage: { input_tokens: number?, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, server_tool_use: { web_search_requests: number }? } } | { ["type"]: "message_stop" } | { ["type"]: "content_block_start", index: number, content_block: ({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) }) } | { ["type"]: "content_block_delta", index: number, delta: ({ ["type"]: "text_delta", text: string } | { ["type"]: "input_json_delta", partial_json: string } | { ["type"]: "thinking_delta", thinking: string } | { ["type"]: "signature_delta", signature: string } | { ["type"]: "citations_delta", citation: ({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number }) }) } | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | { ["type"]: "error", error: { ["type"]: string, message: string } })
+    @type AnthropicMessagesStreamEvent ({ ["type"]: "message_start", message: { id: string, ["type"]: "message", role: "assistant", content: {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}, model: string, stop_reason: any?, stop_sequence: any?, usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? } } } | { ["type"]: "message_delta", delta: { stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?, stop_sequence: string? }, usage: { input_tokens: number?, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, server_tool_use: { web_search_requests: number }? } } | { ["type"]: "message_stop" } | { ["type"]: "content_block_start", index: number, content_block: ({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) }) } | { ["type"]: "content_block_delta", index: number, delta: ({ ["type"]: "text_delta", text: string } | { ["type"]: "input_json_delta", partial_json: string } | { ["type"]: "thinking_delta", thinking: string } | { ["type"]: "signature_delta", signature: string } | { ["type"]: "citations_delta", citation: ({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number }) }) } | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | { ["type"]: "error", error: { ["type"]: string, message: string } })
     @within OpenRouterTypes
     Union of all possible streaming events
 ]=]
@@ -144,6 +144,7 @@ export type AnthropicMessagesStreamEvent =
 				cache_creation_input_tokens: number?,
 				cache_read_input_tokens: number?,
 				cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+				inference_geo: string?,
 				server_tool_use: { web_search_requests: number }?,
 				service_tier: ("standard" | "priority" | "batch")?,
 			},
@@ -152,15 +153,7 @@ export type AnthropicMessagesStreamEvent =
 	| {
 		["type"]: "message_delta",
 		delta: {
-			stop_reason: (
-				"end_turn"
-				| "max_tokens"
-				| "stop_sequence"
-				| "tool_use"
-				| "pause_turn"
-				| "refusal"
-				| "model_context_window_exceeded"
-			)?,
+			stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?,
 			stop_sequence: string?,
 		},
 		usage: {
@@ -309,6 +302,15 @@ export type AnthropicMessagesStreamEvent =
 	}
 
 --[=[
+    @interface AnthropicOutputConfig
+    @within OpenRouterTypes
+    Configuration for controlling output behavior. Currently supports the effort parameter for Claude Opus 4.5.
+    
+    @field effort ("low" | "medium" | "high" | "max")? -- How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer. Valid values are `low`, `medium`, `high`, or `max`.; (Ex: "medium")
+]=]
+export type AnthropicOutputConfig = { effort: ("low" | "medium" | "high" | "max")? }
+
+--[=[
     @interface BadGatewayResponseErrorData
     @within OpenRouterTypes
     Error data for BadGatewayResponse
@@ -359,9 +361,9 @@ export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: 
     @field role "assistant"
     @field content {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}
     @field model string
-    @field stop_reason ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal" | "model_context_window_exceeded")?
+    @field stop_reason ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?
     @field stop_sequence string?
-    @field usage { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? }
+    @field usage { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? }
 ]=]
 export type BaseAnthropicMessagesResponse = {
 	id: string,
@@ -443,15 +445,7 @@ export type BaseAnthropicMessagesResponse = {
 		)
 	},
 	model: string,
-	stop_reason: (
-		"end_turn"
-		| "max_tokens"
-		| "stop_sequence"
-		| "tool_use"
-		| "pause_turn"
-		| "refusal"
-		| "model_context_window_exceeded"
-	)?,
+	stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?,
 	stop_sequence: string?,
 	usage: {
 		input_tokens: number,
@@ -459,6 +453,7 @@ export type BaseAnthropicMessagesResponse = {
 		cache_creation_input_tokens: number?,
 		cache_read_input_tokens: number?,
 		cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+		inference_geo: string?,
 		server_tool_use: { web_search_requests: number }?,
 		service_tier: ("standard" | "priority" | "batch")?,
 	},
@@ -474,7 +469,7 @@ export type AnthropicMessagesResponse = BaseAnthropicMessagesResponse
 --[=[
     @type BigNumberUnion string
     @within OpenRouterTypes
-    A value in string format that is a large number
+    Price per million prompt tokens
 ]=]
 export type BigNumberUnion = string
 
@@ -668,6 +663,16 @@ export type DataCollection = ("deny" | "allow")?
     @field frequency_penalty number? -- Range: -2.0-2.0
 ]=]
 export type DefaultParameters = { temperature: number?, top_p: number?, frequency_penalty: number? }?
+
+--[=[
+    @interface DeveloperMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItemText})
+    @field name string?
+]=]
+export type DeveloperMessage = { role: string, content: string | { ChatMessageContentItemText }, name: string? }
 
 --[=[
     @interface EdgeNetworkTimeoutResponseErrorData
@@ -1909,13 +1914,14 @@ export type PreferredMaxLatency = (number | PercentileLatencyCutoffs)?
 export type PreferredMinThroughput = (number | PercentileThroughputCutoffs)?
 
 --[=[
-    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
+    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
 	"AI21"
 	| "AionLabs"
 	| "Alibaba"
+	| "Ambient"
 	| "Amazon Bedrock"
 	| "Amazon Nova"
 	| "Anthropic"
@@ -1972,6 +1978,7 @@ export type ProviderName = (
 	| "Seed"
 	| "SiliconFlow"
 	| "Sourceful"
+	| "StepFun"
 	| "Stealth"
 	| "StreamLake"
 	| "Switchpoint"
@@ -3084,7 +3091,7 @@ export type WebSearchEngine = "native" | "exa"
     @field top_k number?
     @field tools {({ name: string, description: string?, input_schema: { [string]: any? }, ["type"]: "custom"?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "bash_20250124", name: "bash", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "text_editor_20250124", name: "str_replace_editor", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_20250305", name: "web_search", allowed_domains: {string}?, blocked_domains: {string}?, max_uses: number?, user_location: { ["type"]: "approximate", city: string?, country: string?, region: string?, timezone: string? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}?
     @field tool_choice ({ ["type"]: "auto", disable_parallel_tool_use: boolean? } | { ["type"]: "any", disable_parallel_tool_use: boolean? } | { ["type"]: "none" } | { ["type"]: "tool", name: string, disable_parallel_tool_use: boolean? })?
-    @field thinking ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" })?
+    @field thinking ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" } | { ["type"]: "adaptive" })?
     @field service_tier ("auto" | "standard_only")?
     @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
     @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
@@ -3092,6 +3099,7 @@ export type WebSearchEngine = "native" | "exa"
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
     @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
     @field models {string}?
+    @field output_config AnthropicOutputConfig?
 ]=]
 export type AnthropicMessagesRequest = {
 	model: string,
@@ -3185,7 +3193,7 @@ export type AnthropicMessagesRequest = {
 		| { ["type"]: "none" }
 		| { ["type"]: "tool", name: string, disable_parallel_tool_use: boolean? }
 	)?,
-	thinking: ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" })?,
+	thinking: ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" } | { ["type"]: "adaptive" })?,
 	service_tier: ("auto" | "standard_only")?,
 	provider: {
 		allow_fallbacks: boolean?,
@@ -3221,6 +3229,7 @@ export type AnthropicMessagesRequest = {
 	user: string?,
 	session_id: string?,
 	models: { string }?,
+	output_config: AnthropicOutputConfig?,
 }
 
 --[=[
@@ -3734,14 +3743,251 @@ export type OpenResponsesStreamEvent = (
 )
 
 --[=[
-    @type __schema0 {(("AI21" | "AionLabs" | "Alibaba" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider") | string)}
+    @type __schema1 boolean?
     @within OpenRouterTypes
 ]=]
-export type __schema0 = {
+export type __schema1 = boolean?
+
+--[=[
+    @type __schema11 number
+    @within OpenRouterTypes
+]=]
+export type __schema11 = number
+
+--[=[
+    @type __schema13 any
+    @within OpenRouterTypes
+]=]
+export type __schema13 = any
+
+--[=[
+    @type __schema14 (__schema11 | ModelName | __schema13)
+    @within OpenRouterTypes
+]=]
+export type __schema14 = __schema11 | ModelName | __schema13
+
+--[=[
+    @interface __schema10
+    @within OpenRouterTypes
+    
+    @field prompt (__schema11 | ModelName | __schema13)?
+    @field completion (__schema11 | ModelName | __schema13)?
+    @field image __schema14?
+    @field audio __schema14?
+    @field request __schema14?
+]=]
+export type __schema10 = {
+	prompt: (__schema11 | ModelName | __schema13)?,
+	completion: (__schema11 | ModelName | __schema13)?,
+	image: __schema14?,
+	audio: __schema14?,
+	request: __schema14?,
+}
+
+--[=[
+    @type __schema15 (number | { p50: number?, p75: number?, p90: number?, p99: number? })?
+    @within OpenRouterTypes
+]=]
+export type __schema15 = (number | { p50: number?, p75: number?, p90: number?, p99: number? })?
+
+--[=[
+    @type __schema17 {({ id: string, enabled: boolean?, allowed_models: {string}? } | { id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}
+    @within OpenRouterTypes
+]=]
+export type __schema17 = {
+	{ id: string, enabled: boolean?, allowed_models: { string }? } | { id: string } | {
+		id: string,
+		enabled: boolean?,
+		max_results: number?,
+		search_prompt: string?,
+		engine: ("native" | "exa")?,
+	} | {
+		id: string,
+		enabled: boolean?,
+		pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
+	} | { id: string, enabled: boolean? }
+}
+
+--[=[
+    @type __schema18 string
+    @within OpenRouterTypes
+]=]
+export type __schema18 = string
+
+--[=[
+    @type __schema20 string?
+    @within OpenRouterTypes
+]=]
+export type __schema20 = string?
+
+--[=[
+    @type __schema21 ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @within OpenRouterTypes
+]=]
+export type __schema21 = (
+	"unknown"
+	| "openai-responses-v1"
+	| "azure-openai-responses-v1"
+	| "xai-responses-v1"
+	| "anthropic-claude-v1"
+	| "google-gemini-v1"
+)?
+
+--[=[
+    @type __schema19 ({ ["type"]: string, summary: string, id: __schema20?, format: __schema21?, index: __schema11? } | { ["type"]: string, data: string, id: __schema20?, format: __schema21?, index: __schema11? } | { ["type"]: string, text: string?, signature: string?, id: __schema20?, format: __schema21?, index: __schema11? })
+    @within OpenRouterTypes
+]=]
+export type __schema19 = (
+	{ ["type"]: string, summary: string, id: __schema20?, format: __schema21?, index: __schema11? }
+	| { ["type"]: string, data: string, id: __schema20?, format: __schema21?, index: __schema11? }
+	| { ["type"]: string, text: string?, signature: string?, id: __schema20?, format: __schema21?, index: __schema11? }
+)
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouterTypes
+    
+    @field role string
+    @field content (string | {ChatMessageContentItem})?
+    @field name string?
+    @field tool_calls {ChatMessageToolCall}?
+    @field refusal string?
+    @field reasoning string?
+    @field reasoning_details {__schema19}?
+    @field images {{ image_url: { url: string } }}?
+]=]
+export type AssistantMessage = {
+	role: string,
+	content: (string | { ChatMessageContentItem })?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+	reasoning_details: { __schema19 }?,
+	images: { { image_url: { url: string } } }?,
+}
+
+--[=[
+    @interface ChatStreamingMessageChunk
+    @within OpenRouterTypes
+    
+    @field role "assistant"?
+    @field content string?
+    @field reasoning string?
+    @field refusal string?
+    @field tool_calls {ChatStreamingMessageToolCall}?
+    @field reasoning_details {__schema19}?
+]=]
+export type ChatStreamingMessageChunk = {
+	role: "assistant"?,
+	content: string?,
+	reasoning: string?,
+	refusal: string?,
+	tool_calls: { ChatStreamingMessageToolCall }?,
+	reasoning_details: { __schema19 }?,
+}
+
+--[=[
+    @type Message (SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage)
+    @within OpenRouterTypes
+]=]
+export type Message = SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage
+
+--[=[
+    @type __schema25 ChatCompletionFinishReason?
+    @within OpenRouterTypes
+]=]
+export type __schema25 = ChatCompletionFinishReason?
+
+--[=[
+    @interface ChatResponseChoice
+    @within OpenRouterTypes
+    
+    @field finish_reason __schema25
+    @field index number
+    @field message AssistantMessage
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatResponseChoice = {
+	finish_reason: __schema25,
+	index: number,
+	message: AssistantMessage,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatResponse
+    @within OpenRouterTypes
+    
+    @field id string
+    @field choices {ChatResponseChoice}
+    @field created number
+    @field model string
+    @field object string
+    @field system_fingerprint string?
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatResponse = {
+	id: string,
+	choices: { ChatResponseChoice },
+	created: number,
+	model: string,
+	object: string,
+	system_fingerprint: string?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ChatStreamingChoice
+    @within OpenRouterTypes
+    
+    @field delta ChatStreamingMessageChunk
+    @field finish_reason __schema25
+    @field index number
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatStreamingChoice = {
+	delta: ChatStreamingMessageChunk,
+	finish_reason: __schema25,
+	index: number,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatStreamingResponseChunk
+    @within OpenRouterTypes
+    
+    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
+]=]
+export type ChatStreamingResponseChunk = {
+	data: {
+		id: string,
+		choices: { ChatStreamingChoice },
+		created: number,
+		model: string,
+		object: string,
+		system_fingerprint: string?,
+		error: { message: string, code: number }?,
+		usage: ChatGenerationTokenUsage?,
+	},
+}
+
+--[=[
+    @type __schema3 ("deny" | "allow")?
+    @within OpenRouterTypes
+]=]
+export type __schema3 = ("deny" | "allow")?
+
+--[=[
+    @type __schema5 {(("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider") | string)}
+    @within OpenRouterTypes
+]=]
+export type __schema5 = {
 	(
 		"AI21"
 		| "AionLabs"
 		| "Alibaba"
+		| "Ambient"
 		| "Amazon Bedrock"
 		| "Amazon Nova"
 		| "Anthropic"
@@ -3798,6 +4044,7 @@ export type __schema0 = {
 		| "Seed"
 		| "SiliconFlow"
 		| "Sourceful"
+		| "StepFun"
 		| "Stealth"
 		| "StreamLake"
 		| "Switchpoint"
@@ -3814,111 +4061,52 @@ export type __schema0 = {
 }
 
 --[=[
-    @type __schema1 (number | string)
+    @type __schema4 __schema5?
     @within OpenRouterTypes
 ]=]
-export type __schema1 = number | string
+export type __schema4 = __schema5?
 
 --[=[
-    @type __schema3 string?
+    @type __schema8 {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?
     @within OpenRouterTypes
 ]=]
-export type __schema3 = string?
+export type __schema8 = { "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown" }?
 
 --[=[
-    @type __schema4 ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @type __schema9 ProviderSortUnion?
     @within OpenRouterTypes
 ]=]
-export type __schema4 = (
-	"unknown"
-	| "openai-responses-v1"
-	| "azure-openai-responses-v1"
-	| "xai-responses-v1"
-	| "anthropic-claude-v1"
-	| "google-gemini-v1"
-)?
+export type __schema9 = ProviderSortUnion?
 
 --[=[
-    @type __schema5 number
+    @type __schema0 { allow_fallbacks: __schema1?, require_parameters: __schema1?, data_collection: __schema3?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema4?, only: __schema4?, ignore: __schema4?, quantizations: __schema8?, sort: __schema9?, max_price: __schema10?, preferred_min_throughput: __schema15?, preferred_max_latency: __schema15? }?
     @within OpenRouterTypes
 ]=]
-export type __schema5 = number
-
---[=[
-    @type __schema2 ({ ["type"]: string, summary: string, id: __schema3?, format: __schema4?, index: __schema5? } | { ["type"]: string, data: string, id: __schema3?, format: __schema4?, index: __schema5? } | { ["type"]: string, text: string?, signature: string?, id: __schema3?, format: __schema4?, index: __schema5? })
-    @within OpenRouterTypes
-]=]
-export type __schema2 = (
-	{ ["type"]: string, summary: string, id: __schema3?, format: __schema4?, index: __schema5? }
-	| { ["type"]: string, data: string, id: __schema3?, format: __schema4?, index: __schema5? }
-	| { ["type"]: string, text: string?, signature: string?, id: __schema3?, format: __schema4?, index: __schema5? }
-)
-
---[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})?
-    @field name string?
-    @field tool_calls {ChatMessageToolCall}?
-    @field refusal string?
-    @field reasoning string?
-    @field reasoning_details {__schema2}?
-    @field images {{ image_url: { url: string } }}?
-]=]
-export type AssistantMessage = {
-	role: string,
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-	reasoning_details: { __schema2 }?,
-	images: { { image_url: { url: string } } }?,
-}
-
---[=[
-    @interface ChatStreamingMessageChunk
-    @within OpenRouterTypes
-    
-    @field role "assistant"?
-    @field content string?
-    @field reasoning string?
-    @field refusal string?
-    @field tool_calls {ChatStreamingMessageToolCall}?
-    @field reasoning_details {__schema2}?
-]=]
-export type ChatStreamingMessageChunk = {
-	role: "assistant"?,
-	content: string?,
-	reasoning: string?,
-	refusal: string?,
-	tool_calls: { ChatStreamingMessageToolCall }?,
-	reasoning_details: { __schema2 }?,
-}
-
---[=[
-    @type Message (SystemMessage | UserMessage | { role: string, content: (string | {ChatMessageContentItemText}), name: string? } | AssistantMessage | ToolResponseMessage)
-    @within OpenRouterTypes
-]=]
-export type Message = (
-	SystemMessage
-	| UserMessage
-	| { role: string, content: string | { ChatMessageContentItemText }, name: string? }
-	| AssistantMessage
-	| ToolResponseMessage
-)
+export type __schema0 = {
+	allow_fallbacks: __schema1?,
+	require_parameters: __schema1?,
+	data_collection: __schema3?,
+	zdr: boolean?,
+	enforce_distillable_text: boolean?,
+	order: __schema4?,
+	only: __schema4?,
+	ignore: __schema4?,
+	quantizations: __schema8?,
+	sort: __schema9?,
+	max_price: __schema10?,
+	preferred_min_throughput: __schema15?,
+	preferred_max_latency: __schema15?,
+}?
 
 --[=[
     @interface ChatGenerationParams
     @within OpenRouterTypes
     
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: ("deny" | "allow")?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema0?, only: __schema0?, ignore: __schema0?, quantizations: {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?, sort: ProviderSortUnion?, max_price: { prompt: __schema1?, completion: __schema1?, image: __schema1?, audio: __schema1?, request: __schema1? }?, preferred_min_throughput: (number | { p50: number?, p75: number?, p90: number?, p99: number? })?, preferred_max_latency: (number | { p50: number?, p75: number?, p90: number?, p99: number? })? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: string, enabled: boolean?, allowed_models: {string}? } | { id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field provider __schema0? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins __schema17? -- Plugins you want to enable for this request, including their settings.
     @field route ("fallback" | "sort")?
     @field user string?
-    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field session_id __schema18? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
     @field messages {Message}
     @field model ModelName?
     @field models {ModelName}?
@@ -3933,7 +4121,7 @@ export type Message = (
     @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ReasoningSummaryVerbosity? }?
     @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
     @field seed number?
-    @field stop (string | {string})?
+    @field stop (string | {ModelName})?
     @field stream boolean? -- Default: False
     @field stream_options ChatStreamOptions?
     @field temperature number? -- Default: 1
@@ -3941,43 +4129,15 @@ export type Message = (
     @field tools {ToolDefinitionJson}?
     @field top_p number? -- Default: 1
     @field debug { echo_upstream_body: boolean? }?
-    @field image_config { [string]: (string | number) }?
+    @field image_config { [string]: (string | number | {any}) }?
     @field modalities {("text" | "image")}?
 ]=]
 export type ChatGenerationParams = {
-	provider: {
-		allow_fallbacks: boolean?,
-		require_parameters: boolean?,
-		data_collection: ("deny" | "allow")?,
-		zdr: boolean?,
-		enforce_distillable_text: boolean?,
-		order: __schema0?,
-		only: __schema0?,
-		ignore: __schema0?,
-		quantizations: { "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown" }?,
-		sort: ProviderSortUnion?,
-		max_price: {
-			prompt: __schema1?,
-			completion: __schema1?,
-			image: __schema1?,
-			audio: __schema1?,
-			request: __schema1?,
-		}?,
-		preferred_min_throughput: (number | { p50: number?, p75: number?, p90: number?, p99: number? })?,
-		preferred_max_latency: (number | { p50: number?, p75: number?, p90: number?, p99: number? })?,
-	}?,
-	plugins: {
-		(
-			{ id: string, enabled: boolean?, allowed_models: { string }? }
-			| { id: string }
-			| { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? }
-			| { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? }
-			| { id: string, enabled: boolean? }
-		)
-	}?,
+	provider: __schema0?,
+	plugins: __schema17?,
 	route: ("fallback" | "sort")?,
 	user: string?,
-	session_id: string?,
+	session_id: __schema18?,
 	messages: { Message },
 	model: ModelName?,
 	models: { ModelName }?,
@@ -3995,7 +4155,7 @@ export type ChatGenerationParams = {
 	}?,
 	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
 	seed: number?,
-	stop: (string | { string })?,
+	stop: (string | { ModelName })?,
 	stream: boolean?,
 	stream_options: ChatStreamOptions?,
 	temperature: number?,
@@ -4003,87 +4163,8 @@ export type ChatGenerationParams = {
 	tools: { ToolDefinitionJson }?,
 	top_p: number?,
 	debug: { echo_upstream_body: boolean? }?,
-	image_config: { [string]: string | number }?,
+	image_config: { [string]: string | number | { any } }?,
 	modalities: { "text" | "image" }?,
-}
-
---[=[
-    @type __schema6 ChatCompletionFinishReason?
-    @within OpenRouterTypes
-]=]
-export type __schema6 = ChatCompletionFinishReason?
-
---[=[
-    @interface ChatResponseChoice
-    @within OpenRouterTypes
-    
-    @field finish_reason __schema6
-    @field index number
-    @field message AssistantMessage
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatResponseChoice = {
-	finish_reason: __schema6,
-	index: number,
-	message: AssistantMessage,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatResponse
-    @within OpenRouterTypes
-    
-    @field id string
-    @field choices {ChatResponseChoice}
-    @field created number
-    @field model string
-    @field object string
-    @field system_fingerprint string?
-    @field usage ChatGenerationTokenUsage?
-]=]
-export type ChatResponse = {
-	id: string,
-	choices: { ChatResponseChoice },
-	created: number,
-	model: string,
-	object: string,
-	system_fingerprint: string?,
-	usage: ChatGenerationTokenUsage?,
-}
-
---[=[
-    @interface ChatStreamingChoice
-    @within OpenRouterTypes
-    
-    @field delta ChatStreamingMessageChunk
-    @field finish_reason __schema6
-    @field index number
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatStreamingChoice = {
-	delta: ChatStreamingMessageChunk,
-	finish_reason: __schema6,
-	index: number,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatStreamingResponseChunk
-    @within OpenRouterTypes
-    
-    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
-]=]
-export type ChatStreamingResponseChunk = {
-	data: {
-		id: string,
-		choices: { ChatStreamingChoice },
-		created: number,
-		model: string,
-		object: string,
-		system_fingerprint: string?,
-		error: { message: string, code: number }?,
-		usage: ChatGenerationTokenUsage?,
-	},
 }
 
 --[=[
@@ -4473,7 +4554,7 @@ export type ListEmbeddingsModels400Response = BadRequestResponse
 export type ListEmbeddingsModels500Response = InternalServerResponse
 
 --[=[
-    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")?, router: string? } }
+    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")?, router: string?, provider_responses: {{ id: string?, endpoint_id: string?, model_permaslug: string?, provider_name: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")?, status: number?, latency: number?, is_byok: boolean? }}? } }
     @within OpenRouterTypes
     200 Response type for getGeneration
 ]=]
@@ -4512,6 +4593,118 @@ export type GetGeneration200Response = {
 		external_user: string?,
 		api_type: ("completions" | "embeddings")?,
 		router: string?,
+		provider_responses: {
+			{
+				id: string?,
+				endpoint_id: string?,
+				model_permaslug: string?,
+				provider_name: (
+					"AnyScale"
+					| "Atoma"
+					| "Cent-ML"
+					| "CrofAI"
+					| "Enfer"
+					| "GoPomelo"
+					| "HuggingFace"
+					| "Hyperbolic 2"
+					| "InoCloud"
+					| "Kluster"
+					| "Lambda"
+					| "Lepton"
+					| "Lynn 2"
+					| "Lynn"
+					| "Mancer"
+					| "Meta"
+					| "Modal"
+					| "Nineteen"
+					| "OctoAI"
+					| "Recursal"
+					| "Reflection"
+					| "Replicate"
+					| "SambaNova 2"
+					| "SF Compute"
+					| "Targon"
+					| "Together 2"
+					| "Ubicloud"
+					| "01.AI"
+					| "AI21"
+					| "AionLabs"
+					| "Alibaba"
+					| "Ambient"
+					| "Amazon Bedrock"
+					| "Amazon Nova"
+					| "Anthropic"
+					| "Arcee AI"
+					| "AtlasCloud"
+					| "Avian"
+					| "Azure"
+					| "BaseTen"
+					| "BytePlus"
+					| "Black Forest Labs"
+					| "Cerebras"
+					| "Chutes"
+					| "Cirrascale"
+					| "Clarifai"
+					| "Cloudflare"
+					| "Cohere"
+					| "Crusoe"
+					| "DeepInfra"
+					| "DeepSeek"
+					| "Featherless"
+					| "Fireworks"
+					| "Friendli"
+					| "GMICloud"
+					| "Google"
+					| "Google AI Studio"
+					| "Groq"
+					| "Hyperbolic"
+					| "Inception"
+					| "Inceptron"
+					| "InferenceNet"
+					| "Infermatic"
+					| "Inflection"
+					| "Liquid"
+					| "Mara"
+					| "Mancer 2"
+					| "Minimax"
+					| "ModelRun"
+					| "Mistral"
+					| "Modular"
+					| "Moonshot AI"
+					| "Morph"
+					| "NCompass"
+					| "Nebius"
+					| "NextBit"
+					| "Novita"
+					| "Nvidia"
+					| "OpenAI"
+					| "OpenInference"
+					| "Parasail"
+					| "Perplexity"
+					| "Phala"
+					| "Relace"
+					| "SambaNova"
+					| "Seed"
+					| "SiliconFlow"
+					| "Sourceful"
+					| "StepFun"
+					| "Stealth"
+					| "StreamLake"
+					| "Switchpoint"
+					| "Together"
+					| "Upstage"
+					| "Venice"
+					| "WandB"
+					| "Xiaomi"
+					| "xAI"
+					| "Z.AI"
+					| "FakeProvider"
+				)?,
+				status: number?,
+				latency: number?,
+				is_byok: boolean?,
+			}
+		}?,
 	},
 }
 
@@ -5443,7 +5636,7 @@ export type BulkUnassignMembersFromGuardrail404Response = NotFoundResponse
 export type BulkUnassignMembersFromGuardrail500Response = InternalServerResponse
 
 --[=[
-    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, rate_limit: { requests: number, interval: string, note: string } } }
+    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_management_key: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, rate_limit: { requests: number, interval: string, note: string } } }
     @within OpenRouterTypes
     200 Response type for getCurrentKey
 ]=]
@@ -5460,6 +5653,7 @@ export type GetCurrentKey200Response = {
 		byok_usage_weekly: number,
 		byok_usage_monthly: number,
 		is_free_tier: boolean,
+		is_management_key: boolean,
 		is_provisioning_key: boolean,
 		limit_remaining: number?,
 		limit_reset: string?,
