@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-02-08T00:43:23.058462Z (generator v1.0.0)
+-- Last generated: 2026-03-01T00:37:38.920458Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -176,6 +176,46 @@ function OpenRouter.getUserActivity(
 		["date"] = date,
 	})
 	return self:_request("GET", `/activity{queryString}`, nil)
+end
+
+--[[
+  ══════════════════════════════════════════════════════════════════════════════
+  Chat: Chat completion endpoints
+  ══════════════════════════════════════════════════════════════════════════════
+]]
+
+--[=[
+    Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
+
+    Endpoint: POST /chat/completions
+
+    @method sendChatCompletionRequest
+    @within OpenRouter
+    @tag Chat
+    
+    @param params ChatGenerationParams -- Request body parameters
+    @return Result<SendChatCompletionRequest200Response, SendChatCompletionRequest400Response | SendChatCompletionRequest401Response | SendChatCompletionRequest402Response | SendChatCompletionRequest404Response | SendChatCompletionRequest408Response | SendChatCompletionRequest413Response | SendChatCompletionRequest422Response | SendChatCompletionRequest429Response | SendChatCompletionRequest500Response | SendChatCompletionRequest502Response | SendChatCompletionRequest503Response | SendChatCompletionRequest524Response | SendChatCompletionRequest529Response>
+]=]
+function OpenRouter.sendChatCompletionRequest(
+	self: OpenRouter,
+	params: Types.ChatGenerationParams
+): Types.Result<
+	Types.SendChatCompletionRequest200Response,
+	Types.SendChatCompletionRequest400Response
+	| Types.SendChatCompletionRequest401Response
+	| Types.SendChatCompletionRequest402Response
+	| Types.SendChatCompletionRequest404Response
+	| Types.SendChatCompletionRequest408Response
+	| Types.SendChatCompletionRequest413Response
+	| Types.SendChatCompletionRequest422Response
+	| Types.SendChatCompletionRequest429Response
+	| Types.SendChatCompletionRequest500Response
+	| Types.SendChatCompletionRequest502Response
+	| Types.SendChatCompletionRequest503Response
+	| Types.SendChatCompletionRequest524Response
+	| Types.SendChatCompletionRequest529Response
+>
+	return self:_request("POST", "/chat/completions", params)
 end
 
 --[[
@@ -1068,7 +1108,7 @@ end
     @within OpenRouter
     @tag OAuth
     
-    @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number?, expires_at: string? } -- Request body parameters
+    @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number?, expires_at: string?, key_label: string?, usage_limit_type: ("daily" | "weekly" | "monthly")?, spawn_agent: string?, spawn_cloud: string? } -- Request body parameters
     @return Result<CreateAuthKeysCode200Response, CreateAuthKeysCode400Response | CreateAuthKeysCode401Response | CreateAuthKeysCode500Response>
 ]=]
 function OpenRouter.createAuthKeysCode(
@@ -1079,43 +1119,16 @@ function OpenRouter.createAuthKeysCode(
 		code_challenge_method: ("S256" | "plain")?,
 		limit: number?,
 		expires_at: string?,
+		key_label: string?,
+		usage_limit_type: ("daily" | "weekly" | "monthly")?,
+		spawn_agent: string?,
+		spawn_cloud: string?,
 	}
 ): Types.Result<
 	Types.CreateAuthKeysCode200Response,
 	Types.CreateAuthKeysCode400Response | Types.CreateAuthKeysCode401Response | Types.CreateAuthKeysCode500Response
 >
 	return self:_request("POST", "/auth/keys/code", params)
-end
-
---[[
-  ══════════════════════════════════════════════════════════════════════════════
-  Chat: Chat completion endpoints
-  ══════════════════════════════════════════════════════════════════════════════
-]]
-
---[=[
-    Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
-
-    Endpoint: POST /chat/completions
-
-    @method sendChatCompletionRequest
-    @within OpenRouter
-    @tag Chat
-    
-    @param params ChatGenerationParams -- Request body parameters
-    @return Result<SendChatCompletionRequest200Response, SendChatCompletionRequest400Response | SendChatCompletionRequest401Response | SendChatCompletionRequest429Response | SendChatCompletionRequest500Response>
-]=]
-function OpenRouter.sendChatCompletionRequest(
-	self: OpenRouter,
-	params: Types.ChatGenerationParams
-): Types.Result<
-	Types.SendChatCompletionRequest200Response,
-	Types.SendChatCompletionRequest400Response
-	| Types.SendChatCompletionRequest401Response
-	| Types.SendChatCompletionRequest429Response
-	| Types.SendChatCompletionRequest500Response
->
-	return self:_request("POST", "/chat/completions", params)
 end
 
 return OpenRouter
