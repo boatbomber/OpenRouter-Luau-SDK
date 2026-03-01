@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-02-08T00:43:23.044320Z (generator v1.0.0)
+-- Last generated: 2026-03-01T00:37:38.906685Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -311,6 +311,13 @@ export type AnthropicMessagesStreamEvent =
 export type AnthropicOutputConfig = { effort: ("low" | "medium" | "high" | "max")? }
 
 --[=[
+    @type AssistantMessageImages {{ image_url: { url: string } }}
+    @within OpenRouterTypes
+    Generated images from image generation models
+]=]
+export type AssistantMessageImages = { { image_url: { url: string } } }
+
+--[=[
     @interface BadGatewayResponseErrorData
     @within OpenRouterTypes
     Error data for BadGatewayResponse
@@ -480,22 +487,15 @@ export type BigNumberUnion = string
 export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
 
 --[=[
-    @interface ChatError
-    @within OpenRouterTypes
-    
-    @field error { code: (string | number)?, message: string, param: string?, ["type"]: string? }
-]=]
-export type ChatError = { error: { code: (string | number)?, message: string, param: string?, ["type"]: string? } }
-
---[=[
     @interface ChatGenerationTokenUsage
     @within OpenRouterTypes
+    Token usage statistics
     
-    @field completion_tokens number
-    @field prompt_tokens number
-    @field total_tokens number
-    @field completion_tokens_details { reasoning_tokens: number?, audio_tokens: number?, accepted_prediction_tokens: number?, rejected_prediction_tokens: number? }?
-    @field prompt_tokens_details { cached_tokens: number?, cache_write_tokens: number?, audio_tokens: number?, video_tokens: number? }?
+    @field completion_tokens number -- Number of tokens in the completion
+    @field prompt_tokens number -- Number of tokens in the prompt
+    @field total_tokens number -- Total number of tokens
+    @field completion_tokens_details { reasoning_tokens: number?, audio_tokens: number?, accepted_prediction_tokens: number?, rejected_prediction_tokens: number? }? -- Detailed completion token usage
+    @field prompt_tokens_details { cached_tokens: number?, cache_write_tokens: number?, audio_tokens: number?, video_tokens: number? }? -- Detailed prompt token usage
 ]=]
 export type ChatGenerationTokenUsage = {
 	completion_tokens: number,
@@ -518,69 +518,60 @@ export type ChatGenerationTokenUsage = {
 --[=[
     @interface ChatMessageContentItemAudio
     @within OpenRouterTypes
+    Audio input content part. Supported audio formats vary by provider.
     
-    @field type string
+    @field type "input_audio"
     @field input_audio { data: string, format: string }
 ]=]
-export type ChatMessageContentItemAudio = { ["type"]: string, input_audio: { data: string, format: string } }
+export type ChatMessageContentItemAudio = { ["type"]: "input_audio", input_audio: { data: string, format: string } }
 
 --[=[
     @interface ChatMessageContentItemCacheControl
     @within OpenRouterTypes
+    Cache control for the content part
     
-    @field type string
+    @field type "ephemeral"
     @field ttl ("5m" | "1h")?
 ]=]
-export type ChatMessageContentItemCacheControl = { ["type"]: string, ttl: ("5m" | "1h")? }
+export type ChatMessageContentItemCacheControl = { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }
 
 --[=[
     @interface ChatMessageContentItemImage
     @within OpenRouterTypes
+    Image content part for vision models
     
-    @field type string
+    @field type "image_url"
     @field image_url { url: string, detail: ("auto" | "low" | "high")? }
 ]=]
 export type ChatMessageContentItemImage = {
-	["type"]: string,
+	["type"]: "image_url",
 	image_url: { url: string, detail: ("auto" | "low" | "high")? },
 }
 
 --[=[
     @interface ChatMessageContentItemText
     @within OpenRouterTypes
+    Text content part
     
-    @field type string
+    @field type "text"
     @field text string
     @field cache_control ChatMessageContentItemCacheControl?
 ]=]
 export type ChatMessageContentItemText = {
-	["type"]: string,
+	["type"]: "text",
 	text: string,
 	cache_control: ChatMessageContentItemCacheControl?,
 }
 
 --[=[
-    @type ChatMessageContentItemVideo { ["type"]: string, video_url: { url: string } }
-    @within OpenRouterTypes
-]=]
-export type ChatMessageContentItemVideo = { ["type"]: string, video_url: { url: string } }
-
---[=[
-    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo)
-    @within OpenRouterTypes
-]=]
-export type ChatMessageContentItem = (
-	ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | ChatMessageContentItemVideo
-)
-
---[=[
     @interface ChatMessageTokenLogprob
     @within OpenRouterTypes
+    Token log probability information
     
-    @field token string
-    @field logprob number
-    @field bytes {number}?
-    @field top_logprobs {{ token: string, logprob: number, bytes: {number}? }}
+    @field token string -- The token
+    @field logprob number -- Log probability of the token
+    @field bytes {number}? -- UTF-8 bytes of the token
+    @field top_logprobs {{ token: string, logprob: number, bytes: {number}? }} -- Top alternative tokens with probabilities
 ]=]
 export type ChatMessageTokenLogprob = {
 	token: string,
@@ -592,43 +583,47 @@ export type ChatMessageTokenLogprob = {
 --[=[
     @interface ChatMessageTokenLogprobs
     @within OpenRouterTypes
+    Log probabilities for the completion
     
-    @field content {ChatMessageTokenLogprob}?
-    @field refusal {ChatMessageTokenLogprob}?
+    @field content {ChatMessageTokenLogprob}? -- Log probabilities for content tokens
+    @field refusal {ChatMessageTokenLogprob}? -- Log probabilities for refusal tokens
 ]=]
-export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, refusal: { ChatMessageTokenLogprob }? }
+export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, refusal: { ChatMessageTokenLogprob }? }?
 
 --[=[
     @interface ChatMessageToolCall
     @within OpenRouterTypes
+    Tool call made by the assistant
     
-    @field id string
-    @field type string
+    @field id string -- Tool call identifier
+    @field type "function"
     @field function { name: string, arguments: string }
 ]=]
-export type ChatMessageToolCall = { id: string, ["type"]: string, ["function"]: { name: string, arguments: string } }
+export type ChatMessageToolCall = { id: string, ["type"]: "function", ["function"]: { name: string, arguments: string } }
 
 --[=[
     @interface ChatStreamOptions
     @within OpenRouterTypes
+    Streaming configuration options
     
-    @field include_usage boolean?
+    @field include_usage boolean? -- @deprecated; Deprecated: This field has no effect. Full usage details are always included.; (Ex: true)
 ]=]
-export type ChatStreamOptions = { include_usage: boolean? }
+export type ChatStreamOptions = { include_usage: boolean? }?
 
 --[=[
     @interface ChatStreamingMessageToolCall
     @within OpenRouterTypes
+    Tool call delta for streaming responses
     
-    @field index number
-    @field id string?
-    @field type string?
-    @field function { name: string?, arguments: string? }?
+    @field index number -- Tool call index in the array; (Ex: 0)
+    @field id string? -- Tool call identifier; (Ex: "call_abc123")
+    @field type "function"? -- Tool call type; (Ex: "function")
+    @field function { name: string?, arguments: string? }? -- Function call details
 ]=]
 export type ChatStreamingMessageToolCall = {
 	index: number,
 	id: string?,
-	["type"]: string?,
+	["type"]: "function"?,
 	["function"]: { name: string?, arguments: string? }?,
 }
 
@@ -654,6 +649,15 @@ export type CreateChargeRequest = { amount: number, sender: string, chain_id: nu
 export type DataCollection = ("deny" | "allow")?
 
 --[=[
+    @interface DebugOptions
+    @within OpenRouterTypes
+    Debug options for inspecting request transformations (streaming only)
+    
+    @field echo_upstream_body boolean? -- If true, includes the transformed upstream request body in a debug chunk at the start of the stream. Only works with streaming mode.; (Ex: true)
+]=]
+export type DebugOptions = { echo_upstream_body: boolean? }
+
+--[=[
     @interface DefaultParameters
     @within OpenRouterTypes
     Default parameters for this model
@@ -667,12 +671,13 @@ export type DefaultParameters = { temperature: number?, top_p: number?, frequenc
 --[=[
     @interface DeveloperMessage
     @within OpenRouterTypes
+    Developer message
     
-    @field role string
-    @field content (string | {ChatMessageContentItemText})
-    @field name string?
+    @field role "developer"
+    @field content (string | {ChatMessageContentItemText}) -- Developer message content; (Ex: "This is a message from the developer.")
+    @field name string? -- Optional name for the developer message; (Ex: "Developer")
 ]=]
-export type DeveloperMessage = { role: string, content: string | { ChatMessageContentItemText }, name: string? }
+export type DeveloperMessage = { role: "developer", content: string | { ChatMessageContentItemText }, name: string? }
 
 --[=[
     @interface EdgeNetworkTimeoutResponseErrorData
@@ -809,13 +814,14 @@ export type InternalServerResponse = { error: InternalServerResponseErrorData, u
 --[=[
     @interface JSONSchemaConfig
     @within OpenRouterTypes
+    JSON Schema configuration object
     
-    @field name string
-    @field description string?
-    @field schema { [string]: any }?
-    @field strict boolean?
+    @field name string -- Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars); (Ex: "math_response")
+    @field description string? -- Schema description for the model; (Ex: "A mathematical response")
+    @field schema { [string]: any? }? -- JSON Schema object; (Ex: {"type":"object","properties":{"answer":{"type":"number"}},"required":["answer"]})
+    @field strict boolean? -- Enable strict schema adherence; (Ex: false)
 ]=]
-export type JSONSchemaConfig = { name: string, description: string?, schema: { [string]: any }?, strict: boolean? }
+export type JSONSchemaConfig = { name: string, description: string?, schema: { [string]: any? }?, strict: boolean? }
 
 --[=[
     @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
@@ -847,8 +853,16 @@ export type ModelGroup = (
 --[=[
     @type ModelName string
     @within OpenRouterTypes
+    Model to use for completion
 ]=]
 export type ModelName = string
+
+--[=[
+    @type ModelNames {ModelName}
+    @within OpenRouterTypes
+    Models to use for completion
+]=]
+export type ModelNames = { ModelName }
 
 --[=[
     @interface ModelsCountResponse
@@ -862,11 +876,12 @@ export type ModelsCountResponse = { data: { count: number } }
 --[=[
     @interface NamedToolChoice
     @within OpenRouterTypes
+    Named tool choice for specific function
     
-    @field type string
+    @field type "function"
     @field function { name: string }
 ]=]
-export type NamedToolChoice = { ["type"]: string, ["function"]: { name: string } }
+export type NamedToolChoice = { ["type"]: "function", ["function"]: { name: string } }
 
 --[=[
     @interface NotFoundResponseErrorData
@@ -1914,7 +1929,7 @@ export type PreferredMaxLatency = (number | PercentileLatencyCutoffs)?
 export type PreferredMinThroughput = (number | PercentileThroughputCutoffs)?
 
 --[=[
-    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
+    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
@@ -1952,7 +1967,9 @@ export type ProviderName = (
 	| "Inception"
 	| "Inceptron"
 	| "InferenceNet"
+	| "Ionstream"
 	| "Infermatic"
+	| "Io Net"
 	| "Inflection"
 	| "Liquid"
 	| "Mara"
@@ -2016,23 +2033,19 @@ export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErro
 --[=[
     @type ProviderSort ("price" | "throughput" | "latency")
     @within OpenRouterTypes
+    The provider sorting strategy (price, throughput, latency)
 ]=]
 export type ProviderSort = "price" | "throughput" | "latency"
 
 --[=[
     @interface ProviderSortConfig
     @within OpenRouterTypes
+    The provider sorting strategy (price, throughput, latency)
     
-    @field by ProviderSort?
-    @field partition ("model" | "none")?
+    @field by ("price" | "throughput" | "latency")? -- The provider sorting strategy (price, throughput, latency); (Ex: "price")
+    @field partition ("model" | "none")? -- Partitioning strategy for sorting: "model" (default) groups endpoints by model before sorting (fallback models remain fallbacks), "none" sorts all endpoints together regardless of model.; (Ex: "model")
 ]=]
-export type ProviderSortConfig = { by: ProviderSort?, partition: ("model" | "none")? }
-
---[=[
-    @type ProviderSortUnion (ProviderSort | ProviderSortConfig)
-    @within OpenRouterTypes
-]=]
-export type ProviderSortUnion = ProviderSort | ProviderSortConfig
+export type ProviderSortConfig = { by: ("price" | "throughput" | "latency")?, partition: ("model" | "none")? }
 
 --[=[
     @interface PublicPricing
@@ -2202,6 +2215,163 @@ export type ListEndpointsResponse = {
 }
 
 --[=[
+    @interface ReasoningDetailEncrypted
+    @within OpenRouterTypes
+    Reasoning detail encrypted schema
+    
+    @field type "reasoning.encrypted"
+    @field data string
+    @field id string?
+    @field format ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @field index number?
+]=]
+export type ReasoningDetailEncrypted = {
+	["type"]: "reasoning.encrypted",
+	data: string,
+	id: string?,
+	format: (
+		"unknown"
+		| "openai-responses-v1"
+		| "azure-openai-responses-v1"
+		| "xai-responses-v1"
+		| "anthropic-claude-v1"
+		| "google-gemini-v1"
+	)?,
+	index: number?,
+}
+
+--[=[
+    @interface ReasoningDetailSummary
+    @within OpenRouterTypes
+    Reasoning detail summary schema
+    
+    @field type "reasoning.summary"
+    @field summary string
+    @field id string?
+    @field format ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @field index number?
+]=]
+export type ReasoningDetailSummary = {
+	["type"]: "reasoning.summary",
+	summary: string,
+	id: string?,
+	format: (
+		"unknown"
+		| "openai-responses-v1"
+		| "azure-openai-responses-v1"
+		| "xai-responses-v1"
+		| "anthropic-claude-v1"
+		| "google-gemini-v1"
+	)?,
+	index: number?,
+}
+
+--[=[
+    @interface ReasoningDetailText
+    @within OpenRouterTypes
+    Reasoning detail text schema
+    
+    @field type "reasoning.text"
+    @field text string?
+    @field signature string?
+    @field id string?
+    @field format ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
+    @field index number?
+]=]
+export type ReasoningDetailText = {
+	["type"]: "reasoning.text",
+	text: string?,
+	signature: string?,
+	id: string?,
+	format: (
+		"unknown"
+		| "openai-responses-v1"
+		| "azure-openai-responses-v1"
+		| "xai-responses-v1"
+		| "anthropic-claude-v1"
+		| "google-gemini-v1"
+	)?,
+	index: number?,
+}
+
+--[=[
+    @type ReasoningDetailUnion (ReasoningDetailSummary | ReasoningDetailEncrypted | ReasoningDetailText)
+    @within OpenRouterTypes
+    Reasoning detail union schema
+]=]
+export type ReasoningDetailUnion = ReasoningDetailSummary | ReasoningDetailEncrypted | ReasoningDetailText
+
+--[=[
+    @type AssistantMessageReasoningDetails {ReasoningDetailUnion}
+    @within OpenRouterTypes
+    Reasoning details for extended thinking models
+]=]
+export type AssistantMessageReasoningDetails = { ReasoningDetailUnion }
+
+--[=[
+    @interface ChatStreamingMessageChunk
+    @within OpenRouterTypes
+    Delta changes in streaming response
+    
+    @field role "assistant"? -- The role of the message author; (Ex: "assistant")
+    @field content string? -- Message content delta; (Ex: "Hello")
+    @field reasoning string? -- Reasoning content delta; (Ex: "I need to")
+    @field refusal string? -- Refusal message delta
+    @field tool_calls {ChatStreamingMessageToolCall}? -- Tool calls delta
+    @field reasoning_details AssistantMessageReasoningDetails?
+]=]
+export type ChatStreamingMessageChunk = {
+	role: "assistant"?,
+	content: string?,
+	reasoning: string?,
+	refusal: string?,
+	tool_calls: { ChatStreamingMessageToolCall }?,
+	reasoning_details: AssistantMessageReasoningDetails?,
+}
+
+--[=[
+    @interface ChatStreamingChoice
+    @within OpenRouterTypes
+    Streaming completion choice chunk
+    
+    @field delta ChatStreamingMessageChunk
+    @field finish_reason ChatCompletionFinishReason?
+    @field index number -- Choice index; (Ex: 0)
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatStreamingChoice = {
+	delta: ChatStreamingMessageChunk,
+	finish_reason: ChatCompletionFinishReason?,
+	index: number,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatStreamingResponseChunk
+    @within OpenRouterTypes
+    Streaming chat completion chunk
+    
+    @field id string -- Unique chunk identifier; (Ex: "chatcmpl-123")
+    @field choices {ChatStreamingChoice} -- List of streaming chunk choices
+    @field created number -- Unix timestamp of creation; (Ex: 1677652288)
+    @field model string -- Model used for completion; (Ex: "openai/gpt-4")
+    @field object "chat.completion.chunk"
+    @field system_fingerprint string? -- System fingerprint; (Ex: "fp_44709d6fcb")
+    @field error { message: string, code: number }? -- Error information; (Ex: {"message":"Rate limit exceeded","code":429})
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatStreamingResponseChunk = {
+	id: string,
+	choices: { ChatStreamingChoice },
+	created: number,
+	model: string,
+	object: "chat.completion.chunk",
+	system_fingerprint: string?,
+	error: { message: string, code: number }?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
     @interface ReasoningSummaryText
     @within OpenRouterTypes
     
@@ -2260,10 +2430,10 @@ export type OpenResponsesReasoningSummaryPartDoneEvent = {
 }
 
 --[=[
-    @type ReasoningSummaryVerbosity ("auto" | "concise" | "detailed")
+    @type ReasoningSummaryVerbosity ("auto" | "concise" | "detailed")?
     @within OpenRouterTypes
 ]=]
-export type ReasoningSummaryVerbosity = "auto" | "concise" | "detailed"
+export type ReasoningSummaryVerbosity = ("auto" | "concise" | "detailed")?
 
 --[=[
     @interface OpenAIResponsesReasoningConfig
@@ -2314,11 +2484,12 @@ export type OutputItemReasoning = {
 }
 
 --[=[
-    @type OpenResponsesReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
+    @type OpenResponsesReasoning (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
     @within OpenRouterTypes
     Reasoning output item with signature and format extensions
 ]=]
 export type OpenResponsesReasoning = OutputItemReasoning & {
+	content: { ReasoningTextContent }?,
 	signature: string?,
 	format: (
 		"unknown"
@@ -2352,22 +2523,51 @@ export type RequestTimeoutResponseErrorData = { code: number, message: string, m
 export type RequestTimeoutResponse = { error: RequestTimeoutResponseErrorData, user_id: string? }
 
 --[=[
+    @interface ResponseFormatJSONObject
+    @within OpenRouterTypes
+    JSON object response format
+    
+    @field type "json_object"
+]=]
+export type ResponseFormatJSONObject = { ["type"]: "json_object" }
+
+--[=[
     @interface ResponseFormatJSONSchema
     @within OpenRouterTypes
+    JSON Schema response format for structured outputs
     
-    @field type string
+    @field type "json_schema"
     @field json_schema JSONSchemaConfig
 ]=]
-export type ResponseFormatJSONSchema = { ["type"]: string, json_schema: JSONSchemaConfig }
+export type ResponseFormatJSONSchema = { ["type"]: "json_schema", json_schema: JSONSchemaConfig }
+
+--[=[
+    @interface ResponseFormatText
+    @within OpenRouterTypes
+    Default text response format
+    
+    @field type "text"
+]=]
+export type ResponseFormatText = { ["type"]: "text" }
 
 --[=[
     @interface ResponseFormatTextGrammar
     @within OpenRouterTypes
+    Custom grammar response format
     
-    @field type string
-    @field grammar string
+    @field type "grammar"
+    @field grammar string -- Custom grammar for text generation; (Ex: "root ::= \"yes\" | \"no\"")
 ]=]
-export type ResponseFormatTextGrammar = { ["type"]: string, grammar: string }
+export type ResponseFormatTextGrammar = { ["type"]: "grammar", grammar: string }
+
+--[=[
+    @interface ResponseFormatTextPython
+    @within OpenRouterTypes
+    Python code response format
+    
+    @field type "python"
+]=]
+export type ResponseFormatTextPython = { ["type"]: "python" }
 
 --[=[
     @interface ResponseInputAudio
@@ -2507,15 +2707,6 @@ export type ResponsesErrorField = {
 }?
 
 --[=[
-    @interface ResponsesFormatJSONObject
-    @within OpenRouterTypes
-    JSON object response format
-    
-    @field type "json_object"
-]=]
-export type ResponsesFormatJSONObject = { ["type"]: "json_object" }
-
---[=[
     @interface ResponsesFormatText
     @within OpenRouterTypes
     Plain text response format
@@ -2544,12 +2735,12 @@ export type ResponsesFormatTextJSONSchemaConfig = {
 }
 
 --[=[
-    @type ResponseFormatTextConfig (ResponsesFormatText | ResponsesFormatJSONObject | ResponsesFormatTextJSONSchemaConfig)
+    @type ResponseFormatTextConfig (ResponsesFormatText | ResponseFormatJSONObject | ResponsesFormatTextJSONSchemaConfig)
     @within OpenRouterTypes
     Text response format configuration
 ]=]
 export type ResponseFormatTextConfig = (
-	ResponsesFormatText | ResponsesFormatJSONObject | ResponsesFormatTextJSONSchemaConfig
+	ResponsesFormatText | ResponseFormatJSONObject | ResponsesFormatTextJSONSchemaConfig
 )
 
 --[=[
@@ -2582,11 +2773,12 @@ export type ResponsesImageGenerationCall = OutputItemImageGenerationCall
 export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
 
 --[=[
-    @type ResponsesOutputItemReasoning (OutputItemReasoning & { signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
+    @type ResponsesOutputItemReasoning (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
     @within OpenRouterTypes
     An output item containing reasoning
 ]=]
 export type ResponsesOutputItemReasoning = OutputItemReasoning & {
+	content: { ReasoningTextContent }?,
 	signature: string?,
 	format: (
 		"unknown"
@@ -2688,12 +2880,13 @@ export type ServiceUnavailableResponse = { error: ServiceUnavailableResponseErro
 --[=[
     @interface SystemMessage
     @within OpenRouterTypes
+    System message for setting behavior
     
-    @field role string
-    @field content (string | {ChatMessageContentItemText})
-    @field name string?
+    @field role "system"
+    @field content (string | {ChatMessageContentItemText}) -- System message content; (Ex: "You are a helpful assistant.")
+    @field name string? -- Optional name for the system message; (Ex: "Assistant Config")
 ]=]
-export type SystemMessage = { role: string, content: string | { ChatMessageContentItemText }, name: string? }
+export type SystemMessage = { role: "system", content: string | { ChatMessageContentItemText }, name: string? }
 
 --[=[
     @interface TooManyRequestsResponseErrorData
@@ -2763,32 +2956,26 @@ export type OpenResponsesFunctionToolCall = {
 }
 
 --[=[
-    @type ToolChoiceOption (string | NamedToolChoice)
+    @type ToolChoiceOption ("none" | "auto" | "required" | NamedToolChoice)
     @within OpenRouterTypes
+    Tool choice configuration
 ]=]
-export type ToolChoiceOption = string | NamedToolChoice
+export type ToolChoiceOption = "none" | "auto" | "required" | NamedToolChoice
 
 --[=[
     @interface ToolDefinitionJson
     @within OpenRouterTypes
+    Tool definition for function calling
     
-    @field type string
-    @field function { name: string, description: string?, parameters: { [string]: any }?, strict: boolean? }
+    @field type "function"
+    @field function { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? } -- Function definition for tool calling; (Ex: {"name":"get_weather","description":"Get the current weather for a location","parameters":{"type"...)
+    @field cache_control ChatMessageContentItemCacheControl?
 ]=]
 export type ToolDefinitionJson = {
-	["type"]: string,
-	["function"]: { name: string, description: string?, parameters: { [string]: any }?, strict: boolean? },
+	["type"]: "function",
+	["function"]: { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? },
+	cache_control: ChatMessageContentItemCacheControl?,
 }
-
---[=[
-    @interface ToolResponseMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})
-    @field tool_call_id string
-]=]
-export type ToolResponseMessage = { role: string, content: string | { ChatMessageContentItem }, tool_call_id: string }
 
 --[=[
     @interface TopProviderInfo
@@ -3058,14 +3245,140 @@ export type UnprocessableEntityResponseErrorData = { code: number, message: stri
 export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseErrorData, user_id: string? }
 
 --[=[
+    @interface VideoInput
+    @within OpenRouterTypes
+    Video input object
+    
+    @field url string -- URL of the video (data: URLs supported)
+]=]
+export type VideoInput = { url: string }
+
+--[=[
+    @interface ChatMessageContentItemVideo
+    @within OpenRouterTypes
+    Video input content part
+    
+    @field type "video_url"
+    @field video_url VideoInput
+]=]
+export type ChatMessageContentItemVideo = { ["type"]: "video_url", video_url: VideoInput }
+
+--[=[
+    @interface ChatMessageContentItemVideoLegacy
+    @within OpenRouterTypes
+    Video input content part (legacy format - deprecated)
+    
+    @field type "input_video"
+    @field video_url VideoInput
+]=]
+export type ChatMessageContentItemVideoLegacy = { ["type"]: "input_video", video_url: VideoInput }
+
+--[=[
+    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | (ChatMessageContentItemVideoLegacy | ChatMessageContentItemVideo))
+    @within OpenRouterTypes
+    Content part for chat completion messages
+]=]
+export type ChatMessageContentItem = (
+	ChatMessageContentItemText
+	| ChatMessageContentItemImage
+	| ChatMessageContentItemAudio
+	| ChatMessageContentItemVideoLegacy
+	| ChatMessageContentItemVideo
+)
+
+--[=[
+    @interface AssistantMessage
+    @within OpenRouterTypes
+    Assistant message for requests and responses
+    
+    @field role "assistant"
+    @field content (string | {ChatMessageContentItem})? -- Assistant message content
+    @field name string? -- Optional name for the assistant
+    @field tool_calls {ChatMessageToolCall}? -- Tool calls made by the assistant
+    @field refusal string? -- Refusal message if content was refused
+    @field reasoning string? -- Reasoning output
+    @field reasoning_details AssistantMessageReasoningDetails?
+    @field images AssistantMessageImages?
+]=]
+export type AssistantMessage = {
+	role: "assistant",
+	content: (string | { ChatMessageContentItem })?,
+	name: string?,
+	tool_calls: { ChatMessageToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+	reasoning_details: AssistantMessageReasoningDetails?,
+	images: AssistantMessageImages?,
+}
+
+--[=[
+    @interface ChatResponseChoice
+    @within OpenRouterTypes
+    Chat completion choice
+    
+    @field finish_reason ChatCompletionFinishReason?
+    @field index number -- Choice index; (Ex: 0)
+    @field message AssistantMessage
+    @field logprobs ChatMessageTokenLogprobs?
+]=]
+export type ChatResponseChoice = {
+	finish_reason: ChatCompletionFinishReason?,
+	index: number,
+	message: AssistantMessage,
+	logprobs: ChatMessageTokenLogprobs?,
+}
+
+--[=[
+    @interface ChatResponse
+    @within OpenRouterTypes
+    Chat completion response
+    
+    @field id string -- Unique completion identifier; (Ex: "chatcmpl-123")
+    @field choices {ChatResponseChoice} -- List of completion choices
+    @field created number -- Unix timestamp of creation; (Ex: 1677652288)
+    @field model string -- Model used for completion; (Ex: "openai/gpt-4")
+    @field object "chat.completion"
+    @field system_fingerprint string? -- System fingerprint; (Ex: "fp_44709d6fcb")
+    @field usage ChatGenerationTokenUsage?
+]=]
+export type ChatResponse = {
+	id: string,
+	choices: { ChatResponseChoice },
+	created: number,
+	model: string,
+	object: "chat.completion",
+	system_fingerprint: string?,
+	usage: ChatGenerationTokenUsage?,
+}
+
+--[=[
+    @interface ToolResponseMessage
+    @within OpenRouterTypes
+    Tool response message
+    
+    @field role "tool"
+    @field content (string | {ChatMessageContentItem}) -- Tool response content; (Ex: "The weather in San Francisco is 72°F and sunny.")
+    @field tool_call_id string -- ID of the assistant message tool call this message responds to; (Ex: "call_abc123")
+]=]
+export type ToolResponseMessage = { role: "tool", content: string | { ChatMessageContentItem }, tool_call_id: string }
+
+--[=[
     @interface UserMessage
     @within OpenRouterTypes
+    User message
     
-    @field role string
-    @field content (string | {ChatMessageContentItem})
-    @field name string?
+    @field role "user"
+    @field content (string | {ChatMessageContentItem}) -- User message content; (Ex: "What is the capital of France?")
+    @field name string? -- Optional name for the user; (Ex: "User")
 ]=]
-export type UserMessage = { role: string, content: string | { ChatMessageContentItem }, name: string? }
+export type UserMessage = { role: "user", content: string | { ChatMessageContentItem }, name: string? }
+
+--[=[
+    @type Message (SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage)
+    @within OpenRouterTypes
+    Chat completion message with role-based discrimination
+]=]
+export type Message = SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage
 
 --[=[
     @type WebSearchEngine ("native" | "exa")
@@ -3098,6 +3411,7 @@ export type WebSearchEngine = "native" | "exa"
     @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
     @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
     @field models {string}?
     @field output_config AnthropicOutputConfig?
 ]=]
@@ -3228,8 +3542,117 @@ export type AnthropicMessagesRequest = {
 	route: ("fallback" | "sort")?,
 	user: string?,
 	session_id: string?,
+	trace: { [string]: any? }?,
 	models: { string }?,
 	output_config: AnthropicOutputConfig?,
+}
+
+--[=[
+    @interface ChatGenerationParams
+    @within OpenRouterTypes
+    Chat completion request parameters
+    
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
+    @field user string? -- Unique user identifier; (Ex: "user-123")
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+    @field messages {Message} -- List of messages for the conversation; (Ex: [{"role":"user","content":"Hello!"}])
+    @field model ModelName?
+    @field models ModelNames?
+    @field frequency_penalty number? -- Frequency penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
+    @field logit_bias { [string]: number }? -- Token logit bias adjustments; (Ex: {"50256":-100})
+    @field logprobs boolean? -- Return log probabilities; (Ex: false)
+    @field top_logprobs number? -- Number of top log probabilities to return (0-20); Range: 0.0-20.0; (Ex: 5)
+    @field max_completion_tokens number? -- Maximum tokens in completion; Min: 1.0; (Ex: 100)
+    @field max_tokens number? -- Maximum tokens (deprecated, use max_completion_tokens); Min: 1.0; (Ex: 100)
+    @field metadata { [string]: string }? -- Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values); (Ex: {"user_id":"user-123","session_id":"session-456"})
+    @field presence_penalty number? -- Presence penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
+    @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ReasoningSummaryVerbosity? }? -- Configuration options for reasoning models; (Ex: {"effort":"medium","summary":"concise"})
+    @field response_format (ResponseFormatText | ResponseFormatJSONObject | ResponseFormatJSONSchema | ResponseFormatTextGrammar | ResponseFormatTextPython)? -- Response format configuration; (Ex: {"type":"json_object"})
+    @field seed number? -- Random seed for deterministic outputs; (Ex: 42)
+    @field stop (string | {string})? -- Stop sequences (up to 4); (Ex: ["\n"])
+    @field stream boolean? -- Enable streaming response; Default: False; (Ex: false)
+    @field stream_options ChatStreamOptions?
+    @field temperature number? -- Sampling temperature (0-2); Range: 0.0-2.0; Default: 1; (Ex: 0.7)
+    @field parallel_tool_calls boolean?
+    @field tool_choice ToolChoiceOption?
+    @field tools {ToolDefinitionJson}? -- Available tools for function calling; (Ex: [{"type":"function","function":{"name":"get_weather","description":"Get weather"}}])
+    @field top_p number? -- Nucleus sampling parameter (0-1); Range: 0.0-1.0; Default: 1; (Ex: 1)
+    @field debug DebugOptions?
+    @field image_config { [string]: (string | number | {any?}) }? -- Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.; (Ex: {"aspect_ratio":"16:9"})
+    @field modalities {("text" | "image")}? -- Output modalities for the response. Supported values are "text" and "image".; (Ex: ["text","image"])
+]=]
+export type ChatGenerationParams = {
+	provider: {
+		allow_fallbacks: boolean?,
+		require_parameters: boolean?,
+		data_collection: DataCollection?,
+		zdr: boolean?,
+		enforce_distillable_text: boolean?,
+		order: { ProviderName | string }?,
+		only: { ProviderName | string }?,
+		ignore: { ProviderName | string }?,
+		quantizations: { Quantization }?,
+		sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?,
+		max_price: {
+			prompt: BigNumberUnion?,
+			completion: BigNumberUnion?,
+			image: BigNumberUnion?,
+			audio: BigNumberUnion?,
+			request: BigNumberUnion?,
+		}?,
+		preferred_min_throughput: PreferredMinThroughput?,
+		preferred_max_latency: PreferredMaxLatency?,
+	}?,
+	plugins: {
+		(
+			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
+			| { id: "moderation" }
+			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
+			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
+			| { id: "response-healing", enabled: boolean? }
+		)
+	}?,
+	route: ("fallback" | "sort")?,
+	user: string?,
+	session_id: string?,
+	trace: { [string]: any? }?,
+	messages: { Message },
+	model: ModelName?,
+	models: ModelNames?,
+	frequency_penalty: number?,
+	logit_bias: { [string]: number }?,
+	logprobs: boolean?,
+	top_logprobs: number?,
+	max_completion_tokens: number?,
+	max_tokens: number?,
+	metadata: { [string]: string }?,
+	presence_penalty: number?,
+	reasoning: {
+		effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?,
+		summary: ReasoningSummaryVerbosity?,
+	}?,
+	response_format: (
+		ResponseFormatText
+		| ResponseFormatJSONObject
+		| ResponseFormatJSONSchema
+		| ResponseFormatTextGrammar
+		| ResponseFormatTextPython
+	)?,
+	seed: number?,
+	stop: (string | { string })?,
+	stream: boolean?,
+	stream_options: ChatStreamOptions?,
+	temperature: number?,
+	parallel_tool_calls: boolean?,
+	tool_choice: ToolChoiceOption?,
+	tools: { ToolDefinitionJson }?,
+	top_p: number?,
+	debug: DebugOptions?,
+	image_config: { [string]: string | number | { any? } }?,
+	modalities: { "text" | "image" }?,
 }
 
 --[=[
@@ -3603,6 +4026,7 @@ export type OpenResponsesInput =
     @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
     @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
     @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
 ]=]
 export type OpenResponsesRequest = {
 	input: OpenResponsesInput?,
@@ -3676,6 +4100,7 @@ export type OpenResponsesRequest = {
 	route: ("fallback" | "sort")?,
 	user: string?,
 	session_id: string?,
+	trace: { [string]: any? }?,
 }
 
 --[=[
@@ -3741,431 +4166,6 @@ export type OpenResponsesStreamEvent = (
 	| OpenResponsesImageGenCallPartialImage
 	| OpenResponsesImageGenCallCompleted
 )
-
---[=[
-    @type __schema1 boolean?
-    @within OpenRouterTypes
-]=]
-export type __schema1 = boolean?
-
---[=[
-    @type __schema11 number
-    @within OpenRouterTypes
-]=]
-export type __schema11 = number
-
---[=[
-    @type __schema13 any
-    @within OpenRouterTypes
-]=]
-export type __schema13 = any
-
---[=[
-    @type __schema14 (__schema11 | ModelName | __schema13)
-    @within OpenRouterTypes
-]=]
-export type __schema14 = __schema11 | ModelName | __schema13
-
---[=[
-    @interface __schema10
-    @within OpenRouterTypes
-    
-    @field prompt (__schema11 | ModelName | __schema13)?
-    @field completion (__schema11 | ModelName | __schema13)?
-    @field image __schema14?
-    @field audio __schema14?
-    @field request __schema14?
-]=]
-export type __schema10 = {
-	prompt: (__schema11 | ModelName | __schema13)?,
-	completion: (__schema11 | ModelName | __schema13)?,
-	image: __schema14?,
-	audio: __schema14?,
-	request: __schema14?,
-}
-
---[=[
-    @type __schema15 (number | { p50: number?, p75: number?, p90: number?, p99: number? })?
-    @within OpenRouterTypes
-]=]
-export type __schema15 = (number | { p50: number?, p75: number?, p90: number?, p99: number? })?
-
---[=[
-    @type __schema17 {({ id: string, enabled: boolean?, allowed_models: {string}? } | { id: string } | { id: string, enabled: boolean?, max_results: number?, search_prompt: string?, engine: ("native" | "exa")? } | { id: string, enabled: boolean?, pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }? } | { id: string, enabled: boolean? })}
-    @within OpenRouterTypes
-]=]
-export type __schema17 = {
-	{ id: string, enabled: boolean?, allowed_models: { string }? } | { id: string } | {
-		id: string,
-		enabled: boolean?,
-		max_results: number?,
-		search_prompt: string?,
-		engine: ("native" | "exa")?,
-	} | {
-		id: string,
-		enabled: boolean?,
-		pdf: { engine: ("mistral-ocr" | "pdf-text" | "native")? }?,
-	} | { id: string, enabled: boolean? }
-}
-
---[=[
-    @type __schema18 string
-    @within OpenRouterTypes
-]=]
-export type __schema18 = string
-
---[=[
-    @type __schema20 string?
-    @within OpenRouterTypes
-]=]
-export type __schema20 = string?
-
---[=[
-    @type __schema21 ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")?
-    @within OpenRouterTypes
-]=]
-export type __schema21 = (
-	"unknown"
-	| "openai-responses-v1"
-	| "azure-openai-responses-v1"
-	| "xai-responses-v1"
-	| "anthropic-claude-v1"
-	| "google-gemini-v1"
-)?
-
---[=[
-    @type __schema19 ({ ["type"]: string, summary: string, id: __schema20?, format: __schema21?, index: __schema11? } | { ["type"]: string, data: string, id: __schema20?, format: __schema21?, index: __schema11? } | { ["type"]: string, text: string?, signature: string?, id: __schema20?, format: __schema21?, index: __schema11? })
-    @within OpenRouterTypes
-]=]
-export type __schema19 = (
-	{ ["type"]: string, summary: string, id: __schema20?, format: __schema21?, index: __schema11? }
-	| { ["type"]: string, data: string, id: __schema20?, format: __schema21?, index: __schema11? }
-	| { ["type"]: string, text: string?, signature: string?, id: __schema20?, format: __schema21?, index: __schema11? }
-)
-
---[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    
-    @field role string
-    @field content (string | {ChatMessageContentItem})?
-    @field name string?
-    @field tool_calls {ChatMessageToolCall}?
-    @field refusal string?
-    @field reasoning string?
-    @field reasoning_details {__schema19}?
-    @field images {{ image_url: { url: string } }}?
-]=]
-export type AssistantMessage = {
-	role: string,
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-	reasoning_details: { __schema19 }?,
-	images: { { image_url: { url: string } } }?,
-}
-
---[=[
-    @interface ChatStreamingMessageChunk
-    @within OpenRouterTypes
-    
-    @field role "assistant"?
-    @field content string?
-    @field reasoning string?
-    @field refusal string?
-    @field tool_calls {ChatStreamingMessageToolCall}?
-    @field reasoning_details {__schema19}?
-]=]
-export type ChatStreamingMessageChunk = {
-	role: "assistant"?,
-	content: string?,
-	reasoning: string?,
-	refusal: string?,
-	tool_calls: { ChatStreamingMessageToolCall }?,
-	reasoning_details: { __schema19 }?,
-}
-
---[=[
-    @type Message (SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage)
-    @within OpenRouterTypes
-]=]
-export type Message = SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage
-
---[=[
-    @type __schema25 ChatCompletionFinishReason?
-    @within OpenRouterTypes
-]=]
-export type __schema25 = ChatCompletionFinishReason?
-
---[=[
-    @interface ChatResponseChoice
-    @within OpenRouterTypes
-    
-    @field finish_reason __schema25
-    @field index number
-    @field message AssistantMessage
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatResponseChoice = {
-	finish_reason: __schema25,
-	index: number,
-	message: AssistantMessage,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatResponse
-    @within OpenRouterTypes
-    
-    @field id string
-    @field choices {ChatResponseChoice}
-    @field created number
-    @field model string
-    @field object string
-    @field system_fingerprint string?
-    @field usage ChatGenerationTokenUsage?
-]=]
-export type ChatResponse = {
-	id: string,
-	choices: { ChatResponseChoice },
-	created: number,
-	model: string,
-	object: string,
-	system_fingerprint: string?,
-	usage: ChatGenerationTokenUsage?,
-}
-
---[=[
-    @interface ChatStreamingChoice
-    @within OpenRouterTypes
-    
-    @field delta ChatStreamingMessageChunk
-    @field finish_reason __schema25
-    @field index number
-    @field logprobs ChatMessageTokenLogprobs?
-]=]
-export type ChatStreamingChoice = {
-	delta: ChatStreamingMessageChunk,
-	finish_reason: __schema25,
-	index: number,
-	logprobs: ChatMessageTokenLogprobs?,
-}
-
---[=[
-    @interface ChatStreamingResponseChunk
-    @within OpenRouterTypes
-    
-    @field data { id: string, choices: {ChatStreamingChoice}, created: number, model: string, object: string, system_fingerprint: string?, error: { message: string, code: number }?, usage: ChatGenerationTokenUsage? }
-]=]
-export type ChatStreamingResponseChunk = {
-	data: {
-		id: string,
-		choices: { ChatStreamingChoice },
-		created: number,
-		model: string,
-		object: string,
-		system_fingerprint: string?,
-		error: { message: string, code: number }?,
-		usage: ChatGenerationTokenUsage?,
-	},
-}
-
---[=[
-    @type __schema3 ("deny" | "allow")?
-    @within OpenRouterTypes
-]=]
-export type __schema3 = ("deny" | "allow")?
-
---[=[
-    @type __schema5 {(("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider") | string)}
-    @within OpenRouterTypes
-]=]
-export type __schema5 = {
-	(
-		"AI21"
-		| "AionLabs"
-		| "Alibaba"
-		| "Ambient"
-		| "Amazon Bedrock"
-		| "Amazon Nova"
-		| "Anthropic"
-		| "Arcee AI"
-		| "AtlasCloud"
-		| "Avian"
-		| "Azure"
-		| "BaseTen"
-		| "BytePlus"
-		| "Black Forest Labs"
-		| "Cerebras"
-		| "Chutes"
-		| "Cirrascale"
-		| "Clarifai"
-		| "Cloudflare"
-		| "Cohere"
-		| "Crusoe"
-		| "DeepInfra"
-		| "DeepSeek"
-		| "Featherless"
-		| "Fireworks"
-		| "Friendli"
-		| "GMICloud"
-		| "Google"
-		| "Google AI Studio"
-		| "Groq"
-		| "Hyperbolic"
-		| "Inception"
-		| "Inceptron"
-		| "InferenceNet"
-		| "Infermatic"
-		| "Inflection"
-		| "Liquid"
-		| "Mara"
-		| "Mancer 2"
-		| "Minimax"
-		| "ModelRun"
-		| "Mistral"
-		| "Modular"
-		| "Moonshot AI"
-		| "Morph"
-		| "NCompass"
-		| "Nebius"
-		| "NextBit"
-		| "Novita"
-		| "Nvidia"
-		| "OpenAI"
-		| "OpenInference"
-		| "Parasail"
-		| "Perplexity"
-		| "Phala"
-		| "Relace"
-		| "SambaNova"
-		| "Seed"
-		| "SiliconFlow"
-		| "Sourceful"
-		| "StepFun"
-		| "Stealth"
-		| "StreamLake"
-		| "Switchpoint"
-		| "Together"
-		| "Upstage"
-		| "Venice"
-		| "WandB"
-		| "Xiaomi"
-		| "xAI"
-		| "Z.AI"
-		| "FakeProvider"
-	)
-	| string
-}
-
---[=[
-    @type __schema4 __schema5?
-    @within OpenRouterTypes
-]=]
-export type __schema4 = __schema5?
-
---[=[
-    @type __schema8 {("int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown")}?
-    @within OpenRouterTypes
-]=]
-export type __schema8 = { "int4" | "int8" | "fp4" | "fp6" | "fp8" | "fp16" | "bf16" | "fp32" | "unknown" }?
-
---[=[
-    @type __schema9 ProviderSortUnion?
-    @within OpenRouterTypes
-]=]
-export type __schema9 = ProviderSortUnion?
-
---[=[
-    @type __schema0 { allow_fallbacks: __schema1?, require_parameters: __schema1?, data_collection: __schema3?, zdr: boolean?, enforce_distillable_text: boolean?, order: __schema4?, only: __schema4?, ignore: __schema4?, quantizations: __schema8?, sort: __schema9?, max_price: __schema10?, preferred_min_throughput: __schema15?, preferred_max_latency: __schema15? }?
-    @within OpenRouterTypes
-]=]
-export type __schema0 = {
-	allow_fallbacks: __schema1?,
-	require_parameters: __schema1?,
-	data_collection: __schema3?,
-	zdr: boolean?,
-	enforce_distillable_text: boolean?,
-	order: __schema4?,
-	only: __schema4?,
-	ignore: __schema4?,
-	quantizations: __schema8?,
-	sort: __schema9?,
-	max_price: __schema10?,
-	preferred_min_throughput: __schema15?,
-	preferred_max_latency: __schema15?,
-}?
-
---[=[
-    @interface ChatGenerationParams
-    @within OpenRouterTypes
-    
-    @field provider __schema0? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins __schema17? -- Plugins you want to enable for this request, including their settings.
-    @field route ("fallback" | "sort")?
-    @field user string?
-    @field session_id __schema18? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-    @field messages {Message}
-    @field model ModelName?
-    @field models {ModelName}?
-    @field frequency_penalty number?
-    @field logit_bias { [string]: number }?
-    @field logprobs boolean?
-    @field top_logprobs number?
-    @field max_completion_tokens number?
-    @field max_tokens number?
-    @field metadata { [string]: string }?
-    @field presence_penalty number?
-    @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ReasoningSummaryVerbosity? }?
-    @field response_format ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?
-    @field seed number?
-    @field stop (string | {ModelName})?
-    @field stream boolean? -- Default: False
-    @field stream_options ChatStreamOptions?
-    @field temperature number? -- Default: 1
-    @field tool_choice ToolChoiceOption?
-    @field tools {ToolDefinitionJson}?
-    @field top_p number? -- Default: 1
-    @field debug { echo_upstream_body: boolean? }?
-    @field image_config { [string]: (string | number | {any}) }?
-    @field modalities {("text" | "image")}?
-]=]
-export type ChatGenerationParams = {
-	provider: __schema0?,
-	plugins: __schema17?,
-	route: ("fallback" | "sort")?,
-	user: string?,
-	session_id: __schema18?,
-	messages: { Message },
-	model: ModelName?,
-	models: { ModelName }?,
-	frequency_penalty: number?,
-	logit_bias: { [string]: number }?,
-	logprobs: boolean?,
-	top_logprobs: number?,
-	max_completion_tokens: number?,
-	max_tokens: number?,
-	metadata: { [string]: string }?,
-	presence_penalty: number?,
-	reasoning: {
-		effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?,
-		summary: ReasoningSummaryVerbosity?,
-	}?,
-	response_format: ({ ["type"]: string } | ResponseFormatJSONSchema | ResponseFormatTextGrammar)?,
-	seed: number?,
-	stop: (string | { ModelName })?,
-	stream: boolean?,
-	stream_options: ChatStreamOptions?,
-	temperature: number?,
-	tool_choice: ToolChoiceOption?,
-	tools: { ToolDefinitionJson }?,
-	top_p: number?,
-	debug: { echo_upstream_body: boolean? }?,
-	image_config: { [string]: string | number | { any } }?,
-	modalities: { "text" | "image" }?,
-}
 
 --[=[
     @type CreateResponses200Response OpenResponsesNonStreamingResponse
@@ -4364,6 +4364,104 @@ export type GetUserActivity403Response = ForbiddenResponse
 export type GetUserActivity500Response = InternalServerResponse
 
 --[=[
+    @type SendChatCompletionRequest200Response ChatResponse
+    @within OpenRouterTypes
+    200 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest200Response = ChatResponse
+
+--[=[
+    @type SendChatCompletionRequest400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest400Response = BadRequestResponse
+
+--[=[
+    @type SendChatCompletionRequest401Response UnauthorizedResponse
+    @within OpenRouterTypes
+    401 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest401Response = UnauthorizedResponse
+
+--[=[
+    @type SendChatCompletionRequest402Response PaymentRequiredResponse
+    @within OpenRouterTypes
+    402 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest402Response = PaymentRequiredResponse
+
+--[=[
+    @type SendChatCompletionRequest404Response NotFoundResponse
+    @within OpenRouterTypes
+    404 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest404Response = NotFoundResponse
+
+--[=[
+    @type SendChatCompletionRequest408Response RequestTimeoutResponse
+    @within OpenRouterTypes
+    408 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest408Response = RequestTimeoutResponse
+
+--[=[
+    @type SendChatCompletionRequest413Response PayloadTooLargeResponse
+    @within OpenRouterTypes
+    413 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest413Response = PayloadTooLargeResponse
+
+--[=[
+    @type SendChatCompletionRequest422Response UnprocessableEntityResponse
+    @within OpenRouterTypes
+    422 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest422Response = UnprocessableEntityResponse
+
+--[=[
+    @type SendChatCompletionRequest429Response TooManyRequestsResponse
+    @within OpenRouterTypes
+    429 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest429Response = TooManyRequestsResponse
+
+--[=[
+    @type SendChatCompletionRequest500Response InternalServerResponse
+    @within OpenRouterTypes
+    500 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest500Response = InternalServerResponse
+
+--[=[
+    @type SendChatCompletionRequest502Response BadGatewayResponse
+    @within OpenRouterTypes
+    502 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest502Response = BadGatewayResponse
+
+--[=[
+    @type SendChatCompletionRequest503Response ServiceUnavailableResponse
+    @within OpenRouterTypes
+    503 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest503Response = ServiceUnavailableResponse
+
+--[=[
+    @type SendChatCompletionRequest524Response EdgeNetworkTimeoutResponse
+    @within OpenRouterTypes
+    524 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest524Response = EdgeNetworkTimeoutResponse
+
+--[=[
+    @type SendChatCompletionRequest529Response ProviderOverloadedResponse
+    @within OpenRouterTypes
+    529 Response type for sendChatCompletionRequest
+]=]
+export type SendChatCompletionRequest529Response = ProviderOverloadedResponse
+
+--[=[
     @type GetCredits200Response { data: { total_credits: number, total_usage: number } }
     @within OpenRouterTypes
     200 Response type for getCredits
@@ -4554,7 +4652,7 @@ export type ListEmbeddingsModels400Response = BadRequestResponse
 export type ListEmbeddingsModels500Response = InternalServerResponse
 
 --[=[
-    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")?, router: string?, provider_responses: {{ id: string?, endpoint_id: string?, model_permaslug: string?, provider_name: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Infermatic" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")?, status: number?, latency: number?, is_byok: boolean? }}? } }
+    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")?, router: string?, provider_responses: {{ id: string?, endpoint_id: string?, model_permaslug: string?, provider_name: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")?, status: number?, latency: number?, is_byok: boolean? }}? } }
     @within OpenRouterTypes
     200 Response type for getGeneration
 ]=]
@@ -4661,7 +4759,9 @@ export type GetGeneration200Response = {
 					| "Inception"
 					| "Inceptron"
 					| "InferenceNet"
+					| "Ionstream"
 					| "Infermatic"
+					| "Io Net"
 					| "Inflection"
 					| "Liquid"
 					| "Mara"
@@ -5732,39 +5832,4 @@ export type CreateAuthKeysCode401Response = UnauthorizedResponse
     500 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode500Response = InternalServerResponse
-
---[=[
-    @type SendChatCompletionRequest200Response ChatResponse
-    @within OpenRouterTypes
-    200 Response type for sendChatCompletionRequest
-]=]
-export type SendChatCompletionRequest200Response = ChatResponse
-
---[=[
-    @type SendChatCompletionRequest400Response ChatError
-    @within OpenRouterTypes
-    400 Response type for sendChatCompletionRequest
-]=]
-export type SendChatCompletionRequest400Response = ChatError
-
---[=[
-    @type SendChatCompletionRequest401Response ChatError
-    @within OpenRouterTypes
-    401 Response type for sendChatCompletionRequest
-]=]
-export type SendChatCompletionRequest401Response = ChatError
-
---[=[
-    @type SendChatCompletionRequest429Response ChatError
-    @within OpenRouterTypes
-    429 Response type for sendChatCompletionRequest
-]=]
-export type SendChatCompletionRequest429Response = ChatError
-
---[=[
-    @type SendChatCompletionRequest500Response ChatError
-    @within OpenRouterTypes
-    500 Response type for sendChatCompletionRequest
-]=]
-export type SendChatCompletionRequest500Response = ChatError
 return {}
