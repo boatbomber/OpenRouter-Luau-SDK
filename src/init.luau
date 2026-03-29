@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-03-01T00:37:38.920458Z (generator v1.0.0)
+-- Last generated: 2026-03-29T00:39:33.630095Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -84,12 +84,12 @@ end
     @within OpenRouter
     @tag beta.responses
     
-    @param params OpenResponsesRequest -- Request body parameters
+    @param params ResponsesRequest -- Request body parameters
     @return Result<CreateResponses200Response, CreateResponses400Response | CreateResponses401Response | CreateResponses402Response | CreateResponses404Response | CreateResponses408Response | CreateResponses413Response | CreateResponses422Response | CreateResponses429Response | CreateResponses500Response | CreateResponses502Response | CreateResponses503Response | CreateResponses524Response | CreateResponses529Response>
 ]=]
 function OpenRouter.createResponses(
 	self: OpenRouter,
-	params: Types.OpenResponsesRequest
+	params: Types.ResponsesRequest
 ): Types.Result<
 	Types.CreateResponses200Response,
 	Types.CreateResponses400Response
@@ -124,12 +124,12 @@ end
     @within OpenRouter
     @tag Anthropic Messages
     
-    @param params AnthropicMessagesRequest -- Request body parameters
+    @param params MessagesRequest -- Request body parameters
     @return Result<CreateMessages200Response, CreateMessages400Response | CreateMessages401Response | CreateMessages403Response | CreateMessages404Response | CreateMessages429Response | CreateMessages500Response | CreateMessages503Response | CreateMessages529Response>
 ]=]
 function OpenRouter.createMessages(
 	self: OpenRouter,
-	params: Types.AnthropicMessagesRequest
+	params: Types.MessagesRequest
 ): Types.Result<
 	Types.CreateMessages200Response,
 	Types.CreateMessages400Response
@@ -193,12 +193,12 @@ end
     @within OpenRouter
     @tag Chat
     
-    @param params ChatGenerationParams -- Request body parameters
+    @param params ChatRequest -- Request body parameters
     @return Result<SendChatCompletionRequest200Response, SendChatCompletionRequest400Response | SendChatCompletionRequest401Response | SendChatCompletionRequest402Response | SendChatCompletionRequest404Response | SendChatCompletionRequest408Response | SendChatCompletionRequest413Response | SendChatCompletionRequest422Response | SendChatCompletionRequest429Response | SendChatCompletionRequest500Response | SendChatCompletionRequest502Response | SendChatCompletionRequest503Response | SendChatCompletionRequest524Response | SendChatCompletionRequest529Response>
 ]=]
 function OpenRouter.sendChatCompletionRequest(
 	self: OpenRouter,
-	params: Types.ChatGenerationParams
+	params: Types.ChatRequest
 ): Types.Result<
 	Types.SendChatCompletionRequest200Response,
 	Types.SendChatCompletionRequest400Response
@@ -387,12 +387,20 @@ end
     @within OpenRouter
     @tag Models
     
-    @return Result<ListModelsCount200Response, ListModelsCount500Response>
+    @param output_modalities string? -- Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".
+    @return Result<ListModelsCount200Response, ListModelsCount400Response | ListModelsCount500Response>
 ]=]
 function OpenRouter.listModelsCount(
-	self: OpenRouter
-): Types.Result<Types.ListModelsCount200Response, Types.ListModelsCount500Response>
-	return self:_request("GET", "/models/count", nil)
+	self: OpenRouter,
+	output_modalities: string?
+): Types.Result<
+	Types.ListModelsCount200Response,
+	Types.ListModelsCount400Response | Types.ListModelsCount500Response
+>
+	local queryString = self:_buildQueryString({
+		["output_modalities"] = output_modalities,
+	})
+	return self:_request("GET", `/models/count{queryString}`, nil)
 end
 
 --[=[
@@ -405,6 +413,7 @@ end
     @tag Models
     
     @param category ("programming" | "roleplay" | "marketing" | "marketing/seo" | "technology" | "science" | "translation" | "legal" | "finance" | "health" | "trivia" | "academia")? -- Filter models by use case category
+    @param output_modalities string? -- Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".
     @param supported_parameters string? -- No description provided
     @param use_rss string? -- No description provided
     @param use_rss_chat_links string? -- No description provided
@@ -426,6 +435,7 @@ function OpenRouter.getModels(
 		| "trivia"
 		| "academia"
 	)?,
+	output_modalities: string?,
 	supported_parameters: string?,
 	use_rss: string?,
 	use_rss_chat_links: string?
@@ -435,6 +445,7 @@ function OpenRouter.getModels(
 >
 	local queryString = self:_buildQueryString({
 		["category"] = category,
+		["output_modalities"] = output_modalities,
 		["supported_parameters"] = supported_parameters,
 		["use_rss"] = use_rss,
 		["use_rss_chat_links"] = use_rss_chat_links,
@@ -737,7 +748,7 @@ end
     @within OpenRouter
     @tag Guardrails
     
-    @param params { name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
+    @param params { name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
     @return Result<CreateGuardrail201Response, CreateGuardrail400Response | CreateGuardrail401Response | CreateGuardrail500Response>
 ]=]
 function OpenRouter.createGuardrail(
@@ -748,6 +759,7 @@ function OpenRouter.createGuardrail(
 		limit_usd: number?,
 		reset_interval: ("daily" | "weekly" | "monthly")?,
 		allowed_providers: { string }?,
+		ignored_providers: { string }?,
 		allowed_models: { string }?,
 		enforce_zdr: boolean?,
 	}
@@ -812,7 +824,7 @@ end
     @tag Guardrails
     
     @param id string -- The unique identifier of the guardrail to update
-    @param params { name: string?, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
+    @param params { name: string?, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean? } -- Request body parameters
     @return Result<UpdateGuardrail200Response, UpdateGuardrail400Response | UpdateGuardrail401Response | UpdateGuardrail404Response | UpdateGuardrail500Response>
 ]=]
 function OpenRouter.updateGuardrail(
@@ -824,6 +836,7 @@ function OpenRouter.updateGuardrail(
 		limit_usd: number?,
 		reset_interval: ("daily" | "weekly" | "monthly")?,
 		allowed_providers: { string }?,
+		ignored_providers: { string }?,
 		allowed_models: { string }?,
 		enforce_zdr: boolean?,
 	}
@@ -1109,7 +1122,7 @@ end
     @tag OAuth
     
     @param params { callback_url: string, code_challenge: string?, code_challenge_method: ("S256" | "plain")?, limit: number?, expires_at: string?, key_label: string?, usage_limit_type: ("daily" | "weekly" | "monthly")?, spawn_agent: string?, spawn_cloud: string? } -- Request body parameters
-    @return Result<CreateAuthKeysCode200Response, CreateAuthKeysCode400Response | CreateAuthKeysCode401Response | CreateAuthKeysCode500Response>
+    @return Result<CreateAuthKeysCode200Response, CreateAuthKeysCode400Response | CreateAuthKeysCode401Response | CreateAuthKeysCode409Response | CreateAuthKeysCode500Response>
 ]=]
 function OpenRouter.createAuthKeysCode(
 	self: OpenRouter,
@@ -1126,7 +1139,10 @@ function OpenRouter.createAuthKeysCode(
 	}
 ): Types.Result<
 	Types.CreateAuthKeysCode200Response,
-	Types.CreateAuthKeysCode400Response | Types.CreateAuthKeysCode401Response | Types.CreateAuthKeysCode500Response
+	Types.CreateAuthKeysCode400Response
+	| Types.CreateAuthKeysCode401Response
+	| Types.CreateAuthKeysCode409Response
+	| Types.CreateAuthKeysCode500Response
 >
 	return self:_request("POST", "/auth/keys/code", params)
 end

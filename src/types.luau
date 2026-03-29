@@ -1,7 +1,7 @@
 --!strict
 -- This file is auto-generated from OpenRouter API
 -- DO NOT EDIT MANUALLY - Changes will be overwritten
--- Last generated: 2026-03-01T00:37:38.906685Z (generator v1.0.0)
+-- Last generated: 2026-03-29T00:39:33.614794Z (generator v1.0.0)
 -- Documentation: https://openrouter.ai/docs - OpenRouter Documentation
 
 --[[
@@ -49,273 +49,13 @@ export type ActivityItem = {
 }
 
 --[=[
-    @type AnthropicMessagesStreamEvent ({ ["type"]: "message_start", message: { id: string, ["type"]: "message", role: "assistant", content: {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}, model: string, stop_reason: any?, stop_sequence: any?, usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? } } } | { ["type"]: "message_delta", delta: { stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?, stop_sequence: string? }, usage: { input_tokens: number?, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, server_tool_use: { web_search_requests: number }? } } | { ["type"]: "message_stop" } | { ["type"]: "content_block_start", index: number, content_block: ({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) }) } | { ["type"]: "content_block_delta", index: number, delta: ({ ["type"]: "text_delta", text: string } | { ["type"]: "input_json_delta", partial_json: string } | { ["type"]: "thinking_delta", thinking: string } | { ["type"]: "signature_delta", signature: string } | { ["type"]: "citations_delta", citation: ({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number }) }) } | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | { ["type"]: "error", error: { ["type"]: string, message: string } })
+    @interface ApplyPatchServerTool
     @within OpenRouterTypes
-    Union of all possible streaming events
-]=]
-export type AnthropicMessagesStreamEvent =
-	{
-		["type"]: "message_start",
-		message: {
-			id: string,
-			["type"]: "message",
-			role: "assistant",
-			content: {
-				(
-					{
-						["type"]: "text",
-						text: string,
-						citations: {
-							{
-								["type"]: "char_location",
-								cited_text: string,
-								document_index: number,
-								document_title: string?,
-								start_char_index: number,
-								end_char_index: number,
-								file_id: string?,
-							} | {
-								["type"]: "page_location",
-								cited_text: string,
-								document_index: number,
-								document_title: string?,
-								start_page_number: number,
-								end_page_number: number,
-								file_id: string?,
-							} | {
-								["type"]: "content_block_location",
-								cited_text: string,
-								document_index: number,
-								document_title: string?,
-								start_block_index: number,
-								end_block_index: number,
-								file_id: string?,
-							} | {
-								["type"]: "web_search_result_location",
-								cited_text: string,
-								encrypted_index: string,
-								title: string?,
-								url: string,
-							} | {
-								["type"]: "search_result_location",
-								cited_text: string,
-								search_result_index: number,
-								source: string,
-								title: string?,
-								start_block_index: number,
-								end_block_index: number,
-							}
-						}?,
-					}
-					| { ["type"]: "tool_use", id: string, name: string, input: any? }
-					| { ["type"]: "thinking", thinking: string, signature: string }
-					| { ["type"]: "redacted_thinking", data: string }
-					| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
-					| {
-						["type"]: "web_search_tool_result",
-						tool_use_id: string,
-						content: {
-							{
-								["type"]: "web_search_result",
-								encrypted_content: string,
-								page_age: string?,
-								title: string,
-								url: string,
-							}
-						} | {
-							["type"]: "web_search_tool_result_error",
-							error_code: (
-								"invalid_tool_input"
-								| "unavailable"
-								| "max_uses_exceeded"
-								| "too_many_requests"
-								| "query_too_long"
-							),
-						},
-					}
-				)
-			},
-			model: string,
-			stop_reason: any?,
-			stop_sequence: any?,
-			usage: {
-				input_tokens: number,
-				output_tokens: number,
-				cache_creation_input_tokens: number?,
-				cache_read_input_tokens: number?,
-				cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
-				inference_geo: string?,
-				server_tool_use: { web_search_requests: number }?,
-				service_tier: ("standard" | "priority" | "batch")?,
-			},
-		},
-	}
-	| {
-		["type"]: "message_delta",
-		delta: {
-			stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?,
-			stop_sequence: string?,
-		},
-		usage: {
-			input_tokens: number?,
-			output_tokens: number,
-			cache_creation_input_tokens: number?,
-			cache_read_input_tokens: number?,
-			server_tool_use: { web_search_requests: number }?,
-		},
-	}
-	| { ["type"]: "message_stop" }
-	| {
-		["type"]: "content_block_start",
-		index: number,
-		content_block: (
-			{
-				["type"]: "text",
-				text: string,
-				citations: {
-					{
-						["type"]: "char_location",
-						cited_text: string,
-						document_index: number,
-						document_title: string?,
-						start_char_index: number,
-						end_char_index: number,
-						file_id: string?,
-					} | {
-						["type"]: "page_location",
-						cited_text: string,
-						document_index: number,
-						document_title: string?,
-						start_page_number: number,
-						end_page_number: number,
-						file_id: string?,
-					} | {
-						["type"]: "content_block_location",
-						cited_text: string,
-						document_index: number,
-						document_title: string?,
-						start_block_index: number,
-						end_block_index: number,
-						file_id: string?,
-					} | {
-						["type"]: "web_search_result_location",
-						cited_text: string,
-						encrypted_index: string,
-						title: string?,
-						url: string,
-					} | {
-						["type"]: "search_result_location",
-						cited_text: string,
-						search_result_index: number,
-						source: string,
-						title: string?,
-						start_block_index: number,
-						end_block_index: number,
-					}
-				}?,
-			}
-			| { ["type"]: "tool_use", id: string, name: string, input: any? }
-			| { ["type"]: "thinking", thinking: string, signature: string }
-			| { ["type"]: "redacted_thinking", data: string }
-			| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
-			| {
-				["type"]: "web_search_tool_result",
-				tool_use_id: string,
-				content: {
-					{
-						["type"]: "web_search_result",
-						encrypted_content: string,
-						page_age: string?,
-						title: string,
-						url: string,
-					}
-				} | {
-					["type"]: "web_search_tool_result_error",
-					error_code: (
-						"invalid_tool_input"
-						| "unavailable"
-						| "max_uses_exceeded"
-						| "too_many_requests"
-						| "query_too_long"
-					),
-				},
-			}
-		),
-	}
-	| {
-		["type"]: "content_block_delta",
-		index: number,
-		delta: (
-			{ ["type"]: "text_delta", text: string }
-			| { ["type"]: "input_json_delta", partial_json: string }
-			| { ["type"]: "thinking_delta", thinking: string }
-			| { ["type"]: "signature_delta", signature: string }
-			| {
-				["type"]: "citations_delta",
-				citation: {
-					["type"]: "char_location",
-					cited_text: string,
-					document_index: number,
-					document_title: string?,
-					start_char_index: number,
-					end_char_index: number,
-					file_id: string?,
-				} | {
-					["type"]: "page_location",
-					cited_text: string,
-					document_index: number,
-					document_title: string?,
-					start_page_number: number,
-					end_page_number: number,
-					file_id: string?,
-				} | {
-					["type"]: "content_block_location",
-					cited_text: string,
-					document_index: number,
-					document_title: string?,
-					start_block_index: number,
-					end_block_index: number,
-					file_id: string?,
-				} | {
-					["type"]: "web_search_result_location",
-					cited_text: string,
-					encrypted_index: string,
-					title: string?,
-					url: string,
-				} | {
-					["type"]: "search_result_location",
-					cited_text: string,
-					search_result_index: number,
-					source: string,
-					title: string?,
-					start_block_index: number,
-					end_block_index: number,
-				},
-			}
-		),
-	}
-	| { ["type"]: "content_block_stop", index: number }
-	| { ["type"]: "ping" }
-	| {
-		["type"]: "error",
-		error: { ["type"]: string, message: string },
-	}
-
---[=[
-    @interface AnthropicOutputConfig
-    @within OpenRouterTypes
-    Configuration for controlling output behavior. Currently supports the effort parameter for Claude Opus 4.5.
+    Apply patch tool configuration
     
-    @field effort ("low" | "medium" | "high" | "max")? -- How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer. Valid values are `low`, `medium`, `high`, or `max`.; (Ex: "medium")
+    @field type "apply_patch"
 ]=]
-export type AnthropicOutputConfig = { effort: ("low" | "medium" | "high" | "max")? }
-
---[=[
-    @type AssistantMessageImages {{ image_url: { url: string } }}
-    @within OpenRouterTypes
-    Generated images from image generation models
-]=]
-export type AssistantMessageImages = { { image_url: { url: string } } }
+export type ApplyPatchServerTool = { ["type"]: "apply_patch" }
 
 --[=[
     @interface BadGatewayResponseErrorData
@@ -360,22 +100,83 @@ export type BadRequestResponseErrorData = { code: number, message: string, metad
 export type BadRequestResponse = { error: BadRequestResponseErrorData, user_id: string? }
 
 --[=[
-    @interface BaseAnthropicMessagesResponse
+    @interface BaseErrorEvent
+    @within OpenRouterTypes
+    Event emitted when an error occurs during streaming
+    
+    @field type "error"
+    @field code string?
+    @field message string
+    @field param string?
+    @field sequence_number number
+]=]
+export type BaseErrorEvent = {
+	["type"]: "error",
+	code: string?,
+	message: string,
+	param: string?,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseFunctionCallArgsDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when function call arguments are being streamed
+    
+    @field type "response.function_call_arguments.delta"
+    @field item_id string
+    @field output_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type BaseFunctionCallArgsDeltaEvent = {
+	["type"]: "response.function_call_arguments.delta",
+	item_id: string,
+	output_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseFunctionCallArgsDoneEvent
+    @within OpenRouterTypes
+    Event emitted when function call arguments streaming is complete
+    
+    @field type "response.function_call_arguments.done"
+    @field item_id string
+    @field output_index number
+    @field name string
+    @field arguments string
+    @field sequence_number number
+]=]
+export type BaseFunctionCallArgsDoneEvent = {
+	["type"]: "response.function_call_arguments.done",
+	item_id: string,
+	output_index: number,
+	name: string,
+	arguments: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseMessagesResult
     @within OpenRouterTypes
     
     @field id string
     @field type "message"
     @field role "assistant"
-    @field content {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }) })}
+    @field container { id: string, expires_at: string }?
+    @field content {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: ("web_search" | "web_fetch" | "code_execution" | "bash_code_execution" | "text_editor_code_execution" | "tool_search_tool_regex" | "tool_search_tool_bm25"), input: any? } | { ["type"]: "web_search_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long" | "request_too_large") }) } | { ["type"]: "web_fetch_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), content: ({ ["type"]: "web_fetch_tool_result_error", error_code: ("invalid_tool_input" | "url_too_long" | "url_not_allowed" | "url_not_accessible" | "unsupported_content_type" | "too_many_requests" | "max_uses_exceeded" | "unavailable") } | { content: { citations: { enabled: boolean }?, source: ({ data: string, media_type: "application/pdf", ["type"]: "base64" } | { data: string, media_type: "text/plain", ["type"]: "text" }), title: string?, ["type"]: "document" }, retrieved_at: string?, ["type"]: "web_fetch_result", url: string }), tool_use_id: string } | { ["type"]: "code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), ["type"]: "code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "code_execution_result" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, encrypted_stdout: string, return_code: number, stderr: string, ["type"]: "encrypted_code_execution_result" }), tool_use_id: string } | { ["type"]: "bash_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "output_file_too_large"), ["type"]: "bash_code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "bash_code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "bash_code_execution_result" }), tool_use_id: string } | { ["type"]: "text_editor_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "file_not_found"), error_message: string?, ["type"]: "text_editor_code_execution_tool_result_error" } | { content: string, file_type: ("text" | "image" | "pdf"), num_lines: number?, start_line: number?, total_lines: number?, ["type"]: "text_editor_code_execution_view_result" } | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | { lines: {string}?, new_lines: number?, new_start: number?, old_lines: number?, old_start: number?, ["type"]: "text_editor_code_execution_str_replace_result" }), tool_use_id: string } | { ["type"]: "tool_search_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), error_message: string?, ["type"]: "tool_search_tool_result_error" } | { tool_references: {{ tool_name: string, ["type"]: "tool_reference" }}, ["type"]: "tool_search_tool_search_result" }), tool_use_id: string } | { ["type"]: "container_upload", file_id: string })}
     @field model string
     @field stop_reason ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?
     @field stop_sequence string?
-    @field usage { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number }?, service_tier: ("standard" | "priority" | "batch")? }
+    @field usage { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number, web_fetch_requests: number }?, service_tier: ("standard" | "priority" | "batch")?, speed: ("fast" | "standard")? }
 ]=]
-export type BaseAnthropicMessagesResponse = {
+export type BaseMessagesResult = {
 	id: string,
 	["type"]: "message",
 	role: "assistant",
+	container: { id: string, expires_at: string }?,
 	content: {
 		(
 			{
@@ -423,12 +224,45 @@ export type BaseAnthropicMessagesResponse = {
 					}
 				}?,
 			}
-			| { ["type"]: "tool_use", id: string, name: string, input: any? }
+			| {
+				["type"]: "tool_use",
+				id: string,
+				caller: (
+					{ ["type"]: "direct" }
+					| { ["type"]: "code_execution_20250825", tool_id: string }
+					| { ["type"]: "code_execution_20260120", tool_id: string }
+				),
+				name: string,
+				input: any?,
+			}
 			| { ["type"]: "thinking", thinking: string, signature: string }
 			| { ["type"]: "redacted_thinking", data: string }
-			| { ["type"]: "server_tool_use", id: string, name: "web_search", input: any? }
+			| {
+				["type"]: "server_tool_use",
+				id: string,
+				caller: (
+					{ ["type"]: "direct" }
+					| { ["type"]: "code_execution_20250825", tool_id: string }
+					| { ["type"]: "code_execution_20260120", tool_id: string }
+				),
+				name: (
+					"web_search"
+					| "web_fetch"
+					| "code_execution"
+					| "bash_code_execution"
+					| "text_editor_code_execution"
+					| "tool_search_tool_regex"
+					| "tool_search_tool_bm25"
+				),
+				input: any?,
+			}
 			| {
 				["type"]: "web_search_tool_result",
+				caller: (
+					{ ["type"]: "direct" }
+					| { ["type"]: "code_execution_20250825", tool_id: string }
+					| { ["type"]: "code_execution_20260120", tool_id: string }
+				),
 				tool_use_id: string,
 				content: {
 					{
@@ -446,9 +280,131 @@ export type BaseAnthropicMessagesResponse = {
 						| "max_uses_exceeded"
 						| "too_many_requests"
 						| "query_too_long"
+						| "request_too_large"
 					),
 				},
 			}
+			| {
+				["type"]: "web_fetch_tool_result",
+				caller: (
+					{ ["type"]: "direct" }
+					| { ["type"]: "code_execution_20250825", tool_id: string }
+					| { ["type"]: "code_execution_20260120", tool_id: string }
+				),
+				content: {
+					["type"]: "web_fetch_tool_result_error",
+					error_code: (
+						"invalid_tool_input"
+						| "url_too_long"
+						| "url_not_allowed"
+						| "url_not_accessible"
+						| "unsupported_content_type"
+						| "too_many_requests"
+						| "max_uses_exceeded"
+						| "unavailable"
+					),
+				} | {
+					content: {
+						citations: { enabled: boolean }?,
+						source: (
+							{ data: string, media_type: "application/pdf", ["type"]: "base64" }
+							| { data: string, media_type: "text/plain", ["type"]: "text" }
+						),
+						title: string?,
+						["type"]: "document",
+					},
+					retrieved_at: string?,
+					["type"]: "web_fetch_result",
+					url: string,
+				},
+				tool_use_id: string,
+			}
+			| {
+				["type"]: "code_execution_tool_result",
+				content: {
+					error_code: (
+						"invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"
+					),
+					["type"]: "code_execution_tool_result_error",
+				} | {
+					content: { { file_id: string, ["type"]: "code_execution_output" } },
+					return_code: number,
+					stderr: string,
+					stdout: string,
+					["type"]: "code_execution_result",
+				} | {
+					content: { { file_id: string, ["type"]: "code_execution_output" } },
+					encrypted_stdout: string,
+					return_code: number,
+					stderr: string,
+					["type"]: "encrypted_code_execution_result",
+				},
+				tool_use_id: string,
+			}
+			| {
+				["type"]: "bash_code_execution_tool_result",
+				content: {
+					error_code: (
+						"invalid_tool_input"
+						| "unavailable"
+						| "too_many_requests"
+						| "execution_time_exceeded"
+						| "output_file_too_large"
+					),
+					["type"]: "bash_code_execution_tool_result_error",
+				} | {
+					content: { { file_id: string, ["type"]: "bash_code_execution_output" } },
+					return_code: number,
+					stderr: string,
+					stdout: string,
+					["type"]: "bash_code_execution_result",
+				},
+				tool_use_id: string,
+			}
+			| {
+				["type"]: "text_editor_code_execution_tool_result",
+				content: {
+					error_code: (
+						"invalid_tool_input"
+						| "unavailable"
+						| "too_many_requests"
+						| "execution_time_exceeded"
+						| "file_not_found"
+					),
+					error_message: string?,
+					["type"]: "text_editor_code_execution_tool_result_error",
+				} | {
+					content: string,
+					file_type: "text" | "image" | "pdf",
+					num_lines: number?,
+					start_line: number?,
+					total_lines: number?,
+					["type"]: "text_editor_code_execution_view_result",
+				} | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | {
+					lines: { string }?,
+					new_lines: number?,
+					new_start: number?,
+					old_lines: number?,
+					old_start: number?,
+					["type"]: "text_editor_code_execution_str_replace_result",
+				},
+				tool_use_id: string,
+			}
+			| {
+				["type"]: "tool_search_tool_result",
+				content: {
+					error_code: (
+						"invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"
+					),
+					error_message: string?,
+					["type"]: "tool_search_tool_result_error",
+				} | {
+					tool_references: { { tool_name: string, ["type"]: "tool_reference" } },
+					["type"]: "tool_search_tool_search_result",
+				},
+				tool_use_id: string,
+			}
+			| { ["type"]: "container_upload", file_id: string }
 		)
 	},
 	model: string,
@@ -461,17 +417,137 @@ export type BaseAnthropicMessagesResponse = {
 		cache_read_input_tokens: number?,
 		cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
 		inference_geo: string?,
-		server_tool_use: { web_search_requests: number }?,
+		server_tool_use: { web_search_requests: number, web_fetch_requests: number }?,
 		service_tier: ("standard" | "priority" | "batch")?,
+		speed: ("fast" | "standard")?,
 	},
 }
 
 --[=[
-    @type AnthropicMessagesResponse BaseAnthropicMessagesResponse
+    @interface BaseReasoningDeltaEvent
     @within OpenRouterTypes
-    Non-streaming response from the Anthropic Messages API with OpenRouter extensions
+    Event emitted when reasoning text delta is streamed
+    
+    @field type "response.reasoning_text.delta"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
 ]=]
-export type AnthropicMessagesResponse = BaseAnthropicMessagesResponse
+export type BaseReasoningDeltaEvent = {
+	["type"]: "response.reasoning_text.delta",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseReasoningDoneEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning text streaming is complete
+    
+    @field type "response.reasoning_text.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field text string
+    @field sequence_number number
+]=]
+export type BaseReasoningDoneEvent = {
+	["type"]: "response.reasoning_text.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	text: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseReasoningSummaryTextDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning summary text delta is streamed
+    
+    @field type "response.reasoning_summary_text.delta"
+    @field item_id string
+    @field output_index number
+    @field summary_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type BaseReasoningSummaryTextDeltaEvent = {
+	["type"]: "response.reasoning_summary_text.delta",
+	item_id: string,
+	output_index: number,
+	summary_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseReasoningSummaryTextDoneEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning summary text streaming is complete
+    
+    @field type "response.reasoning_summary_text.done"
+    @field item_id string
+    @field output_index number
+    @field summary_index number
+    @field text string
+    @field sequence_number number
+]=]
+export type BaseReasoningSummaryTextDoneEvent = {
+	["type"]: "response.reasoning_summary_text.done",
+	item_id: string,
+	output_index: number,
+	summary_index: number,
+	text: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseRefusalDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when a refusal delta is streamed
+    
+    @field type "response.refusal.delta"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type BaseRefusalDeltaEvent = {
+	["type"]: "response.refusal.delta",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseRefusalDoneEvent
+    @within OpenRouterTypes
+    Event emitted when refusal streaming is complete
+    
+    @field type "response.refusal.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field refusal string
+    @field sequence_number number
+]=]
+export type BaseRefusalDoneEvent = {
+	["type"]: "response.refusal.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	refusal: string,
+	sequence_number: number,
+}
 
 --[=[
     @type BigNumberUnion string
@@ -481,13 +557,270 @@ export type AnthropicMessagesResponse = BaseAnthropicMessagesResponse
 export type BigNumberUnion = string
 
 --[=[
-    @type ChatCompletionFinishReason ("tool_calls" | "stop" | "length" | "content_filter" | "error")
+    @type ChatAssistantImages {{ image_url: { url: string } }}
     @within OpenRouterTypes
+    Generated images from image generation models
 ]=]
-export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "content_filter" | "error"
+export type ChatAssistantImages = { { image_url: { url: string } } }
 
 --[=[
-    @interface ChatGenerationTokenUsage
+    @interface ChatAudioOutput
+    @within OpenRouterTypes
+    Audio output data or reference
+    
+    @field id string? -- Audio output identifier
+    @field expires_at number? -- Audio expiration timestamp
+    @field data string? -- Base64 encoded audio data
+    @field transcript string? -- Audio transcript
+]=]
+export type ChatAudioOutput = { id: string?, expires_at: number?, data: string?, transcript: string? }
+
+--[=[
+    @interface ChatContentAudio
+    @within OpenRouterTypes
+    Audio input content part. Supported audio formats vary by provider.
+    
+    @field type "input_audio"
+    @field input_audio { data: string, format: string }
+]=]
+export type ChatContentAudio = { ["type"]: "input_audio", input_audio: { data: string, format: string } }
+
+--[=[
+    @interface ChatContentCacheControl
+    @within OpenRouterTypes
+    Cache control for the content part
+    
+    @field type "ephemeral"
+    @field ttl ("5m" | "1h")?
+]=]
+export type ChatContentCacheControl = { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }
+
+--[=[
+    @interface ChatContentFile
+    @within OpenRouterTypes
+    File content part for document processing
+    
+    @field type "file"
+    @field file { file_data: string?, file_id: string?, filename: string? }
+]=]
+export type ChatContentFile = { ["type"]: "file", file: { file_data: string?, file_id: string?, filename: string? } }
+
+--[=[
+    @interface ChatContentImage
+    @within OpenRouterTypes
+    Image content part for vision models
+    
+    @field type "image_url"
+    @field image_url { url: string, detail: ("auto" | "low" | "high")? }
+]=]
+export type ChatContentImage = { ["type"]: "image_url", image_url: { url: string, detail: ("auto" | "low" | "high")? } }
+
+--[=[
+    @interface ChatContentText
+    @within OpenRouterTypes
+    Text content part
+    
+    @field type "text"
+    @field text string
+    @field cache_control ChatContentCacheControl?
+]=]
+export type ChatContentText = { ["type"]: "text", text: string, cache_control: ChatContentCacheControl? }
+
+--[=[
+    @interface ChatContentVideoInput
+    @within OpenRouterTypes
+    Video input object
+    
+    @field url string -- URL of the video (data: URLs supported)
+]=]
+export type ChatContentVideoInput = { url: string }
+
+--[=[
+    @interface ChatContentVideo
+    @within OpenRouterTypes
+    Video input content part
+    
+    @field type "video_url"
+    @field video_url ChatContentVideoInput
+]=]
+export type ChatContentVideo = { ["type"]: "video_url", video_url: ChatContentVideoInput }
+
+--[=[
+    @interface ChatDebugOptions
+    @within OpenRouterTypes
+    Debug options for inspecting request transformations (streaming only)
+    
+    @field echo_upstream_body boolean? -- If true, includes the transformed upstream request body in a debug chunk at the start of the stream. Only works with streaming mode.; (Ex: true)
+]=]
+export type ChatDebugOptions = { echo_upstream_body: boolean? }
+
+--[=[
+    @interface ChatDeveloperMessage
+    @within OpenRouterTypes
+    Developer message
+    
+    @field role "developer"
+    @field content (string | {ChatContentText}) -- Developer message content; (Ex: "This is a message from the developer.")
+    @field name string? -- Optional name for the developer message; (Ex: "Developer")
+]=]
+export type ChatDeveloperMessage = { role: "developer", content: string | { ChatContentText }, name: string? }
+
+--[=[
+    @type ChatFinishReasonEnum ("tool_calls" | "stop" | "length" | "content_filter" | "error")
+    @within OpenRouterTypes
+]=]
+export type ChatFinishReasonEnum = "tool_calls" | "stop" | "length" | "content_filter" | "error"
+
+--[=[
+    @interface ChatFormatGrammarConfig
+    @within OpenRouterTypes
+    Custom grammar response format
+    
+    @field type "grammar"
+    @field grammar string -- Custom grammar for text generation; (Ex: "root ::= \"yes\" | \"no\"")
+]=]
+export type ChatFormatGrammarConfig = { ["type"]: "grammar", grammar: string }
+
+--[=[
+    @interface ChatFormatPythonConfig
+    @within OpenRouterTypes
+    Python code response format
+    
+    @field type "python"
+]=]
+export type ChatFormatPythonConfig = { ["type"]: "python" }
+
+--[=[
+    @interface ChatFormatTextConfig
+    @within OpenRouterTypes
+    Default text response format
+    
+    @field type "text"
+]=]
+export type ChatFormatTextConfig = { ["type"]: "text" }
+
+--[=[
+    @interface ChatJsonSchemaConfig
+    @within OpenRouterTypes
+    JSON Schema configuration object
+    
+    @field name string -- Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars); (Ex: "math_response")
+    @field description string? -- Schema description for the model; (Ex: "A mathematical response")
+    @field schema { [string]: any? }? -- JSON Schema object; (Ex: {"type":"object","properties":{"answer":{"type":"number"}},"required":["answer"]})
+    @field strict boolean? -- Enable strict schema adherence; (Ex: false)
+]=]
+export type ChatJsonSchemaConfig = { name: string, description: string?, schema: { [string]: any? }?, strict: boolean? }
+
+--[=[
+    @interface ChatFormatJsonSchemaConfig
+    @within OpenRouterTypes
+    JSON Schema response format for structured outputs
+    
+    @field type "json_schema"
+    @field json_schema ChatJsonSchemaConfig
+]=]
+export type ChatFormatJsonSchemaConfig = { ["type"]: "json_schema", json_schema: ChatJsonSchemaConfig }
+
+--[=[
+    @interface ChatNamedToolChoice
+    @within OpenRouterTypes
+    Named tool choice for specific function
+    
+    @field type "function"
+    @field function { name: string }
+]=]
+export type ChatNamedToolChoice = { ["type"]: "function", ["function"]: { name: string } }
+
+--[=[
+    @type ChatReasoningSummaryVerbosityEnum ("auto" | "concise" | "detailed")
+    @within OpenRouterTypes
+]=]
+export type ChatReasoningSummaryVerbosityEnum = "auto" | "concise" | "detailed"
+
+--[=[
+    @interface ChatStreamOptions
+    @within OpenRouterTypes
+    Streaming configuration options
+    
+    @field include_usage boolean? -- @deprecated; Deprecated: This field has no effect. Full usage details are always included.; (Ex: true)
+]=]
+export type ChatStreamOptions = { include_usage: boolean? }?
+
+--[=[
+    @interface ChatStreamToolCall
+    @within OpenRouterTypes
+    Tool call delta for streaming responses
+    
+    @field index number -- Tool call index in the array; (Ex: 0)
+    @field id string? -- Tool call identifier; (Ex: "call_abc123")
+    @field type "function"? -- Tool call type; (Ex: "function")
+    @field function { name: string?, arguments: string? }? -- Function call details
+]=]
+export type ChatStreamToolCall = {
+	index: number,
+	id: string?,
+	["type"]: "function"?,
+	["function"]: { name: string?, arguments: string? }?,
+}
+
+--[=[
+    @interface ChatSystemMessage
+    @within OpenRouterTypes
+    System message for setting behavior
+    
+    @field role "system"
+    @field content (string | {ChatContentText}) -- System message content; (Ex: "You are a helpful assistant.")
+    @field name string? -- Optional name for the system message; (Ex: "Assistant Config")
+]=]
+export type ChatSystemMessage = { role: "system", content: string | { ChatContentText }, name: string? }
+
+--[=[
+    @interface ChatTokenLogprob
+    @within OpenRouterTypes
+    Token log probability information
+    
+    @field token string -- The token
+    @field logprob number -- Log probability of the token
+    @field bytes {number}? -- UTF-8 bytes of the token
+    @field top_logprobs {{ token: string, logprob: number, bytes: {number}? }} -- Top alternative tokens with probabilities
+]=]
+export type ChatTokenLogprob = {
+	token: string,
+	logprob: number,
+	bytes: { number }?,
+	top_logprobs: { { token: string, logprob: number, bytes: { number }? } },
+}
+
+--[=[
+    @interface ChatTokenLogprobs
+    @within OpenRouterTypes
+    Log probabilities for the completion
+    
+    @field content {ChatTokenLogprob}? -- Log probabilities for content tokens
+    @field refusal {ChatTokenLogprob}? -- Log probabilities for refusal tokens
+]=]
+export type ChatTokenLogprobs = { content: { ChatTokenLogprob }?, refusal: { ChatTokenLogprob }? }?
+
+--[=[
+    @interface ChatToolCall
+    @within OpenRouterTypes
+    Tool call made by the assistant
+    
+    @field id string -- Tool call identifier
+    @field type "function"
+    @field function { name: string, arguments: string }
+]=]
+export type ChatToolCall = { id: string, ["type"]: "function", ["function"]: { name: string, arguments: string } }
+
+--[=[
+    @type ChatToolChoice ("none" | "auto" | "required" | ChatNamedToolChoice)
+    @within OpenRouterTypes
+    Tool choice configuration
+]=]
+export type ChatToolChoice = "none" | "auto" | "required" | ChatNamedToolChoice
+
+--[=[
+    @interface ChatUsage
     @within OpenRouterTypes
     Token usage statistics
     
@@ -497,7 +830,7 @@ export type ChatCompletionFinishReason = "tool_calls" | "stop" | "length" | "con
     @field completion_tokens_details { reasoning_tokens: number?, audio_tokens: number?, accepted_prediction_tokens: number?, rejected_prediction_tokens: number? }? -- Detailed completion token usage
     @field prompt_tokens_details { cached_tokens: number?, cache_write_tokens: number?, audio_tokens: number?, video_tokens: number? }? -- Detailed prompt token usage
 ]=]
-export type ChatGenerationTokenUsage = {
+export type ChatUsage = {
 	completion_tokens: number,
 	prompt_tokens: number,
 	total_tokens: number,
@@ -516,116 +849,137 @@ export type ChatGenerationTokenUsage = {
 }
 
 --[=[
-    @interface ChatMessageContentItemAudio
+    @interface ChatWebSearchServerTool
     @within OpenRouterTypes
-    Audio input content part. Supported audio formats vary by provider.
+    OpenRouter built-in server tool: searches the web for current information
     
-    @field type "input_audio"
-    @field input_audio { data: string, format: string }
+    @field type "openrouter:web_search"
+    @field parameters { engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?, max_results: number?, max_total_results: number?, search_context_size: ("low" | "medium" | "high")?, user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?, allowed_domains: {string}?, excluded_domains: {string}? }?
 ]=]
-export type ChatMessageContentItemAudio = { ["type"]: "input_audio", input_audio: { data: string, format: string } }
-
---[=[
-    @interface ChatMessageContentItemCacheControl
-    @within OpenRouterTypes
-    Cache control for the content part
-    
-    @field type "ephemeral"
-    @field ttl ("5m" | "1h")?
-]=]
-export type ChatMessageContentItemCacheControl = { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }
-
---[=[
-    @interface ChatMessageContentItemImage
-    @within OpenRouterTypes
-    Image content part for vision models
-    
-    @field type "image_url"
-    @field image_url { url: string, detail: ("auto" | "low" | "high")? }
-]=]
-export type ChatMessageContentItemImage = {
-	["type"]: "image_url",
-	image_url: { url: string, detail: ("auto" | "low" | "high")? },
+export type ChatWebSearchServerTool = {
+	["type"]: "openrouter:web_search",
+	parameters: {
+		engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+		max_results: number?,
+		max_total_results: number?,
+		search_context_size: ("low" | "medium" | "high")?,
+		user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?,
+		allowed_domains: { string }?,
+		excluded_domains: { string }?,
+	}?,
 }
 
 --[=[
-    @interface ChatMessageContentItemText
+    @interface ChatWebSearchShorthand
     @within OpenRouterTypes
-    Text content part
+    Web search tool using OpenAI Responses API syntax. Automatically converted to openrouter:web_search.
     
-    @field type "text"
-    @field text string
-    @field cache_control ChatMessageContentItemCacheControl?
+    @field type ("web_search" | "web_search_preview" | "web_search_preview_2025_03_11" | "web_search_2025_08_26")
+    @field engine ("auto" | "native" | "exa" | "firecrawl" | "parallel")? -- Which search engine to use. "auto" (default) uses native if the provider supports it, otherwise Exa. "native" forces the provider's built-in search. "exa" forces the Exa search API. "firecrawl" uses Firecrawl (requires BYOK). "parallel" uses the Parallel search API.; (Ex: "auto")
+    @field max_results number? -- Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search.; Range: 1.0-25.0; (Ex: 5)
+    @field max_total_results number? -- Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops.; Min: 1.0; (Ex: 20)
+    @field search_context_size ("low" | "medium" | "high")? -- How much context to retrieve per result. Defaults to medium (15000 chars). Only applies when using the Exa engine; ignored with native provider search.
+    @field user_location { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }? -- Approximate user location for location-biased results.
+    @field allowed_domains {string}? -- Limit search results to these domains. Applies to Exa and Parallel engines. Not supported with Firecrawl or native provider search.
+    @field excluded_domains {string}? -- Exclude search results from these domains. Applies to Exa and Parallel engines. Not supported with Firecrawl or native provider search.
+    @field parameters { engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?, max_results: number?, max_total_results: number?, search_context_size: ("low" | "medium" | "high")?, user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?, allowed_domains: {string}?, excluded_domains: {string}? }?
 ]=]
-export type ChatMessageContentItemText = {
-	["type"]: "text",
-	text: string,
-	cache_control: ChatMessageContentItemCacheControl?,
+export type ChatWebSearchShorthand = {
+	["type"]: "web_search" | "web_search_preview" | "web_search_preview_2025_03_11" | "web_search_2025_08_26",
+	engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+	max_results: number?,
+	max_total_results: number?,
+	search_context_size: ("low" | "medium" | "high")?,
+	user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?,
+	allowed_domains: { string }?,
+	excluded_domains: { string }?,
+	parameters: {
+		engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+		max_results: number?,
+		max_total_results: number?,
+		search_context_size: ("low" | "medium" | "high")?,
+		user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?,
+		allowed_domains: { string }?,
+		excluded_domains: { string }?,
+	}?,
 }
 
 --[=[
-    @interface ChatMessageTokenLogprob
+    @interface CodeInterpreterServerTool
     @within OpenRouterTypes
-    Token log probability information
+    Code interpreter tool configuration
     
-    @field token string -- The token
-    @field logprob number -- Log probability of the token
-    @field bytes {number}? -- UTF-8 bytes of the token
-    @field top_logprobs {{ token: string, logprob: number, bytes: {number}? }} -- Top alternative tokens with probabilities
+    @field type "code_interpreter"
+    @field container (string | { ["type"]: "auto", file_ids: {string}?, memory_limit: ("1g" | "4g" | "16g" | "64g")? })
 ]=]
-export type ChatMessageTokenLogprob = {
-	token: string,
-	logprob: number,
-	bytes: { number }?,
-	top_logprobs: { { token: string, logprob: number, bytes: { number }? } },
+export type CodeInterpreterServerTool = {
+	["type"]: "code_interpreter",
+	container: string | { ["type"]: "auto", file_ids: { string }?, memory_limit: ("1g" | "4g" | "16g" | "64g")? },
 }
 
 --[=[
-    @interface ChatMessageTokenLogprobs
+    @interface CodexLocalShellTool
     @within OpenRouterTypes
-    Log probabilities for the completion
+    Local shell tool configuration
     
-    @field content {ChatMessageTokenLogprob}? -- Log probabilities for content tokens
-    @field refusal {ChatMessageTokenLogprob}? -- Log probabilities for refusal tokens
+    @field type "local_shell"
 ]=]
-export type ChatMessageTokenLogprobs = { content: { ChatMessageTokenLogprob }?, refusal: { ChatMessageTokenLogprob }? }?
+export type CodexLocalShellTool = { ["type"]: "local_shell" }
 
 --[=[
-    @interface ChatMessageToolCall
+    @interface CompoundFilter
     @within OpenRouterTypes
-    Tool call made by the assistant
+    A compound filter that combines multiple comparison or compound filters
     
-    @field id string -- Tool call identifier
-    @field type "function"
-    @field function { name: string, arguments: string }
+    @field type ("and" | "or")
+    @field filters {{ [string]: any? }}
 ]=]
-export type ChatMessageToolCall = { id: string, ["type"]: "function", ["function"]: { name: string, arguments: string } }
+export type CompoundFilter = { ["type"]: "and" | "or", filters: { { [string]: any? } } }
 
 --[=[
-    @interface ChatStreamOptions
+    @interface ComputerUseServerTool
     @within OpenRouterTypes
-    Streaming configuration options
+    Computer use preview tool configuration
     
-    @field include_usage boolean? -- @deprecated; Deprecated: This field has no effect. Full usage details are always included.; (Ex: true)
+    @field type "computer_use_preview"
+    @field display_height number
+    @field display_width number
+    @field environment ("windows" | "mac" | "linux" | "ubuntu" | "browser")
 ]=]
-export type ChatStreamOptions = { include_usage: boolean? }?
-
---[=[
-    @interface ChatStreamingMessageToolCall
-    @within OpenRouterTypes
-    Tool call delta for streaming responses
-    
-    @field index number -- Tool call index in the array; (Ex: 0)
-    @field id string? -- Tool call identifier; (Ex: "call_abc123")
-    @field type "function"? -- Tool call type; (Ex: "function")
-    @field function { name: string?, arguments: string? }? -- Function call details
-]=]
-export type ChatStreamingMessageToolCall = {
-	index: number,
-	id: string?,
-	["type"]: "function"?,
-	["function"]: { name: string?, arguments: string? }?,
+export type ComputerUseServerTool = {
+	["type"]: "computer_use_preview",
+	display_height: number,
+	display_width: number,
+	environment: "windows" | "mac" | "linux" | "ubuntu" | "browser",
 }
+
+--[=[
+    @interface ConflictResponseErrorData
+    @within OpenRouterTypes
+    Error data for ConflictResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type ConflictResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface ConflictResponse
+    @within OpenRouterTypes
+    Conflict - Resource conflict or concurrent modification
+    
+    @field error ConflictResponseErrorData
+    @field user_id string?
+]=]
+export type ConflictResponse = { error: ConflictResponseErrorData, user_id: string? }
+
+--[=[
+    @type ContextCompressionEngine "middle-out"
+    @within OpenRouterTypes
+    The compression engine to use. Defaults to "middle-out".
+]=]
+export type ContextCompressionEngine = "middle-out"
 
 --[=[
     @interface CreateChargeRequest
@@ -639,6 +993,23 @@ export type ChatStreamingMessageToolCall = {
 export type CreateChargeRequest = { amount: number, sender: string, chain_id: number }
 
 --[=[
+    @interface CustomTool
+    @within OpenRouterTypes
+    Custom tool configuration
+    
+    @field type "custom"
+    @field name string
+    @field description string?
+    @field format ({ ["type"]: "text" } | { ["type"]: "grammar", definition: string, syntax: ("lark" | "regex") })?
+]=]
+export type CustomTool = {
+	["type"]: "custom",
+	name: string,
+	description: string?,
+	format: ({ ["type"]: "text" } | { ["type"]: "grammar", definition: string, syntax: "lark" | "regex" })?,
+}
+
+--[=[
     @type DataCollection ("deny" | "allow")?
     @within OpenRouterTypes
     Data collection setting. If no available model provider meets the requirement, your request will return an error.
@@ -649,13 +1020,25 @@ export type CreateChargeRequest = { amount: number, sender: string, chain_id: nu
 export type DataCollection = ("deny" | "allow")?
 
 --[=[
-    @interface DebugOptions
+    @interface DatetimeServerTool
     @within OpenRouterTypes
-    Debug options for inspecting request transformations (streaming only)
+    OpenRouter built-in server tool: returns the current date and time
     
-    @field echo_upstream_body boolean? -- If true, includes the transformed upstream request body in a debug chunk at the start of the stream. Only works with streaming mode.; (Ex: true)
+    @field type "openrouter:datetime"
+    @field parameters { timezone: string? }?
 ]=]
-export type DebugOptions = { echo_upstream_body: boolean? }
+export type DatetimeServerTool = { ["type"]: "openrouter:datetime", parameters: { timezone: string? }? }
+
+--[=[
+    @type ChatFunctionTool ({ ["type"]: "function", ["function"]: { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? }, cache_control: ChatContentCacheControl? } | DatetimeServerTool | ChatWebSearchServerTool | ChatWebSearchShorthand)
+    @within OpenRouterTypes
+    Tool definition for function calling (regular function or OpenRouter built-in server tool)
+]=]
+export type ChatFunctionTool = {
+	["type"]: "function",
+	["function"]: { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? },
+	cache_control: ChatContentCacheControl?,
+} | DatetimeServerTool | ChatWebSearchServerTool | ChatWebSearchShorthand
 
 --[=[
     @interface DefaultParameters
@@ -664,20 +1047,19 @@ export type DebugOptions = { echo_upstream_body: boolean? }
     
     @field temperature number? -- Range: 0.0-2.0
     @field top_p number? -- Range: 0.0-1.0
+    @field top_k number? -- Min: 0.0
     @field frequency_penalty number? -- Range: -2.0-2.0
+    @field presence_penalty number? -- Range: -2.0-2.0
+    @field repetition_penalty number? -- Range: 0.0-2.0
 ]=]
-export type DefaultParameters = { temperature: number?, top_p: number?, frequency_penalty: number? }?
-
---[=[
-    @interface DeveloperMessage
-    @within OpenRouterTypes
-    Developer message
-    
-    @field role "developer"
-    @field content (string | {ChatMessageContentItemText}) -- Developer message content; (Ex: "This is a message from the developer.")
-    @field name string? -- Optional name for the developer message; (Ex: "Developer")
-]=]
-export type DeveloperMessage = { role: "developer", content: string | { ChatMessageContentItemText }, name: string? }
+export type DefaultParameters = {
+	temperature: number?,
+	top_p: number?,
+	top_k: number?,
+	frequency_penalty: number?,
+	presence_penalty: number?,
+	repetition_penalty: number?,
+}?
 
 --[=[
     @interface EdgeNetworkTimeoutResponseErrorData
@@ -707,6 +1089,13 @@ export type EdgeNetworkTimeoutResponse = { error: EdgeNetworkTimeoutResponseErro
 export type EndpointStatus = number
 
 --[=[
+    @type ErrorEvent BaseErrorEvent
+    @within OpenRouterTypes
+    Event emitted when an error occurs during streaming
+]=]
+export type ErrorEvent = BaseErrorEvent
+
+--[=[
     @interface FileCitation
     @within OpenRouterTypes
     
@@ -726,6 +1115,29 @@ export type FileCitation = { ["type"]: "file_citation", file_id: string, filenam
     @field index number
 ]=]
 export type FilePath = { ["type"]: "file_path", file_id: string, index: number }
+
+--[=[
+    @interface FileSearchServerTool
+    @within OpenRouterTypes
+    File search tool configuration
+    
+    @field type "file_search"
+    @field vector_store_ids {string}
+    @field filters ({ key: string, ["type"]: ("eq" | "ne" | "gt" | "gte" | "lt" | "lte"), value: (string | number | boolean | {(string | number)}) } | CompoundFilter)?
+    @field max_num_results number? -- Range: 1.0-50.0
+    @field ranking_options { ranker: ("auto" | "default-2024-11-15")?, score_threshold: number? }?
+]=]
+export type FileSearchServerTool = {
+	["type"]: "file_search",
+	vector_store_ids: { string },
+	filters: ({
+		key: string,
+		["type"]: "eq" | "ne" | "gt" | "gte" | "lt" | "lte",
+		value: string | number | boolean | { string | number },
+	} | CompoundFilter)?,
+	max_num_results: number?,
+	ranking_options: { ranker: ("auto" | "default-2024-11-15")?, score_threshold: number? }?,
+}
 
 --[=[
     @interface ForbiddenResponseErrorData
@@ -749,16 +1161,224 @@ export type ForbiddenResponseErrorData = { code: number, message: string, metada
 export type ForbiddenResponse = { error: ForbiddenResponseErrorData, user_id: string? }
 
 --[=[
+    @interface FormatJsonObjectConfig
+    @within OpenRouterTypes
+    JSON object response format
+    
+    @field type "json_object"
+]=]
+export type FormatJsonObjectConfig = { ["type"]: "json_object" }
+
+--[=[
+    @interface FormatJsonSchemaConfig
+    @within OpenRouterTypes
+    JSON schema constrained response format
+    
+    @field type "json_schema"
+    @field name string
+    @field description string?
+    @field strict boolean?
+    @field schema { [string]: any? }
+]=]
+export type FormatJsonSchemaConfig = {
+	["type"]: "json_schema",
+	name: string,
+	description: string?,
+	strict: boolean?,
+	schema: { [string]: any? },
+}
+
+--[=[
+    @interface FormatTextConfig
+    @within OpenRouterTypes
+    Plain text response format
+    
+    @field type "text"
+]=]
+export type FormatTextConfig = { ["type"]: "text" }
+
+--[=[
+    @type Formats (FormatTextConfig | FormatJsonObjectConfig | FormatJsonSchemaConfig)
+    @within OpenRouterTypes
+    Text response format configuration
+]=]
+export type Formats = FormatTextConfig | FormatJsonObjectConfig | FormatJsonSchemaConfig
+
+--[=[
+    @type FunctionCallArgsDeltaEvent BaseFunctionCallArgsDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when function call arguments are being streamed
+]=]
+export type FunctionCallArgsDeltaEvent = BaseFunctionCallArgsDeltaEvent
+
+--[=[
+    @type FunctionCallArgsDoneEvent BaseFunctionCallArgsDoneEvent
+    @within OpenRouterTypes
+    Event emitted when function call arguments streaming is complete
+]=]
+export type FunctionCallArgsDoneEvent = BaseFunctionCallArgsDoneEvent
+
+--[=[
+    @interface FunctionTool
+    @within OpenRouterTypes
+    Function tool definition
+    
+    @field type "function"
+    @field name string
+    @field description string?
+    @field strict boolean?
+    @field parameters { [string]: any? }?
+]=]
+export type FunctionTool = {
+	["type"]: "function",
+	name: string,
+	description: string?,
+	strict: boolean?,
+	parameters: { [string]: any? }?,
+}
+
+--[=[
+    @interface ImageGenerationServerTool
+    @within OpenRouterTypes
+    Image generation tool configuration
+    
+    @field type "image_generation"
+    @field background ("transparent" | "opaque" | "auto")?
+    @field input_fidelity ("high" | "low")?
+    @field input_image_mask { image_url: string?, file_id: string? }?
+    @field model ("gpt-image-1" | "gpt-image-1-mini")?
+    @field moderation ("auto" | "low")?
+    @field output_compression number?
+    @field output_format ("png" | "webp" | "jpeg")?
+    @field partial_images number?
+    @field quality ("low" | "medium" | "high" | "auto")?
+    @field size ("1024x1024" | "1024x1536" | "1536x1024" | "auto")?
+]=]
+export type ImageGenerationServerTool = {
+	["type"]: "image_generation",
+	background: ("transparent" | "opaque" | "auto")?,
+	input_fidelity: ("high" | "low")?,
+	input_image_mask: { image_url: string?, file_id: string? }?,
+	model: ("gpt-image-1" | "gpt-image-1-mini")?,
+	moderation: ("auto" | "low")?,
+	output_compression: number?,
+	output_format: ("png" | "webp" | "jpeg")?,
+	partial_images: number?,
+	quality: ("low" | "medium" | "high" | "auto")?,
+	size: ("1024x1024" | "1024x1536" | "1536x1024" | "auto")?,
+}
+
+--[=[
     @type ImageGenerationStatus ("in_progress" | "completed" | "generating" | "failed")
     @within OpenRouterTypes
 ]=]
 export type ImageGenerationStatus = "in_progress" | "completed" | "generating" | "failed"
 
 --[=[
+    @interface IncompleteDetails
+    @within OpenRouterTypes
+    
+    @field reason ("max_output_tokens" | "content_filter")?
+]=]
+export type IncompleteDetails = { reason: ("max_output_tokens" | "content_filter")? }?
+
+--[=[
+    @interface InputAudio
+    @within OpenRouterTypes
+    Audio input content item
+    
+    @field type "input_audio"
+    @field input_audio { data: string, format: ("mp3" | "wav") }
+]=]
+export type InputAudio = { ["type"]: "input_audio", input_audio: { data: string, format: "mp3" | "wav" } }
+
+--[=[
+    @interface InputFile
+    @within OpenRouterTypes
+    File input content item
+    
+    @field type "input_file"
+    @field file_id string?
+    @field file_data string?
+    @field filename string?
+    @field file_url string?
+]=]
+export type InputFile = {
+	["type"]: "input_file",
+	file_id: string?,
+	file_data: string?,
+	filename: string?,
+	file_url: string?,
+}
+
+--[=[
+    @interface InputImage
+    @within OpenRouterTypes
+    Image input content item
+    
+    @field type "input_image"
+    @field detail ("auto" | "high" | "low")
+    @field image_url string?
+]=]
+export type InputImage = { ["type"]: "input_image", detail: "auto" | "high" | "low", image_url: string? }
+
+--[=[
     @type InputModality ("text" | "image" | "file" | "audio" | "video")
     @within OpenRouterTypes
 ]=]
 export type InputModality = "text" | "image" | "file" | "audio" | "video"
+
+--[=[
+    @interface InputText
+    @within OpenRouterTypes
+    Text input content item
+    
+    @field type "input_text"
+    @field text string
+]=]
+export type InputText = { ["type"]: "input_text", text: string }
+
+--[=[
+    @interface InputVideo
+    @within OpenRouterTypes
+    Video input content item
+    
+    @field type "input_video"
+    @field video_url string -- A base64 data URL or remote URL that resolves to a video file
+]=]
+export type InputVideo = { ["type"]: "input_video", video_url: string }
+
+--[=[
+    @interface EasyInputMessage
+    @within OpenRouterTypes
+    
+    @field type "message"?
+    @field role ("user" | "system" | "assistant" | "developer")
+    @field content ({(InputText | InputImage | InputFile | InputAudio | InputVideo)} | string)?
+    @field phase ("commentary" | "final_answer")? -- The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages.; (Ex: "final_answer")
+]=]
+export type EasyInputMessage = {
+	["type"]: "message"?,
+	role: "user" | "system" | "assistant" | "developer",
+	content: ({ InputText | InputImage | InputFile | InputAudio | InputVideo } | string)?,
+	phase: ("commentary" | "final_answer")?,
+}
+
+--[=[
+    @interface InputMessageItem
+    @within OpenRouterTypes
+    
+    @field id string?
+    @field type "message"?
+    @field role ("user" | "system" | "developer")
+    @field content {(InputText | InputImage | InputFile | InputAudio | InputVideo)}?
+]=]
+export type InputMessageItem = {
+	id: string?,
+	["type"]: "message"?,
+	role: "user" | "system" | "developer",
+	content: { InputText | InputImage | InputFile | InputAudio | InputVideo }?,
+}
 
 --[=[
     @type InstructType ("none" | "airoboros" | "alpaca" | "alpaca-modif" | "chatml" | "claude" | "code-llama" | "gemma" | "llama2" | "llama3" | "mistral" | "nemotron" | "neural" | "openchat" | "phi3" | "rwkv" | "vicuna" | "zephyr" | "deepseek-r1" | "deepseek-v3.1" | "qwq" | "qwen3")?
@@ -812,612 +1432,93 @@ export type InternalServerResponseErrorData = { code: number, message: string, m
 export type InternalServerResponse = { error: InternalServerResponseErrorData, user_id: string? }
 
 --[=[
-    @interface JSONSchemaConfig
+    @interface Legacy_ChatContentVideo
     @within OpenRouterTypes
-    JSON Schema configuration object
+    Video input content part (legacy format - deprecated)
     
-    @field name string -- Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars); (Ex: "math_response")
-    @field description string? -- Schema description for the model; (Ex: "A mathematical response")
-    @field schema { [string]: any? }? -- JSON Schema object; (Ex: {"type":"object","properties":{"answer":{"type":"number"}},"required":["answer"]})
-    @field strict boolean? -- Enable strict schema adherence; (Ex: false)
+    @field type "input_video"
+    @field video_url ChatContentVideoInput
 ]=]
-export type JSONSchemaConfig = { name: string, description: string?, schema: { [string]: any? }?, strict: boolean? }
+export type Legacy_ChatContentVideo = { ["type"]: "input_video", video_url: ChatContentVideoInput }
 
 --[=[
-    @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
+    @type ChatContentItems (ChatContentText | ChatContentImage | ChatContentAudio | (Legacy_ChatContentVideo | ChatContentVideo) | ChatContentFile)
     @within OpenRouterTypes
-    Tokenizer type used by the model
+    Content part for chat completion messages
 ]=]
-export type ModelGroup = (
-	"Router"
-	| "Media"
-	| "Other"
-	| "GPT"
-	| "Claude"
-	| "Gemini"
-	| "Grok"
-	| "Cohere"
-	| "Nova"
-	| "Qwen"
-	| "Yi"
-	| "DeepSeek"
-	| "Mistral"
-	| "Llama2"
-	| "Llama3"
-	| "Llama4"
-	| "PaLM"
-	| "RWKV"
-	| "Qwen3"
+export type ChatContentItems = (
+	ChatContentText | ChatContentImage | ChatContentAudio | Legacy_ChatContentVideo | ChatContentVideo | ChatContentFile
 )
 
 --[=[
-    @type ModelName string
+    @interface ChatToolMessage
     @within OpenRouterTypes
-    Model to use for completion
-]=]
-export type ModelName = string
-
---[=[
-    @type ModelNames {ModelName}
-    @within OpenRouterTypes
-    Models to use for completion
-]=]
-export type ModelNames = { ModelName }
-
---[=[
-    @interface ModelsCountResponse
-    @within OpenRouterTypes
-    Model count data
+    Tool response message
     
-    @field data { count: number } -- Model count data; (Ex: {"count":150})
+    @field role "tool"
+    @field content (string | {ChatContentItems}) -- Tool response content; (Ex: "The weather in San Francisco is 72°F and sunny.")
+    @field tool_call_id string -- ID of the assistant message tool call this message responds to; (Ex: "call_abc123")
 ]=]
-export type ModelsCountResponse = { data: { count: number } }
+export type ChatToolMessage = { role: "tool", content: string | { ChatContentItems }, tool_call_id: string }
 
 --[=[
-    @interface NamedToolChoice
+    @interface ChatUserMessage
     @within OpenRouterTypes
-    Named tool choice for specific function
+    User message
     
-    @field type "function"
-    @field function { name: string }
+    @field role "user"
+    @field content (string | {ChatContentItems}) -- User message content; (Ex: "What is the capital of France?")
+    @field name string? -- Optional name for the user; (Ex: "User")
 ]=]
-export type NamedToolChoice = { ["type"]: "function", ["function"]: { name: string } }
+export type ChatUserMessage = { role: "user", content: string | { ChatContentItems }, name: string? }
 
 --[=[
-    @interface NotFoundResponseErrorData
+    @interface McpServerTool
     @within OpenRouterTypes
-    Error data for NotFoundResponse
+    MCP (Model Context Protocol) tool configuration
     
-    @field code number
-    @field message string
-    @field metadata { [string]: any? }?
+    @field type "mcp"
+    @field server_label string
+    @field allowed_tools ({string} | { tool_names: {string}?, read_only: boolean? })?
+    @field authorization string?
+    @field connector_id ("connector_dropbox" | "connector_gmail" | "connector_googlecalendar" | "connector_googledrive" | "connector_microsoftteams" | "connector_outlookcalendar" | "connector_outlookemail" | "connector_sharepoint")?
+    @field headers { [string]: string }?
+    @field require_approval ({ never: { tool_names: {string}? }?, always: { tool_names: {string}? }? } | "always" | "never")?
+    @field server_description string?
+    @field server_url string?
 ]=]
-export type NotFoundResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
-
---[=[
-    @interface NotFoundResponse
-    @within OpenRouterTypes
-    Not Found - Resource does not exist
-    
-    @field error NotFoundResponseErrorData
-    @field user_id string?
-]=]
-export type NotFoundResponse = { error: NotFoundResponseErrorData, user_id: string? }
-
---[=[
-    @interface OpenAIResponsesErrorEvent
-    @within OpenRouterTypes
-    Event emitted when an error occurs during streaming
-    
-    @field type "error"
-    @field code string?
-    @field message string
-    @field param string?
-    @field sequence_number number
-]=]
-export type OpenAIResponsesErrorEvent = {
-	["type"]: "error",
-	code: string?,
-	message: string,
-	param: string?,
-	sequence_number: number,
+export type McpServerTool = {
+	["type"]: "mcp",
+	server_label: string,
+	allowed_tools: ({ string } | { tool_names: { string }?, read_only: boolean? })?,
+	authorization: string?,
+	connector_id: (
+		"connector_dropbox"
+		| "connector_gmail"
+		| "connector_googlecalendar"
+		| "connector_googledrive"
+		| "connector_microsoftteams"
+		| "connector_outlookcalendar"
+		| "connector_outlookemail"
+		| "connector_sharepoint"
+	)?,
+	headers: { [string]: string }?,
+	require_approval: (
+		{ never: { tool_names: { string }? }?, always: { tool_names: { string }? }? } | "always" | "never"
+	)?,
+	server_description: string?,
+	server_url: string?,
 }
 
 --[=[
-    @interface OpenAIResponsesImageGenCallCompleted
-    @within OpenRouterTypes
-    
-    @field type "response.image_generation_call.completed"
-    @field item_id string
-    @field output_index number
-    @field sequence_number number
-]=]
-export type OpenAIResponsesImageGenCallCompleted = {
-	["type"]: "response.image_generation_call.completed",
-	item_id: string,
-	output_index: number,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesImageGenCallGenerating
-    @within OpenRouterTypes
-    
-    @field type "response.image_generation_call.generating"
-    @field item_id string
-    @field output_index number
-    @field sequence_number number
-]=]
-export type OpenAIResponsesImageGenCallGenerating = {
-	["type"]: "response.image_generation_call.generating",
-	item_id: string,
-	output_index: number,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesImageGenCallInProgress
-    @within OpenRouterTypes
-    
-    @field type "response.image_generation_call.in_progress"
-    @field item_id string
-    @field output_index number
-    @field sequence_number number
-]=]
-export type OpenAIResponsesImageGenCallInProgress = {
-	["type"]: "response.image_generation_call.in_progress",
-	item_id: string,
-	output_index: number,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesImageGenCallPartialImage
-    @within OpenRouterTypes
-    
-    @field type "response.image_generation_call.partial_image"
-    @field item_id string
-    @field output_index number
-    @field sequence_number number
-    @field partial_image_b64 string
-    @field partial_image_index number
-]=]
-export type OpenAIResponsesImageGenCallPartialImage = {
-	["type"]: "response.image_generation_call.partial_image",
-	item_id: string,
-	output_index: number,
-	sequence_number: number,
-	partial_image_b64: string,
-	partial_image_index: number,
-}
-
---[=[
-    @type OpenAIResponsesIncludable ("file_search_call.results" | "message.input_image.image_url" | "computer_call_output.output.image_url" | "reasoning.encrypted_content" | "code_interpreter_call.outputs")
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesIncludable = (
-	"file_search_call.results"
-	| "message.input_image.image_url"
-	| "computer_call_output.output.image_url"
-	| "reasoning.encrypted_content"
-	| "code_interpreter_call.outputs"
-)
-
---[=[
-    @interface OpenAIResponsesIncompleteDetails
-    @within OpenRouterTypes
-    
-    @field reason ("max_output_tokens" | "content_filter")?
-]=]
-export type OpenAIResponsesIncompleteDetails = { reason: ("max_output_tokens" | "content_filter")? }?
-
---[=[
-    @interface OpenAIResponsesReasoningDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning text delta is streamed
-    
-    @field type "response.reasoning_text.delta"
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field delta string
-    @field sequence_number number
-]=]
-export type OpenAIResponsesReasoningDeltaEvent = {
-	["type"]: "response.reasoning_text.delta",
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	delta: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesReasoningDoneEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning text streaming is complete
-    
-    @field type "response.reasoning_text.done"
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field text string
-    @field sequence_number number
-]=]
-export type OpenAIResponsesReasoningDoneEvent = {
-	["type"]: "response.reasoning_text.done",
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	text: string,
-	sequence_number: number,
-}
-
---[=[
-    @type OpenAIResponsesReasoningEffort ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesReasoningEffort = ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
-
---[=[
-    @interface OpenAIResponsesReasoningSummaryTextDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning summary text delta is streamed
-    
-    @field type "response.reasoning_summary_text.delta"
-    @field item_id string
-    @field output_index number
-    @field summary_index number
-    @field delta string
-    @field sequence_number number
-]=]
-export type OpenAIResponsesReasoningSummaryTextDeltaEvent = {
-	["type"]: "response.reasoning_summary_text.delta",
-	item_id: string,
-	output_index: number,
-	summary_index: number,
-	delta: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesReasoningSummaryTextDoneEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning summary text streaming is complete
-    
-    @field type "response.reasoning_summary_text.done"
-    @field item_id string
-    @field output_index number
-    @field summary_index number
-    @field text string
-    @field sequence_number number
-]=]
-export type OpenAIResponsesReasoningSummaryTextDoneEvent = {
-	["type"]: "response.reasoning_summary_text.done",
-	item_id: string,
-	output_index: number,
-	summary_index: number,
-	text: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenAIResponsesRefusalContent
-    @within OpenRouterTypes
-    
-    @field type "refusal"
-    @field refusal string
-]=]
-export type OpenAIResponsesRefusalContent = { ["type"]: "refusal", refusal: string }
-
---[=[
-    @type OpenAIResponsesResponseStatus ("completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued")
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesResponseStatus = (
-	"completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued"
-)
-
---[=[
-    @type OpenAIResponsesServiceTier ("auto" | "default" | "flex" | "priority" | "scale")?
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesServiceTier = ("auto" | "default" | "flex" | "priority" | "scale")?
-
---[=[
-    @type OpenAIResponsesToolChoice ("auto" | "none" | "required" | { ["type"]: "function", name: string } | { ["type"]: ("web_search_preview_2025_03_11" | "web_search_preview") })
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesToolChoice = "auto" | "none" | "required" | { ["type"]: "function", name: string } | {
-	["type"]: "web_search_preview_2025_03_11" | "web_search_preview",
-}
-
---[=[
-    @type OpenAIResponsesTruncation ("auto" | "disabled")?
-    @within OpenRouterTypes
-]=]
-export type OpenAIResponsesTruncation = ("auto" | "disabled")?
-
---[=[
-    @interface OpenAIResponsesUsage
-    @within OpenRouterTypes
-    
-    @field input_tokens number
-    @field input_tokens_details { cached_tokens: number }
-    @field output_tokens number
-    @field output_tokens_details { reasoning_tokens: number }
-    @field total_tokens number
-]=]
-export type OpenAIResponsesUsage = {
-	input_tokens: number,
-	input_tokens_details: { cached_tokens: number },
-	output_tokens: number,
-	output_tokens_details: { reasoning_tokens: number },
-	total_tokens: number,
-}
-
---[=[
-    @type OpenResponsesErrorEvent OpenAIResponsesErrorEvent
-    @within OpenRouterTypes
-    Event emitted when an error occurs during streaming
-]=]
-export type OpenResponsesErrorEvent = OpenAIResponsesErrorEvent
-
---[=[
-    @interface OpenResponsesFunctionCallArgumentsDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when function call arguments are being streamed
-    
-    @field type "response.function_call_arguments.delta"
-    @field item_id string
-    @field output_index number
-    @field delta string
-    @field sequence_number number
-]=]
-export type OpenResponsesFunctionCallArgumentsDeltaEvent = {
-	["type"]: "response.function_call_arguments.delta",
-	item_id: string,
-	output_index: number,
-	delta: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenResponsesFunctionCallArgumentsDoneEvent
-    @within OpenRouterTypes
-    Event emitted when function call arguments streaming is complete
-    
-    @field type "response.function_call_arguments.done"
-    @field item_id string
-    @field output_index number
-    @field name string
-    @field arguments string
-    @field sequence_number number
-]=]
-export type OpenResponsesFunctionCallArgumentsDoneEvent = {
-	["type"]: "response.function_call_arguments.done",
-	item_id: string,
-	output_index: number,
-	name: string,
-	arguments: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenResponsesFunctionTool
-    @within OpenRouterTypes
-    Function tool definition
-    
-    @field type "function"
-    @field name string
-    @field description string?
-    @field strict boolean?
-    @field parameters { [string]: any? }?
-]=]
-export type OpenResponsesFunctionTool = {
-	["type"]: "function",
-	name: string,
-	description: string?,
-	strict: boolean?,
-	parameters: { [string]: any? }?,
-}
-
---[=[
-    @type OpenResponsesImageGenCallCompleted OpenAIResponsesImageGenCallCompleted
-    @within OpenRouterTypes
-    Image generation call completed
-]=]
-export type OpenResponsesImageGenCallCompleted = OpenAIResponsesImageGenCallCompleted
-
---[=[
-    @type OpenResponsesImageGenCallGenerating OpenAIResponsesImageGenCallGenerating
-    @within OpenRouterTypes
-    Image generation call is generating
-]=]
-export type OpenResponsesImageGenCallGenerating = OpenAIResponsesImageGenCallGenerating
-
---[=[
-    @type OpenResponsesImageGenCallInProgress OpenAIResponsesImageGenCallInProgress
-    @within OpenRouterTypes
-    Image generation call in progress
-]=]
-export type OpenResponsesImageGenCallInProgress = OpenAIResponsesImageGenCallInProgress
-
---[=[
-    @type OpenResponsesImageGenCallPartialImage OpenAIResponsesImageGenCallPartialImage
-    @within OpenRouterTypes
-    Image generation call with partial image
-]=]
-export type OpenResponsesImageGenCallPartialImage = OpenAIResponsesImageGenCallPartialImage
-
---[=[
-    @type OpenResponsesReasoningDeltaEvent OpenAIResponsesReasoningDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning text delta is streamed
-]=]
-export type OpenResponsesReasoningDeltaEvent = OpenAIResponsesReasoningDeltaEvent
-
---[=[
-    @type OpenResponsesReasoningDoneEvent OpenAIResponsesReasoningDoneEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning text streaming is complete
-]=]
-export type OpenResponsesReasoningDoneEvent = OpenAIResponsesReasoningDoneEvent
-
---[=[
-    @type OpenResponsesReasoningSummaryTextDeltaEvent OpenAIResponsesReasoningSummaryTextDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning summary text delta is streamed
-]=]
-export type OpenResponsesReasoningSummaryTextDeltaEvent = OpenAIResponsesReasoningSummaryTextDeltaEvent
-
---[=[
-    @type OpenResponsesReasoningSummaryTextDoneEvent OpenAIResponsesReasoningSummaryTextDoneEvent
-    @within OpenRouterTypes
-    Event emitted when reasoning summary text streaming is complete
-]=]
-export type OpenResponsesReasoningSummaryTextDoneEvent = OpenAIResponsesReasoningSummaryTextDoneEvent
-
---[=[
-    @interface OpenResponsesRefusalDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when a refusal delta is streamed
-    
-    @field type "response.refusal.delta"
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field delta string
-    @field sequence_number number
-]=]
-export type OpenResponsesRefusalDeltaEvent = {
-	["type"]: "response.refusal.delta",
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	delta: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenResponsesRefusalDoneEvent
-    @within OpenRouterTypes
-    Event emitted when refusal streaming is complete
-    
-    @field type "response.refusal.done"
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field refusal string
-    @field sequence_number number
-]=]
-export type OpenResponsesRefusalDoneEvent = {
-	["type"]: "response.refusal.done",
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	refusal: string,
-	sequence_number: number,
-}
-
---[=[
-    @type OpenResponsesRequestMetadata { [string]: string }?
-    @within OpenRouterTypes
-    Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-]=]
-export type OpenResponsesRequestMetadata = { [string]: string }?
-
---[=[
-    @interface OpenResponsesTopLogprobs
-    @within OpenRouterTypes
-    Alternative token with its log probability
-    
-    @field token string?
-    @field logprob number?
-]=]
-export type OpenResponsesTopLogprobs = { token: string?, logprob: number? }
-
---[=[
-    @interface OpenResponsesLogProbs
-    @within OpenRouterTypes
-    Log probability information for a token
-    
-    @field logprob number
-    @field token string
-    @field top_logprobs {OpenResponsesTopLogprobs}?
-]=]
-export type OpenResponsesLogProbs = { logprob: number, token: string, top_logprobs: { OpenResponsesTopLogprobs }? }
-
---[=[
-    @interface OpenResponsesTextDeltaEvent
-    @within OpenRouterTypes
-    Event emitted when a text delta is streamed
-    
-    @field type "response.output_text.delta"
-    @field logprobs {OpenResponsesLogProbs}
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field delta string
-    @field sequence_number number
-]=]
-export type OpenResponsesTextDeltaEvent = {
-	["type"]: "response.output_text.delta",
-	logprobs: { OpenResponsesLogProbs },
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	delta: string,
-	sequence_number: number,
-}
-
---[=[
-    @interface OpenResponsesTextDoneEvent
-    @within OpenRouterTypes
-    Event emitted when text streaming is complete
-    
-    @field type "response.output_text.done"
-    @field output_index number
-    @field item_id string
-    @field content_index number
-    @field text string
-    @field sequence_number number
-    @field logprobs {OpenResponsesLogProbs}
-]=]
-export type OpenResponsesTextDoneEvent = {
-	["type"]: "response.output_text.done",
-	output_index: number,
-	item_id: string,
-	content_index: number,
-	text: string,
-	sequence_number: number,
-	logprobs: { OpenResponsesLogProbs },
-}
-
---[=[
-    @type OpenResponsesUsage (OpenAIResponsesUsage & { cost: number?, is_byok: boolean?, cost_details: { upstream_inference_cost: number?, upstream_inference_input_cost: number, upstream_inference_output_cost: number }? })
-    @within OpenRouterTypes
-    Token usage information for the response
-]=]
-export type OpenResponsesUsage = OpenAIResponsesUsage & {
-	cost: number?,
-	is_byok: boolean?,
-	cost_details: {
-		upstream_inference_cost: number?,
-		upstream_inference_input_cost: number,
-		upstream_inference_output_cost: number,
-	}?,
-}
-
---[=[
-    @interface OpenRouterAnthropicMessageParam
+    @interface MessagesMessageParam
     @within OpenRouterTypes
     Anthropic message with OpenRouter extensions
     
     @field role ("user" | "assistant")
-    @field content (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "document", source: ({ ["type"]: "base64", media_type: "application/pdf", data: string } | { ["type"]: "text", media_type: "text/plain", data: string } | { ["type"]: "content", content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}) } | { ["type"]: "url", url: string }), citations: { enabled: boolean? }?, context: string?, title: string?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_use", id: string, name: string, input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_result", tool_use_id: string, content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})?, is_error: boolean?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: "web_search", input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, title: string, url: string, page_age: string? }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "search_result", source: string, title: string, content: {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }}, citations: { enabled: boolean? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})
+    @field content (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "document", source: ({ ["type"]: "base64", media_type: "application/pdf", data: string } | { ["type"]: "text", media_type: "text/plain", data: string } | { ["type"]: "content", content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}) } | { ["type"]: "url", url: string }), citations: { enabled: boolean? }?, context: string?, title: string?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_use", id: string, name: string, input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_result", tool_use_id: string, content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "tool_reference", tool_name: string } | { ["type"]: "search_result", source: string, title: string, content: {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }}, citations: { enabled: boolean? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "document", source: ({ ["type"]: "base64", media_type: "application/pdf", data: string } | { ["type"]: "text", media_type: "text/plain", data: string } | { ["type"]: "content", content: (string | {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "image", source: ({ ["type"]: "base64", media_type: ("image/jpeg" | "image/png" | "image/gif" | "image/webp"), data: string } | { ["type"]: "url", url: string }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}) } | { ["type"]: "url", url: string }), citations: { enabled: boolean? }?, context: string?, title: string?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})?, is_error: boolean?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, name: ("web_search" | "web_fetch" | "code_execution" | "bash_code_execution" | "text_editor_code_execution" | "tool_search_tool_regex" | "tool_search_tool_bm25"), input: any?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_tool_result", tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, title: string, url: string, page_age: string? }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long") }), cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "search_result", source: string, title: string, content: {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }}, citations: { enabled: boolean? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })})
 ]=]
-export type OpenRouterAnthropicMessageParam = {
+export type MessagesMessageParam = {
 	role: "user" | "assistant",
 	content: string | {
 		(
@@ -1594,13 +1695,135 @@ export type OpenRouterAnthropicMessageParam = {
 							}
 						}?,
 						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
-					} | {
+					}
+					| {
 						["type"]: "image",
 						source: {
 							["type"]: "base64",
 							media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp",
 							data: string,
 						} | { ["type"]: "url", url: string },
+						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+					}
+					| { ["type"]: "tool_reference", tool_name: string }
+					| {
+						["type"]: "search_result",
+						source: string,
+						title: string,
+						content: {
+							{
+								["type"]: "text",
+								text: string,
+								citations: {
+									{
+										["type"]: "char_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_char_index: number,
+										end_char_index: number,
+									} | {
+										["type"]: "page_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_page_number: number,
+										end_page_number: number,
+									} | {
+										["type"]: "content_block_location",
+										cited_text: string,
+										document_index: number,
+										document_title: string?,
+										start_block_index: number,
+										end_block_index: number,
+									} | {
+										["type"]: "web_search_result_location",
+										cited_text: string,
+										encrypted_index: string,
+										title: string?,
+										url: string,
+									} | {
+										["type"]: "search_result_location",
+										cited_text: string,
+										search_result_index: number,
+										source: string,
+										title: string?,
+										start_block_index: number,
+										end_block_index: number,
+									}
+								}?,
+								cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+							}
+						},
+						citations: { enabled: boolean? }?,
+						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+					}
+					| {
+						["type"]: "document",
+						source: (
+							{ ["type"]: "base64", media_type: "application/pdf", data: string }
+							| { ["type"]: "text", media_type: "text/plain", data: string }
+							| {
+								["type"]: "content",
+								content: string | {
+									{
+										["type"]: "text",
+										text: string,
+										citations: {
+											{
+												["type"]: "char_location",
+												cited_text: string,
+												document_index: number,
+												document_title: string?,
+												start_char_index: number,
+												end_char_index: number,
+											} | {
+												["type"]: "page_location",
+												cited_text: string,
+												document_index: number,
+												document_title: string?,
+												start_page_number: number,
+												end_page_number: number,
+											} | {
+												["type"]: "content_block_location",
+												cited_text: string,
+												document_index: number,
+												document_title: string?,
+												start_block_index: number,
+												end_block_index: number,
+											} | {
+												["type"]: "web_search_result_location",
+												cited_text: string,
+												encrypted_index: string,
+												title: string?,
+												url: string,
+											} | {
+												["type"]: "search_result_location",
+												cited_text: string,
+												search_result_index: number,
+												source: string,
+												title: string?,
+												start_block_index: number,
+												end_block_index: number,
+											}
+										}?,
+										cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+									} | {
+										["type"]: "image",
+										source: {
+											["type"]: "base64",
+											media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+											data: string,
+										} | { ["type"]: "url", url: string },
+										cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+									}
+								},
+							}
+							| { ["type"]: "url", url: string }
+						),
+						citations: { enabled: boolean? }?,
+						context: string?,
+						title: string?,
 						cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
 					}
 				})?,
@@ -1612,7 +1835,15 @@ export type OpenRouterAnthropicMessageParam = {
 			| {
 				["type"]: "server_tool_use",
 				id: string,
-				name: "web_search",
+				name: (
+					"web_search"
+					| "web_fetch"
+					| "code_execution"
+					| "bash_code_execution"
+					| "text_editor_code_execution"
+					| "tool_search_tool_regex"
+					| "tool_search_tool_bm25"
+				),
 				input: any?,
 				cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
 			}
@@ -1696,6 +1927,1199 @@ export type OpenRouterAnthropicMessageParam = {
 }
 
 --[=[
+    @interface MessagesOutputConfig
+    @within OpenRouterTypes
+    Configuration for controlling output behavior. Supports the effort parameter and structured output format.
+    
+    @field effort ("low" | "medium" | "high" | "max")? -- How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer. Valid values are `low`, `medium`, `high`, or `max`.; (Ex: "medium")
+    @field format { ["type"]: "json_schema", schema: { [string]: any? } }? -- A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
+]=]
+export type MessagesOutputConfig = {
+	effort: ("low" | "medium" | "high" | "max")?,
+	format: { ["type"]: "json_schema", schema: { [string]: any? } }?,
+}
+
+--[=[
+    @type MessagesResult (BaseMessagesResult & { usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number, web_fetch_requests: number }?, service_tier: string?, speed: ("fast" | "standard")?, cost: number?, is_byok: boolean?, cost_details: { upstream_inference_cost: number?, upstream_inference_prompt_cost: number, upstream_inference_completions_cost: number }? }?, provider: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AkashML" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Reka" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")? })
+    @within OpenRouterTypes
+    Non-streaming response from the Anthropic Messages API with OpenRouter extensions
+]=]
+export type MessagesResult = BaseMessagesResult & {
+	usage: {
+		input_tokens: number,
+		output_tokens: number,
+		cache_creation_input_tokens: number?,
+		cache_read_input_tokens: number?,
+		cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+		inference_geo: string?,
+		server_tool_use: { web_search_requests: number, web_fetch_requests: number }?,
+		service_tier: string?,
+		speed: ("fast" | "standard")?,
+		cost: number?,
+		is_byok: boolean?,
+		cost_details: {
+			upstream_inference_cost: number?,
+			upstream_inference_prompt_cost: number,
+			upstream_inference_completions_cost: number,
+		}?,
+	}?,
+	provider: (
+		"AnyScale"
+		| "Atoma"
+		| "Cent-ML"
+		| "CrofAI"
+		| "Enfer"
+		| "GoPomelo"
+		| "HuggingFace"
+		| "Hyperbolic 2"
+		| "InoCloud"
+		| "Kluster"
+		| "Lambda"
+		| "Lepton"
+		| "Lynn 2"
+		| "Lynn"
+		| "Mancer"
+		| "Meta"
+		| "Modal"
+		| "Nineteen"
+		| "OctoAI"
+		| "Recursal"
+		| "Reflection"
+		| "Replicate"
+		| "SambaNova 2"
+		| "SF Compute"
+		| "Targon"
+		| "Together 2"
+		| "Ubicloud"
+		| "01.AI"
+		| "AkashML"
+		| "AI21"
+		| "AionLabs"
+		| "Alibaba"
+		| "Ambient"
+		| "Amazon Bedrock"
+		| "Amazon Nova"
+		| "Anthropic"
+		| "Arcee AI"
+		| "AtlasCloud"
+		| "Avian"
+		| "Azure"
+		| "BaseTen"
+		| "BytePlus"
+		| "Black Forest Labs"
+		| "Cerebras"
+		| "Chutes"
+		| "Cirrascale"
+		| "Clarifai"
+		| "Cloudflare"
+		| "Cohere"
+		| "Crusoe"
+		| "DeepInfra"
+		| "DeepSeek"
+		| "Featherless"
+		| "Fireworks"
+		| "Friendli"
+		| "GMICloud"
+		| "Google"
+		| "Google AI Studio"
+		| "Groq"
+		| "Hyperbolic"
+		| "Inception"
+		| "Inceptron"
+		| "InferenceNet"
+		| "Ionstream"
+		| "Infermatic"
+		| "Io Net"
+		| "Inflection"
+		| "Liquid"
+		| "Mara"
+		| "Mancer 2"
+		| "Minimax"
+		| "ModelRun"
+		| "Mistral"
+		| "Modular"
+		| "Moonshot AI"
+		| "Morph"
+		| "NCompass"
+		| "Nebius"
+		| "NextBit"
+		| "Novita"
+		| "Nvidia"
+		| "OpenAI"
+		| "OpenInference"
+		| "Parasail"
+		| "Perplexity"
+		| "Phala"
+		| "Reka"
+		| "Relace"
+		| "SambaNova"
+		| "Seed"
+		| "SiliconFlow"
+		| "Sourceful"
+		| "StepFun"
+		| "Stealth"
+		| "StreamLake"
+		| "Switchpoint"
+		| "Together"
+		| "Upstage"
+		| "Venice"
+		| "WandB"
+		| "Xiaomi"
+		| "xAI"
+		| "Z.AI"
+		| "FakeProvider"
+	)?,
+}
+
+--[=[
+    @interface MessagesStartEvent
+    @within OpenRouterTypes
+    Event sent at the start of a streaming message
+    
+    @field type "message_start"
+    @field message { id: string, ["type"]: "message", role: "assistant", container: { id: string, expires_at: string }?, content: {({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: ("web_search" | "web_fetch" | "code_execution" | "bash_code_execution" | "text_editor_code_execution" | "tool_search_tool_regex" | "tool_search_tool_bm25"), input: any? } | { ["type"]: "web_search_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long" | "request_too_large") }) } | { ["type"]: "web_fetch_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), content: ({ ["type"]: "web_fetch_tool_result_error", error_code: ("invalid_tool_input" | "url_too_long" | "url_not_allowed" | "url_not_accessible" | "unsupported_content_type" | "too_many_requests" | "max_uses_exceeded" | "unavailable") } | { content: { citations: { enabled: boolean }?, source: ({ data: string, media_type: "application/pdf", ["type"]: "base64" } | { data: string, media_type: "text/plain", ["type"]: "text" }), title: string?, ["type"]: "document" }, retrieved_at: string?, ["type"]: "web_fetch_result", url: string }), tool_use_id: string } | { ["type"]: "code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), ["type"]: "code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "code_execution_result" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, encrypted_stdout: string, return_code: number, stderr: string, ["type"]: "encrypted_code_execution_result" }), tool_use_id: string } | { ["type"]: "bash_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "output_file_too_large"), ["type"]: "bash_code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "bash_code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "bash_code_execution_result" }), tool_use_id: string } | { ["type"]: "text_editor_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "file_not_found"), error_message: string?, ["type"]: "text_editor_code_execution_tool_result_error" } | { content: string, file_type: ("text" | "image" | "pdf"), num_lines: number?, start_line: number?, total_lines: number?, ["type"]: "text_editor_code_execution_view_result" } | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | { lines: {string}?, new_lines: number?, new_start: number?, old_lines: number?, old_start: number?, ["type"]: "text_editor_code_execution_str_replace_result" }), tool_use_id: string } | { ["type"]: "tool_search_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), error_message: string?, ["type"]: "tool_search_tool_result_error" } | { tool_references: {{ tool_name: string, ["type"]: "tool_reference" }}, ["type"]: "tool_search_tool_search_result" }), tool_use_id: string } | { ["type"]: "container_upload", file_id: string })}, model: string, stop_reason: any?, stop_sequence: any?, usage: { input_tokens: number, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?, inference_geo: string?, server_tool_use: { web_search_requests: number, web_fetch_requests: number }?, service_tier: ("standard" | "priority" | "batch")?, speed: ("fast" | "standard")? }, provider: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AkashML" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Reka" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")? }
+]=]
+export type MessagesStartEvent = {
+	["type"]: "message_start",
+	message: {
+		id: string,
+		["type"]: "message",
+		role: "assistant",
+		container: { id: string, expires_at: string }?,
+		content: {
+			(
+				{
+					["type"]: "text",
+					text: string,
+					citations: {
+						{
+							["type"]: "char_location",
+							cited_text: string,
+							document_index: number,
+							document_title: string?,
+							start_char_index: number,
+							end_char_index: number,
+							file_id: string?,
+						} | {
+							["type"]: "page_location",
+							cited_text: string,
+							document_index: number,
+							document_title: string?,
+							start_page_number: number,
+							end_page_number: number,
+							file_id: string?,
+						} | {
+							["type"]: "content_block_location",
+							cited_text: string,
+							document_index: number,
+							document_title: string?,
+							start_block_index: number,
+							end_block_index: number,
+							file_id: string?,
+						} | {
+							["type"]: "web_search_result_location",
+							cited_text: string,
+							encrypted_index: string,
+							title: string?,
+							url: string,
+						} | {
+							["type"]: "search_result_location",
+							cited_text: string,
+							search_result_index: number,
+							source: string,
+							title: string?,
+							start_block_index: number,
+							end_block_index: number,
+						}
+					}?,
+				}
+				| {
+					["type"]: "tool_use",
+					id: string,
+					caller: (
+						{ ["type"]: "direct" }
+						| { ["type"]: "code_execution_20250825", tool_id: string }
+						| { ["type"]: "code_execution_20260120", tool_id: string }
+					),
+					name: string,
+					input: any?,
+				}
+				| { ["type"]: "thinking", thinking: string, signature: string }
+				| { ["type"]: "redacted_thinking", data: string }
+				| {
+					["type"]: "server_tool_use",
+					id: string,
+					caller: (
+						{ ["type"]: "direct" }
+						| { ["type"]: "code_execution_20250825", tool_id: string }
+						| { ["type"]: "code_execution_20260120", tool_id: string }
+					),
+					name: (
+						"web_search"
+						| "web_fetch"
+						| "code_execution"
+						| "bash_code_execution"
+						| "text_editor_code_execution"
+						| "tool_search_tool_regex"
+						| "tool_search_tool_bm25"
+					),
+					input: any?,
+				}
+				| {
+					["type"]: "web_search_tool_result",
+					caller: (
+						{ ["type"]: "direct" }
+						| { ["type"]: "code_execution_20250825", tool_id: string }
+						| { ["type"]: "code_execution_20260120", tool_id: string }
+					),
+					tool_use_id: string,
+					content: {
+						{
+							["type"]: "web_search_result",
+							encrypted_content: string,
+							page_age: string?,
+							title: string,
+							url: string,
+						}
+					} | {
+						["type"]: "web_search_tool_result_error",
+						error_code: (
+							"invalid_tool_input"
+							| "unavailable"
+							| "max_uses_exceeded"
+							| "too_many_requests"
+							| "query_too_long"
+							| "request_too_large"
+						),
+					},
+				}
+				| {
+					["type"]: "web_fetch_tool_result",
+					caller: (
+						{ ["type"]: "direct" }
+						| { ["type"]: "code_execution_20250825", tool_id: string }
+						| { ["type"]: "code_execution_20260120", tool_id: string }
+					),
+					content: {
+						["type"]: "web_fetch_tool_result_error",
+						error_code: (
+							"invalid_tool_input"
+							| "url_too_long"
+							| "url_not_allowed"
+							| "url_not_accessible"
+							| "unsupported_content_type"
+							| "too_many_requests"
+							| "max_uses_exceeded"
+							| "unavailable"
+						),
+					} | {
+						content: {
+							citations: { enabled: boolean }?,
+							source: (
+								{ data: string, media_type: "application/pdf", ["type"]: "base64" }
+								| { data: string, media_type: "text/plain", ["type"]: "text" }
+							),
+							title: string?,
+							["type"]: "document",
+						},
+						retrieved_at: string?,
+						["type"]: "web_fetch_result",
+						url: string,
+					},
+					tool_use_id: string,
+				}
+				| {
+					["type"]: "code_execution_tool_result",
+					content: {
+						error_code: (
+							"invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"
+						),
+						["type"]: "code_execution_tool_result_error",
+					} | {
+						content: { { file_id: string, ["type"]: "code_execution_output" } },
+						return_code: number,
+						stderr: string,
+						stdout: string,
+						["type"]: "code_execution_result",
+					} | {
+						content: { { file_id: string, ["type"]: "code_execution_output" } },
+						encrypted_stdout: string,
+						return_code: number,
+						stderr: string,
+						["type"]: "encrypted_code_execution_result",
+					},
+					tool_use_id: string,
+				}
+				| {
+					["type"]: "bash_code_execution_tool_result",
+					content: {
+						error_code: (
+							"invalid_tool_input"
+							| "unavailable"
+							| "too_many_requests"
+							| "execution_time_exceeded"
+							| "output_file_too_large"
+						),
+						["type"]: "bash_code_execution_tool_result_error",
+					} | {
+						content: { { file_id: string, ["type"]: "bash_code_execution_output" } },
+						return_code: number,
+						stderr: string,
+						stdout: string,
+						["type"]: "bash_code_execution_result",
+					},
+					tool_use_id: string,
+				}
+				| {
+					["type"]: "text_editor_code_execution_tool_result",
+					content: {
+						error_code: (
+							"invalid_tool_input"
+							| "unavailable"
+							| "too_many_requests"
+							| "execution_time_exceeded"
+							| "file_not_found"
+						),
+						error_message: string?,
+						["type"]: "text_editor_code_execution_tool_result_error",
+					} | {
+						content: string,
+						file_type: "text" | "image" | "pdf",
+						num_lines: number?,
+						start_line: number?,
+						total_lines: number?,
+						["type"]: "text_editor_code_execution_view_result",
+					} | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | {
+						lines: { string }?,
+						new_lines: number?,
+						new_start: number?,
+						old_lines: number?,
+						old_start: number?,
+						["type"]: "text_editor_code_execution_str_replace_result",
+					},
+					tool_use_id: string,
+				}
+				| {
+					["type"]: "tool_search_tool_result",
+					content: {
+						error_code: (
+							"invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"
+						),
+						error_message: string?,
+						["type"]: "tool_search_tool_result_error",
+					} | {
+						tool_references: { { tool_name: string, ["type"]: "tool_reference" } },
+						["type"]: "tool_search_tool_search_result",
+					},
+					tool_use_id: string,
+				}
+				| { ["type"]: "container_upload", file_id: string }
+			)
+		},
+		model: string,
+		stop_reason: any?,
+		stop_sequence: any?,
+		usage: {
+			input_tokens: number,
+			output_tokens: number,
+			cache_creation_input_tokens: number?,
+			cache_read_input_tokens: number?,
+			cache_creation: { ephemeral_5m_input_tokens: number, ephemeral_1h_input_tokens: number }?,
+			inference_geo: string?,
+			server_tool_use: { web_search_requests: number, web_fetch_requests: number }?,
+			service_tier: ("standard" | "priority" | "batch")?,
+			speed: ("fast" | "standard")?,
+		},
+		provider: (
+			"AnyScale"
+			| "Atoma"
+			| "Cent-ML"
+			| "CrofAI"
+			| "Enfer"
+			| "GoPomelo"
+			| "HuggingFace"
+			| "Hyperbolic 2"
+			| "InoCloud"
+			| "Kluster"
+			| "Lambda"
+			| "Lepton"
+			| "Lynn 2"
+			| "Lynn"
+			| "Mancer"
+			| "Meta"
+			| "Modal"
+			| "Nineteen"
+			| "OctoAI"
+			| "Recursal"
+			| "Reflection"
+			| "Replicate"
+			| "SambaNova 2"
+			| "SF Compute"
+			| "Targon"
+			| "Together 2"
+			| "Ubicloud"
+			| "01.AI"
+			| "AkashML"
+			| "AI21"
+			| "AionLabs"
+			| "Alibaba"
+			| "Ambient"
+			| "Amazon Bedrock"
+			| "Amazon Nova"
+			| "Anthropic"
+			| "Arcee AI"
+			| "AtlasCloud"
+			| "Avian"
+			| "Azure"
+			| "BaseTen"
+			| "BytePlus"
+			| "Black Forest Labs"
+			| "Cerebras"
+			| "Chutes"
+			| "Cirrascale"
+			| "Clarifai"
+			| "Cloudflare"
+			| "Cohere"
+			| "Crusoe"
+			| "DeepInfra"
+			| "DeepSeek"
+			| "Featherless"
+			| "Fireworks"
+			| "Friendli"
+			| "GMICloud"
+			| "Google"
+			| "Google AI Studio"
+			| "Groq"
+			| "Hyperbolic"
+			| "Inception"
+			| "Inceptron"
+			| "InferenceNet"
+			| "Ionstream"
+			| "Infermatic"
+			| "Io Net"
+			| "Inflection"
+			| "Liquid"
+			| "Mara"
+			| "Mancer 2"
+			| "Minimax"
+			| "ModelRun"
+			| "Mistral"
+			| "Modular"
+			| "Moonshot AI"
+			| "Morph"
+			| "NCompass"
+			| "Nebius"
+			| "NextBit"
+			| "Novita"
+			| "Nvidia"
+			| "OpenAI"
+			| "OpenInference"
+			| "Parasail"
+			| "Perplexity"
+			| "Phala"
+			| "Reka"
+			| "Relace"
+			| "SambaNova"
+			| "Seed"
+			| "SiliconFlow"
+			| "Sourceful"
+			| "StepFun"
+			| "Stealth"
+			| "StreamLake"
+			| "Switchpoint"
+			| "Together"
+			| "Upstage"
+			| "Venice"
+			| "WandB"
+			| "Xiaomi"
+			| "xAI"
+			| "Z.AI"
+			| "FakeProvider"
+		)?,
+	},
+}
+
+--[=[
+    @type MessagesStreamEvents (MessagesStartEvent | { ["type"]: "message_delta", delta: { container: { id: string, expires_at: string }?, stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?, stop_sequence: string? }, usage: { input_tokens: number?, output_tokens: number, cache_creation_input_tokens: number?, cache_read_input_tokens: number?, server_tool_use: { web_search_requests: number, web_fetch_requests: number }? } } | { ["type"]: "message_stop" } | { ["type"]: "content_block_start", index: number, content_block: ({ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}? } | { ["type"]: "tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: string, input: any? } | { ["type"]: "thinking", thinking: string, signature: string } | { ["type"]: "redacted_thinking", data: string } | { ["type"]: "server_tool_use", id: string, caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), name: ("web_search" | "web_fetch" | "code_execution" | "bash_code_execution" | "text_editor_code_execution" | "tool_search_tool_regex" | "tool_search_tool_bm25"), input: any? } | { ["type"]: "web_search_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), tool_use_id: string, content: ({{ ["type"]: "web_search_result", encrypted_content: string, page_age: string?, title: string, url: string }} | { ["type"]: "web_search_tool_result_error", error_code: ("invalid_tool_input" | "unavailable" | "max_uses_exceeded" | "too_many_requests" | "query_too_long" | "request_too_large") }) } | { ["type"]: "web_fetch_tool_result", caller: ({ ["type"]: "direct" } | { ["type"]: "code_execution_20250825", tool_id: string } | { ["type"]: "code_execution_20260120", tool_id: string }), content: ({ ["type"]: "web_fetch_tool_result_error", error_code: ("invalid_tool_input" | "url_too_long" | "url_not_allowed" | "url_not_accessible" | "unsupported_content_type" | "too_many_requests" | "max_uses_exceeded" | "unavailable") } | { content: { citations: { enabled: boolean }?, source: ({ data: string, media_type: "application/pdf", ["type"]: "base64" } | { data: string, media_type: "text/plain", ["type"]: "text" }), title: string?, ["type"]: "document" }, retrieved_at: string?, ["type"]: "web_fetch_result", url: string }), tool_use_id: string } | { ["type"]: "code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), ["type"]: "code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "code_execution_result" } | { content: {{ file_id: string, ["type"]: "code_execution_output" }}, encrypted_stdout: string, return_code: number, stderr: string, ["type"]: "encrypted_code_execution_result" }), tool_use_id: string } | { ["type"]: "bash_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "output_file_too_large"), ["type"]: "bash_code_execution_tool_result_error" } | { content: {{ file_id: string, ["type"]: "bash_code_execution_output" }}, return_code: number, stderr: string, stdout: string, ["type"]: "bash_code_execution_result" }), tool_use_id: string } | { ["type"]: "text_editor_code_execution_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded" | "file_not_found"), error_message: string?, ["type"]: "text_editor_code_execution_tool_result_error" } | { content: string, file_type: ("text" | "image" | "pdf"), num_lines: number?, start_line: number?, total_lines: number?, ["type"]: "text_editor_code_execution_view_result" } | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | { lines: {string}?, new_lines: number?, new_start: number?, old_lines: number?, old_start: number?, ["type"]: "text_editor_code_execution_str_replace_result" }), tool_use_id: string } | { ["type"]: "tool_search_tool_result", content: ({ error_code: ("invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"), error_message: string?, ["type"]: "tool_search_tool_result_error" } | { tool_references: {{ tool_name: string, ["type"]: "tool_reference" }}, ["type"]: "tool_search_tool_search_result" }), tool_use_id: string } | { ["type"]: "container_upload", file_id: string }) } | { ["type"]: "content_block_delta", index: number, delta: ({ ["type"]: "text_delta", text: string } | { ["type"]: "input_json_delta", partial_json: string } | { ["type"]: "thinking_delta", thinking: string } | { ["type"]: "signature_delta", signature: string } | { ["type"]: "citations_delta", citation: ({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number, file_id: string? } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number, file_id: string? } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number, file_id: string? } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number }) }) } | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | { ["type"]: "error", error: { ["type"]: string, message: string } })
+    @within OpenRouterTypes
+    Union of all possible streaming events
+]=]
+export type MessagesStreamEvents = MessagesStartEvent | {
+	["type"]: "message_delta",
+	delta: {
+		container: { id: string, expires_at: string }?,
+		stop_reason: ("end_turn" | "max_tokens" | "stop_sequence" | "tool_use" | "pause_turn" | "refusal")?,
+		stop_sequence: string?,
+	},
+	usage: {
+		input_tokens: number?,
+		output_tokens: number,
+		cache_creation_input_tokens: number?,
+		cache_read_input_tokens: number?,
+		server_tool_use: { web_search_requests: number, web_fetch_requests: number }?,
+	},
+} | { ["type"]: "message_stop" } | {
+	["type"]: "content_block_start",
+	index: number,
+	content_block: (
+		{
+			["type"]: "text",
+			text: string,
+			citations: {
+				{
+					["type"]: "char_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_char_index: number,
+					end_char_index: number,
+					file_id: string?,
+				} | {
+					["type"]: "page_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_page_number: number,
+					end_page_number: number,
+					file_id: string?,
+				} | {
+					["type"]: "content_block_location",
+					cited_text: string,
+					document_index: number,
+					document_title: string?,
+					start_block_index: number,
+					end_block_index: number,
+					file_id: string?,
+				} | {
+					["type"]: "web_search_result_location",
+					cited_text: string,
+					encrypted_index: string,
+					title: string?,
+					url: string,
+				} | {
+					["type"]: "search_result_location",
+					cited_text: string,
+					search_result_index: number,
+					source: string,
+					title: string?,
+					start_block_index: number,
+					end_block_index: number,
+				}
+			}?,
+		}
+		| {
+			["type"]: "tool_use",
+			id: string,
+			caller: (
+				{ ["type"]: "direct" }
+				| { ["type"]: "code_execution_20250825", tool_id: string }
+				| { ["type"]: "code_execution_20260120", tool_id: string }
+			),
+			name: string,
+			input: any?,
+		}
+		| { ["type"]: "thinking", thinking: string, signature: string }
+		| { ["type"]: "redacted_thinking", data: string }
+		| {
+			["type"]: "server_tool_use",
+			id: string,
+			caller: (
+				{ ["type"]: "direct" }
+				| { ["type"]: "code_execution_20250825", tool_id: string }
+				| { ["type"]: "code_execution_20260120", tool_id: string }
+			),
+			name: (
+				"web_search"
+				| "web_fetch"
+				| "code_execution"
+				| "bash_code_execution"
+				| "text_editor_code_execution"
+				| "tool_search_tool_regex"
+				| "tool_search_tool_bm25"
+			),
+			input: any?,
+		}
+		| {
+			["type"]: "web_search_tool_result",
+			caller: (
+				{ ["type"]: "direct" }
+				| { ["type"]: "code_execution_20250825", tool_id: string }
+				| { ["type"]: "code_execution_20260120", tool_id: string }
+			),
+			tool_use_id: string,
+			content: {
+				{
+					["type"]: "web_search_result",
+					encrypted_content: string,
+					page_age: string?,
+					title: string,
+					url: string,
+				}
+			} | {
+				["type"]: "web_search_tool_result_error",
+				error_code: (
+					"invalid_tool_input"
+					| "unavailable"
+					| "max_uses_exceeded"
+					| "too_many_requests"
+					| "query_too_long"
+					| "request_too_large"
+				),
+			},
+		}
+		| {
+			["type"]: "web_fetch_tool_result",
+			caller: (
+				{ ["type"]: "direct" }
+				| { ["type"]: "code_execution_20250825", tool_id: string }
+				| { ["type"]: "code_execution_20260120", tool_id: string }
+			),
+			content: {
+				["type"]: "web_fetch_tool_result_error",
+				error_code: (
+					"invalid_tool_input"
+					| "url_too_long"
+					| "url_not_allowed"
+					| "url_not_accessible"
+					| "unsupported_content_type"
+					| "too_many_requests"
+					| "max_uses_exceeded"
+					| "unavailable"
+				),
+			} | {
+				content: {
+					citations: { enabled: boolean }?,
+					source: (
+						{ data: string, media_type: "application/pdf", ["type"]: "base64" }
+						| { data: string, media_type: "text/plain", ["type"]: "text" }
+					),
+					title: string?,
+					["type"]: "document",
+				},
+				retrieved_at: string?,
+				["type"]: "web_fetch_result",
+				url: string,
+			},
+			tool_use_id: string,
+		}
+		| {
+			["type"]: "code_execution_tool_result",
+			content: {
+				error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded",
+				["type"]: "code_execution_tool_result_error",
+			} | {
+				content: { { file_id: string, ["type"]: "code_execution_output" } },
+				return_code: number,
+				stderr: string,
+				stdout: string,
+				["type"]: "code_execution_result",
+			} | {
+				content: { { file_id: string, ["type"]: "code_execution_output" } },
+				encrypted_stdout: string,
+				return_code: number,
+				stderr: string,
+				["type"]: "encrypted_code_execution_result",
+			},
+			tool_use_id: string,
+		}
+		| {
+			["type"]: "bash_code_execution_tool_result",
+			content: {
+				error_code: (
+					"invalid_tool_input"
+					| "unavailable"
+					| "too_many_requests"
+					| "execution_time_exceeded"
+					| "output_file_too_large"
+				),
+				["type"]: "bash_code_execution_tool_result_error",
+			} | {
+				content: { { file_id: string, ["type"]: "bash_code_execution_output" } },
+				return_code: number,
+				stderr: string,
+				stdout: string,
+				["type"]: "bash_code_execution_result",
+			},
+			tool_use_id: string,
+		}
+		| {
+			["type"]: "text_editor_code_execution_tool_result",
+			content: {
+				error_code: (
+					"invalid_tool_input"
+					| "unavailable"
+					| "too_many_requests"
+					| "execution_time_exceeded"
+					| "file_not_found"
+				),
+				error_message: string?,
+				["type"]: "text_editor_code_execution_tool_result_error",
+			} | {
+				content: string,
+				file_type: "text" | "image" | "pdf",
+				num_lines: number?,
+				start_line: number?,
+				total_lines: number?,
+				["type"]: "text_editor_code_execution_view_result",
+			} | { is_file_update: boolean, ["type"]: "text_editor_code_execution_create_result" } | {
+				lines: { string }?,
+				new_lines: number?,
+				new_start: number?,
+				old_lines: number?,
+				old_start: number?,
+				["type"]: "text_editor_code_execution_str_replace_result",
+			},
+			tool_use_id: string,
+		}
+		| {
+			["type"]: "tool_search_tool_result",
+			content: {
+				error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded",
+				error_message: string?,
+				["type"]: "tool_search_tool_result_error",
+			} | {
+				tool_references: { { tool_name: string, ["type"]: "tool_reference" } },
+				["type"]: "tool_search_tool_search_result",
+			},
+			tool_use_id: string,
+		}
+		| { ["type"]: "container_upload", file_id: string }
+	),
+} | {
+	["type"]: "content_block_delta",
+	index: number,
+	delta: (
+		{ ["type"]: "text_delta", text: string }
+		| { ["type"]: "input_json_delta", partial_json: string }
+		| { ["type"]: "thinking_delta", thinking: string }
+		| { ["type"]: "signature_delta", signature: string }
+		| {
+			["type"]: "citations_delta",
+			citation: {
+				["type"]: "char_location",
+				cited_text: string,
+				document_index: number,
+				document_title: string?,
+				start_char_index: number,
+				end_char_index: number,
+				file_id: string?,
+			} | {
+				["type"]: "page_location",
+				cited_text: string,
+				document_index: number,
+				document_title: string?,
+				start_page_number: number,
+				end_page_number: number,
+				file_id: string?,
+			} | {
+				["type"]: "content_block_location",
+				cited_text: string,
+				document_index: number,
+				document_title: string?,
+				start_block_index: number,
+				end_block_index: number,
+				file_id: string?,
+			} | {
+				["type"]: "web_search_result_location",
+				cited_text: string,
+				encrypted_index: string,
+				title: string?,
+				url: string,
+			} | {
+				["type"]: "search_result_location",
+				cited_text: string,
+				search_result_index: number,
+				source: string,
+				title: string?,
+				start_block_index: number,
+				end_block_index: number,
+			},
+		}
+	),
+} | { ["type"]: "content_block_stop", index: number } | { ["type"]: "ping" } | {
+	["type"]: "error",
+	error: { ["type"]: string, message: string },
+}
+
+--[=[
+    @interface MessagesWebSearchServerTool
+    @within OpenRouterTypes
+    OpenRouter built-in server tool: searches the web for current information
+    
+    @field type "openrouter:web_search"
+    @field parameters { engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?, max_results: number?, max_total_results: number?, search_context_size: ("low" | "medium" | "high")?, user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?, allowed_domains: {string}?, excluded_domains: {string}? }?
+]=]
+export type MessagesWebSearchServerTool = {
+	["type"]: "openrouter:web_search",
+	parameters: {
+		engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+		max_results: number?,
+		max_total_results: number?,
+		search_context_size: ("low" | "medium" | "high")?,
+		user_location: { ["type"]: "approximate"?, city: string?, region: string?, country: string?, timezone: string? }?,
+		allowed_domains: { string }?,
+		excluded_domains: { string }?,
+	}?,
+}
+
+--[=[
+    @type ModelGroup ("Router" | "Media" | "Other" | "GPT" | "Claude" | "Gemini" | "Grok" | "Cohere" | "Nova" | "Qwen" | "Yi" | "DeepSeek" | "Mistral" | "Llama2" | "Llama3" | "Llama4" | "PaLM" | "RWKV" | "Qwen3")
+    @within OpenRouterTypes
+    Tokenizer type used by the model
+]=]
+export type ModelGroup = (
+	"Router"
+	| "Media"
+	| "Other"
+	| "GPT"
+	| "Claude"
+	| "Gemini"
+	| "Grok"
+	| "Cohere"
+	| "Nova"
+	| "Qwen"
+	| "Yi"
+	| "DeepSeek"
+	| "Mistral"
+	| "Llama2"
+	| "Llama3"
+	| "Llama4"
+	| "PaLM"
+	| "RWKV"
+	| "Qwen3"
+)
+
+--[=[
+    @type ModelName string
+    @within OpenRouterTypes
+    Model to use for completion
+]=]
+export type ModelName = string
+
+--[=[
+    @type ChatModelNames {ModelName}
+    @within OpenRouterTypes
+    Models to use for completion
+]=]
+export type ChatModelNames = { ModelName }
+
+--[=[
+    @interface ModelsCountResponse
+    @within OpenRouterTypes
+    Model count data
+    
+    @field data { count: number } -- Model count data; (Ex: {"count":150})
+]=]
+export type ModelsCountResponse = { data: { count: number } }
+
+--[=[
+    @interface NotFoundResponseErrorData
+    @within OpenRouterTypes
+    Error data for NotFoundResponse
+    
+    @field code number
+    @field message string
+    @field metadata { [string]: any? }?
+]=]
+export type NotFoundResponseErrorData = { code: number, message: string, metadata: { [string]: any? }? }
+
+--[=[
+    @interface NotFoundResponse
+    @within OpenRouterTypes
+    Not Found - Resource does not exist
+    
+    @field error NotFoundResponseErrorData
+    @field user_id string?
+]=]
+export type NotFoundResponse = { error: NotFoundResponseErrorData, user_id: string? }
+
+--[=[
+    @interface OpenAIResponsesImageGenCallCompleted
+    @within OpenRouterTypes
+    
+    @field type "response.image_generation_call.completed"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallCompleted = {
+	["type"]: "response.image_generation_call.completed",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @type ImageGenCallCompletedEvent OpenAIResponsesImageGenCallCompleted
+    @within OpenRouterTypes
+    Image generation call completed
+]=]
+export type ImageGenCallCompletedEvent = OpenAIResponsesImageGenCallCompleted
+
+--[=[
+    @interface OpenAIResponsesImageGenCallGenerating
+    @within OpenRouterTypes
+    
+    @field type "response.image_generation_call.generating"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallGenerating = {
+	["type"]: "response.image_generation_call.generating",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @type ImageGenCallGeneratingEvent OpenAIResponsesImageGenCallGenerating
+    @within OpenRouterTypes
+    Image generation call is generating
+]=]
+export type ImageGenCallGeneratingEvent = OpenAIResponsesImageGenCallGenerating
+
+--[=[
+    @interface OpenAIResponsesImageGenCallInProgress
+    @within OpenRouterTypes
+    
+    @field type "response.image_generation_call.in_progress"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesImageGenCallInProgress = {
+	["type"]: "response.image_generation_call.in_progress",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @type ImageGenCallInProgressEvent OpenAIResponsesImageGenCallInProgress
+    @within OpenRouterTypes
+    Image generation call in progress
+]=]
+export type ImageGenCallInProgressEvent = OpenAIResponsesImageGenCallInProgress
+
+--[=[
+    @interface OpenAIResponsesImageGenCallPartialImage
+    @within OpenRouterTypes
+    
+    @field type "response.image_generation_call.partial_image"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+    @field partial_image_b64 string
+    @field partial_image_index number
+]=]
+export type OpenAIResponsesImageGenCallPartialImage = {
+	["type"]: "response.image_generation_call.partial_image",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+	partial_image_b64: string,
+	partial_image_index: number,
+}
+
+--[=[
+    @type ImageGenCallPartialImageEvent OpenAIResponsesImageGenCallPartialImage
+    @within OpenRouterTypes
+    Image generation call with partial image
+]=]
+export type ImageGenCallPartialImageEvent = OpenAIResponsesImageGenCallPartialImage
+
+--[=[
+    @interface OpenAIResponsesRefusalContent
+    @within OpenRouterTypes
+    
+    @field type "refusal"
+    @field refusal string
+]=]
+export type OpenAIResponsesRefusalContent = { ["type"]: "refusal", refusal: string }
+
+--[=[
+    @type OpenAIResponsesResponseStatus ("completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued")
+    @within OpenRouterTypes
+]=]
+export type OpenAIResponsesResponseStatus = (
+	"completed" | "incomplete" | "in_progress" | "failed" | "cancelled" | "queued"
+)
+
+--[=[
+    @interface OpenAIResponsesSearchCompleted
+    @within OpenRouterTypes
+    
+    @field type "response.web_search_call.completed"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesSearchCompleted = {
+	["type"]: "response.web_search_call.completed",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @type OpenAIResponsesToolChoice ("auto" | "none" | "required" | { ["type"]: "function", name: string } | { ["type"]: ("web_search_preview_2025_03_11" | "web_search_preview") })
+    @within OpenRouterTypes
+]=]
+export type OpenAIResponsesToolChoice = "auto" | "none" | "required" | { ["type"]: "function", name: string } | {
+	["type"]: "web_search_preview_2025_03_11" | "web_search_preview",
+}
+
+--[=[
+    @type OpenAIResponsesTruncation ("auto" | "disabled")?
+    @within OpenRouterTypes
+]=]
+export type OpenAIResponsesTruncation = ("auto" | "disabled")?
+
+--[=[
+    @interface OpenAIResponsesUsage
+    @within OpenRouterTypes
+    
+    @field input_tokens number
+    @field input_tokens_details { cached_tokens: number }
+    @field output_tokens number
+    @field output_tokens_details { reasoning_tokens: number }
+    @field total_tokens number
+]=]
+export type OpenAIResponsesUsage = {
+	input_tokens: number,
+	input_tokens_details: { cached_tokens: number },
+	output_tokens: number,
+	output_tokens_details: { reasoning_tokens: number },
+	total_tokens: number,
+}
+
+--[=[
+    @interface OpenAIResponsesWebSearchCallInProgress
+    @within OpenRouterTypes
+    
+    @field type "response.web_search_call.in_progress"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesWebSearchCallInProgress = {
+	["type"]: "response.web_search_call.in_progress",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenAIResponsesWebSearchCallSearching
+    @within OpenRouterTypes
+    
+    @field type "response.web_search_call.searching"
+    @field item_id string
+    @field output_index number
+    @field sequence_number number
+]=]
+export type OpenAIResponsesWebSearchCallSearching = {
+	["type"]: "response.web_search_call.searching",
+	item_id: string,
+	output_index: number,
+	sequence_number: number,
+}
+
+--[=[
+    @interface OpenResponsesTopLogprobs
+    @within OpenRouterTypes
+    Alternative token with its log probability
+    
+    @field token string?
+    @field logprob number?
+    @field bytes {number}?
+]=]
+export type OpenResponsesTopLogprobs = { token: string?, logprob: number?, bytes: { number }? }
+
+--[=[
+    @interface OpenResponsesLogProbs
+    @within OpenRouterTypes
+    Log probability information for a token
+    
+    @field logprob number
+    @field token string
+    @field top_logprobs {OpenResponsesTopLogprobs}?
+    @field bytes {number}?
+]=]
+export type OpenResponsesLogProbs = {
+	logprob: number,
+	token: string,
+	top_logprobs: { OpenResponsesTopLogprobs }?,
+	bytes: { number }?,
+}
+
+--[=[
+    @interface BaseTextDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when a text delta is streamed
+    
+    @field type "response.output_text.delta"
+    @field logprobs {OpenResponsesLogProbs}
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field delta string
+    @field sequence_number number
+]=]
+export type BaseTextDeltaEvent = {
+	["type"]: "response.output_text.delta",
+	logprobs: { OpenResponsesLogProbs },
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	delta: string,
+	sequence_number: number,
+}
+
+--[=[
+    @interface BaseTextDoneEvent
+    @within OpenRouterTypes
+    Event emitted when text streaming is complete
+    
+    @field type "response.output_text.done"
+    @field output_index number
+    @field item_id string
+    @field content_index number
+    @field text string
+    @field sequence_number number
+    @field logprobs {OpenResponsesLogProbs}
+]=]
+export type BaseTextDoneEvent = {
+	["type"]: "response.output_text.done",
+	output_index: number,
+	item_id: string,
+	content_index: number,
+	text: string,
+	sequence_number: number,
+	logprobs: { OpenResponsesLogProbs },
+}
+
+--[=[
+    @interface OutputDatetimeItem
+    @within OpenRouterTypes
+    An openrouter:datetime server tool output item
+    
+    @field type "openrouter:datetime"
+    @field id string?
+    @field status ("completed" | "in_progress" | "incomplete")
+    @field datetime string -- ISO 8601 datetime string
+    @field timezone string -- IANA timezone name
+]=]
+export type OutputDatetimeItem = {
+	["type"]: "openrouter:datetime",
+	id: string?,
+	status: "completed" | "in_progress" | "incomplete",
+	datetime: string,
+	timezone: string,
+}
+
+--[=[
     @interface OutputItemFunctionCall
     @within OpenRouterTypes
     
@@ -1716,6 +3140,12 @@ export type OutputItemFunctionCall = {
 }
 
 --[=[
+    @type OutputFunctionCallItem OutputItemFunctionCall
+    @within OpenRouterTypes
+]=]
+export type OutputFunctionCallItem = OutputItemFunctionCall
+
+--[=[
     @interface OutputItemImageGenerationCall
     @within OpenRouterTypes
     
@@ -1732,10 +3162,16 @@ export type OutputItemImageGenerationCall = {
 }
 
 --[=[
-    @type OutputModality ("text" | "image" | "embeddings" | "audio")
+    @type OutputImageGenerationCallItem OutputItemImageGenerationCall
     @within OpenRouterTypes
 ]=]
-export type OutputModality = "text" | "image" | "embeddings" | "audio"
+export type OutputImageGenerationCallItem = OutputItemImageGenerationCall
+
+--[=[
+    @type OutputModality ("text" | "image" | "embeddings" | "audio" | "video")
+    @within OpenRouterTypes
+]=]
+export type OutputModality = "text" | "image" | "embeddings" | "audio" | "video"
 
 --[=[
     @interface ModelArchitecture
@@ -1780,11 +3216,28 @@ export type ModelArchitecture = {
 }
 
 --[=[
-    @type PDFParserEngine ("mistral-ocr" | "pdf-text" | "native")
+    @type OutputModalityEnum ("text" | "image")
     @within OpenRouterTypes
-    The engine to use for parsing PDF files.
 ]=]
-export type PDFParserEngine = "mistral-ocr" | "pdf-text" | "native"
+export type OutputModalityEnum = "text" | "image"
+
+--[=[
+    @interface OutputServerToolItem
+    @within OpenRouterTypes
+    A generic OpenRouter server tool output item
+    
+    @field type string -- Server tool type (e.g. openrouter:datetime, openrouter:web_search)
+    @field id string?
+    @field status ("completed" | "in_progress" | "incomplete")
+]=]
+export type OutputServerToolItem = { [string]: any? }
+
+--[=[
+    @type PDFParserEngine (("mistral-ocr" | "native" | "cloudflare-ai") | "pdf-text")
+    @within OpenRouterTypes
+    The engine to use for parsing PDF files. "pdf-text" is deprecated and automatically redirected to "cloudflare-ai".
+]=]
+export type PDFParserEngine = "mistral-ocr" | "native" | "cloudflare-ai" | "pdf-text"
 
 --[=[
     @interface PDFParserOptions
@@ -1929,11 +3382,30 @@ export type PreferredMaxLatency = (number | PercentileLatencyCutoffs)?
 export type PreferredMinThroughput = (number | PercentileThroughputCutoffs)?
 
 --[=[
-    @type ProviderName ("AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
+    @interface Preview_WebSearchUserLocation
+    @within OpenRouterTypes
+    
+    @field type "approximate"
+    @field city string?
+    @field country string?
+    @field region string?
+    @field timezone string?
+]=]
+export type Preview_WebSearchUserLocation = {
+	["type"]: "approximate",
+	city: string?,
+	country: string?,
+	region: string?,
+	timezone: string?,
+}?
+
+--[=[
+    @type ProviderName ("AkashML" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Reka" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")
     @within OpenRouterTypes
 ]=]
 export type ProviderName = (
-	"AI21"
+	"AkashML"
+	| "AI21"
 	| "AionLabs"
 	| "Alibaba"
 	| "Ambient"
@@ -1990,6 +3462,7 @@ export type ProviderName = (
 	| "Parasail"
 	| "Perplexity"
 	| "Phala"
+	| "Reka"
 	| "Relace"
 	| "SambaNova"
 	| "Seed"
@@ -2031,21 +3504,21 @@ export type ProviderOverloadedResponseErrorData = { code: number, message: strin
 export type ProviderOverloadedResponse = { error: ProviderOverloadedResponseErrorData, user_id: string? }
 
 --[=[
-    @type ProviderSort ("price" | "throughput" | "latency")
+    @type ProviderSort ("price" | "throughput" | "latency" | "exacto")
     @within OpenRouterTypes
     The provider sorting strategy (price, throughput, latency)
 ]=]
-export type ProviderSort = "price" | "throughput" | "latency"
+export type ProviderSort = "price" | "throughput" | "latency" | "exacto"
 
 --[=[
     @interface ProviderSortConfig
     @within OpenRouterTypes
     The provider sorting strategy (price, throughput, latency)
     
-    @field by ("price" | "throughput" | "latency")? -- The provider sorting strategy (price, throughput, latency); (Ex: "price")
+    @field by ("price" | "throughput" | "latency" | "exacto")? -- The provider sorting strategy (price, throughput, latency); (Ex: "price")
     @field partition ("model" | "none")? -- Partitioning strategy for sorting: "model" (default) groups endpoints by model before sorting (fallback models remain fallbacks), "none" sorts all endpoints together regardless of model.; (Ex: "model")
 ]=]
-export type ProviderSortConfig = { by: ("price" | "throughput" | "latency")?, partition: ("model" | "none")? }
+export type ProviderSortConfig = { by: ("price" | "throughput" | "latency" | "exacto")?, partition: ("model" | "none")? }
 
 --[=[
     @interface PublicPricing
@@ -2215,6 +3688,13 @@ export type ListEndpointsResponse = {
 }
 
 --[=[
+    @type ReasoningDeltaEvent BaseReasoningDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning text delta is streamed
+]=]
+export type ReasoningDeltaEvent = BaseReasoningDeltaEvent
+
+--[=[
     @interface ReasoningDetailEncrypted
     @within OpenRouterTypes
     Reasoning detail encrypted schema
@@ -2302,14 +3782,92 @@ export type ReasoningDetailText = {
 export type ReasoningDetailUnion = ReasoningDetailSummary | ReasoningDetailEncrypted | ReasoningDetailText
 
 --[=[
-    @type AssistantMessageReasoningDetails {ReasoningDetailUnion}
+    @type ChatReasoningDetails {ReasoningDetailUnion}
     @within OpenRouterTypes
     Reasoning details for extended thinking models
 ]=]
-export type AssistantMessageReasoningDetails = { ReasoningDetailUnion }
+export type ChatReasoningDetails = { ReasoningDetailUnion }
 
 --[=[
-    @interface ChatStreamingMessageChunk
+    @interface ChatAssistantMessage
+    @within OpenRouterTypes
+    Assistant message for requests and responses
+    
+    @field role "assistant"
+    @field content (string | {ChatContentItems})? -- Assistant message content
+    @field name string? -- Optional name for the assistant
+    @field tool_calls {ChatToolCall}? -- Tool calls made by the assistant
+    @field refusal string? -- Refusal message if content was refused
+    @field reasoning string? -- Reasoning output
+    @field reasoning_details ChatReasoningDetails?
+    @field images ChatAssistantImages?
+    @field audio ChatAudioOutput?
+]=]
+export type ChatAssistantMessage = {
+	role: "assistant",
+	content: (string | { ChatContentItems })?,
+	name: string?,
+	tool_calls: { ChatToolCall }?,
+	refusal: string?,
+	reasoning: string?,
+	reasoning_details: ChatReasoningDetails?,
+	images: ChatAssistantImages?,
+	audio: ChatAudioOutput?,
+}
+
+--[=[
+    @interface ChatChoice
+    @within OpenRouterTypes
+    Chat completion choice
+    
+    @field finish_reason ChatFinishReasonEnum?
+    @field index number -- Choice index; (Ex: 0)
+    @field message ChatAssistantMessage
+    @field logprobs ChatTokenLogprobs?
+]=]
+export type ChatChoice = {
+	finish_reason: ChatFinishReasonEnum?,
+	index: number,
+	message: ChatAssistantMessage,
+	logprobs: ChatTokenLogprobs?,
+}
+
+--[=[
+    @type ChatMessages (ChatSystemMessage | ChatUserMessage | ChatDeveloperMessage | ChatAssistantMessage | ChatToolMessage)
+    @within OpenRouterTypes
+    Chat completion message with role-based discrimination
+]=]
+export type ChatMessages = (
+	ChatSystemMessage | ChatUserMessage | ChatDeveloperMessage | ChatAssistantMessage | ChatToolMessage
+)
+
+--[=[
+    @interface ChatResult
+    @within OpenRouterTypes
+    Chat completion response
+    
+    @field id string -- Unique completion identifier; (Ex: "chatcmpl-123")
+    @field choices {ChatChoice} -- List of completion choices
+    @field created number -- Unix timestamp of creation; (Ex: 1677652288)
+    @field model string -- Model used for completion; (Ex: "openai/gpt-4")
+    @field object "chat.completion"
+    @field system_fingerprint string? -- System fingerprint; (Ex: "fp_44709d6fcb")
+    @field service_tier string? -- The service tier used by the upstream provider for this request; (Ex: "default")
+    @field usage ChatUsage?
+]=]
+export type ChatResult = {
+	id: string,
+	choices: { ChatChoice },
+	created: number,
+	model: string,
+	object: "chat.completion",
+	system_fingerprint: string?,
+	service_tier: string?,
+	usage: ChatUsage?,
+}
+
+--[=[
+    @interface ChatStreamDelta
     @within OpenRouterTypes
     Delta changes in streaming response
     
@@ -2317,59 +3875,76 @@ export type AssistantMessageReasoningDetails = { ReasoningDetailUnion }
     @field content string? -- Message content delta; (Ex: "Hello")
     @field reasoning string? -- Reasoning content delta; (Ex: "I need to")
     @field refusal string? -- Refusal message delta
-    @field tool_calls {ChatStreamingMessageToolCall}? -- Tool calls delta
-    @field reasoning_details AssistantMessageReasoningDetails?
+    @field tool_calls {ChatStreamToolCall}? -- Tool calls delta
+    @field reasoning_details ChatReasoningDetails?
+    @field audio ChatAudioOutput?
 ]=]
-export type ChatStreamingMessageChunk = {
+export type ChatStreamDelta = {
 	role: "assistant"?,
 	content: string?,
 	reasoning: string?,
 	refusal: string?,
-	tool_calls: { ChatStreamingMessageToolCall }?,
-	reasoning_details: AssistantMessageReasoningDetails?,
+	tool_calls: { ChatStreamToolCall }?,
+	reasoning_details: ChatReasoningDetails?,
+	audio: ChatAudioOutput?,
 }
 
 --[=[
-    @interface ChatStreamingChoice
+    @interface ChatStreamChoice
     @within OpenRouterTypes
     Streaming completion choice chunk
     
-    @field delta ChatStreamingMessageChunk
-    @field finish_reason ChatCompletionFinishReason?
+    @field delta ChatStreamDelta
+    @field finish_reason ChatFinishReasonEnum?
     @field index number -- Choice index; (Ex: 0)
-    @field logprobs ChatMessageTokenLogprobs?
+    @field logprobs ChatTokenLogprobs?
 ]=]
-export type ChatStreamingChoice = {
-	delta: ChatStreamingMessageChunk,
-	finish_reason: ChatCompletionFinishReason?,
+export type ChatStreamChoice = {
+	delta: ChatStreamDelta,
+	finish_reason: ChatFinishReasonEnum?,
 	index: number,
-	logprobs: ChatMessageTokenLogprobs?,
+	logprobs: ChatTokenLogprobs?,
 }
 
 --[=[
-    @interface ChatStreamingResponseChunk
+    @interface ChatStreamChunk
     @within OpenRouterTypes
     Streaming chat completion chunk
     
     @field id string -- Unique chunk identifier; (Ex: "chatcmpl-123")
-    @field choices {ChatStreamingChoice} -- List of streaming chunk choices
+    @field choices {ChatStreamChoice} -- List of streaming chunk choices
     @field created number -- Unix timestamp of creation; (Ex: 1677652288)
     @field model string -- Model used for completion; (Ex: "openai/gpt-4")
     @field object "chat.completion.chunk"
     @field system_fingerprint string? -- System fingerprint; (Ex: "fp_44709d6fcb")
+    @field service_tier string? -- The service tier used by the upstream provider for this request; (Ex: "default")
     @field error { message: string, code: number }? -- Error information; (Ex: {"message":"Rate limit exceeded","code":429})
-    @field usage ChatGenerationTokenUsage?
+    @field usage ChatUsage?
 ]=]
-export type ChatStreamingResponseChunk = {
+export type ChatStreamChunk = {
 	id: string,
-	choices: { ChatStreamingChoice },
+	choices: { ChatStreamChoice },
 	created: number,
 	model: string,
 	object: "chat.completion.chunk",
 	system_fingerprint: string?,
+	service_tier: string?,
 	error: { message: string, code: number }?,
-	usage: ChatGenerationTokenUsage?,
+	usage: ChatUsage?,
 }
+
+--[=[
+    @type ReasoningDoneEvent BaseReasoningDoneEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning text streaming is complete
+]=]
+export type ReasoningDoneEvent = BaseReasoningDoneEvent
+
+--[=[
+    @type ReasoningEffortEnum ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
+    @within OpenRouterTypes
+]=]
+export type ReasoningEffortEnum = ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?
 
 --[=[
     @interface ReasoningSummaryText
@@ -2381,7 +3956,7 @@ export type ChatStreamingResponseChunk = {
 export type ReasoningSummaryText = { ["type"]: "summary_text", text: string }
 
 --[=[
-    @interface OpenAIResponsesReasoningSummaryPartAddedEvent
+    @interface BaseReasoningSummaryPartAddedEvent
     @within OpenRouterTypes
     Event emitted when a reasoning summary part is added
     
@@ -2392,7 +3967,7 @@ export type ReasoningSummaryText = { ["type"]: "summary_text", text: string }
     @field part ReasoningSummaryText
     @field sequence_number number
 ]=]
-export type OpenAIResponsesReasoningSummaryPartAddedEvent = {
+export type BaseReasoningSummaryPartAddedEvent = {
 	["type"]: "response.reasoning_summary_part.added",
 	output_index: number,
 	item_id: string,
@@ -2402,14 +3977,7 @@ export type OpenAIResponsesReasoningSummaryPartAddedEvent = {
 }
 
 --[=[
-    @type OpenResponsesReasoningSummaryPartAddedEvent OpenAIResponsesReasoningSummaryPartAddedEvent
-    @within OpenRouterTypes
-    Event emitted when a reasoning summary part is added
-]=]
-export type OpenResponsesReasoningSummaryPartAddedEvent = OpenAIResponsesReasoningSummaryPartAddedEvent
-
---[=[
-    @interface OpenResponsesReasoningSummaryPartDoneEvent
+    @interface BaseReasoningSummaryPartDoneEvent
     @within OpenRouterTypes
     Event emitted when a reasoning summary part is complete
     
@@ -2420,7 +3988,7 @@ export type OpenResponsesReasoningSummaryPartAddedEvent = OpenAIResponsesReasoni
     @field part ReasoningSummaryText
     @field sequence_number number
 ]=]
-export type OpenResponsesReasoningSummaryPartDoneEvent = {
+export type BaseReasoningSummaryPartDoneEvent = {
 	["type"]: "response.reasoning_summary_part.done",
 	output_index: number,
 	item_id: string,
@@ -2430,29 +3998,54 @@ export type OpenResponsesReasoningSummaryPartDoneEvent = {
 }
 
 --[=[
-    @type ReasoningSummaryVerbosity ("auto" | "concise" | "detailed")?
+    @type ReasoningSummaryPartAddedEvent BaseReasoningSummaryPartAddedEvent
     @within OpenRouterTypes
+    Event emitted when a reasoning summary part is added
 ]=]
-export type ReasoningSummaryVerbosity = ("auto" | "concise" | "detailed")?
+export type ReasoningSummaryPartAddedEvent = BaseReasoningSummaryPartAddedEvent
 
 --[=[
-    @interface OpenAIResponsesReasoningConfig
+    @type ReasoningSummaryPartDoneEvent BaseReasoningSummaryPartDoneEvent
+    @within OpenRouterTypes
+    Event emitted when a reasoning summary part is complete
+]=]
+export type ReasoningSummaryPartDoneEvent = BaseReasoningSummaryPartDoneEvent
+
+--[=[
+    @type ReasoningSummaryTextDeltaEvent BaseReasoningSummaryTextDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning summary text delta is streamed
+]=]
+export type ReasoningSummaryTextDeltaEvent = BaseReasoningSummaryTextDeltaEvent
+
+--[=[
+    @type ReasoningSummaryTextDoneEvent BaseReasoningSummaryTextDoneEvent
+    @within OpenRouterTypes
+    Event emitted when reasoning summary text streaming is complete
+]=]
+export type ReasoningSummaryTextDoneEvent = BaseReasoningSummaryTextDoneEvent
+
+--[=[
+    @type ReasoningSummaryVerbosityEnum ("auto" | "concise" | "detailed")?
+    @within OpenRouterTypes
+]=]
+export type ReasoningSummaryVerbosityEnum = ("auto" | "concise" | "detailed")?
+
+--[=[
+    @interface BaseReasoningConfig
     @within OpenRouterTypes
     
-    @field effort OpenAIResponsesReasoningEffort?
-    @field summary ReasoningSummaryVerbosity?
+    @field effort ReasoningEffortEnum?
+    @field summary ReasoningSummaryVerbosityEnum?
 ]=]
-export type OpenAIResponsesReasoningConfig = {
-	effort: OpenAIResponsesReasoningEffort?,
-	summary: ReasoningSummaryVerbosity?,
-}?
+export type BaseReasoningConfig = { effort: ReasoningEffortEnum?, summary: ReasoningSummaryVerbosityEnum? }?
 
 --[=[
-    @type OpenResponsesReasoningConfig (OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? })
+    @type ReasoningConfig (BaseReasoningConfig & { max_tokens: number?, enabled: boolean? })
     @within OpenRouterTypes
     Configuration for reasoning mode in the response
 ]=]
-export type OpenResponsesReasoningConfig = OpenAIResponsesReasoningConfig & { max_tokens: number?, enabled: boolean? }
+export type ReasoningConfig = BaseReasoningConfig & { max_tokens: number?, enabled: boolean? }
 
 --[=[
     @interface ReasoningTextContent
@@ -2484,11 +4077,11 @@ export type OutputItemReasoning = {
 }
 
 --[=[
-    @type OpenResponsesReasoning (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
+    @type OutputReasoningItem (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
     @within OpenRouterTypes
-    Reasoning output item with signature and format extensions
+    An output item containing reasoning
 ]=]
-export type OpenResponsesReasoning = OutputItemReasoning & {
+export type OutputReasoningItem = OutputItemReasoning & {
 	content: { ReasoningTextContent }?,
 	signature: string?,
 	format: (
@@ -2500,6 +4093,45 @@ export type OpenResponsesReasoning = OutputItemReasoning & {
 		| "google-gemini-v1"
 	)?,
 }
+
+--[=[
+    @type ReasoningItem (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
+    @within OpenRouterTypes
+    Reasoning output item with signature and format extensions
+]=]
+export type ReasoningItem = OutputItemReasoning & {
+	content: { ReasoningTextContent }?,
+	signature: string?,
+	format: (
+		"unknown"
+		| "openai-responses-v1"
+		| "azure-openai-responses-v1"
+		| "xai-responses-v1"
+		| "anthropic-claude-v1"
+		| "google-gemini-v1"
+	)?,
+}
+
+--[=[
+    @type RefusalDeltaEvent BaseRefusalDeltaEvent
+    @within OpenRouterTypes
+    Event emitted when a refusal delta is streamed
+]=]
+export type RefusalDeltaEvent = BaseRefusalDeltaEvent
+
+--[=[
+    @type RefusalDoneEvent BaseRefusalDoneEvent
+    @within OpenRouterTypes
+    Event emitted when refusal streaming is complete
+]=]
+export type RefusalDoneEvent = BaseRefusalDoneEvent
+
+--[=[
+    @type RequestMetadata { [string]: string }?
+    @within OpenRouterTypes
+    Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
+]=]
+export type RequestMetadata = { [string]: string }?
 
 --[=[
     @interface RequestTimeoutResponseErrorData
@@ -2523,156 +4155,16 @@ export type RequestTimeoutResponseErrorData = { code: number, message: string, m
 export type RequestTimeoutResponse = { error: RequestTimeoutResponseErrorData, user_id: string? }
 
 --[=[
-    @interface ResponseFormatJSONObject
+    @type ResponseIncludesEnum ("file_search_call.results" | "message.input_image.image_url" | "computer_call_output.output.image_url" | "reasoning.encrypted_content" | "code_interpreter_call.outputs")
     @within OpenRouterTypes
-    JSON object response format
-    
-    @field type "json_object"
 ]=]
-export type ResponseFormatJSONObject = { ["type"]: "json_object" }
-
---[=[
-    @interface ResponseFormatJSONSchema
-    @within OpenRouterTypes
-    JSON Schema response format for structured outputs
-    
-    @field type "json_schema"
-    @field json_schema JSONSchemaConfig
-]=]
-export type ResponseFormatJSONSchema = { ["type"]: "json_schema", json_schema: JSONSchemaConfig }
-
---[=[
-    @interface ResponseFormatText
-    @within OpenRouterTypes
-    Default text response format
-    
-    @field type "text"
-]=]
-export type ResponseFormatText = { ["type"]: "text" }
-
---[=[
-    @interface ResponseFormatTextGrammar
-    @within OpenRouterTypes
-    Custom grammar response format
-    
-    @field type "grammar"
-    @field grammar string -- Custom grammar for text generation; (Ex: "root ::= \"yes\" | \"no\"")
-]=]
-export type ResponseFormatTextGrammar = { ["type"]: "grammar", grammar: string }
-
---[=[
-    @interface ResponseFormatTextPython
-    @within OpenRouterTypes
-    Python code response format
-    
-    @field type "python"
-]=]
-export type ResponseFormatTextPython = { ["type"]: "python" }
-
---[=[
-    @interface ResponseInputAudio
-    @within OpenRouterTypes
-    Audio input content item
-    
-    @field type "input_audio"
-    @field input_audio { data: string, format: ("mp3" | "wav") }
-]=]
-export type ResponseInputAudio = { ["type"]: "input_audio", input_audio: { data: string, format: "mp3" | "wav" } }
-
---[=[
-    @interface ResponseInputFile
-    @within OpenRouterTypes
-    File input content item
-    
-    @field type "input_file"
-    @field file_id string?
-    @field file_data string?
-    @field filename string?
-    @field file_url string?
-]=]
-export type ResponseInputFile = {
-	["type"]: "input_file",
-	file_id: string?,
-	file_data: string?,
-	filename: string?,
-	file_url: string?,
-}
-
---[=[
-    @interface ResponseInputImage
-    @within OpenRouterTypes
-    Image input content item
-    
-    @field type "input_image"
-    @field detail ("auto" | "high" | "low")
-    @field image_url string?
-]=]
-export type ResponseInputImage = { ["type"]: "input_image", detail: "auto" | "high" | "low", image_url: string? }
-
---[=[
-    @interface ResponseInputText
-    @within OpenRouterTypes
-    Text input content item
-    
-    @field type "input_text"
-    @field text string
-]=]
-export type ResponseInputText = { ["type"]: "input_text", text: string }
-
---[=[
-    @interface OpenAIResponsesPrompt
-    @within OpenRouterTypes
-    
-    @field id string
-    @field variables { [string]: (string | ResponseInputText | ResponseInputImage | ResponseInputFile) }?
-]=]
-export type OpenAIResponsesPrompt = {
-	id: string,
-	variables: { [string]: string | ResponseInputText | ResponseInputImage | ResponseInputFile }?,
-}?
-
---[=[
-    @interface ResponseInputVideo
-    @within OpenRouterTypes
-    Video input content item
-    
-    @field type "input_video"
-    @field video_url string -- A base64 data URL or remote URL that resolves to a video file
-]=]
-export type ResponseInputVideo = { ["type"]: "input_video", video_url: string }
-
---[=[
-    @interface OpenResponsesEasyInputMessage
-    @within OpenRouterTypes
-    
-    @field type "message"?
-    @field role ("user" | "system" | "assistant" | "developer")
-    @field content ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio | ResponseInputVideo)} | string)
-]=]
-export type OpenResponsesEasyInputMessage = {
-	["type"]: "message"?,
-	role: "user" | "system" | "assistant" | "developer",
-	content: (
-		{ ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio | ResponseInputVideo }
-		| string
-	),
-}
-
---[=[
-    @interface OpenResponsesInputMessageItem
-    @within OpenRouterTypes
-    
-    @field id string?
-    @field type "message"?
-    @field role ("user" | "system" | "developer")
-    @field content {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio | ResponseInputVideo)}
-]=]
-export type OpenResponsesInputMessageItem = {
-	id: string?,
-	["type"]: "message"?,
-	role: "user" | "system" | "developer",
-	content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio | ResponseInputVideo },
-}
+export type ResponseIncludesEnum = (
+	"file_search_call.results"
+	| "message.input_image.image_url"
+	| "computer_call_output.output.image_url"
+	| "reasoning.encrypted_content"
+	| "code_interpreter_call.outputs"
+)
 
 --[=[
     @interface ResponsesErrorField
@@ -2707,154 +4199,59 @@ export type ResponsesErrorField = {
 }?
 
 --[=[
-    @interface ResponsesFormatText
-    @within OpenRouterTypes
-    Plain text response format
-    
-    @field type "text"
-]=]
-export type ResponsesFormatText = { ["type"]: "text" }
-
---[=[
-    @interface ResponsesFormatTextJSONSchemaConfig
-    @within OpenRouterTypes
-    JSON schema constrained response format
-    
-    @field type "json_schema"
-    @field name string
-    @field description string?
-    @field strict boolean?
-    @field schema { [string]: any? }
-]=]
-export type ResponsesFormatTextJSONSchemaConfig = {
-	["type"]: "json_schema",
-	name: string,
-	description: string?,
-	strict: boolean?,
-	schema: { [string]: any? },
-}
-
---[=[
-    @type ResponseFormatTextConfig (ResponsesFormatText | ResponseFormatJSONObject | ResponsesFormatTextJSONSchemaConfig)
-    @within OpenRouterTypes
-    Text response format configuration
-]=]
-export type ResponseFormatTextConfig = (
-	ResponsesFormatText | ResponseFormatJSONObject | ResponsesFormatTextJSONSchemaConfig
-)
-
---[=[
-    @interface ResponseTextConfig
-    @within OpenRouterTypes
-    Text output configuration including format and verbosity
-    
-    @field format ResponseFormatTextConfig?
-    @field verbosity ("high" | "low" | "medium")?
-]=]
-export type ResponseTextConfig = { format: ResponseFormatTextConfig?, verbosity: ("high" | "low" | "medium")? }
-
---[=[
-    @type OpenResponsesResponseText ResponseTextConfig
-    @within OpenRouterTypes
-    Text output configuration including format and verbosity
-]=]
-export type OpenResponsesResponseText = ResponseTextConfig
-
---[=[
-    @type ResponsesImageGenerationCall OutputItemImageGenerationCall
-    @within OpenRouterTypes
-]=]
-export type ResponsesImageGenerationCall = OutputItemImageGenerationCall
-
---[=[
-    @type ResponsesOutputItemFunctionCall OutputItemFunctionCall
-    @within OpenRouterTypes
-]=]
-export type ResponsesOutputItemFunctionCall = OutputItemFunctionCall
-
---[=[
-    @type ResponsesOutputItemReasoning (OutputItemReasoning & { content: {ReasoningTextContent}?, signature: string?, format: ("unknown" | "openai-responses-v1" | "azure-openai-responses-v1" | "xai-responses-v1" | "anthropic-claude-v1" | "google-gemini-v1")? })
-    @within OpenRouterTypes
-    An output item containing reasoning
-]=]
-export type ResponsesOutputItemReasoning = OutputItemReasoning & {
-	content: { ReasoningTextContent }?,
-	signature: string?,
-	format: (
-		"unknown"
-		| "openai-responses-v1"
-		| "azure-openai-responses-v1"
-		| "xai-responses-v1"
-		| "anthropic-claude-v1"
-		| "google-gemini-v1"
-	)?,
-}
-
---[=[
-    @type ResponsesOutputModality ("text" | "image")
-    @within OpenRouterTypes
-]=]
-export type ResponsesOutputModality = "text" | "image"
-
---[=[
-    @type ResponsesSearchContextSize ("low" | "medium" | "high")
+    @type SearchContextSizeEnum ("low" | "medium" | "high")
     @within OpenRouterTypes
     Size of the search context for web search tools
 ]=]
-export type ResponsesSearchContextSize = "low" | "medium" | "high"
+export type SearchContextSizeEnum = "low" | "medium" | "high"
 
 --[=[
-    @interface ResponsesWebSearchUserLocation
+    @interface Preview_20250311_WebSearchServerTool
     @within OpenRouterTypes
-    User location information for web search
+    Web search preview tool configuration (2025-03-11 version)
     
-    @field type "approximate"?
-    @field city string?
-    @field country string?
-    @field region string?
-    @field timezone string?
+    @field type "web_search_preview_2025_03_11"
+    @field search_context_size SearchContextSizeEnum?
+    @field user_location Preview_WebSearchUserLocation?
+    @field engine ("auto" | "native" | "exa" | "firecrawl" | "parallel")? -- Which search engine to use. "auto" (default) uses native if the provider supports it, otherwise Exa. "native" forces the provider's built-in search. "exa" forces the Exa search API. "firecrawl" uses Firecrawl (requires BYOK). "parallel" uses the Parallel search API.; (Ex: "auto")
+    @field max_results number? -- Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search.; Range: 1.0-25.0; (Ex: 5)
+    @field filters { allowed_domains: {string}?, excluded_domains: {string}? }?
 ]=]
-export type ResponsesWebSearchUserLocation = {
-	["type"]: "approximate"?,
-	city: string?,
-	country: string?,
-	region: string?,
-	timezone: string?,
-}?
-
---[=[
-    @interface OpenResponsesWebSearch20250826Tool
-    @within OpenRouterTypes
-    Web search tool configuration (2025-08-26 version)
-    
-    @field type "web_search_2025_08_26"
-    @field filters { allowed_domains: {string}? }?
-    @field search_context_size ResponsesSearchContextSize?
-    @field user_location ResponsesWebSearchUserLocation?
-]=]
-export type OpenResponsesWebSearch20250826Tool = {
-	["type"]: "web_search_2025_08_26",
-	filters: { allowed_domains: { string }? }?,
-	search_context_size: ResponsesSearchContextSize?,
-	user_location: ResponsesWebSearchUserLocation?,
+export type Preview_20250311_WebSearchServerTool = {
+	["type"]: "web_search_preview_2025_03_11",
+	search_context_size: SearchContextSizeEnum?,
+	user_location: Preview_WebSearchUserLocation?,
+	engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+	max_results: number?,
+	filters: { allowed_domains: { string }?, excluded_domains: { string }? }?,
 }
 
 --[=[
-    @interface OpenResponsesWebSearchTool
+    @interface Preview_WebSearchServerTool
     @within OpenRouterTypes
-    Web search tool configuration
+    Web search preview tool configuration
     
-    @field type "web_search"
-    @field filters { allowed_domains: {string}? }?
-    @field search_context_size ResponsesSearchContextSize?
-    @field user_location ResponsesWebSearchUserLocation?
+    @field type "web_search_preview"
+    @field search_context_size SearchContextSizeEnum?
+    @field user_location Preview_WebSearchUserLocation?
+    @field engine ("auto" | "native" | "exa" | "firecrawl" | "parallel")? -- Which search engine to use. "auto" (default) uses native if the provider supports it, otherwise Exa. "native" forces the provider's built-in search. "exa" forces the Exa search API. "firecrawl" uses Firecrawl (requires BYOK). "parallel" uses the Parallel search API.; (Ex: "auto")
+    @field max_results number? -- Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search.; Range: 1.0-25.0; (Ex: 5)
+    @field filters { allowed_domains: {string}?, excluded_domains: {string}? }?
 ]=]
-export type OpenResponsesWebSearchTool = {
-	["type"]: "web_search",
-	filters: { allowed_domains: { string }? }?,
-	search_context_size: ResponsesSearchContextSize?,
-	user_location: ResponsesWebSearchUserLocation?,
+export type Preview_WebSearchServerTool = {
+	["type"]: "web_search_preview",
+	search_context_size: SearchContextSizeEnum?,
+	user_location: Preview_WebSearchUserLocation?,
+	engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+	max_results: number?,
+	filters: { allowed_domains: { string }?, excluded_domains: { string }? }?,
 }
+
+--[=[
+    @type ServiceTierEnum ("auto" | "default" | "flex" | "priority" | "scale")?
+    @within OpenRouterTypes
+]=]
+export type ServiceTierEnum = ("auto" | "default" | "flex" | "priority" | "scale")?
 
 --[=[
     @interface ServiceUnavailableResponseErrorData
@@ -2878,15 +4275,57 @@ export type ServiceUnavailableResponseErrorData = { code: number, message: strin
 export type ServiceUnavailableResponse = { error: ServiceUnavailableResponseErrorData, user_id: string? }
 
 --[=[
-    @interface SystemMessage
+    @interface ShellServerTool
     @within OpenRouterTypes
-    System message for setting behavior
+    Shell tool configuration
     
-    @field role "system"
-    @field content (string | {ChatMessageContentItemText}) -- System message content; (Ex: "You are a helpful assistant.")
-    @field name string? -- Optional name for the system message; (Ex: "Assistant Config")
+    @field type "shell"
 ]=]
-export type SystemMessage = { role: "system", content: string | { ChatMessageContentItemText }, name: string? }
+export type ShellServerTool = { ["type"]: "shell" }
+
+--[=[
+    @interface StoredPromptTemplate
+    @within OpenRouterTypes
+    
+    @field id string
+    @field variables { [string]: (string | InputText | InputImage | InputFile) }?
+]=]
+export type StoredPromptTemplate = { id: string, variables: { [string]: string | InputText | InputImage | InputFile }? }?
+
+--[=[
+    @interface TextConfig
+    @within OpenRouterTypes
+    Text output configuration including format and verbosity
+    
+    @field format Formats?
+    @field verbosity ("high" | "low" | "medium")?
+]=]
+export type TextConfig = { format: Formats?, verbosity: ("high" | "low" | "medium")? }
+
+--[=[
+    @type TextDeltaEvent (BaseTextDeltaEvent & { logprobs: {(OpenResponsesLogProbs & { top_logprobs: {OpenResponsesTopLogprobs}? })}? })
+    @within OpenRouterTypes
+    Event emitted when a text delta is streamed
+]=]
+export type TextDeltaEvent = BaseTextDeltaEvent & {
+	logprobs: { OpenResponsesLogProbs & { top_logprobs: { OpenResponsesTopLogprobs }? } }?,
+}
+
+--[=[
+    @type TextDoneEvent (BaseTextDoneEvent & { logprobs: {(OpenResponsesLogProbs & { top_logprobs: {OpenResponsesTopLogprobs}? })}? })
+    @within OpenRouterTypes
+    Event emitted when text streaming is complete
+]=]
+export type TextDoneEvent = BaseTextDoneEvent & {
+	logprobs: { OpenResponsesLogProbs & { top_logprobs: { OpenResponsesTopLogprobs }? } }?,
+}
+
+--[=[
+    @type TextExtendedConfig TextConfig
+    @within OpenRouterTypes
+    Text output configuration including format and verbosity
+]=]
+export type TextExtendedConfig = TextConfig
 
 --[=[
     @interface TooManyRequestsResponseErrorData
@@ -2910,32 +4349,13 @@ export type TooManyRequestsResponseErrorData = { code: number, message: string, 
 export type TooManyRequestsResponse = { error: TooManyRequestsResponseErrorData, user_id: string? }
 
 --[=[
-    @type ToolCallStatus ("in_progress" | "completed" | "incomplete")?
+    @type ToolCallStatusEnum ("in_progress" | "completed" | "incomplete")?
     @within OpenRouterTypes
 ]=]
-export type ToolCallStatus = ("in_progress" | "completed" | "incomplete")?
+export type ToolCallStatusEnum = ("in_progress" | "completed" | "incomplete")?
 
 --[=[
-    @interface OpenResponsesFunctionCallOutput
-    @within OpenRouterTypes
-    The output from a function call execution
-    
-    @field type "function_call_output"
-    @field id string?
-    @field call_id string
-    @field output string
-    @field status ToolCallStatus?
-]=]
-export type OpenResponsesFunctionCallOutput = {
-	["type"]: "function_call_output",
-	id: string?,
-	call_id: string,
-	output: string,
-	status: ToolCallStatus?,
-}
-
---[=[
-    @interface OpenResponsesFunctionToolCall
+    @interface FunctionCallItem
     @within OpenRouterTypes
     A function call initiated by the model
     
@@ -2944,37 +4364,34 @@ export type OpenResponsesFunctionCallOutput = {
     @field name string
     @field arguments string
     @field id string
-    @field status ToolCallStatus?
+    @field status ToolCallStatusEnum?
 ]=]
-export type OpenResponsesFunctionToolCall = {
+export type FunctionCallItem = {
 	["type"]: "function_call",
 	call_id: string,
 	name: string,
 	arguments: string,
 	id: string,
-	status: ToolCallStatus?,
+	status: ToolCallStatusEnum?,
 }
 
 --[=[
-    @type ToolChoiceOption ("none" | "auto" | "required" | NamedToolChoice)
+    @interface FunctionCallOutputItem
     @within OpenRouterTypes
-    Tool choice configuration
-]=]
-export type ToolChoiceOption = "none" | "auto" | "required" | NamedToolChoice
-
---[=[
-    @interface ToolDefinitionJson
-    @within OpenRouterTypes
-    Tool definition for function calling
+    The output from a function call execution
     
-    @field type "function"
-    @field function { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? } -- Function definition for tool calling; (Ex: {"name":"get_weather","description":"Get the current weather for a location","parameters":{"type"...)
-    @field cache_control ChatMessageContentItemCacheControl?
+    @field type "function_call_output"
+    @field id string?
+    @field call_id string
+    @field output (string | {(InputText | InputImage | InputFile)})
+    @field status ToolCallStatusEnum?
 ]=]
-export type ToolDefinitionJson = {
-	["type"]: "function",
-	["function"]: { name: string, description: string?, parameters: { [string]: any? }?, strict: boolean? },
-	cache_control: ChatMessageContentItemCacheControl?,
+export type FunctionCallOutputItem = {
+	["type"]: "function_call_output",
+	id: string?,
+	call_id: string,
+	output: string | { InputText | InputImage | InputFile },
+	status: ToolCallStatusEnum?,
 }
 
 --[=[
@@ -3006,6 +4423,7 @@ export type TopProviderInfo = { context_length: number?, max_completion_tokens: 
     @field per_request_limits PerRequestLimits
     @field supported_parameters {Parameter} -- List of supported parameters for this model
     @field default_parameters DefaultParameters
+    @field knowledge_cutoff string? -- The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown.; (Ex: "2024-10-01")
     @field expiration_date string? -- The date after which the model may be removed. ISO 8601 date string (YYYY-MM-DD) or null if no expiration.; (Ex: "2025-06-01")
 ]=]
 export type Model = {
@@ -3022,6 +4440,7 @@ export type Model = {
 	per_request_limits: PerRequestLimits,
 	supported_parameters: { Parameter },
 	default_parameters: DefaultParameters,
+	knowledge_cutoff: string?,
 	expiration_date: string?,
 }
 
@@ -3042,6 +4461,12 @@ export type ModelsListResponseData = { Model }
 export type ModelsListResponse = { data: ModelsListResponseData }
 
 --[=[
+    @type TruncationEnum ("auto" | "disabled")?
+    @within OpenRouterTypes
+]=]
+export type TruncationEnum = ("auto" | "disabled")?
+
+--[=[
     @interface URLCitation
     @within OpenRouterTypes
     
@@ -3060,7 +4485,7 @@ export type URLCitation = { ["type"]: "url_citation", url: string, title: string
 export type OpenAIResponsesAnnotation = FileCitation | URLCitation | FilePath
 
 --[=[
-    @interface OpenResponsesOutputTextAnnotationAddedEvent
+    @interface BaseAnnotationAddedEvent
     @within OpenRouterTypes
     Event emitted when a text annotation is added to output
     
@@ -3072,7 +4497,7 @@ export type OpenAIResponsesAnnotation = FileCitation | URLCitation | FilePath
     @field annotation_index number
     @field annotation OpenAIResponsesAnnotation
 ]=]
-export type OpenResponsesOutputTextAnnotationAddedEvent = {
+export type BaseAnnotationAddedEvent = {
 	["type"]: "response.output_text.annotation.added",
 	output_index: number,
 	item_id: string,
@@ -3081,6 +4506,13 @@ export type OpenResponsesOutputTextAnnotationAddedEvent = {
 	annotation_index: number,
 	annotation: OpenAIResponsesAnnotation,
 }
+
+--[=[
+    @type AnnotationAddedEvent BaseAnnotationAddedEvent
+    @within OpenRouterTypes
+    Event emitted when a text annotation is added to output
+]=]
+export type AnnotationAddedEvent = BaseAnnotationAddedEvent
 
 --[=[
     @interface ResponseOutputText
@@ -3106,7 +4538,7 @@ export type ResponseOutputText = {
 }
 
 --[=[
-    @interface OpenResponsesContentPartAddedEvent
+    @interface BaseContentPartAddedEvent
     @within OpenRouterTypes
     Event emitted when a new content part is added to an output item
     
@@ -3117,7 +4549,7 @@ export type ResponseOutputText = {
     @field part (ResponseOutputText | OpenAIResponsesRefusalContent)
     @field sequence_number number
 ]=]
-export type OpenResponsesContentPartAddedEvent = {
+export type BaseContentPartAddedEvent = {
 	["type"]: "response.content_part.added",
 	output_index: number,
 	item_id: string,
@@ -3127,7 +4559,7 @@ export type OpenResponsesContentPartAddedEvent = {
 }
 
 --[=[
-    @interface OpenResponsesContentPartDoneEvent
+    @interface BaseContentPartDoneEvent
     @within OpenRouterTypes
     Event emitted when a content part is complete
     
@@ -3138,13 +4570,31 @@ export type OpenResponsesContentPartAddedEvent = {
     @field part (ResponseOutputText | OpenAIResponsesRefusalContent)
     @field sequence_number number
 ]=]
-export type OpenResponsesContentPartDoneEvent = {
+export type BaseContentPartDoneEvent = {
 	["type"]: "response.content_part.done",
 	output_index: number,
 	item_id: string,
 	content_index: number,
 	part: ResponseOutputText | OpenAIResponsesRefusalContent,
 	sequence_number: number,
+}
+
+--[=[
+    @type ContentPartAddedEvent (BaseContentPartAddedEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? })
+    @within OpenRouterTypes
+    Event emitted when a new content part is added to an output item
+]=]
+export type ContentPartAddedEvent = BaseContentPartAddedEvent & {
+	part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)?,
+}
+
+--[=[
+    @type ContentPartDoneEvent (BaseContentPartDoneEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? })
+    @within OpenRouterTypes
+    Event emitted when a content part is complete
+]=]
+export type ContentPartDoneEvent = BaseContentPartDoneEvent & {
+	part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)?,
 }
 
 --[=[
@@ -3156,6 +4606,7 @@ export type OpenResponsesContentPartDoneEvent = {
     @field type "message"
     @field status ("completed" | "incomplete" | "in_progress")?
     @field content {(ResponseOutputText | OpenAIResponsesRefusalContent)}
+    @field phase ("commentary" | "final_answer")? -- The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages.
 ]=]
 export type OutputMessage = {
 	id: string,
@@ -3163,44 +4614,46 @@ export type OutputMessage = {
 	["type"]: "message",
 	status: ("completed" | "incomplete" | "in_progress")?,
 	content: { ResponseOutputText | OpenAIResponsesRefusalContent },
+	phase: ("commentary" | "final_answer")?,
 }
 
 --[=[
-    @type OpenAIResponsesInput (string | {({ ["type"]: "message"?, role: ("user" | "system" | "assistant" | "developer"), content: ({(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} | string) } | { id: string, ["type"]: "message"?, role: ("user" | "system" | "developer"), content: {(ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio)} } | { ["type"]: "function_call_output", id: string?, call_id: string, output: string, status: ToolCallStatus? } | { ["type"]: "function_call", call_id: string, name: string, arguments: string, id: string?, status: ToolCallStatus? } | OutputItemImageGenerationCall | OutputMessage)})?
+    @type BaseInputs (string | {({ ["type"]: "message"?, role: ("user" | "system" | "assistant" | "developer"), content: ({(InputText | InputImage | InputFile | InputAudio)} | string), phase: ("commentary" | "final_answer")? } | { id: string, ["type"]: "message"?, role: ("user" | "system" | "developer"), content: {(InputText | InputImage | InputFile | InputAudio)} } | { ["type"]: "function_call_output", id: string?, call_id: string, output: (string | {(InputText | InputImage | InputFile)}), status: ToolCallStatusEnum? } | { ["type"]: "function_call", call_id: string, name: string, arguments: string, id: string?, status: ToolCallStatusEnum? } | OutputItemImageGenerationCall | OutputMessage)})?
     @within OpenRouterTypes
 ]=]
-export type OpenAIResponsesInput = (string | {
+export type BaseInputs = (string | {
 	{
 		["type"]: "message"?,
 		role: "user" | "system" | "assistant" | "developer",
-		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio } | string,
+		content: { InputText | InputImage | InputFile | InputAudio } | string,
+		phase: ("commentary" | "final_answer")?,
 	} | {
 		id: string,
 		["type"]: "message"?,
 		role: "user" | "system" | "developer",
-		content: { ResponseInputText | ResponseInputImage | ResponseInputFile | ResponseInputAudio },
+		content: { InputText | InputImage | InputFile | InputAudio },
 	} | {
 		["type"]: "function_call_output",
 		id: string?,
 		call_id: string,
-		output: string,
-		status: ToolCallStatus?,
+		output: string | { InputText | InputImage | InputFile },
+		status: ToolCallStatusEnum?,
 	} | {
 		["type"]: "function_call",
 		call_id: string,
 		name: string,
 		arguments: string,
 		id: string?,
-		status: ToolCallStatus?,
+		status: ToolCallStatusEnum?,
 	} | OutputItemImageGenerationCall | OutputMessage
 })?
 
 --[=[
-    @type ResponsesOutputMessage OutputMessage
+    @type OutputMessageItem OutputMessage
     @within OpenRouterTypes
     An output message item
 ]=]
-export type ResponsesOutputMessage = OutputMessage
+export type OutputMessageItem = OutputMessage
 
 --[=[
     @interface UnauthorizedResponseErrorData
@@ -3245,180 +4698,204 @@ export type UnprocessableEntityResponseErrorData = { code: number, message: stri
 export type UnprocessableEntityResponse = { error: UnprocessableEntityResponseErrorData, user_id: string? }
 
 --[=[
-    @interface VideoInput
+    @type Usage (OpenAIResponsesUsage & { cost: number?, is_byok: boolean?, cost_details: { upstream_inference_cost: number?, upstream_inference_input_cost: number, upstream_inference_output_cost: number }? })
     @within OpenRouterTypes
-    Video input object
-    
-    @field url string -- URL of the video (data: URLs supported)
+    Token usage information for the response
 ]=]
-export type VideoInput = { url: string }
-
---[=[
-    @interface ChatMessageContentItemVideo
-    @within OpenRouterTypes
-    Video input content part
-    
-    @field type "video_url"
-    @field video_url VideoInput
-]=]
-export type ChatMessageContentItemVideo = { ["type"]: "video_url", video_url: VideoInput }
-
---[=[
-    @interface ChatMessageContentItemVideoLegacy
-    @within OpenRouterTypes
-    Video input content part (legacy format - deprecated)
-    
-    @field type "input_video"
-    @field video_url VideoInput
-]=]
-export type ChatMessageContentItemVideoLegacy = { ["type"]: "input_video", video_url: VideoInput }
-
---[=[
-    @type ChatMessageContentItem (ChatMessageContentItemText | ChatMessageContentItemImage | ChatMessageContentItemAudio | (ChatMessageContentItemVideoLegacy | ChatMessageContentItemVideo))
-    @within OpenRouterTypes
-    Content part for chat completion messages
-]=]
-export type ChatMessageContentItem = (
-	ChatMessageContentItemText
-	| ChatMessageContentItemImage
-	| ChatMessageContentItemAudio
-	| ChatMessageContentItemVideoLegacy
-	| ChatMessageContentItemVideo
-)
-
---[=[
-    @interface AssistantMessage
-    @within OpenRouterTypes
-    Assistant message for requests and responses
-    
-    @field role "assistant"
-    @field content (string | {ChatMessageContentItem})? -- Assistant message content
-    @field name string? -- Optional name for the assistant
-    @field tool_calls {ChatMessageToolCall}? -- Tool calls made by the assistant
-    @field refusal string? -- Refusal message if content was refused
-    @field reasoning string? -- Reasoning output
-    @field reasoning_details AssistantMessageReasoningDetails?
-    @field images AssistantMessageImages?
-]=]
-export type AssistantMessage = {
-	role: "assistant",
-	content: (string | { ChatMessageContentItem })?,
-	name: string?,
-	tool_calls: { ChatMessageToolCall }?,
-	refusal: string?,
-	reasoning: string?,
-	reasoning_details: AssistantMessageReasoningDetails?,
-	images: AssistantMessageImages?,
+export type Usage = OpenAIResponsesUsage & {
+	cost: number?,
+	is_byok: boolean?,
+	cost_details: {
+		upstream_inference_cost: number?,
+		upstream_inference_input_cost: number,
+		upstream_inference_output_cost: number,
+	}?,
 }
 
 --[=[
-    @interface ChatResponseChoice
+    @type WebSearchCallCompletedEvent OpenAIResponsesSearchCompleted
     @within OpenRouterTypes
-    Chat completion choice
-    
-    @field finish_reason ChatCompletionFinishReason?
-    @field index number -- Choice index; (Ex: 0)
-    @field message AssistantMessage
-    @field logprobs ChatMessageTokenLogprobs?
+    Web search call completed
 ]=]
-export type ChatResponseChoice = {
-	finish_reason: ChatCompletionFinishReason?,
-	index: number,
-	message: AssistantMessage,
-	logprobs: ChatMessageTokenLogprobs?,
-}
+export type WebSearchCallCompletedEvent = OpenAIResponsesSearchCompleted
 
 --[=[
-    @interface ChatResponse
+    @type WebSearchCallInProgressEvent OpenAIResponsesWebSearchCallInProgress
     @within OpenRouterTypes
-    Chat completion response
-    
-    @field id string -- Unique completion identifier; (Ex: "chatcmpl-123")
-    @field choices {ChatResponseChoice} -- List of completion choices
-    @field created number -- Unix timestamp of creation; (Ex: 1677652288)
-    @field model string -- Model used for completion; (Ex: "openai/gpt-4")
-    @field object "chat.completion"
-    @field system_fingerprint string? -- System fingerprint; (Ex: "fp_44709d6fcb")
-    @field usage ChatGenerationTokenUsage?
+    Web search call in progress
 ]=]
-export type ChatResponse = {
-	id: string,
-	choices: { ChatResponseChoice },
-	created: number,
-	model: string,
-	object: "chat.completion",
-	system_fingerprint: string?,
-	usage: ChatGenerationTokenUsage?,
-}
+export type WebSearchCallInProgressEvent = OpenAIResponsesWebSearchCallInProgress
 
 --[=[
-    @interface ToolResponseMessage
+    @type WebSearchCallSearchingEvent OpenAIResponsesWebSearchCallSearching
     @within OpenRouterTypes
-    Tool response message
-    
-    @field role "tool"
-    @field content (string | {ChatMessageContentItem}) -- Tool response content; (Ex: "The weather in San Francisco is 72°F and sunny.")
-    @field tool_call_id string -- ID of the assistant message tool call this message responds to; (Ex: "call_abc123")
+    Web search call is searching
 ]=]
-export type ToolResponseMessage = { role: "tool", content: string | { ChatMessageContentItem }, tool_call_id: string }
+export type WebSearchCallSearchingEvent = OpenAIResponsesWebSearchCallSearching
 
 --[=[
-    @interface UserMessage
-    @within OpenRouterTypes
-    User message
-    
-    @field role "user"
-    @field content (string | {ChatMessageContentItem}) -- User message content; (Ex: "What is the capital of France?")
-    @field name string? -- Optional name for the user; (Ex: "User")
-]=]
-export type UserMessage = { role: "user", content: string | { ChatMessageContentItem }, name: string? }
-
---[=[
-    @type Message (SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage)
-    @within OpenRouterTypes
-    Chat completion message with role-based discrimination
-]=]
-export type Message = SystemMessage | UserMessage | DeveloperMessage | AssistantMessage | ToolResponseMessage
-
---[=[
-    @type WebSearchEngine ("native" | "exa")
+    @type WebSearchEngine ("native" | "exa" | "firecrawl" | "parallel")
     @within OpenRouterTypes
     The search engine to use for web search.
 ]=]
-export type WebSearchEngine = "native" | "exa"
+export type WebSearchEngine = "native" | "exa" | "firecrawl" | "parallel"
 
 --[=[
-    @interface AnthropicMessagesRequest
+    @interface ChatRequest
+    @within OpenRouterTypes
+    Chat completion request parameters
+    
+    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
+    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine?, include_domains: {string}?, exclude_domains: {string}? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? } | { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? })}? -- Plugins you want to enable for this request, including their settings.
+    @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
+    @field user string? -- Unique user identifier; (Ex: "user-123")
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+    @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+    @field messages {ChatMessages} -- List of messages for the conversation; (Ex: [{"role":"user","content":"Hello!"}])
+    @field model ModelName?
+    @field models ChatModelNames?
+    @field frequency_penalty number? -- Frequency penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
+    @field logit_bias { [string]: number }? -- Token logit bias adjustments; (Ex: {"50256":-100})
+    @field logprobs boolean? -- Return log probabilities; (Ex: false)
+    @field top_logprobs number? -- Number of top log probabilities to return (0-20); Range: 0.0-20.0; (Ex: 5)
+    @field max_completion_tokens number? -- Maximum tokens in completion; Min: 1.0; (Ex: 100)
+    @field max_tokens number? -- Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.; Min: 1.0; (Ex: 100)
+    @field metadata { [string]: string }? -- Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values); (Ex: {"user_id":"user-123","session_id":"session-456"})
+    @field presence_penalty number? -- Presence penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
+    @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ChatReasoningSummaryVerbosityEnum? }? -- Configuration options for reasoning models; (Ex: {"effort":"medium","summary":"concise"})
+    @field response_format (ChatFormatTextConfig | FormatJsonObjectConfig | ChatFormatJsonSchemaConfig | ChatFormatGrammarConfig | ChatFormatPythonConfig)? -- Response format configuration; (Ex: {"type":"json_object"})
+    @field seed number? -- Random seed for deterministic outputs; (Ex: 42)
+    @field stop (string | {string})? -- Stop sequences (up to 4); (Ex: ["\n"])
+    @field stream boolean? -- Enable streaming response; Default: False; (Ex: false)
+    @field stream_options ChatStreamOptions?
+    @field temperature number? -- Sampling temperature (0-2); Range: 0.0-2.0; Default: 1; (Ex: 0.7)
+    @field parallel_tool_calls boolean?
+    @field tool_choice ChatToolChoice?
+    @field tools {ChatFunctionTool}? -- Available tools for function calling; (Ex: [{"type":"function","function":{"name":"get_weather","description":"Get weather"}}])
+    @field top_p number? -- Nucleus sampling parameter (0-1); Range: 0.0-1.0; Default: 1; (Ex: 1)
+    @field debug ChatDebugOptions?
+    @field image_config { [string]: (string | number | {any?}) }? -- Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.; (Ex: {"aspect_ratio":"16:9"})
+    @field modalities {("text" | "image" | "audio")}? -- Output modalities for the response. Supported values are "text", "image", and "audio".; (Ex: ["text","image"])
+    @field cache_control { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? -- Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+    @field service_tier ("auto" | "default" | "flex" | "priority" | "scale")? -- The service tier to use for processing this request.; (Ex: "auto")
+]=]
+export type ChatRequest = {
+	provider: {
+		allow_fallbacks: boolean?,
+		require_parameters: boolean?,
+		data_collection: DataCollection?,
+		zdr: boolean?,
+		enforce_distillable_text: boolean?,
+		order: { ProviderName | string }?,
+		only: { ProviderName | string }?,
+		ignore: { ProviderName | string }?,
+		quantizations: { Quantization }?,
+		sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?,
+		max_price: {
+			prompt: BigNumberUnion?,
+			completion: BigNumberUnion?,
+			image: BigNumberUnion?,
+			audio: BigNumberUnion?,
+			request: BigNumberUnion?,
+		}?,
+		preferred_min_throughput: PreferredMinThroughput?,
+		preferred_max_latency: PreferredMaxLatency?,
+	}?,
+	plugins: {
+		(
+			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
+			| { id: "moderation" }
+			| {
+				id: "web",
+				enabled: boolean?,
+				max_results: number?,
+				search_prompt: string?,
+				engine: WebSearchEngine?,
+				include_domains: { string }?,
+				exclude_domains: { string }?,
+			}
+			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
+			| { id: "response-healing", enabled: boolean? }
+			| { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? }
+		)
+	}?,
+	route: ("fallback" | "sort")?,
+	user: string?,
+	session_id: string?,
+	trace: { [string]: any? }?,
+	messages: { ChatMessages },
+	model: ModelName?,
+	models: ChatModelNames?,
+	frequency_penalty: number?,
+	logit_bias: { [string]: number }?,
+	logprobs: boolean?,
+	top_logprobs: number?,
+	max_completion_tokens: number?,
+	max_tokens: number?,
+	metadata: { [string]: string }?,
+	presence_penalty: number?,
+	reasoning: {
+		effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?,
+		summary: ChatReasoningSummaryVerbosityEnum?,
+	}?,
+	response_format: (
+		ChatFormatTextConfig
+		| FormatJsonObjectConfig
+		| ChatFormatJsonSchemaConfig
+		| ChatFormatGrammarConfig
+		| ChatFormatPythonConfig
+	)?,
+	seed: number?,
+	stop: (string | { string })?,
+	stream: boolean?,
+	stream_options: ChatStreamOptions?,
+	temperature: number?,
+	parallel_tool_calls: boolean?,
+	tool_choice: ChatToolChoice?,
+	tools: { ChatFunctionTool }?,
+	top_p: number?,
+	debug: ChatDebugOptions?,
+	image_config: { [string]: string | number | { any? } }?,
+	modalities: { "text" | "image" | "audio" }?,
+	cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+	service_tier: ("auto" | "default" | "flex" | "priority" | "scale")?,
+}
+
+--[=[
+    @interface MessagesRequest
     @within OpenRouterTypes
     Request schema for Anthropic Messages API endpoint
     
     @field model string
-    @field max_tokens number
-    @field messages {OpenRouterAnthropicMessageParam}
+    @field max_tokens number?
+    @field messages {MessagesMessageParam}?
     @field system (string | {{ ["type"]: "text", text: string, citations: {({ ["type"]: "char_location", cited_text: string, document_index: number, document_title: string?, start_char_index: number, end_char_index: number } | { ["type"]: "page_location", cited_text: string, document_index: number, document_title: string?, start_page_number: number, end_page_number: number } | { ["type"]: "content_block_location", cited_text: string, document_index: number, document_title: string?, start_block_index: number, end_block_index: number } | { ["type"]: "web_search_result_location", cited_text: string, encrypted_index: string, title: string?, url: string } | { ["type"]: "search_result_location", cited_text: string, search_result_index: number, source: string, title: string?, start_block_index: number, end_block_index: number })}?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? }})?
     @field metadata { user_id: string? }?
     @field stop_sequences {string}?
-    @field stream boolean?
     @field temperature number?
     @field top_p number?
     @field top_k number?
-    @field tools {({ name: string, description: string?, input_schema: { [string]: any? }, ["type"]: "custom"?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "bash_20250124", name: "bash", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "text_editor_20250124", name: "str_replace_editor", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_20250305", name: "web_search", allowed_domains: {string}?, blocked_domains: {string}?, max_uses: number?, user_location: { ["type"]: "approximate", city: string?, country: string?, region: string?, timezone: string? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? })}?
+    @field tools {({ name: string, description: string?, input_schema: { [string]: any? }, ["type"]: "custom"?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "bash_20250124", name: "bash", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "text_editor_20250124", name: "str_replace_editor", cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_20250305", name: "web_search", allowed_domains: {string}?, blocked_domains: {string}?, max_uses: number?, user_location: { ["type"]: "approximate", city: string?, country: string?, region: string?, timezone: string? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | { ["type"]: "web_search_20260209", name: "web_search", allowed_callers: {("direct" | "code_execution_20250825" | "code_execution_20260120")}?, allowed_domains: {string}?, blocked_domains: {string}?, max_uses: number?, user_location: { ["type"]: "approximate", city: string?, country: string?, region: string?, timezone: string? }?, cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }? } | DatetimeServerTool | MessagesWebSearchServerTool)}?
     @field tool_choice ({ ["type"]: "auto", disable_parallel_tool_use: boolean? } | { ["type"]: "any", disable_parallel_tool_use: boolean? } | { ["type"]: "none" } | { ["type"]: "tool", name: string, disable_parallel_tool_use: boolean? })?
     @field thinking ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" } | { ["type"]: "adaptive" })?
     @field service_tier ("auto" | "standard_only")?
+    @field output_config MessagesOutputConfig?
+    @field cache_control { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?
+    @field stream boolean?
+    @field context_management { edits: {({ ["type"]: "clear_tool_uses_20250919", clear_at_least: { ["type"]: "input_tokens", value: number }?, clear_tool_inputs: (boolean | {string})?, exclude_tools: {string}?, keep: { ["type"]: "tool_uses", value: number }?, trigger: ({ ["type"]: "input_tokens", value: number } | { ["type"]: "tool_uses", value: number })? } | { ["type"]: "clear_thinking_20251015", keep: ({ ["type"]: "thinking_turns", value: number } | { ["type"]: "all" } | "all")? } | { ["type"]: "compact_20260112", instructions: string?, pause_after_compaction: boolean?, trigger: { ["type"]: "input_tokens", value: number }? })}? }?
     @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine?, include_domains: {string}?, exclude_domains: {string}? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? } | { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? })}? -- Plugins you want to enable for this request, including their settings.
     @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
-    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
-    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
     @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
     @field models {string}?
-    @field output_config AnthropicOutputConfig?
+    @field speed ("fast" | "standard")? -- Controls output generation speed. When set to `fast`, uses a higher-speed inference configuration at premium pricing. Defaults to `standard` when omitted.; (Ex: "fast")
 ]=]
-export type AnthropicMessagesRequest = {
+export type MessagesRequest = {
 	model: string,
-	max_tokens: number,
-	messages: { OpenRouterAnthropicMessageParam },
+	max_tokens: number?,
+	messages: { MessagesMessageParam }?,
 	system: (string | {
 		{
 			["type"]: "text",
@@ -3466,7 +4943,6 @@ export type AnthropicMessagesRequest = {
 	})?,
 	metadata: { user_id: string? }?,
 	stop_sequences: { string }?,
-	stream: boolean?,
 	temperature: number?,
 	top_p: number?,
 	top_k: number?,
@@ -3499,7 +4975,22 @@ export type AnthropicMessagesRequest = {
 				timezone: string?,
 			}?,
 			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
-		}
+		} | {
+			["type"]: "web_search_20260209",
+			name: "web_search",
+			allowed_callers: { "direct" | "code_execution_20250825" | "code_execution_20260120" }?,
+			allowed_domains: { string }?,
+			blocked_domains: { string }?,
+			max_uses: number?,
+			user_location: {
+				["type"]: "approximate",
+				city: string?,
+				country: string?,
+				region: string?,
+				timezone: string?,
+			}?,
+			cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+		} | DatetimeServerTool | MessagesWebSearchServerTool
 	}?,
 	tool_choice: (
 		{ ["type"]: "auto", disable_parallel_tool_use: boolean? }
@@ -3509,6 +5000,29 @@ export type AnthropicMessagesRequest = {
 	)?,
 	thinking: ({ ["type"]: "enabled", budget_tokens: number } | { ["type"]: "disabled" } | { ["type"]: "adaptive" })?,
 	service_tier: ("auto" | "standard_only")?,
+	output_config: MessagesOutputConfig?,
+	cache_control: { ["type"]: "ephemeral", ttl: ("5m" | "1h")? }?,
+	stream: boolean?,
+	context_management: {
+		edits: {
+			{
+				["type"]: "clear_tool_uses_20250919",
+				clear_at_least: { ["type"]: "input_tokens", value: number }?,
+				clear_tool_inputs: (boolean | { string })?,
+				exclude_tools: { string }?,
+				keep: { ["type"]: "tool_uses", value: number }?,
+				trigger: ({ ["type"]: "input_tokens", value: number } | { ["type"]: "tool_uses", value: number })?,
+			} | {
+				["type"]: "clear_thinking_20251015",
+				keep: ({ ["type"]: "thinking_turns", value: number } | { ["type"]: "all" } | "all")?,
+			} | {
+				["type"]: "compact_20260112",
+				instructions: string?,
+				pause_after_compaction: boolean?,
+				trigger: { ["type"]: "input_tokens", value: number }?,
+			}
+		}?,
+	}?,
 	provider: {
 		allow_fallbacks: boolean?,
 		require_parameters: boolean?,
@@ -3534,9 +5048,18 @@ export type AnthropicMessagesRequest = {
 		(
 			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
 			| { id: "moderation" }
-			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
+			| {
+				id: "web",
+				enabled: boolean?,
+				max_results: number?,
+				search_prompt: string?,
+				engine: WebSearchEngine?,
+				include_domains: { string }?,
+				exclude_domains: { string }?,
+			}
 			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
 			| { id: "response-healing", enabled: boolean? }
+			| { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? }
 		)
 	}?,
 	route: ("fallback" | "sort")?,
@@ -3544,163 +5067,20 @@ export type AnthropicMessagesRequest = {
 	session_id: string?,
 	trace: { [string]: any? }?,
 	models: { string }?,
-	output_config: AnthropicOutputConfig?,
+	speed: ("fast" | "standard")?,
 }
 
 --[=[
-    @interface ChatGenerationParams
+    @interface WebSearchServerTool_OpenRouter
     @within OpenRouterTypes
-    Chat completion request parameters
+    OpenRouter built-in server tool: searches the web for current information
     
-    @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
-    @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
-    @field user string? -- Unique user identifier; (Ex: "user-123")
-    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-    @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-    @field messages {Message} -- List of messages for the conversation; (Ex: [{"role":"user","content":"Hello!"}])
-    @field model ModelName?
-    @field models ModelNames?
-    @field frequency_penalty number? -- Frequency penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
-    @field logit_bias { [string]: number }? -- Token logit bias adjustments; (Ex: {"50256":-100})
-    @field logprobs boolean? -- Return log probabilities; (Ex: false)
-    @field top_logprobs number? -- Number of top log probabilities to return (0-20); Range: 0.0-20.0; (Ex: 5)
-    @field max_completion_tokens number? -- Maximum tokens in completion; Min: 1.0; (Ex: 100)
-    @field max_tokens number? -- Maximum tokens (deprecated, use max_completion_tokens); Min: 1.0; (Ex: 100)
-    @field metadata { [string]: string }? -- Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values); (Ex: {"user_id":"user-123","session_id":"session-456"})
-    @field presence_penalty number? -- Presence penalty (-2.0 to 2.0); Range: -2.0-2.0; (Ex: 0)
-    @field reasoning { effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?, summary: ReasoningSummaryVerbosity? }? -- Configuration options for reasoning models; (Ex: {"effort":"medium","summary":"concise"})
-    @field response_format (ResponseFormatText | ResponseFormatJSONObject | ResponseFormatJSONSchema | ResponseFormatTextGrammar | ResponseFormatTextPython)? -- Response format configuration; (Ex: {"type":"json_object"})
-    @field seed number? -- Random seed for deterministic outputs; (Ex: 42)
-    @field stop (string | {string})? -- Stop sequences (up to 4); (Ex: ["\n"])
-    @field stream boolean? -- Enable streaming response; Default: False; (Ex: false)
-    @field stream_options ChatStreamOptions?
-    @field temperature number? -- Sampling temperature (0-2); Range: 0.0-2.0; Default: 1; (Ex: 0.7)
-    @field parallel_tool_calls boolean?
-    @field tool_choice ToolChoiceOption?
-    @field tools {ToolDefinitionJson}? -- Available tools for function calling; (Ex: [{"type":"function","function":{"name":"get_weather","description":"Get weather"}}])
-    @field top_p number? -- Nucleus sampling parameter (0-1); Range: 0.0-1.0; Default: 1; (Ex: 1)
-    @field debug DebugOptions?
-    @field image_config { [string]: (string | number | {any?}) }? -- Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.; (Ex: {"aspect_ratio":"16:9"})
-    @field modalities {("text" | "image")}? -- Output modalities for the response. Supported values are "text" and "image".; (Ex: ["text","image"])
+    @field type "openrouter:web_search"
+    @field parameters { max_results: number?, max_total_results: number? }?
 ]=]
-export type ChatGenerationParams = {
-	provider: {
-		allow_fallbacks: boolean?,
-		require_parameters: boolean?,
-		data_collection: DataCollection?,
-		zdr: boolean?,
-		enforce_distillable_text: boolean?,
-		order: { ProviderName | string }?,
-		only: { ProviderName | string }?,
-		ignore: { ProviderName | string }?,
-		quantizations: { Quantization }?,
-		sort: (ProviderSort & (ProviderSort | ProviderSortConfig))?,
-		max_price: {
-			prompt: BigNumberUnion?,
-			completion: BigNumberUnion?,
-			image: BigNumberUnion?,
-			audio: BigNumberUnion?,
-			request: BigNumberUnion?,
-		}?,
-		preferred_min_throughput: PreferredMinThroughput?,
-		preferred_max_latency: PreferredMaxLatency?,
-	}?,
-	plugins: {
-		(
-			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
-			| { id: "moderation" }
-			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
-			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
-			| { id: "response-healing", enabled: boolean? }
-		)
-	}?,
-	route: ("fallback" | "sort")?,
-	user: string?,
-	session_id: string?,
-	trace: { [string]: any? }?,
-	messages: { Message },
-	model: ModelName?,
-	models: ModelNames?,
-	frequency_penalty: number?,
-	logit_bias: { [string]: number }?,
-	logprobs: boolean?,
-	top_logprobs: number?,
-	max_completion_tokens: number?,
-	max_tokens: number?,
-	metadata: { [string]: string }?,
-	presence_penalty: number?,
-	reasoning: {
-		effort: ("xhigh" | "high" | "medium" | "low" | "minimal" | "none")?,
-		summary: ReasoningSummaryVerbosity?,
-	}?,
-	response_format: (
-		ResponseFormatText
-		| ResponseFormatJSONObject
-		| ResponseFormatJSONSchema
-		| ResponseFormatTextGrammar
-		| ResponseFormatTextPython
-	)?,
-	seed: number?,
-	stop: (string | { string })?,
-	stream: boolean?,
-	stream_options: ChatStreamOptions?,
-	temperature: number?,
-	parallel_tool_calls: boolean?,
-	tool_choice: ToolChoiceOption?,
-	tools: { ToolDefinitionJson }?,
-	top_p: number?,
-	debug: DebugOptions?,
-	image_config: { [string]: string | number | { any? } }?,
-	modalities: { "text" | "image" }?,
-}
-
---[=[
-    @interface WebSearchPreviewToolUserLocation
-    @within OpenRouterTypes
-    
-    @field type "approximate"
-    @field city string?
-    @field country string?
-    @field region string?
-    @field timezone string?
-]=]
-export type WebSearchPreviewToolUserLocation = {
-	["type"]: "approximate",
-	city: string?,
-	country: string?,
-	region: string?,
-	timezone: string?,
-}?
-
---[=[
-    @interface OpenResponsesWebSearchPreview20250311Tool
-    @within OpenRouterTypes
-    Web search preview tool configuration (2025-03-11 version)
-    
-    @field type "web_search_preview_2025_03_11"
-    @field search_context_size ResponsesSearchContextSize?
-    @field user_location WebSearchPreviewToolUserLocation?
-]=]
-export type OpenResponsesWebSearchPreview20250311Tool = {
-	["type"]: "web_search_preview_2025_03_11",
-	search_context_size: ResponsesSearchContextSize?,
-	user_location: WebSearchPreviewToolUserLocation?,
-}
-
---[=[
-    @interface OpenResponsesWebSearchPreviewTool
-    @within OpenRouterTypes
-    Web search preview tool configuration
-    
-    @field type "web_search_preview"
-    @field search_context_size ResponsesSearchContextSize?
-    @field user_location WebSearchPreviewToolUserLocation?
-]=]
-export type OpenResponsesWebSearchPreviewTool = {
-	["type"]: "web_search_preview",
-	search_context_size: ResponsesSearchContextSize?,
-	user_location: WebSearchPreviewToolUserLocation?,
+export type WebSearchServerTool_OpenRouter = {
+	["type"]: "openrouter:web_search",
+	parameters: { max_results: number?, max_total_results: number? }?,
 }
 
 --[=[
@@ -3726,17 +5106,188 @@ export type OutputItemFileSearchCall = {
 }
 
 --[=[
+    @type OutputFileSearchCallItem OutputItemFileSearchCall
+    @within OpenRouterTypes
+]=]
+export type OutputFileSearchCallItem = OutputItemFileSearchCall
+
+--[=[
     @interface OutputItemWebSearchCall
     @within OpenRouterTypes
     
     @field type "web_search_call"
     @field id string
+    @field action ({ ["type"]: "search", query: string, queries: {string}?, sources: {{ ["type"]: "url", url: string }}? } | { ["type"]: "open_page", url: string? } | { ["type"]: "find_in_page", pattern: string, url: string })
     @field status WebSearchStatus
 ]=]
-export type OutputItemWebSearchCall = { ["type"]: "web_search_call", id: string, status: WebSearchStatus }
+export type OutputItemWebSearchCall = {
+	["type"]: "web_search_call",
+	id: string,
+	action: (
+		{ ["type"]: "search", query: string, queries: { string }?, sources: { { ["type"]: "url", url: string } }? }
+		| { ["type"]: "open_page", url: string? }
+		| { ["type"]: "find_in_page", pattern: string, url: string }
+	),
+	status: WebSearchStatus,
+}
 
 --[=[
-    @interface OpenAIResponsesNonStreamingResponse
+    @interface OutputItemAddedEvent
+    @within OpenRouterTypes
+    Event emitted when a new output item is added to the response
+    
+    @field type "response.output_item.added"
+    @field output_index number
+    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
+    @field sequence_number number
+]=]
+export type OutputItemAddedEvent = {
+	["type"]: "response.output_item.added",
+	output_index: number,
+	item: (
+		OutputMessage
+		| OutputItemReasoning
+		| OutputItemFunctionCall
+		| OutputItemWebSearchCall
+		| OutputItemFileSearchCall
+		| OutputItemImageGenerationCall
+	),
+	sequence_number: number,
+}
+
+--[=[
+    @interface OutputItemDoneEvent
+    @within OpenRouterTypes
+    Event emitted when an output item is complete
+    
+    @field type "response.output_item.done"
+    @field output_index number
+    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
+    @field sequence_number number
+]=]
+export type OutputItemDoneEvent = {
+	["type"]: "response.output_item.done",
+	output_index: number,
+	item: (
+		OutputMessage
+		| OutputItemReasoning
+		| OutputItemFunctionCall
+		| OutputItemWebSearchCall
+		| OutputItemFileSearchCall
+		| OutputItemImageGenerationCall
+	),
+	sequence_number: number,
+}
+
+--[=[
+    @type OutputWebSearchCallItem OutputItemWebSearchCall
+    @within OpenRouterTypes
+]=]
+export type OutputWebSearchCallItem = OutputItemWebSearchCall
+
+--[=[
+    @type Inputs (string | {(ReasoningItem | EasyInputMessage | InputMessageItem | FunctionCallItem | FunctionCallOutputItem | (OutputMessageItem & { content: ({(ResponseOutputText | OpenAIResponsesRefusalContent)} | string)? }) | (OutputReasoningItem & { summary: {ReasoningSummaryText}? }) | OutputFunctionCallItem | OutputWebSearchCallItem | OutputFileSearchCallItem | OutputImageGenerationCallItem | OutputDatetimeItem | OutputServerToolItem)})
+    @within OpenRouterTypes
+    Input for a response request - can be a string or array of items
+]=]
+export type Inputs =
+	string
+	| {
+		(
+			ReasoningItem
+			| EasyInputMessage
+			| InputMessageItem
+			| FunctionCallItem
+			| FunctionCallOutputItem
+			| (OutputMessageItem & { content: ({ ResponseOutputText | OpenAIResponsesRefusalContent } | string)? })
+			| (OutputReasoningItem & { summary: { ReasoningSummaryText }? })
+			| OutputFunctionCallItem
+			| OutputWebSearchCallItem
+			| OutputFileSearchCallItem
+			| OutputImageGenerationCallItem
+			| OutputDatetimeItem
+			| OutputServerToolItem
+		)
+	}
+
+--[=[
+    @type OutputItems (OutputMessageItem | OutputReasoningItem | OutputFunctionCallItem | OutputWebSearchCallItem | OutputFileSearchCallItem | OutputImageGenerationCallItem | OutputServerToolItem)
+    @within OpenRouterTypes
+    An output item from the response
+]=]
+export type OutputItems = (
+	OutputMessageItem
+	| OutputReasoningItem
+	| OutputFunctionCallItem
+	| OutputWebSearchCallItem
+	| OutputFileSearchCallItem
+	| OutputImageGenerationCallItem
+	| OutputServerToolItem
+)
+
+--[=[
+    @interface WebSearchUserLocation
+    @within OpenRouterTypes
+    User location information for web search
+    
+    @field type "approximate"?
+    @field city string?
+    @field country string?
+    @field region string?
+    @field timezone string?
+]=]
+export type WebSearchUserLocation = {
+	["type"]: "approximate"?,
+	city: string?,
+	country: string?,
+	region: string?,
+	timezone: string?,
+}?
+
+--[=[
+    @interface Legacy_WebSearchServerTool
+    @within OpenRouterTypes
+    Web search tool configuration
+    
+    @field type "web_search"
+    @field filters { allowed_domains: {string}?, excluded_domains: {string}? }?
+    @field search_context_size SearchContextSizeEnum?
+    @field user_location WebSearchUserLocation?
+    @field engine ("auto" | "native" | "exa" | "firecrawl" | "parallel")? -- Which search engine to use. "auto" (default) uses native if the provider supports it, otherwise Exa. "native" forces the provider's built-in search. "exa" forces the Exa search API. "firecrawl" uses Firecrawl (requires BYOK). "parallel" uses the Parallel search API.; (Ex: "auto")
+    @field max_results number? -- Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search.; Range: 1.0-25.0; (Ex: 5)
+]=]
+export type Legacy_WebSearchServerTool = {
+	["type"]: "web_search",
+	filters: { allowed_domains: { string }?, excluded_domains: { string }? }?,
+	search_context_size: SearchContextSizeEnum?,
+	user_location: WebSearchUserLocation?,
+	engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+	max_results: number?,
+}
+
+--[=[
+    @interface WebSearchServerTool
+    @within OpenRouterTypes
+    Web search tool configuration (2025-08-26 version)
+    
+    @field type "web_search_2025_08_26"
+    @field filters { allowed_domains: {string}?, excluded_domains: {string}? }?
+    @field search_context_size SearchContextSizeEnum?
+    @field user_location WebSearchUserLocation?
+    @field engine ("auto" | "native" | "exa" | "firecrawl" | "parallel")? -- Which search engine to use. "auto" (default) uses native if the provider supports it, otherwise Exa. "native" forces the provider's built-in search. "exa" forces the Exa search API. "firecrawl" uses Firecrawl (requires BYOK). "parallel" uses the Parallel search API.; (Ex: "auto")
+    @field max_results number? -- Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search.; Range: 1.0-25.0; (Ex: 5)
+]=]
+export type WebSearchServerTool = {
+	["type"]: "web_search_2025_08_26",
+	filters: { allowed_domains: { string }?, excluded_domains: { string }? }?,
+	search_context_size: SearchContextSizeEnum?,
+	user_location: WebSearchUserLocation?,
+	engine: ("auto" | "native" | "exa" | "firecrawl" | "parallel")?,
+	max_results: number?,
+}
+
+--[=[
+    @interface BaseResponsesResult
     @within OpenRouterTypes
     
     @field id string
@@ -3751,7 +5302,7 @@ export type OutputItemWebSearchCall = { ["type"]: "web_search_call", id: string,
     @field prompt_cache_key string?
     @field safety_identifier string?
     @field error ResponsesErrorField
-    @field incomplete_details OpenAIResponsesIncompleteDetails
+    @field incomplete_details IncompleteDetails
     @field usage OpenAIResponsesUsage?
     @field max_tool_calls number?
     @field top_logprobs number?
@@ -3760,21 +5311,21 @@ export type OutputItemWebSearchCall = { ["type"]: "web_search_call", id: string,
     @field top_p number?
     @field presence_penalty number?
     @field frequency_penalty number?
-    @field instructions OpenAIResponsesInput
-    @field metadata OpenResponsesRequestMetadata
-    @field tools {(OpenResponsesFunctionTool | OpenResponsesWebSearchPreviewTool | OpenResponsesWebSearchPreview20250311Tool | OpenResponsesWebSearchTool | OpenResponsesWebSearch20250826Tool)}
+    @field instructions BaseInputs
+    @field metadata RequestMetadata
+    @field tools {(FunctionTool | Preview_WebSearchServerTool | Preview_20250311_WebSearchServerTool | Legacy_WebSearchServerTool | WebSearchServerTool | FileSearchServerTool | ComputerUseServerTool | CodeInterpreterServerTool | McpServerTool | ImageGenerationServerTool | CodexLocalShellTool | ShellServerTool | ApplyPatchServerTool | CustomTool)}
     @field tool_choice OpenAIResponsesToolChoice
     @field parallel_tool_calls boolean
-    @field prompt OpenAIResponsesPrompt?
+    @field prompt StoredPromptTemplate?
     @field background boolean?
     @field previous_response_id string?
-    @field reasoning OpenAIResponsesReasoningConfig?
-    @field service_tier OpenAIResponsesServiceTier?
+    @field reasoning BaseReasoningConfig?
+    @field service_tier ServiceTierEnum?
     @field store boolean?
-    @field truncation OpenAIResponsesTruncation?
-    @field text ResponseTextConfig?
+    @field truncation TruncationEnum?
+    @field text TextConfig?
 ]=]
-export type OpenAIResponsesNonStreamingResponse = {
+export type BaseResponsesResult = {
 	id: string,
 	object: "response",
 	created_at: number,
@@ -3796,7 +5347,7 @@ export type OpenAIResponsesNonStreamingResponse = {
 	prompt_cache_key: string?,
 	safety_identifier: string?,
 	error: ResponsesErrorField,
-	incomplete_details: OpenAIResponsesIncompleteDetails,
+	incomplete_details: IncompleteDetails,
 	usage: OpenAIResponsesUsage?,
 	max_tool_calls: number?,
 	top_logprobs: number?,
@@ -3805,202 +5356,117 @@ export type OpenAIResponsesNonStreamingResponse = {
 	top_p: number?,
 	presence_penalty: number?,
 	frequency_penalty: number?,
-	instructions: OpenAIResponsesInput,
-	metadata: OpenResponsesRequestMetadata,
+	instructions: BaseInputs,
+	metadata: RequestMetadata,
 	tools: {
 		(
-			OpenResponsesFunctionTool
-			| OpenResponsesWebSearchPreviewTool
-			| OpenResponsesWebSearchPreview20250311Tool
-			| OpenResponsesWebSearchTool
-			| OpenResponsesWebSearch20250826Tool
+			FunctionTool
+			| Preview_WebSearchServerTool
+			| Preview_20250311_WebSearchServerTool
+			| Legacy_WebSearchServerTool
+			| WebSearchServerTool
+			| FileSearchServerTool
+			| ComputerUseServerTool
+			| CodeInterpreterServerTool
+			| McpServerTool
+			| ImageGenerationServerTool
+			| CodexLocalShellTool
+			| ShellServerTool
+			| ApplyPatchServerTool
+			| CustomTool
 		)
 	},
 	tool_choice: OpenAIResponsesToolChoice,
 	parallel_tool_calls: boolean,
-	prompt: OpenAIResponsesPrompt?,
+	prompt: StoredPromptTemplate?,
 	background: boolean?,
 	previous_response_id: string?,
-	reasoning: OpenAIResponsesReasoningConfig?,
-	service_tier: OpenAIResponsesServiceTier?,
+	reasoning: BaseReasoningConfig?,
+	service_tier: ServiceTierEnum?,
 	store: boolean?,
-	truncation: OpenAIResponsesTruncation?,
-	text: ResponseTextConfig?,
+	truncation: TruncationEnum?,
+	text: TextConfig?,
 }
 
 --[=[
-    @interface OpenResponsesCompletedEvent
+    @interface CompletedEvent
     @within OpenRouterTypes
     Event emitted when a response has completed successfully
     
     @field type "response.completed"
-    @field response OpenAIResponsesNonStreamingResponse
+    @field response BaseResponsesResult
     @field sequence_number number
 ]=]
-export type OpenResponsesCompletedEvent = {
-	["type"]: "response.completed",
-	response: OpenAIResponsesNonStreamingResponse,
-	sequence_number: number,
-}
+export type CompletedEvent = { ["type"]: "response.completed", response: BaseResponsesResult, sequence_number: number }
 
 --[=[
-    @interface OpenResponsesCreatedEvent
+    @interface CreatedEvent
     @within OpenRouterTypes
     Event emitted when a response is created
     
     @field type "response.created"
-    @field response OpenAIResponsesNonStreamingResponse
+    @field response BaseResponsesResult
     @field sequence_number number
 ]=]
-export type OpenResponsesCreatedEvent = {
-	["type"]: "response.created",
-	response: OpenAIResponsesNonStreamingResponse,
-	sequence_number: number,
-}
+export type CreatedEvent = { ["type"]: "response.created", response: BaseResponsesResult, sequence_number: number }
 
 --[=[
-    @interface OpenResponsesFailedEvent
+    @interface FailedEvent
     @within OpenRouterTypes
     Event emitted when a response has failed
     
     @field type "response.failed"
-    @field response OpenAIResponsesNonStreamingResponse
+    @field response BaseResponsesResult
     @field sequence_number number
 ]=]
-export type OpenResponsesFailedEvent = {
-	["type"]: "response.failed",
-	response: OpenAIResponsesNonStreamingResponse,
-	sequence_number: number,
-}
+export type FailedEvent = { ["type"]: "response.failed", response: BaseResponsesResult, sequence_number: number }
 
 --[=[
-    @interface OpenResponsesInProgressEvent
+    @interface InProgressEvent
     @within OpenRouterTypes
     Event emitted when a response is in progress
     
     @field type "response.in_progress"
-    @field response OpenAIResponsesNonStreamingResponse
+    @field response BaseResponsesResult
     @field sequence_number number
 ]=]
-export type OpenResponsesInProgressEvent = {
-	["type"]: "response.in_progress",
-	response: OpenAIResponsesNonStreamingResponse,
-	sequence_number: number,
-}
+export type InProgressEvent = { ["type"]: "response.in_progress", response: BaseResponsesResult, sequence_number: number }
 
 --[=[
-    @interface OpenResponsesIncompleteEvent
+    @interface IncompleteEvent
     @within OpenRouterTypes
     Event emitted when a response is incomplete
     
     @field type "response.incomplete"
-    @field response OpenAIResponsesNonStreamingResponse
+    @field response BaseResponsesResult
     @field sequence_number number
 ]=]
-export type OpenResponsesIncompleteEvent = {
-	["type"]: "response.incomplete",
-	response: OpenAIResponsesNonStreamingResponse,
-	sequence_number: number,
-}
+export type IncompleteEvent = { ["type"]: "response.incomplete", response: BaseResponsesResult, sequence_number: number }
 
 --[=[
-    @interface OpenResponsesOutputItemAddedEvent
+    @type OpenResponsesResult (BaseResponsesResult & { output: {OutputItems}?, usage: Usage?, service_tier: string? })
     @within OpenRouterTypes
-    Event emitted when a new output item is added to the response
-    
-    @field type "response.output_item.added"
-    @field output_index number
-    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
-    @field sequence_number number
+    Complete non-streaming response from the Responses API
 ]=]
-export type OpenResponsesOutputItemAddedEvent = {
-	["type"]: "response.output_item.added",
-	output_index: number,
-	item: (
-		OutputMessage
-		| OutputItemReasoning
-		| OutputItemFunctionCall
-		| OutputItemWebSearchCall
-		| OutputItemFileSearchCall
-		| OutputItemImageGenerationCall
-	),
-	sequence_number: number,
-}
+export type OpenResponsesResult = (
+	BaseResponsesResult & { output: { OutputItems }?, usage: Usage?, service_tier: string? }
+)
 
 --[=[
-    @interface OpenResponsesOutputItemDoneEvent
-    @within OpenRouterTypes
-    Event emitted when an output item is complete
-    
-    @field type "response.output_item.done"
-    @field output_index number
-    @field item (OutputMessage | OutputItemReasoning | OutputItemFunctionCall | OutputItemWebSearchCall | OutputItemFileSearchCall | OutputItemImageGenerationCall)
-    @field sequence_number number
-]=]
-export type OpenResponsesOutputItemDoneEvent = {
-	["type"]: "response.output_item.done",
-	output_index: number,
-	item: (
-		OutputMessage
-		| OutputItemReasoning
-		| OutputItemFunctionCall
-		| OutputItemWebSearchCall
-		| OutputItemFileSearchCall
-		| OutputItemImageGenerationCall
-	),
-	sequence_number: number,
-}
-
---[=[
-    @type ResponsesOutputItemFileSearchCall OutputItemFileSearchCall
-    @within OpenRouterTypes
-]=]
-export type ResponsesOutputItemFileSearchCall = OutputItemFileSearchCall
-
---[=[
-    @type ResponsesWebSearchCallOutput OutputItemWebSearchCall
-    @within OpenRouterTypes
-]=]
-export type ResponsesWebSearchCallOutput = OutputItemWebSearchCall
-
---[=[
-    @type OpenResponsesInput (string | {(OpenResponsesReasoning | OpenResponsesEasyInputMessage | OpenResponsesInputMessageItem | OpenResponsesFunctionToolCall | OpenResponsesFunctionCallOutput | ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)})
-    @within OpenRouterTypes
-    Input for a response request - can be a string or array of items
-]=]
-export type OpenResponsesInput =
-	string
-	| {
-		(
-			OpenResponsesReasoning
-			| OpenResponsesEasyInputMessage
-			| OpenResponsesInputMessageItem
-			| OpenResponsesFunctionToolCall
-			| OpenResponsesFunctionCallOutput
-			| ResponsesOutputMessage
-			| ResponsesOutputItemReasoning
-			| ResponsesOutputItemFunctionCall
-			| ResponsesWebSearchCallOutput
-			| ResponsesOutputItemFileSearchCall
-			| ResponsesImageGenerationCall
-		)
-	}
-
---[=[
-    @interface OpenResponsesRequest
+    @interface ResponsesRequest
     @within OpenRouterTypes
     Request schema for Responses endpoint
     
-    @field input OpenResponsesInput?
+    @field input Inputs?
     @field instructions string?
-    @field metadata OpenResponsesRequestMetadata?
-    @field tools {(OpenResponsesFunctionTool | OpenResponsesWebSearchPreviewTool | OpenResponsesWebSearchPreview20250311Tool | OpenResponsesWebSearchTool | OpenResponsesWebSearch20250826Tool)}?
+    @field metadata RequestMetadata?
+    @field tools {(FunctionTool | Preview_WebSearchServerTool | Preview_20250311_WebSearchServerTool | Legacy_WebSearchServerTool | WebSearchServerTool | FileSearchServerTool | ComputerUseServerTool | CodeInterpreterServerTool | McpServerTool | ImageGenerationServerTool | CodexLocalShellTool | ShellServerTool | ApplyPatchServerTool | CustomTool | DatetimeServerTool | WebSearchServerTool_OpenRouter)}?
     @field tool_choice OpenAIResponsesToolChoice?
     @field parallel_tool_calls boolean?
     @field model string?
     @field models {string}?
-    @field text OpenResponsesResponseText?
-    @field reasoning OpenResponsesReasoningConfig?
+    @field text TextExtendedConfig?
+    @field reasoning ReasoningConfig?
     @field max_output_tokens number?
     @field temperature number? -- Range: 0.0-2.0
     @field top_p number? -- Min: 0.0
@@ -4010,43 +5476,54 @@ export type OpenResponsesInput =
     @field frequency_penalty number? -- Range: -2.0-2.0
     @field top_k number?
     @field image_config { [string]: (string | number) }? -- Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.; (Ex: {"aspect_ratio":"16:9"})
-    @field modalities {ResponsesOutputModality}? -- Output modalities for the response. Supported values are "text" and "image".; (Ex: ["text","image"])
+    @field modalities {OutputModalityEnum}? -- Output modalities for the response. Supported values are "text" and "image".; (Ex: ["text","image"])
     @field prompt_cache_key string?
     @field previous_response_id string?
-    @field prompt OpenAIResponsesPrompt?
-    @field include {OpenAIResponsesIncludable}?
+    @field prompt StoredPromptTemplate?
+    @field include {ResponseIncludesEnum}?
     @field background boolean?
     @field safety_identifier string?
     @field store boolean? -- Default: False
-    @field service_tier "auto"? -- Default: 'auto'
+    @field service_tier ("auto" | "default" | "flex" | "priority" | "scale")? -- Default: 'auto'
     @field truncation OpenAIResponsesTruncation?
     @field stream boolean? -- Default: False
     @field provider { allow_fallbacks: boolean?, require_parameters: boolean?, data_collection: DataCollection?, zdr: boolean?, enforce_distillable_text: boolean?, order: {(ProviderName | string)}?, only: {(ProviderName | string)}?, ignore: {(ProviderName | string)}?, quantizations: {Quantization}?, sort: (ProviderSort | ProviderSortConfig)?, max_price: { prompt: BigNumberUnion?, completion: BigNumberUnion?, image: BigNumberUnion?, audio: BigNumberUnion?, request: BigNumberUnion? }?, preferred_min_throughput: PreferredMinThroughput?, preferred_max_latency: PreferredMaxLatency? }? -- When multiple model providers are available, optionally indicate your routing preference.
-    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? })}? -- Plugins you want to enable for this request, including their settings.
+    @field plugins {({ id: "auto-router", enabled: boolean?, allowed_models: {string}? } | { id: "moderation" } | { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine?, include_domains: {string}?, exclude_domains: {string}? } | { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? } | { id: "response-healing", enabled: boolean? } | { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? })}? -- Plugins you want to enable for this request, including their settings.
     @field route ("fallback" | "sort")? -- @deprecated; **DEPRECATED** Use providers.sort.partition instead. Backwards-compatible alias for providers.sort.partition. Accepts legacy values: "fallback" (maps to "model"), "sort" (maps to "none").
-    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
-    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+    @field user string? -- A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
+    @field session_id string? -- A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
     @field trace { [string]: any? }? -- Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
 ]=]
-export type OpenResponsesRequest = {
-	input: OpenResponsesInput?,
+export type ResponsesRequest = {
+	input: Inputs?,
 	instructions: string?,
-	metadata: OpenResponsesRequestMetadata?,
+	metadata: RequestMetadata?,
 	tools: {
 		(
-			OpenResponsesFunctionTool
-			| OpenResponsesWebSearchPreviewTool
-			| OpenResponsesWebSearchPreview20250311Tool
-			| OpenResponsesWebSearchTool
-			| OpenResponsesWebSearch20250826Tool
+			FunctionTool
+			| Preview_WebSearchServerTool
+			| Preview_20250311_WebSearchServerTool
+			| Legacy_WebSearchServerTool
+			| WebSearchServerTool
+			| FileSearchServerTool
+			| ComputerUseServerTool
+			| CodeInterpreterServerTool
+			| McpServerTool
+			| ImageGenerationServerTool
+			| CodexLocalShellTool
+			| ShellServerTool
+			| ApplyPatchServerTool
+			| CustomTool
+			| DatetimeServerTool
+			| WebSearchServerTool_OpenRouter
 		)
 	}?,
 	tool_choice: OpenAIResponsesToolChoice?,
 	parallel_tool_calls: boolean?,
 	model: string?,
 	models: { string }?,
-	text: OpenResponsesResponseText?,
-	reasoning: OpenResponsesReasoningConfig?,
+	text: TextExtendedConfig?,
+	reasoning: ReasoningConfig?,
 	max_output_tokens: number?,
 	temperature: number?,
 	top_p: number?,
@@ -4056,15 +5533,15 @@ export type OpenResponsesRequest = {
 	frequency_penalty: number?,
 	top_k: number?,
 	image_config: { [string]: string | number }?,
-	modalities: { ResponsesOutputModality }?,
+	modalities: { OutputModalityEnum }?,
 	prompt_cache_key: string?,
 	previous_response_id: string?,
-	prompt: OpenAIResponsesPrompt?,
-	include: { OpenAIResponsesIncludable }?,
+	prompt: StoredPromptTemplate?,
+	include: { ResponseIncludesEnum }?,
 	background: boolean?,
 	safety_identifier: string?,
 	store: boolean?,
-	service_tier: "auto"?,
+	service_tier: ("auto" | "default" | "flex" | "priority" | "scale")?,
 	truncation: OpenAIResponsesTruncation?,
 	stream: boolean?,
 	provider: {
@@ -4092,9 +5569,18 @@ export type OpenResponsesRequest = {
 		(
 			{ id: "auto-router", enabled: boolean?, allowed_models: { string }? }
 			| { id: "moderation" }
-			| { id: "web", enabled: boolean?, max_results: number?, search_prompt: string?, engine: WebSearchEngine? }
+			| {
+				id: "web",
+				enabled: boolean?,
+				max_results: number?,
+				search_prompt: string?,
+				engine: WebSearchEngine?,
+				include_domains: { string }?,
+				exclude_domains: { string }?,
+			}
 			| { id: "file-parser", enabled: boolean?, pdf: PDFParserOptions? }
 			| { id: "response-healing", enabled: boolean? }
+			| { id: "context-compression", enabled: boolean?, engine: ContextCompressionEngine? }
 		)
 	}?,
 	route: ("fallback" | "sort")?,
@@ -4104,75 +5590,49 @@ export type OpenResponsesRequest = {
 }
 
 --[=[
-    @type ResponsesOutputItem (ResponsesOutputMessage | ResponsesOutputItemReasoning | ResponsesOutputItemFunctionCall | ResponsesWebSearchCallOutput | ResponsesOutputItemFileSearchCall | ResponsesImageGenerationCall)
-    @within OpenRouterTypes
-    An output item from the response
-]=]
-export type ResponsesOutputItem = (
-	ResponsesOutputMessage
-	| ResponsesOutputItemReasoning
-	| ResponsesOutputItemFunctionCall
-	| ResponsesWebSearchCallOutput
-	| ResponsesOutputItemFileSearchCall
-	| ResponsesImageGenerationCall
-)
-
---[=[
-    @type OpenResponsesNonStreamingResponse (OpenAIResponsesNonStreamingResponse & { output: {ResponsesOutputItem}?, usage: OpenResponsesUsage? })
-    @within OpenRouterTypes
-    Complete non-streaming response from the Responses API
-]=]
-export type OpenResponsesNonStreamingResponse = (
-	OpenAIResponsesNonStreamingResponse & { output: { ResponsesOutputItem }?, usage: OpenResponsesUsage? }
-)
-
---[=[
-    @type OpenResponsesStreamEvent ((OpenResponsesCreatedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesInProgressEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesCompletedEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesIncompleteEvent & { response: OpenResponsesNonStreamingResponse? }) | (OpenResponsesFailedEvent & { response: OpenResponsesNonStreamingResponse? }) | OpenResponsesErrorEvent | (OpenResponsesOutputItemAddedEvent & { item: ResponsesOutputItem? }) | (OpenResponsesOutputItemDoneEvent & { item: ResponsesOutputItem? }) | (OpenResponsesContentPartAddedEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | (OpenResponsesContentPartDoneEvent & { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }) | OpenResponsesTextDeltaEvent | OpenResponsesTextDoneEvent | OpenResponsesRefusalDeltaEvent | OpenResponsesRefusalDoneEvent | OpenResponsesOutputTextAnnotationAddedEvent | OpenResponsesFunctionCallArgumentsDeltaEvent | OpenResponsesFunctionCallArgumentsDoneEvent | OpenResponsesReasoningDeltaEvent | OpenResponsesReasoningDoneEvent | OpenResponsesReasoningSummaryPartAddedEvent | OpenResponsesReasoningSummaryPartDoneEvent | OpenResponsesReasoningSummaryTextDeltaEvent | OpenResponsesReasoningSummaryTextDoneEvent | OpenResponsesImageGenCallInProgress | OpenResponsesImageGenCallGenerating | OpenResponsesImageGenCallPartialImage | OpenResponsesImageGenCallCompleted)
+    @type StreamEvents ((CreatedEvent & { response: OpenResponsesResult? }) | (InProgressEvent & { response: OpenResponsesResult? }) | (CompletedEvent & { response: OpenResponsesResult? }) | (IncompleteEvent & { response: OpenResponsesResult? }) | (FailedEvent & { response: OpenResponsesResult? }) | ErrorEvent | (OutputItemAddedEvent & { item: OutputItems? }) | (OutputItemDoneEvent & { item: OutputItems? }) | ContentPartAddedEvent | ContentPartDoneEvent | TextDeltaEvent | TextDoneEvent | RefusalDeltaEvent | RefusalDoneEvent | AnnotationAddedEvent | FunctionCallArgsDeltaEvent | FunctionCallArgsDoneEvent | ReasoningDeltaEvent | ReasoningDoneEvent | ReasoningSummaryPartAddedEvent | ReasoningSummaryPartDoneEvent | ReasoningSummaryTextDeltaEvent | ReasoningSummaryTextDoneEvent | ImageGenCallInProgressEvent | ImageGenCallGeneratingEvent | ImageGenCallPartialImageEvent | ImageGenCallCompletedEvent | WebSearchCallInProgressEvent | WebSearchCallSearchingEvent | WebSearchCallCompletedEvent)
     @within OpenRouterTypes
     Union of all possible event types emitted during response streaming
 ]=]
-export type OpenResponsesStreamEvent = (
-	(OpenResponsesCreatedEvent & { response: OpenResponsesNonStreamingResponse? })
-	| (OpenResponsesInProgressEvent & { response: OpenResponsesNonStreamingResponse? })
-	| (OpenResponsesCompletedEvent & { response: OpenResponsesNonStreamingResponse? })
-	| (OpenResponsesIncompleteEvent & { response: OpenResponsesNonStreamingResponse? })
-	| (OpenResponsesFailedEvent & { response: OpenResponsesNonStreamingResponse? })
-	| OpenResponsesErrorEvent
-	| (OpenResponsesOutputItemAddedEvent & { item: ResponsesOutputItem? })
-	| (OpenResponsesOutputItemDoneEvent & { item: ResponsesOutputItem? })
-	| (
-		OpenResponsesContentPartAddedEvent
-		& { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }
-	)
-	| (
-		OpenResponsesContentPartDoneEvent
-		& { part: (ResponseOutputText | ReasoningTextContent | OpenAIResponsesRefusalContent)? }
-	)
-	| OpenResponsesTextDeltaEvent
-	| OpenResponsesTextDoneEvent
-	| OpenResponsesRefusalDeltaEvent
-	| OpenResponsesRefusalDoneEvent
-	| OpenResponsesOutputTextAnnotationAddedEvent
-	| OpenResponsesFunctionCallArgumentsDeltaEvent
-	| OpenResponsesFunctionCallArgumentsDoneEvent
-	| OpenResponsesReasoningDeltaEvent
-	| OpenResponsesReasoningDoneEvent
-	| OpenResponsesReasoningSummaryPartAddedEvent
-	| OpenResponsesReasoningSummaryPartDoneEvent
-	| OpenResponsesReasoningSummaryTextDeltaEvent
-	| OpenResponsesReasoningSummaryTextDoneEvent
-	| OpenResponsesImageGenCallInProgress
-	| OpenResponsesImageGenCallGenerating
-	| OpenResponsesImageGenCallPartialImage
-	| OpenResponsesImageGenCallCompleted
+export type StreamEvents = (
+	(CreatedEvent & { response: OpenResponsesResult? })
+	| (InProgressEvent & { response: OpenResponsesResult? })
+	| (CompletedEvent & { response: OpenResponsesResult? })
+	| (IncompleteEvent & { response: OpenResponsesResult? })
+	| (FailedEvent & { response: OpenResponsesResult? })
+	| ErrorEvent
+	| (OutputItemAddedEvent & { item: OutputItems? })
+	| (OutputItemDoneEvent & { item: OutputItems? })
+	| ContentPartAddedEvent
+	| ContentPartDoneEvent
+	| TextDeltaEvent
+	| TextDoneEvent
+	| RefusalDeltaEvent
+	| RefusalDoneEvent
+	| AnnotationAddedEvent
+	| FunctionCallArgsDeltaEvent
+	| FunctionCallArgsDoneEvent
+	| ReasoningDeltaEvent
+	| ReasoningDoneEvent
+	| ReasoningSummaryPartAddedEvent
+	| ReasoningSummaryPartDoneEvent
+	| ReasoningSummaryTextDeltaEvent
+	| ReasoningSummaryTextDoneEvent
+	| ImageGenCallInProgressEvent
+	| ImageGenCallGeneratingEvent
+	| ImageGenCallPartialImageEvent
+	| ImageGenCallCompletedEvent
+	| WebSearchCallInProgressEvent
+	| WebSearchCallSearchingEvent
+	| WebSearchCallCompletedEvent
 )
 
 --[=[
-    @type CreateResponses200Response OpenResponsesNonStreamingResponse
+    @type CreateResponses200Response OpenResponsesResult
     @within OpenRouterTypes
     200 Response type for createResponses
 ]=]
-export type CreateResponses200Response = OpenResponsesNonStreamingResponse
+export type CreateResponses200Response = OpenResponsesResult
 
 --[=[
     @type CreateResponses400Response BadRequestResponse
@@ -4266,11 +5726,11 @@ export type CreateResponses524Response = EdgeNetworkTimeoutResponse
 export type CreateResponses529Response = ProviderOverloadedResponse
 
 --[=[
-    @type CreateMessages200Response AnthropicMessagesResponse
+    @type CreateMessages200Response MessagesResult
     @within OpenRouterTypes
     200 Response type for createMessages
 ]=]
-export type CreateMessages200Response = AnthropicMessagesResponse
+export type CreateMessages200Response = MessagesResult
 
 --[=[
     @type CreateMessages400Response { ["type"]: "error", error: { ["type"]: string, message: string } }
@@ -4364,11 +5824,11 @@ export type GetUserActivity403Response = ForbiddenResponse
 export type GetUserActivity500Response = InternalServerResponse
 
 --[=[
-    @type SendChatCompletionRequest200Response ChatResponse
+    @type SendChatCompletionRequest200Response ChatResult
     @within OpenRouterTypes
     200 Response type for sendChatCompletionRequest
 ]=]
-export type SendChatCompletionRequest200Response = ChatResponse
+export type SendChatCompletionRequest200Response = ChatResult
 
 --[=[
     @type SendChatCompletionRequest400Response BadRequestResponse
@@ -4652,7 +6112,7 @@ export type ListEmbeddingsModels400Response = BadRequestResponse
 export type ListEmbeddingsModels500Response = InternalServerResponse
 
 --[=[
-    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings")?, router: string?, provider_responses: {{ id: string?, endpoint_id: string?, model_permaslug: string?, provider_name: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")?, status: number?, latency: number?, is_byok: boolean? }}? } }
+    @type GetGeneration200Response { data: { id: string, upstream_id: string?, total_cost: number, cache_discount: number?, upstream_inference_cost: number?, created_at: string, model: string, app_id: number?, streamed: boolean?, cancelled: boolean?, provider_name: string?, latency: number?, moderation_latency: number?, generation_time: number?, finish_reason: string?, tokens_prompt: number?, tokens_completion: number?, native_tokens_prompt: number?, native_tokens_completion: number?, native_tokens_completion_images: number?, native_tokens_reasoning: number?, native_tokens_cached: number?, num_media_prompt: number?, num_input_audio_prompt: number?, num_media_completion: number?, num_search_results: number?, origin: string, usage: number, is_byok: boolean, native_finish_reason: string?, external_user: string?, api_type: ("completions" | "embeddings" | "video")?, router: string?, provider_responses: {{ id: string?, endpoint_id: string?, model_permaslug: string?, provider_name: ("AnyScale" | "Atoma" | "Cent-ML" | "CrofAI" | "Enfer" | "GoPomelo" | "HuggingFace" | "Hyperbolic 2" | "InoCloud" | "Kluster" | "Lambda" | "Lepton" | "Lynn 2" | "Lynn" | "Mancer" | "Meta" | "Modal" | "Nineteen" | "OctoAI" | "Recursal" | "Reflection" | "Replicate" | "SambaNova 2" | "SF Compute" | "Targon" | "Together 2" | "Ubicloud" | "01.AI" | "AkashML" | "AI21" | "AionLabs" | "Alibaba" | "Ambient" | "Amazon Bedrock" | "Amazon Nova" | "Anthropic" | "Arcee AI" | "AtlasCloud" | "Avian" | "Azure" | "BaseTen" | "BytePlus" | "Black Forest Labs" | "Cerebras" | "Chutes" | "Cirrascale" | "Clarifai" | "Cloudflare" | "Cohere" | "Crusoe" | "DeepInfra" | "DeepSeek" | "Featherless" | "Fireworks" | "Friendli" | "GMICloud" | "Google" | "Google AI Studio" | "Groq" | "Hyperbolic" | "Inception" | "Inceptron" | "InferenceNet" | "Ionstream" | "Infermatic" | "Io Net" | "Inflection" | "Liquid" | "Mara" | "Mancer 2" | "Minimax" | "ModelRun" | "Mistral" | "Modular" | "Moonshot AI" | "Morph" | "NCompass" | "Nebius" | "NextBit" | "Novita" | "Nvidia" | "OpenAI" | "OpenInference" | "Parasail" | "Perplexity" | "Phala" | "Reka" | "Relace" | "SambaNova" | "Seed" | "SiliconFlow" | "Sourceful" | "StepFun" | "Stealth" | "StreamLake" | "Switchpoint" | "Together" | "Upstage" | "Venice" | "WandB" | "Xiaomi" | "xAI" | "Z.AI" | "FakeProvider")?, status: number?, latency: number?, is_byok: boolean? }}?, user_agent: string?, http_referer: string? } }
     @within OpenRouterTypes
     200 Response type for getGeneration
 ]=]
@@ -4689,7 +6149,7 @@ export type GetGeneration200Response = {
 		is_byok: boolean,
 		native_finish_reason: string?,
 		external_user: string?,
-		api_type: ("completions" | "embeddings")?,
+		api_type: ("completions" | "embeddings" | "video")?,
 		router: string?,
 		provider_responses: {
 			{
@@ -4725,6 +6185,7 @@ export type GetGeneration200Response = {
 					| "Together 2"
 					| "Ubicloud"
 					| "01.AI"
+					| "AkashML"
 					| "AI21"
 					| "AionLabs"
 					| "Alibaba"
@@ -4782,6 +6243,7 @@ export type GetGeneration200Response = {
 					| "Parasail"
 					| "Perplexity"
 					| "Phala"
+					| "Reka"
 					| "Relace"
 					| "SambaNova"
 					| "Seed"
@@ -4805,6 +6267,8 @@ export type GetGeneration200Response = {
 				is_byok: boolean?,
 			}
 		}?,
+		user_agent: string?,
+		http_referer: string?,
 	},
 }
 
@@ -4870,6 +6334,13 @@ export type GetGeneration529Response = ProviderOverloadedResponse
     200 Response type for listModelsCount
 ]=]
 export type ListModelsCount200Response = ModelsCountResponse
+
+--[=[
+    @type ListModelsCount400Response BadRequestResponse
+    @within OpenRouterTypes
+    400 Response type for listModelsCount
+]=]
+export type ListModelsCount400Response = BadRequestResponse
 
 --[=[
     @type ListModelsCount500Response InternalServerResponse
@@ -4963,7 +6434,7 @@ export type ListEndpointsZdr200Response = { data: { PublicEndpoint } }
 export type ListEndpointsZdr500Response = InternalServerResponse
 
 --[=[
-    @type ListProviders200Response { data: {{ name: string, slug: string, privacy_policy_url: string?, terms_of_service_url: string?, status_page_url: string? }} }
+    @type ListProviders200Response { data: {{ name: string, slug: string, privacy_policy_url: string?, terms_of_service_url: string?, status_page_url: string?, headquarters: ("AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "UM" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?, datacenters: {("AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "UM" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")}? }} }
     @within OpenRouterTypes
     200 Response type for listProviders
 ]=]
@@ -4975,6 +6446,510 @@ export type ListProviders200Response = {
 			privacy_policy_url: string?,
 			terms_of_service_url: string?,
 			status_page_url: string?,
+			headquarters: (
+				"AD"
+				| "AE"
+				| "AF"
+				| "AG"
+				| "AI"
+				| "AL"
+				| "AM"
+				| "AO"
+				| "AQ"
+				| "AR"
+				| "AS"
+				| "AT"
+				| "AU"
+				| "AW"
+				| "AX"
+				| "AZ"
+				| "BA"
+				| "BB"
+				| "BD"
+				| "BE"
+				| "BF"
+				| "BG"
+				| "BH"
+				| "BI"
+				| "BJ"
+				| "BL"
+				| "BM"
+				| "BN"
+				| "BO"
+				| "BQ"
+				| "BR"
+				| "BS"
+				| "BT"
+				| "BV"
+				| "BW"
+				| "BY"
+				| "BZ"
+				| "CA"
+				| "CC"
+				| "CD"
+				| "CF"
+				| "CG"
+				| "CH"
+				| "CI"
+				| "CK"
+				| "CL"
+				| "CM"
+				| "CN"
+				| "CO"
+				| "CR"
+				| "CU"
+				| "CV"
+				| "CW"
+				| "CX"
+				| "CY"
+				| "CZ"
+				| "DE"
+				| "DJ"
+				| "DK"
+				| "DM"
+				| "DO"
+				| "DZ"
+				| "EC"
+				| "EE"
+				| "EG"
+				| "EH"
+				| "ER"
+				| "ES"
+				| "ET"
+				| "FI"
+				| "FJ"
+				| "FK"
+				| "FM"
+				| "FO"
+				| "FR"
+				| "GA"
+				| "GB"
+				| "GD"
+				| "GE"
+				| "GF"
+				| "GG"
+				| "GH"
+				| "GI"
+				| "GL"
+				| "GM"
+				| "GN"
+				| "GP"
+				| "GQ"
+				| "GR"
+				| "GS"
+				| "GT"
+				| "GU"
+				| "GW"
+				| "GY"
+				| "HK"
+				| "HM"
+				| "HN"
+				| "HR"
+				| "HT"
+				| "HU"
+				| "ID"
+				| "IE"
+				| "IL"
+				| "IM"
+				| "IN"
+				| "IO"
+				| "IQ"
+				| "IR"
+				| "IS"
+				| "IT"
+				| "JE"
+				| "JM"
+				| "JO"
+				| "JP"
+				| "KE"
+				| "KG"
+				| "KH"
+				| "KI"
+				| "KM"
+				| "KN"
+				| "KP"
+				| "KR"
+				| "KW"
+				| "KY"
+				| "KZ"
+				| "LA"
+				| "LB"
+				| "LC"
+				| "LI"
+				| "LK"
+				| "LR"
+				| "LS"
+				| "LT"
+				| "LU"
+				| "LV"
+				| "LY"
+				| "MA"
+				| "MC"
+				| "MD"
+				| "ME"
+				| "MF"
+				| "MG"
+				| "MH"
+				| "MK"
+				| "ML"
+				| "MM"
+				| "MN"
+				| "MO"
+				| "MP"
+				| "MQ"
+				| "MR"
+				| "MS"
+				| "MT"
+				| "MU"
+				| "MV"
+				| "MW"
+				| "MX"
+				| "MY"
+				| "MZ"
+				| "NA"
+				| "NC"
+				| "NE"
+				| "NF"
+				| "NG"
+				| "NI"
+				| "NL"
+				| "NO"
+				| "NP"
+				| "NR"
+				| "NU"
+				| "NZ"
+				| "OM"
+				| "PA"
+				| "PE"
+				| "PF"
+				| "PG"
+				| "PH"
+				| "PK"
+				| "PL"
+				| "PM"
+				| "PN"
+				| "PR"
+				| "PS"
+				| "PT"
+				| "PW"
+				| "PY"
+				| "QA"
+				| "RE"
+				| "RO"
+				| "RS"
+				| "RU"
+				| "RW"
+				| "SA"
+				| "SB"
+				| "SC"
+				| "SD"
+				| "SE"
+				| "SG"
+				| "SH"
+				| "SI"
+				| "SJ"
+				| "SK"
+				| "SL"
+				| "SM"
+				| "SN"
+				| "SO"
+				| "SR"
+				| "SS"
+				| "ST"
+				| "SV"
+				| "SX"
+				| "SY"
+				| "SZ"
+				| "TC"
+				| "TD"
+				| "TF"
+				| "TG"
+				| "TH"
+				| "TJ"
+				| "TK"
+				| "TL"
+				| "TM"
+				| "TN"
+				| "TO"
+				| "TR"
+				| "TT"
+				| "TV"
+				| "TW"
+				| "TZ"
+				| "UA"
+				| "UG"
+				| "UM"
+				| "US"
+				| "UY"
+				| "UZ"
+				| "VA"
+				| "VC"
+				| "VE"
+				| "VG"
+				| "VI"
+				| "VN"
+				| "VU"
+				| "WF"
+				| "WS"
+				| "YE"
+				| "YT"
+				| "ZA"
+				| "ZM"
+				| "ZW"
+			)?,
+			datacenters: {
+				(
+					"AD"
+					| "AE"
+					| "AF"
+					| "AG"
+					| "AI"
+					| "AL"
+					| "AM"
+					| "AO"
+					| "AQ"
+					| "AR"
+					| "AS"
+					| "AT"
+					| "AU"
+					| "AW"
+					| "AX"
+					| "AZ"
+					| "BA"
+					| "BB"
+					| "BD"
+					| "BE"
+					| "BF"
+					| "BG"
+					| "BH"
+					| "BI"
+					| "BJ"
+					| "BL"
+					| "BM"
+					| "BN"
+					| "BO"
+					| "BQ"
+					| "BR"
+					| "BS"
+					| "BT"
+					| "BV"
+					| "BW"
+					| "BY"
+					| "BZ"
+					| "CA"
+					| "CC"
+					| "CD"
+					| "CF"
+					| "CG"
+					| "CH"
+					| "CI"
+					| "CK"
+					| "CL"
+					| "CM"
+					| "CN"
+					| "CO"
+					| "CR"
+					| "CU"
+					| "CV"
+					| "CW"
+					| "CX"
+					| "CY"
+					| "CZ"
+					| "DE"
+					| "DJ"
+					| "DK"
+					| "DM"
+					| "DO"
+					| "DZ"
+					| "EC"
+					| "EE"
+					| "EG"
+					| "EH"
+					| "ER"
+					| "ES"
+					| "ET"
+					| "FI"
+					| "FJ"
+					| "FK"
+					| "FM"
+					| "FO"
+					| "FR"
+					| "GA"
+					| "GB"
+					| "GD"
+					| "GE"
+					| "GF"
+					| "GG"
+					| "GH"
+					| "GI"
+					| "GL"
+					| "GM"
+					| "GN"
+					| "GP"
+					| "GQ"
+					| "GR"
+					| "GS"
+					| "GT"
+					| "GU"
+					| "GW"
+					| "GY"
+					| "HK"
+					| "HM"
+					| "HN"
+					| "HR"
+					| "HT"
+					| "HU"
+					| "ID"
+					| "IE"
+					| "IL"
+					| "IM"
+					| "IN"
+					| "IO"
+					| "IQ"
+					| "IR"
+					| "IS"
+					| "IT"
+					| "JE"
+					| "JM"
+					| "JO"
+					| "JP"
+					| "KE"
+					| "KG"
+					| "KH"
+					| "KI"
+					| "KM"
+					| "KN"
+					| "KP"
+					| "KR"
+					| "KW"
+					| "KY"
+					| "KZ"
+					| "LA"
+					| "LB"
+					| "LC"
+					| "LI"
+					| "LK"
+					| "LR"
+					| "LS"
+					| "LT"
+					| "LU"
+					| "LV"
+					| "LY"
+					| "MA"
+					| "MC"
+					| "MD"
+					| "ME"
+					| "MF"
+					| "MG"
+					| "MH"
+					| "MK"
+					| "ML"
+					| "MM"
+					| "MN"
+					| "MO"
+					| "MP"
+					| "MQ"
+					| "MR"
+					| "MS"
+					| "MT"
+					| "MU"
+					| "MV"
+					| "MW"
+					| "MX"
+					| "MY"
+					| "MZ"
+					| "NA"
+					| "NC"
+					| "NE"
+					| "NF"
+					| "NG"
+					| "NI"
+					| "NL"
+					| "NO"
+					| "NP"
+					| "NR"
+					| "NU"
+					| "NZ"
+					| "OM"
+					| "PA"
+					| "PE"
+					| "PF"
+					| "PG"
+					| "PH"
+					| "PK"
+					| "PL"
+					| "PM"
+					| "PN"
+					| "PR"
+					| "PS"
+					| "PT"
+					| "PW"
+					| "PY"
+					| "QA"
+					| "RE"
+					| "RO"
+					| "RS"
+					| "RU"
+					| "RW"
+					| "SA"
+					| "SB"
+					| "SC"
+					| "SD"
+					| "SE"
+					| "SG"
+					| "SH"
+					| "SI"
+					| "SJ"
+					| "SK"
+					| "SL"
+					| "SM"
+					| "SN"
+					| "SO"
+					| "SR"
+					| "SS"
+					| "ST"
+					| "SV"
+					| "SX"
+					| "SY"
+					| "SZ"
+					| "TC"
+					| "TD"
+					| "TF"
+					| "TG"
+					| "TH"
+					| "TJ"
+					| "TK"
+					| "TL"
+					| "TM"
+					| "TN"
+					| "TO"
+					| "TR"
+					| "TT"
+					| "TV"
+					| "TW"
+					| "TZ"
+					| "UA"
+					| "UG"
+					| "UM"
+					| "US"
+					| "UY"
+					| "UZ"
+					| "VA"
+					| "VC"
+					| "VE"
+					| "VG"
+					| "VI"
+					| "VN"
+					| "VU"
+					| "WF"
+					| "WS"
+					| "YE"
+					| "YT"
+					| "ZA"
+					| "ZM"
+					| "ZW"
+				)
+			}?,
 		}
 	},
 }
@@ -4987,7 +6962,7 @@ export type ListProviders200Response = {
 export type ListProviders500Response = InternalServerResponse
 
 --[=[
-    @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? }} }
+    @type List200Response { data: {{ hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string?, creator_user_id: string? }} }
     @within OpenRouterTypes
     200 Response type for list
 ]=]
@@ -5013,6 +6988,7 @@ export type List200Response = {
 			created_at: string,
 			updated_at: string?,
 			expires_at: string?,
+			creator_user_id: string?,
 		}
 	},
 }
@@ -5039,7 +7015,7 @@ export type List429Response = TooManyRequestsResponse
 export type List500Response = InternalServerResponse
 
 --[=[
-    @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? }, key: string }
+    @type CreateKeys201Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string?, creator_user_id: string? }, key: string }
     @within OpenRouterTypes
     201 Response type for createKeys
 ]=]
@@ -5064,6 +7040,7 @@ export type CreateKeys201Response = {
 		created_at: string,
 		updated_at: string?,
 		expires_at: string?,
+		creator_user_id: string?,
 	},
 	key: string,
 }
@@ -5097,7 +7074,7 @@ export type CreateKeys429Response = TooManyRequestsResponse
 export type CreateKeys500Response = InternalServerResponse
 
 --[=[
-    @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? } }
+    @type GetKey200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string?, creator_user_id: string? } }
     @within OpenRouterTypes
     200 Response type for getKey
 ]=]
@@ -5122,6 +7099,7 @@ export type GetKey200Response = {
 		created_at: string,
 		updated_at: string?,
 		expires_at: string?,
+		creator_user_id: string?,
 	},
 }
 
@@ -5189,7 +7167,7 @@ export type DeleteKeys429Response = TooManyRequestsResponse
 export type DeleteKeys500Response = InternalServerResponse
 
 --[=[
-    @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string? } }
+    @type UpdateKeys200Response { data: { hash: string, name: string, label: string, disabled: boolean, limit: number?, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, created_at: string, updated_at: string?, expires_at: string?, creator_user_id: string? } }
     @within OpenRouterTypes
     200 Response type for updateKeys
 ]=]
@@ -5214,6 +7192,7 @@ export type UpdateKeys200Response = {
 		created_at: string,
 		updated_at: string?,
 		expires_at: string?,
+		creator_user_id: string?,
 	},
 }
 
@@ -5253,7 +7232,7 @@ export type UpdateKeys429Response = TooManyRequestsResponse
 export type UpdateKeys500Response = InternalServerResponse
 
 --[=[
-    @type ListGuardrails200Response { data: {{ id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? }}, total_count: number }
+    @type ListGuardrails200Response { data: {{ id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? }}, total_count: number }
     @within OpenRouterTypes
     200 Response type for listGuardrails
 ]=]
@@ -5266,6 +7245,7 @@ export type ListGuardrails200Response = {
 			limit_usd: number?,
 			reset_interval: ("daily" | "weekly" | "monthly")?,
 			allowed_providers: { string }?,
+			ignored_providers: { string }?,
 			allowed_models: { string }?,
 			enforce_zdr: boolean?,
 			created_at: string,
@@ -5290,7 +7270,7 @@ export type ListGuardrails401Response = UnauthorizedResponse
 export type ListGuardrails500Response = InternalServerResponse
 
 --[=[
-    @type CreateGuardrail201Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @type CreateGuardrail201Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
     @within OpenRouterTypes
     201 Response type for createGuardrail
 ]=]
@@ -5302,6 +7282,7 @@ export type CreateGuardrail201Response = {
 		limit_usd: number?,
 		reset_interval: ("daily" | "weekly" | "monthly")?,
 		allowed_providers: { string }?,
+		ignored_providers: { string }?,
 		allowed_models: { string }?,
 		enforce_zdr: boolean?,
 		created_at: string,
@@ -5331,7 +7312,7 @@ export type CreateGuardrail401Response = UnauthorizedResponse
 export type CreateGuardrail500Response = InternalServerResponse
 
 --[=[
-    @type GetGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @type GetGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
     @within OpenRouterTypes
     200 Response type for getGuardrail
 ]=]
@@ -5343,6 +7324,7 @@ export type GetGuardrail200Response = {
 		limit_usd: number?,
 		reset_interval: ("daily" | "weekly" | "monthly")?,
 		allowed_providers: { string }?,
+		ignored_providers: { string }?,
 		allowed_models: { string }?,
 		enforce_zdr: boolean?,
 		created_at: string,
@@ -5400,7 +7382,7 @@ export type DeleteGuardrail404Response = NotFoundResponse
 export type DeleteGuardrail500Response = InternalServerResponse
 
 --[=[
-    @type UpdateGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
+    @type UpdateGuardrail200Response { data: { id: string, name: string, description: string?, limit_usd: number?, reset_interval: ("daily" | "weekly" | "monthly")?, allowed_providers: {string}?, ignored_providers: {string}?, allowed_models: {string}?, enforce_zdr: boolean?, created_at: string, updated_at: string? } }
     @within OpenRouterTypes
     200 Response type for updateGuardrail
 ]=]
@@ -5412,6 +7394,7 @@ export type UpdateGuardrail200Response = {
 		limit_usd: number?,
 		reset_interval: ("daily" | "weekly" | "monthly")?,
 		allowed_providers: { string }?,
+		ignored_providers: { string }?,
 		allowed_models: { string }?,
 		enforce_zdr: boolean?,
 		created_at: string,
@@ -5736,7 +7719,7 @@ export type BulkUnassignMembersFromGuardrail404Response = NotFoundResponse
 export type BulkUnassignMembersFromGuardrail500Response = InternalServerResponse
 
 --[=[
-    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_management_key: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, rate_limit: { requests: number, interval: string, note: string } } }
+    @type GetCurrentKey200Response { data: { label: string, limit: number?, usage: number, usage_daily: number, usage_weekly: number, usage_monthly: number, byok_usage: number, byok_usage_daily: number, byok_usage_weekly: number, byok_usage_monthly: number, is_free_tier: boolean, is_management_key: boolean, is_provisioning_key: boolean, limit_remaining: number?, limit_reset: string?, include_byok_in_limit: boolean, expires_at: string?, creator_user_id: string?, rate_limit: { requests: number, interval: string, note: string } } }
     @within OpenRouterTypes
     200 Response type for getCurrentKey
 ]=]
@@ -5759,6 +7742,7 @@ export type GetCurrentKey200Response = {
 		limit_reset: string?,
 		include_byok_in_limit: boolean,
 		expires_at: string?,
+		creator_user_id: string?,
 		rate_limit: { requests: number, interval: string, note: string },
 	},
 }
@@ -5825,6 +7809,13 @@ export type CreateAuthKeysCode400Response = BadRequestResponse
     401 Response type for createAuthKeysCode
 ]=]
 export type CreateAuthKeysCode401Response = UnauthorizedResponse
+
+--[=[
+    @type CreateAuthKeysCode409Response ConflictResponse
+    @within OpenRouterTypes
+    409 Response type for createAuthKeysCode
+]=]
+export type CreateAuthKeysCode409Response = ConflictResponse
 
 --[=[
     @type CreateAuthKeysCode500Response InternalServerResponse
